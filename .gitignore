@@ -1,7 +1,7 @@
 */.vs/
 */Properties/
 */Service References/
-*/bin/
-*/logs/
-*/obj/
-*/obj/Debug/
+#*/bin/
+#*/logs/
+#*/obj/
+#*/obj/Debug/
