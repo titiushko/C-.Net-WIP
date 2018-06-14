@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Basic.cs" />
+    <Compile Include="Constants\Errors\BaseError.cs" />
+    <Compile Include="Constants\Errors\JsonError.cs" />
+    <Compile Include="Constants\Errors\PermissionError.cs" />
     <Compile Include="Constants\Errors\TypeError.cs" />
     <Compile Include="Constants\Formats.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
