@@ -6,18 +6,8 @@ using System.Data.SqlClient;
 
 namespace Titiushko.Utilities.Extensions
 {
-    public static class Exceptions
+    public static class ExceptionExtension
     {
-        /// <summary>
-        /// Get exception messages
-        /// </summary>
-        /// <param name="pException">Exception</param>
-        /// <returns>Messages</returns>
-        public static string GetExceptionMessage(this Exception pException)
-        {
-            return string.Join("<br>", GetExceptionMessages(pException, new HashSet<string>()));
-        }
-
         /// <summary>
         /// Get exception messages list
         /// </summary>
@@ -29,6 +19,26 @@ namespace Titiushko.Utilities.Extensions
             pMessages.Add(pException.Message);
             if (pException.InnerException != null) pMessages = GetExceptionMessages(pException.InnerException, pMessages);
             return pMessages;
+        }
+
+        /// <summary>
+        /// Get exception messages list
+        /// </summary>
+        /// <param name="pException">Exception</param>
+        /// <returns>Messages list</returns>
+        public static ICollection<string> GetExceptionMessages(this Exception pException)
+        {
+            return GetExceptionMessages(pException, new HashSet<string>());
+        }
+
+        /// <summary>
+        /// Get exception messages
+        /// </summary>
+        /// <param name="pException">Exception</param>
+        /// <returns>Messages</returns>
+        public static string GetExceptionMessage(this Exception pException)
+        {
+            return string.Join("<br>", pException.GetExceptionMessages());
         }
 
         /// <summary>

@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Titiushko.Utilities.Extensions
 {
-    public static class Strings
+    public static class StringExtension
     {
         /// <summary>
         /// Evaluate if a string is equal to the constant TRUE; if so, the boolean value is returned true, otherwise the boolean value false is returned
@@ -13,7 +13,7 @@ namespace Titiushko.Utilities.Extensions
         /// <returns>Boolean</returns>
         public static bool IsTrue(this string pString)
         {
-            return !string.IsNullOrEmpty(pString) && pString.ToUpper().Equals(Constants.Basic.TRUE);
+            return !string.IsNullOrWhiteSpace(pString) && pString.ToUpper().Equals(Constants.Basic.TRUE);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Titiushko.Utilities.Extensions
         /// <returns>Boolean</returns>
         public static bool IsFalse(this string pString)
         {
-            return !string.IsNullOrEmpty(pString) && pString.ToUpper().Equals(Constants.Basic.FALSE);
+            return !string.IsNullOrWhiteSpace(pString) && pString.ToUpper().Equals(Constants.Basic.FALSE);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Titiushko.Utilities.Extensions
             try
             {
                 int vInteger = 0;
-                if (!string.IsNullOrEmpty(pNumber) && int.TryParse(pNumber, out vInteger)) return vInteger;
+                if (!string.IsNullOrWhiteSpace(pNumber) && int.TryParse(pNumber, out vInteger)) return vInteger;
                 return -1;
             }
             catch
@@ -58,7 +58,7 @@ namespace Titiushko.Utilities.Extensions
             try
             {
                 long pLonger = 0;
-                if (!string.IsNullOrEmpty(pNumber) && long.TryParse(pNumber, out pLonger)) return pLonger;
+                if (!string.IsNullOrWhiteSpace(pNumber) && long.TryParse(pNumber, out pLonger)) return pLonger;
                 return -1;
             }
             catch
@@ -78,7 +78,7 @@ namespace Titiushko.Utilities.Extensions
         {
             try
             {
-                if (!string.IsNullOrEmpty(pStringDateTime))
+                if (!string.IsNullOrWhiteSpace(pStringDateTime))
                 {
                     return DateTime.ParseExact(pStringDateTime, pFormats, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                 }
@@ -112,7 +112,7 @@ namespace Titiushko.Utilities.Extensions
         {
             try
             {
-                if (string.IsNullOrEmpty(pText)) return pText;
+                if (string.IsNullOrWhiteSpace(pText)) return pText;
                 TextInfo vTextInfo = new CultureInfo("es-ES", false).TextInfo;
                 return vTextInfo.ToTitleCase(vTextInfo.ToLower(pText));
             }
