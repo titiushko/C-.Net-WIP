@@ -1,7 +1,10 @@
 */.vs/
 */Properties/
-*/Service References/
-#*/bin/
-#*/logs/
-#*/obj/
-#*/obj/Debug/
+Titiushko/Titiushko.MVC5/Service References/
+Titiushko/Titiushko.MVC5/bin/
+Titiushko/Titiushko.MVC5/logs/
+Titiushko/Titiushko.MVC5/obj/
+Titiushko/Titiushko.MVC5/obj/Debug/
+Titiushko/Titiushko.Utilities/bin/
+Titiushko/Titiushko.Utilities/obj/
+Titiushko/Titiushko.Utilities/obj/Debug/
