@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,10 +7,16 @@ using System.Web.Mvc;
 
 namespace Titiushko.MVC5.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        public HomeController()
+        {
+            logger = LogManager.GetLogger(typeof(HomeController));
+        }
+
         public ActionResult Index()
         {
+            logger.Info("Página de inicio.");
             return View();
         }
 

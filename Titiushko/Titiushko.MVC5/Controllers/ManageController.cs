@@ -11,7 +11,7 @@ using Titiushko.MVC5.Models;
 namespace Titiushko.MVC5.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

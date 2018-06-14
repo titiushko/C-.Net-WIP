@@ -80,3 +80,5 @@ C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\Microsoft.Ow
 C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\obj\Debug\Titiushko.MVC5.csprojResolveAssemblyReference.cache
 C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\obj\Debug\Titiushko.MVC5.dll
 C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\obj\Debug\Titiushko.MVC5.pdb
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\log4net.dll
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\log4net.xml
