@@ -82,3 +82,8 @@ C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\obj\Debug\Titius
 C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\obj\Debug\Titiushko.MVC5.pdb
 C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\log4net.dll
 C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\log4net.xml
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\Glimpse.Ado.dll
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\Glimpse.AspNet.dll
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\Glimpse.Core.dll
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\Glimpse.EF6.dll
+C:\tito.miguel\repositorios\C#.Net-WIP\Titiushko\Titiushko.MVC5\bin\Glimpse.Mvc5.dll
