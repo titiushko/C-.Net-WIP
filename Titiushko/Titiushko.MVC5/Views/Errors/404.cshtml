@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Error 404: Página no Encontrada";
+    Layout = ViewBag.Layout;
+}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 text-center">
+        <h1 title="@ViewBag.Title"><i class="fa fa-unlink fa-2x"></i><br />Lo sentimos.</h1>
+        <h2>No podemos encontrar la página que está buscando.</h2>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <strong>Las causas más probables:</strong>
+        <ul id="causes">
+            <li>El recurso que está buscando se ha eliminado, se ha cambiado su nombre o no está disponible temporalmente.</li>
+            <li>El directorio o archivo especificado no existe.</li>
+            <li>La URL no existe o contiene errores.</li>
+        </ul>
+        <br />
+        <strong>Lo que puede intentar:</strong>
+        <ul>
+            <li>Verifique que la URL esté bien escrita en la barra de direcciones del navegador web.</li>
+            <li>Si el problema continúa, por favor notifíquelo al administrador del sistema.</li>
+        </ul>
+        <br />
+        <div class="btn-group pull-right">
+            @if (ViewBag.Layout == null)
+            {
+                <a class="btn btn-sm btn-default" onclick="alertify.closeAll();"><i class="fa fa-times-circle"></i> Cerrar</a>
+            }
+            else
+            {
+                <a class="btn btn-sm btn-primary" href="@Url.Action("index", "home")"><i class="fa fa-dashboard"></i> Inicio</a>
+                <a class="btn btn-sm btn-danger" id="BackPreviousPage"><i class="fa fa-reply"></i> Volver</a>
+            }
+        </div>
+    </div>
+</div>
