@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,20 +7,27 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Titiushko.MVC5.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using log4net;
+using Titiushko.MVC5.Models.Constants;
+using Titiushko.Utilities.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
     [Authorize]
     public class AccountController : BaseController
     {
+        private SeguimientoProyectosEntities db = new SeguimientoProyectosEntities();
+        private ApplicationDbContext _db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            logger = LogManager.GetLogger("AccountController");
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +39,9 @@ namespace Titiushko.MVC5.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +125,7 @@ namespace Titiushko.MVC5.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,8 +160,8 @@ namespace Titiushko.MVC5.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -402,6 +407,68 @@ namespace Titiushko.MVC5.Controllers
         {
             return View();
         }
+
+        #region create default users
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult CreateRoles()
+        {
+            try
+            {
+                RoleManager<IdentityRole> vRoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_db));
+                foreach (string role in Constant.User.ROLES)
+                {
+                    vRoleManager.Create(new IdentityRole(role));
+                }
+
+                TempData["success"] = Titiushko.Utilities.Constants.Basic.TRUE;
+                TempData["success_message"] = "Roles are created correctly.";
+                return RedirectToAction("createdefaultusers", "account");
+            }
+            catch (Exception vE)
+            {
+                logger.Error(vE);
+                TempData = TempDataExceptionMessage(vE);
+                return RedirectToAction("index", "home");
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult CreateDefaultUsers()
+        {
+            try
+            {
+                UserManager<ApplicationUser> vUserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_db));
+                foreach (string role in Constant.User.ROLES)
+                {
+                    ApplicationUser user = new ApplicationUser()
+                    {
+                        UserName = role.ToSlug("."),
+                        Email = string.Format("{0}@system.com", role.ToSlug(".")),
+                        FirstName = role,
+                        LastName = role,
+                        CreateDate = DateTime.Now,
+                        LastLoginDate = DateTime.Now,
+                        LastPasswordChangedDate = DateTime.Now
+                    };
+
+                    vUserManager.Create(user, "Admin$1234");
+                    vUserManager.AddToRole(user.Id, role);
+                }
+
+                TempData["success"] = Titiushko.Utilities.Constants.Basic.TRUE;
+                TempData["success_message"] = "Default users are created correctly.";
+                return RedirectToAction("index", "home");
+            }
+            catch (Exception vE)
+            {
+                logger.Error(vE);
+                TempData = TempDataExceptionMessage(vE);
+                return RedirectToAction("index", "home");
+            }
+        }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
