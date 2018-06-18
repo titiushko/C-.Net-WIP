@@ -16,6 +16,13 @@ namespace Titiushko.MVC5.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public System.DateTime LastLoginDate { get; set; }
+        public System.DateTime LastPasswordChangedDate { get; set; }
+        public byte[] Avatar { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
