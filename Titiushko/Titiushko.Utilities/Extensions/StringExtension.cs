@@ -269,5 +269,25 @@ namespace Titiushko.Utilities.Extensions
                 { "Ñ", "N" }
             });
         }
+
+        /// <summary>
+        /// Convierte un String a Enum de tipo T
+        /// </summary>
+        /// <typeparam name="T">Tipo de Enum de la conversión</typeparam>
+        /// <param name="vValue">String a convertir</param>
+        /// <param name="vDefaultValue">Valor predeterminado si "vValue" es null o no se pueda realizar la conversión</param>
+        /// <returns>Enum de tipo T</returns>
+        public static T ToEnum<T>(this string vValue, T vDefaultValue)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(vValue)) return vDefaultValue;
+                return (T)Enum.Parse(typeof(T), vValue, true);
+            }
+            catch
+            {
+                return vDefaultValue;
+            }
+        }
     }
 }
