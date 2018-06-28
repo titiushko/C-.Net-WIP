@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titiushko.MVC5", "Titiushko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titiushko.Utilities", "Titiushko.Utilities\Titiushko.Utilities.csproj", "{C76E30A3-FCF0-4D02-86F9-DD328392F1C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titiushko.HtmlHelpers", "Titiushko.HtmlHelpers\Titiushko.HtmlHelpers.csproj", "{0525C508-036E-4A36-90A8-825DD6822DA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C76E30A3-FCF0-4D02-86F9-DD328392F1C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C76E30A3-FCF0-4D02-86F9-DD328392F1C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C76E30A3-FCF0-4D02-86F9-DD328392F1C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0525C508-036E-4A36-90A8-825DD6822DA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0525C508-036E-4A36-90A8-825DD6822DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0525C508-036E-4A36-90A8-825DD6822DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0525C508-036E-4A36-90A8-825DD6822DA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
