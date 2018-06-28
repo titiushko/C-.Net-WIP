@@ -1,0 +1,10 @@
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\obj\Debug\Titiushko.Utilities.csprojResolveAssemblyReference.cache
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\Titiushko.Utilities.dll.config
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\Titiushko.Utilities.dll
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\Titiushko.Utilities.pdb
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\EntityFramework.dll
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\EntityFramework.xml
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\obj\Debug\Titiushko.Utilities.dll
+C:\Users\javier.galdamez\Documents\Git Repositories\C-.Net-WIP\Titiushko\Titiushko.Utilities\obj\Debug\Titiushko.Utilities.pdb
