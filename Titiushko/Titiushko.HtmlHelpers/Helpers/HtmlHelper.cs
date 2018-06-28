@@ -24,13 +24,20 @@ namespace Titiushko.HtmlHelpers.Helpers
                 HtmlElement vHtmlElement = null;
                 if (pHtmlDoc != null && pHtmlDoc.Window != null && pHtmlDoc.Window.Frames != null && pHtmlDoc.Window.Frames.Count > 0)
                 {
-                    foreach (HtmlWindow frame in pHtmlDoc.Window.Frames)
+                    for (int i = 0; i < pHtmlDoc.Window.Frames.Count; i++)
                     {
                         if (vHtmlElement == null)
                         {
-                            vHtmlElement = frame.Document.GetElementById(pIdentifier) != null
-                                ? frame.Document.GetElementById(pIdentifier)
-                                : (frame.Document.All[pIdentifier] != null ? frame.Document.All[pIdentifier] : null);
+                            try
+                            {
+                                vHtmlElement = pHtmlDoc.Window.Frames[i].Document.GetElementById(pIdentifier) != null
+                                ? pHtmlDoc.Window.Frames[i].Document.GetElementById(pIdentifier)
+                                : (pHtmlDoc.Window.Frames[i].Document.All[pIdentifier] != null ? pHtmlDoc.Window.Frames[i].Document.All[pIdentifier] : null);
+                            }
+                            catch (Exception vE)
+                            {
+                                continue;
+                            }
                         }
                     }
                 }
