@@ -2,6 +2,7 @@
 using System;
 using WebBrowserLaboratory.Helpers;
 using System.Configuration;
+using Titiushko.Utilities.Extensions;
 
 namespace WebBrowserLaboratory
 {
@@ -22,9 +23,9 @@ namespace WebBrowserLaboratory
             {
                 this.Login();
             }
-            catch (System.Exception vE)
+            catch (Exception vE)
             {
-
+                JavaScriptAlertMessage(this.webBrowser, vE.GetExceptionMessage());
             }
         }
 
@@ -45,7 +46,7 @@ namespace WebBrowserLaboratory
                     DeathByCaptcha.Client.DefaultTokenTimeout,
                     new Hashtable() {
                     { "type", 4 },
-                    { "token_params", "{ \"googlekey\": \"" + this.webBrowser.DocumentText.GetGoogleKey() + "\", \"pageurl\": \"" + URL + "\" }" }
+                    { "token_params", "{ \"googlekey\": \"" + HtmlHelper.GetGoogleKey(this.webBrowser.DocumentText) + "\", \"pageurl\": \"" + URL + "\" }" }
                     }
                 );
 

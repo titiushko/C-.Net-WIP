@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System;
+using mshtml;
 
 namespace WebBrowserLaboratory
 {
@@ -88,6 +89,38 @@ namespace WebBrowserLaboratory
             {
                 throw vE;
             }
+        }
+
+        protected void ImportJavaScriptLibraries(WebBrowser pBrowser, string[] pJavaScriptLibraries = null)
+        {
+            try
+            {
+                if (pBrowser != null && pJavaScriptLibraries != null && pJavaScriptLibraries.Length > 0)
+                {
+                    foreach (string vJavaScriptLibrary in pJavaScriptLibraries)
+                    {
+                        HtmlElement vScriptTag = pBrowser.Document.CreateElement("script");
+                        vScriptTag.SetAttribute("type", "text/javascript");
+                        vScriptTag.SetAttribute("src", vJavaScriptLibrary);
+                        pBrowser.Document.GetElementsByTagName("head")[0].AppendChild(vScriptTag);
+                    }
+                }
+            }
+            catch (Exception vE)
+            {
+
+                throw vE;
+            }
+        }
+
+        public void JavaScriptAlertMessage(WebBrowser pBrowser, string pMessage)
+        {
+            HtmlElement vHead = pBrowser.Document.GetElementsByTagName("head")[0];
+            HtmlElement vNewScriptTag = pBrowser.Document.CreateElement("script");
+            IHTMLScriptElement vScriptElement = (IHTMLScriptElement)vNewScriptTag.DomElement;
+            vScriptElement.text = "function AlertMessage() { alert('" + pMessage + "'); }";
+            vHead.AppendChild(vNewScriptTag);
+            pBrowser.Document.InvokeScript("AlertMessage");
         }
     }
 }
