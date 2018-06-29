@@ -24,5 +24,17 @@ namespace FWLA.Controllers
         {
             return View("~/Views/Errors/404.cshtml");
         }
+
+        [Route("eFWLA/index")]
+        public ActionResult Inicio()
+        {
+            return View();
+        }
+
+        [Route("eFWLA/create_contract")]
+        public ActionResult CreateContract()
+        {
+            return View();
+        }
     }
 }

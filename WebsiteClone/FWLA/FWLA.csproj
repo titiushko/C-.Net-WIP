@@ -210,21 +210,23 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -232,37 +234,81 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Sources\960fluid.css" />
+    <Content Include="Sources\additional-methods.js" />
+    <Content Include="Sources\add_icon.png" />
     <Content Include="Sources\b57b8f191a1a6776abf59e4581ed4cd4.js" />
+    <Content Include="Sources\basic.css" />
     <Content Include="Sources\bg_login.png" />
+    <Content Include="Sources\calendar_icon.png" />
     <Content Include="Sources\captcha.jpg" />
+    <Content Include="Sources\colReorder.jqueryui.min.css" />
+    <Content Include="Sources\contract.png" />
+    <Content Include="Sources\contract_add.png" />
     <Content Include="Sources\css%281%29.css" />
     <Content Include="Sources\css%282%29.css" />
     <Content Include="Sources\css.css" />
+    <Content Include="Sources\custom.js" />
+    <Content Include="Sources\dataTables.colReorder.min.js" />
+    <Content Include="Sources\dataTables.jqueryui.min.css" />
+    <Content Include="Sources\dataTables.jqueryui.min.js" />
+    <Content Include="Sources\datatables.min.js" />
     <Content Include="Sources\display.css" />
     <Content Include="Sources\display.js" />
+    <Content Include="Sources\documents.png" />
+    <Content Include="Sources\epiclock.css" />
     <Content Include="Sources\error_icon.png" />
+    <Content Include="Sources\es.js" />
+    <Content Include="Sources\favicon.ico" />
+    <Content Include="Sources\favicon.png" />
+    <Content Include="Sources\fontawesome-webfont.eot" />
+    <Content Include="Sources\fontawesome-webfont.svg" />
+    <Content Include="Sources\fontawesome-webfont.ttf" />
+    <Content Include="Sources\fontawesome-webfont.woff" />
+    <Content Include="Sources\fontawesome-webfont.woff2" />
+    <Content Include="Sources\FontAwesome.otf" />
     <Content Include="Sources\fusion-global.css" />
+    <Content Include="Sources\fwla_validation.js" />
+    <Content Include="Sources\glyphicons-halflings-regular.eot" />
+    <Content Include="Sources\glyphicons-halflings-regular.svg" />
+    <Content Include="Sources\glyphicons-halflings-regular.ttf" />
+    <Content Include="Sources\glyphicons-halflings-regular.woff" />
+    <Content Include="Sources\glyphicons-halflings-regular.woff2" />
     <Content Include="Sources\go_pricing_scripts.js" />
     <Content Include="Sources\go_pricing_styles.css" />
     <Content Include="Sources\greensock.js" />
+    <Content Include="Sources\icomoon.ttf" />
+    <Content Include="Sources\icomoon.woff" />
     <Content Include="Sources\jquery-2.0.3.min.js" />
     <Content Include="Sources\jquery-fluid16.js" />
     <Content Include="Sources\jquery-migrate.min.js" />
     <Content Include="Sources\jquery-ui.min.css" />
+    <Content Include="Sources\jquery-ui.min.js" />
     <Content Include="Sources\jquery-ui.structure.min.css" />
     <Content Include="Sources\jquery-ui.theme.min.css" />
     <Content Include="Sources\jquery.blockUI.js" />
+    <Content Include="Sources\jquery.countdown.css" />
+    <Content Include="Sources\jquery.epiclock.min.js" />
+    <Content Include="Sources\jquery.form.js" />
+    <Content Include="Sources\jquery.formatCurrency-1.4.0.js" />
     <Content Include="Sources\jquery.js" />
     <Content Include="Sources\jquery.maskedinput.js" />
+    <Content Include="Sources\jquery.mb.browser.min.js" />
+    <Content Include="Sources\jquery.plupload.queue.css" />
+    <Content Include="Sources\jquery.plupload.queue.js" />
+    <Content Include="Sources\jquery.prettyLoader.js" />
+    <Content Include="Sources\jquery.prettyPhoto.js" />
     <Content Include="Sources\jquery.themepunch.revolution.min.js" />
     <Content Include="Sources\jquery.themepunch.tools.min.js" />
+    <Content Include="Sources\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Sources\jquery.ui.plupload.min.js" />
     <Content Include="Sources\jquery.validate.js" />
     <Content Include="Sources\layerslider.css" />
     <Content Include="Sources\layerslider.kreaturamedia.jquery.js" />
     <Content Include="Sources\layerslider.transitions.js" />
     <Content Include="Sources\layout.css" />
+    <Content Include="Sources\lc_menu.png" />
     <Content Include="Sources\login_validation.js" />
     <Content Include="Sources\logo-sbp.png" />
     <Content Include="Sources\logo_fwla_header.png" />
@@ -271,13 +317,30 @@
     <Content Include="Sources\mediaelement-and-player.min.js" />
     <Content Include="Sources\mediaelementplayer.css" />
     <Content Include="Sources\mediaelementplayer.min.css" />
+    <Content Include="Sources\menu.css" />
+    <Content Include="Sources\multiselect.min.js" />
     <Content Include="Sources\nav.css" />
     <Content Include="Sources\ok_icon.png" />
+    <Content Include="Sources\page_title_bg.png" />
+    <Content Include="Sources\passwordStrengthMeter.css" />
+    <Content Include="Sources\passwordStrengthMeter.js" />
+    <Content Include="Sources\plupload.full.min.js" />
+    <Content Include="Sources\PositiveSSL_tl_trans2.png" />
+    <Content Include="Sources\pqselect.min.js" />
+    <Content Include="Sources\prettyLoader.css" />
+    <Content Include="Sources\prettyPhoto.css" />
+    <Content Include="Sources\profile.png" />
+    <Content Include="Sources\profile_close.png" />
+    <Content Include="Sources\profile_edit.png" />
+    <Content Include="Sources\rc_menu.png" />
+    <Content Include="Sources\remove_icon.png" />
     <Content Include="Sources\reset.css" />
     <Content Include="Sources\scripts.js" />
+    <Content Include="Sources\search_icon.png" />
     <Content Include="Sources\settings.css" />
     <Content Include="Sources\style.min.css" />
     <Content Include="Sources\styles.css" />
+    <Content Include="Sources\swfobject.js" />
     <Content Include="Sources\switch_minus.gif" />
     <Content Include="Sources\text.css" />
     <Content Include="Sources\tp_twitter_plugin.css" />
@@ -285,18 +348,6 @@
     <Content Include="Sources\wp-embed.min.js" />
     <Content Include="Sources\wp-emoji-release.min.js" />
     <Content Include="Sources\wp-mediaelement.min.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -308,28 +359,38 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Errors\404.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Errors\404.cshtml" />
-    <Content Include="Sources\icomoon.ttf" />
-    <Content Include="Sources\icomoon.woff" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\Inicio.cshtml" />
+    <Content Include="Views\Home\CreateContract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

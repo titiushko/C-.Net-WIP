@@ -50,7 +50,6 @@ namespace FWLA.Models
     {
         [Required]
         [Display(Name = "Username")]
-        [EmailAddress]
         public string Username { get; set; }
 
         [Required]
