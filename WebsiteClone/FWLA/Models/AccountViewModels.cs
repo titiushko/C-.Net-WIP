@@ -12,14 +12,14 @@ namespace FWLA.Models
 
     public class ExternalLoginListViewModel
     {
-        public string ReturnUrl { get; set; }
+        public string accesscheck { get; set; }
     }
 
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
+        public string accesscheck { get; set; }
         public bool RememberMe { get; set; }
     }
 
@@ -31,7 +31,7 @@ namespace FWLA.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
-        public string ReturnUrl { get; set; }
+        public string accesscheck { get; set; }
 
         [Display(Name = "Remember this browser?")]
         public bool RememberBrowser { get; set; }
@@ -49,9 +49,9 @@ namespace FWLA.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Username")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

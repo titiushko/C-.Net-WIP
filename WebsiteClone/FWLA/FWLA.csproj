@@ -233,24 +233,24 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Sources\Login\960fluid.css" />
-    <Content Include="Sources\Login\bg_login.png" />
-    <Content Include="Sources\Login\captcha.jpg" />
-    <Content Include="Sources\Login\jquery-2.0.3.min.js" />
-    <Content Include="Sources\Login\jquery-fluid16.js" />
-    <Content Include="Sources\Login\jquery-ui.min.css" />
-    <Content Include="Sources\Login\jquery-ui.structure.min.css" />
-    <Content Include="Sources\Login\jquery-ui.theme.min.css" />
-    <Content Include="Sources\Login\jquery.blockUI.js" />
-    <Content Include="Sources\Login\jquery.maskedinput.js" />
-    <Content Include="Sources\Login\jquery.validate.js" />
-    <Content Include="Sources\Login\layout.css" />
-    <Content Include="Sources\Login\login_validation.js" />
-    <Content Include="Sources\Login\logo_fwla_login.png" />
-    <Content Include="Sources\Login\nav.css" />
-    <Content Include="Sources\Login\reset.css" />
-    <Content Include="Sources\Login\text.css" />
-    <Content Include="Sources\Login\warning_icon.png" />
+    <Content Include="Sources\960fluid.css" />
+    <Content Include="Sources\bg_login.png" />
+    <Content Include="Sources\captcha.jpg" />
+    <Content Include="Sources\jquery-2.0.3.min.js" />
+    <Content Include="Sources\jquery-fluid16.js" />
+    <Content Include="Sources\jquery-ui.min.css" />
+    <Content Include="Sources\jquery-ui.structure.min.css" />
+    <Content Include="Sources\jquery-ui.theme.min.css" />
+    <Content Include="Sources\jquery.blockUI.js" />
+    <Content Include="Sources\jquery.maskedinput.js" />
+    <Content Include="Sources\jquery.validate.js" />
+    <Content Include="Sources\layout.css" />
+    <Content Include="Sources\login_validation.js" />
+    <Content Include="Sources\logo_fwla_login.png" />
+    <Content Include="Sources\nav.css" />
+    <Content Include="Sources\reset.css" />
+    <Content Include="Sources\text.css" />
+    <Content Include="Sources\warning_icon.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,9 +262,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -311,7 +308,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>17720</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
