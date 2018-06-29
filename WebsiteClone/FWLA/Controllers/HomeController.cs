@@ -12,5 +12,17 @@ namespace FWLA.Controllers
         {
             return RedirectToAction("login", "eFWLA");
         }
+
+        [Route("eFWLA/error/404")]
+        public ActionResult Error404()
+        {
+            return View("~/Views/Errors/404.cshtml");
+        }
+
+        [Route("eFWLA/error/500")]
+        public ActionResult Error500()
+        {
+            return View("~/Views/Errors/404.cshtml");
+        }
     }
 }
