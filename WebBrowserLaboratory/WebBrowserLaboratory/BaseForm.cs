@@ -9,7 +9,7 @@ namespace WebBrowserLaboratory
         bool _PageLoaded = false;
         bool _OnLoadEventSet = false;
 
-        protected void RunActionAndWaitUntilPageLoaded(WebBrowser pBrowser, Action pActionToRun)
+        protected void RunActionAndWaitUntilPageLoaded(WebBrowser pBrowser, Action pActionToRun = null)
         {
             try
             {
@@ -18,16 +18,13 @@ namespace WebBrowserLaboratory
                 _OnLoadEventSet = false;
                 pBrowser.DocumentCompleted += BrowserDocumentCompleted;
                 //AddOnLoadEventToIFrames(pBrowser);
-                if (pActionToRun != null)
+                if (pActionToRun != null) pActionToRun.Invoke();
+                while (!_PageLoaded)
                 {
-                    pActionToRun.Invoke();
-                    while (!_PageLoaded)
-                    {
-                        Application.DoEvents();
-                        _PageLoaded = (pBrowser.ReadyState.Equals(WebBrowserReadyState.Complete) && !vCurrentHtml.Equals(pBrowser.DocumentText));
-                    }
-                    pBrowser.DocumentCompleted -= BrowserDocumentCompleted;
+                    Application.DoEvents();
+                    _PageLoaded = (pBrowser.ReadyState.Equals(WebBrowserReadyState.Complete) && !vCurrentHtml.Equals(pBrowser.DocumentText));
                 }
+                pBrowser.DocumentCompleted -= BrowserDocumentCompleted;
             }
             catch (Exception vE)
             {
@@ -97,13 +94,16 @@ namespace WebBrowserLaboratory
             {
                 if (pBrowser != null && pJavaScriptLibraries != null && pJavaScriptLibraries.Length > 0)
                 {
+                    HtmlElement vHead = pBrowser.Document.GetElementsByTagName("head")[0];
                     foreach (string vJavaScriptLibrary in pJavaScriptLibraries)
                     {
-                        HtmlElement vScriptTag = pBrowser.Document.CreateElement("script");
-                        vScriptTag.SetAttribute("type", "text/javascript");
-                        vScriptTag.SetAttribute("src", vJavaScriptLibrary);
-                        pBrowser.Document.GetElementsByTagName("head")[0].AppendChild(vScriptTag);
+                        HtmlElement vNewScriptTag = pBrowser.Document.CreateElement("script");
+                        vNewScriptTag.SetAttribute("type", "text/javascript");
+                        vNewScriptTag.SetAttribute("src", vJavaScriptLibrary);
+                        vHead.AppendChild(vNewScriptTag);
                     }
+                    pBrowser.Refresh();
+                    this.RunActionAndWaitUntilPageLoaded(pBrowser);
                 }
             }
             catch (Exception vE)
