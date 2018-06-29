@@ -103,15 +103,14 @@ $(document).on("keydown", function (e) {
 	$(":input:visible:enabled").first().focus();
   	$('#epiClock').epiclock({format: 'l, d F Y \| g:i:s a' });   // Creates a text clock displaying local time
   	$.epiclock();                // Starts all the clocks you've created
-	$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook',social_tools: false,allow_resize: true});
+	//$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook',social_tools: false,allow_resize: true});
 	$("#accordion").accordion({collapsible:true,heightStyle: "content"});
 
 	$('#DateStartC').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(2000, 1 - 1, 1),dateFormat: 'yy-mm-dd'});
 	$('#DateEndC').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(2000, 1 - 1, 1),dateFormat: 'yy-mm-dd'});
 	$('#CDateStart,#InvestEmitedDate,#SDateStart,#SInvestEmitedDate,#CPayStart,#CDateEmitted,#CDateDue,#CDisbursementDate,#CDateEmittedStart,#CDateEmittedEnd,#CDateDueStart,#CDateDueEnd,#CDateInactiveStart,#CDateInactiveEnd,#DateCreatedStart,#DateCreatedEnd,#OrderDStart,#OrderDEnd').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date( 1 - 1, 1),dateFormat: 'yy-mm-dd'});
 	$('#CDateEnd,#InvestExpiryDate,#SDateEnd,#SInvestExpiryDate').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(1 - 1, 1),dateFormat: 'yy-mm-dd',defaultDate: '+7Y'});
-	$.prettyLoader({bind_to_ajax: true,offset_top: 13, /* integer */
-			offset_left: 10 /* integer */});
+	//$.prettyLoader({bind_to_ajax:true,offset_top:13,offset_left:10});
 	$('#CarLastRDate').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date( 1 - 1, 1),dateFormat: 'yy-mm-dd'});
 
     $("#altgrid tr:odd,#facility tr:odd,#auto tr:odd,#equipo tr:odd,#inmueble tr:odd,#deposito tr:odd,#otros tr:odd,#autoT tr:odd,#autoV tr:odd,#equipoT tr:odd,#inmuebleT tr:odd,#depositoT tr:odd,#otrosT tr:odd").addClass("odd");

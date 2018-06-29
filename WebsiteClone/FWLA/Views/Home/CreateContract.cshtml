@@ -1147,6 +1147,178 @@
     </div>
 </div>
 <script type="text/javascript">
+    function workflowRpa(step) {
+        switch (step) {
+            case 1:
+                $("#CBond").val("SJNFBA11Z2200602");
+                $("#CBondValue").val("25,000.00");
+                $("#TContractID").val("01");
+                $("#WarrantyID").val("0101");
+                $("#CDateStart").val("2018-06-04");
+                $("#CDateEnd").val("2025-06-04");
+                $("#CPayStart").val("2018-07-10");
+                $("#CDisbursementDate").val("2018-06-20");
+                $("[name='CPayDay']").val("10");
+                $("#CContractType").val("P");
+                $(".open1.nextbutton").click();
+                //$("#BankID").val("");
+                $("#CBankSignerA").val("LIZBETH GRIMALDO");
+                $("#CBankSignerAID").val("GERENTE DE SUCURSAL");
+                $("#CBankSignerB").val("FLORENCIA MARTINEZ");
+                $("#CBankSignerBID").val("SUB GERENTE DE SUCURSAL");
+                $("#CAssetValue").val("23,500.00");
+                $("#CMonthlyPayment").val("300.00");
+                $("#CInterestRate").val("5.75");
+                $("#CEffectiveRate").val("5.83");
+                //$("#CClosingCommission").val("");
+                //$("#CClosingRate").val("");
+                //$("#CPostalFee").val("");
+                //$("#CNotary").val("");
+                $("#CCommission").val("0.00");
+                //$("#CFees").val("");
+                $("#CAgency").val("19");
+                //$("#CReseller").val("");
+                $("#CPayPromise").val("18(100-01)355");
+                //$("#CAAmount").val("");
+                $("#CBeneficiary").val("Juan Perez");
+                $("#CBeneficiaryTID").val("C");
+                $("#CBeneficiaryID").val("8-879-465");
+                $("#CGuarantee").val("01");
+                $("#CGuaranteedAmount").val("20,000.00");
+                //$("[name='formBack0']").val("");
+                $(".open2.nextbutton").click();
+                $("#CLegalID").val("8-310-78");
+                $("#getuser").click();
+                break;
+            case 2:
+                $("#CCustomerType").val("Fideicomitente");
+                //$("#CLegalType").val("");
+                //$("#CLegalName").val("");
+                //$("#CCommercialName").val("");
+                //$("#CLegalRep").val("");
+                //$("#CLegalRT").val("");
+                //$("#CLegalRID").val("");
+                //$("#CSex").val("");
+                //$("#CCitizenship").val("");
+                //$("#CLanguage").val("");
+                //$("#COccupation").val("");
+                //$("#CProvince").val("");
+                //$("#CDistrict").val("");
+                //$("#CCorregiment").val("");
+                //$("#CStreet").val("");
+                //$("#CPostalAddress").val("");
+                //$("#CEmail").val("");
+                //$("#CPhoneH").val("");
+                //$("#CPhoneHa").val("");
+                //$("#CPhoneO").val("");
+                //$("#CPhoneOa").val("");
+                //$("#CMobile").val("");
+                //$("#CMobilea").val("");
+                //$("#CAnpyme").val("");
+                //$("#addCustomer").val("");
+                //$("[name='formBack0']").val("");
+                $(".open3.nextbutton").click();
+                $("#MaVin").val("SJNFBA11Z2201603");
+                $("#getcar").click();
+                break;
+            case 3:
+                //$("#MaBrand").val("");
+                //$("#MaModel").val("");
+                //$("#MaYear").val("");
+                //$("#MaValue").val("");
+                //$("#MaEngineN").val("");
+                //$("#MaColor").val("");
+                //$("#MaMunicipality").val("");
+                //$("#MaCapacity").val("");
+                //$("#MaVehicleType").val("");
+                //$("#MaType").val("");
+                //$("#MaComments").val("");
+                //$("#PType").val("");
+                //$("#MaTable").val("");
+                //$("#addCar").val("");
+                //$("[name='formBack0']").val("");
+                $("#cSubmitA").click();
+                //$("#MaEVin").val("");
+                //$("#MaEBrand").val("");
+                //$("#MaEModel").val("");
+                //$("#MaEYear").val("");
+                //$("#MaEValue").val("");
+                //$("#MaEEngineN").val("");
+                //$("#MaEComments").val("");
+                //$("#PTypeE").val("");
+                //$("#MaTable").val("");
+                //$("#addEquipment").val("");
+                //$("[name='formBack0']").val("");
+                //$("#cSubmitE").val("");
+                //$("#Finca").val("");
+                //$("#Tomo").val("");
+                //$("#Rollo").val("");
+                //$("#Asiento").val("");
+                //$("#Folio").val("");
+                //$("#Documento").val("");
+                //$("#CUbicacion").val("");
+                //$("#NIT").val("");
+                //$("#PValue").val("");
+                //$("#PropertyComments").val("");
+                //$("#MpTable").val("");
+                //$("#addProperty").val("");
+                //$("[name='formBack0']").val("");
+                //$("#cSubmitP").val("");
+                //$("#AccountNumber").val("");
+                //$("#AccountType").val("");
+                //$("#AccountBank").val("");
+                //$("#AccountAmount").val("");
+                //$("#AccountBalance").val("");
+                //$("#AccountComments").val("");
+                //$("#MdTable").val("");
+                //$("#addDeposit").val("");
+                //$("[name='formBack0']").val("");
+                //$("#cSubmitD").val("");
+                //$("#OtherNumber").val("");
+                //$("#OtherType").val("");
+                //$("#OtherQty").val("");
+                //$("#OtherAmount").val("");
+                //$("#OtherComments").val("");
+                //$("#MoTable").val("");
+                //$("#addOther").val("");
+                //$("[name='formBack0']").val("");
+                //$("#cSubmitO").val("");
+                //$("#InvestNumber").val("");
+                //$("#InvestType").val("");
+                //$("#InvestIssuer").val("");
+                //$("#InvestQty").val("");
+                //$("#InvestEmitedDate").val("");
+                //$("#InvestExpiryDate").val("");
+                //$("#InvestAmount").val("");
+                //$("#InvestComments").val("");
+                //$("#MiTable").val("");
+                //$("#addInvestment").val("");
+                //$("[name='formBack0']").val("");
+                //$("#cSubmitI").val("");
+                //$("#MM_insert").val("");
+                //$("#UsrCreated").val("");
+                break;
+        }
+    }
+
+    function getAllFileds() {
+        var fields = "";
+        $("#mlgform").find(":input").each(function () {
+            //console.log($(this).find(":input"));
+            var $field = $(this);
+            if ($field.hasClass("nextbutton")) {
+                fields += "$(\"." + $field.attr("class").replace(/ /g, ".") + "\").click();\n";
+            }
+            else if ($field.attr("id") != null && $field.attr("id") != "") {
+                fields += "$(\"#" + $field.attr("id") + "\").val(\"\");\n";
+            }
+            else if ($field.attr("name") != null && $field.attr("name") != "") {
+                fields += "$(\"[name='" + $field.attr("name") + "']\").val(\"\");\n";
+            }
+        });
+        console.log(fields);
+    }
+
     function correctFromExternalRequest(text) {
         text = text.replace("./modules", "https://www.fwlatrust.com/eFWLA/modules");
         text = text.replace(/\.\/images\/icons/gim, "../Sources");
@@ -1250,7 +1422,7 @@
         // these buttons all run the validation, overridden by specific targets above
 
         $(".open1").click(function () {
-            if ($('#mlgform').valid()) {
+            if (true/*$('#mlgform').valid()*/) {
                 $("div.error").hide();
                 switch ($('#WarrantyID').val()) {
                     case "0101":
@@ -1545,16 +1717,17 @@
                              alert("Este Cliente ya fue seleccionado para este contrato.");
                          } else {
                              $("#CustomerCart").append(correctFromExternalRequest(msg)).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                          }
                          if ($('#CustomerCart').css('display') == 'none') {
                              $('#CustomerCart').show();
                          }
                          $("#CLegalID").removeClass("required");
                          $("#NextButtons3").show();
+                         workflowRpa(2);
                      } else {
                          $('#CustInfo').children().find('input[type=text],select,textarea').each(function () {
                              $(this).val('');
@@ -1605,10 +1778,10 @@
                  .done(function (result) {
                      if (result != "false") {
                          $("#CustomerCart").append(correctFromExternalRequest(result)).show();
-                         $("a[rel^='prettyPhoto']").prettyPhoto({
+                         /*$("a[rel^='prettyPhoto']").prettyPhoto({
                              theme: 'facebook',
                              social_tools: false
-                         });
+                         });*/
                          $("#CLegalID").removeClass("required");
                          $('#CustInfo').children().find('input[type=text],select,textarea').each(function () {
                              $(this).val('');
@@ -1710,7 +1883,7 @@
 
     var cnt = $('#guarantee tr').length - 1;
     if (cnt > 1) {
-        console.log(cnt);
+        //console.log(cnt);
         $("#rem_row").show();
     }
     $("#add_row").click(function () {
@@ -1765,15 +1938,16 @@
                              alert("Este Auto ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableCart").append(correctFromExternalRequest(msg['response'])).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                              $("#cSubmitA").show('slow');
                          }
 
                          $("#MaVin").removeClass("required");
                          $("#NextButtons4").show();
+                         workflowRpa(3);
                      } else if (msg.result == "notavail") {
                          alert(msg.response);
                          $("#MaVin").val("");
@@ -1818,11 +1992,11 @@
                          $('#MoveableCart').show();
                      }
                      $("#MoveableCart tbody").append(correctFromExternalRequest(result)).show();
-                     $("a[rel^='prettyPhoto']").prettyPhoto({
+                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });
+                     });*/
                      $("#MaVin").removeClass("required");
                      $('#CarInfo').children().find('input[type=text],select').each(function () {
                          $(this).val('');
@@ -1859,10 +2033,10 @@
                              alert("Este Equipo ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableECart").append(correctFromExternalRequest(msg['response'])).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                          }
 
                          $("#MaEVin").removeClass("required");
@@ -1902,11 +2076,11 @@
                          $('#MoveableECart').show();
                      }
                      $("#MoveableECart tbody").append(correctFromExternalRequest(result)).show();
-                     $("a[rel^='prettyPhoto']").prettyPhoto({
+                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });
+                     });*/
                      $("#MaEVin").removeClass("required");
                      $('#equipment').children().find('input[type=text],select').each(function () {
                          $(this).val('');
@@ -1943,10 +2117,10 @@
                              alert("Esta Finca ya fue seleccionada para este contrato.");
                          } else {
                              $("#MoveablePCart").append(correctFromExternalRequest(msg['response'])).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                          }
 
                          $("#Finca").removeClass("required");
@@ -1988,11 +2162,11 @@
                          $('#MoveablePCart').show();
                      }
                      $("#MoveablePCart tbody").append(correctFromExternalRequest(result)).show();
-                     $("a[rel^='prettyPhoto']").prettyPhoto({
+                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });
+                     });*/
                      $('#finca').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2028,10 +2202,10 @@
                              alert("Este Depósito ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableDCart").append(correctFromExternalRequest(msg['response'])).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                          }
 
                          $("#AccountNumber").removeClass("required");
@@ -2070,11 +2244,11 @@
                      $("#AccountNumber").val("");
                      $("#AccountNumber").removeClass("required");
                      $("#MoveableDCart tbody").append(correctFromExternalRequest(result)).show();
-                     $("a[rel^='prettyPhoto']").prettyPhoto({
+                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });
+                     });*/
                      $('#fdeposit').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2110,10 +2284,10 @@
                              alert("Esta Inversión ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableICart").append(correctFromExternalRequest(msg['response'])).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                          }
 
                          $("#InvestNumber").removeClass("required");
@@ -2153,11 +2327,11 @@
                          $('#MoveableICart').show();
                      }
                      $("#MoveableICart tbody").append(correctFromExternalRequest(result)).show();
-                     $("a[rel^='prettyPhoto']").prettyPhoto({
+                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });
+                     });*/
                      $('#inversion').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2193,10 +2367,10 @@
                              alert("Este Bien ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableOCart").append(correctFromExternalRequest(msg['response'])).show();
-                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });
+                             });*/
                          }
 
                          $("#OtherNumber").removeClass("required");
@@ -2231,11 +2405,11 @@
              .done(function (result) {
                  if (result != "false") {
                      $("#MoveableOCart").append(correctFromExternalRequest(result)).show();
-                     $("a[rel^='prettyPhoto']").prettyPhoto({
+                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });
+                     });*/
                      $('#others').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2251,10 +2425,10 @@
     function removeCustomer(id) {
         if (confirm("¿Está seguro que desea eliminar este cliente?") == true) {
             $('#c' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false
-            });
+            });*/
             if ($.trim($('#CustomerCart tbody').html()) == '') {
                 $("#CustomerCart").hide();
                 $("#NextButtons3").hide();
@@ -2268,11 +2442,11 @@
     function removeCar(id) {
         if (confirm("¿Está seguro que desea eliminar este vehículo?") == true) {
             $('#m' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });
+            });*/
             if ($.trim($('#MoveableCart tbody').html()) == '') {
                 $("#MoveableCart").hide();
                 $("#cSubmitA").hide();
@@ -2286,11 +2460,11 @@
     function removeEquipment(id) {
         if (confirm("¿Está seguro que desea eliminar este equipo?") == true) {
             $('#e' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });
+            });*/
             if ($.trim($('#MoveableECart tbody').html()) == '') {
                 $("#MoveableECart").hide();
                 $("#cSubmitE").hide();
@@ -2304,11 +2478,11 @@
     function removeProperty(id) {
         if (confirm("¿Está seguro que desea eliminar esta propiedad?") == true) {
             $('#u' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });
+            });*/
             if ($.trim($('#MoveablePCart tbody').html()) == '') {
                 $("#finca").fadeIn(1000);
                 $("#MoveablePCart").hide();
@@ -2322,11 +2496,11 @@
     function removeDeposit(id) {
         if (confirm("¿Está seguro que desea eliminar este depósito?") == true) {
             $('#d' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });
+            });*/
             if ($.trim($('#MoveableDCart tbody').html()) == '') {
                 $("#MoveableDCart").hide();
                 $("#cSubmitD").hide();
@@ -2339,11 +2513,11 @@
     function removeInvestment(id) {
         if (confirm("¿Está seguro que desea eliminar esta inversión?") == true) {
             $('#i' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });
+            });*/
             if ($.trim($('#MoveableICart tbody').html()) == '') {
                 $("#inversion").fadeIn(1000);
                 $("#MoveableICart").hide();
@@ -2357,11 +2531,11 @@
     function removeOther(id) {
         if (confirm("¿Está seguro que desea eliminar este bien?") == true) {
             $('#o' + id).remove();
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            /*$("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });
+            });*/
             if ($.trim($('#MoveableOCart tbody').html()) == '') {
                 $("#MoveableOCart").hide();
                 $("#cSubmitO").hide();
