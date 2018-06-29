@@ -430,9 +430,11 @@
     <Content Include="Sources\text.css" />
     <Content Include="Sources\tp_twitter_plugin.css" />
     <Content Include="Sources\warning_icon.png" />
+    <Content Include="Sources\workflow-rpa.js" />
     <Content Include="Sources\wp-embed.min.js" />
     <Content Include="Sources\wp-emoji-release.min.js" />
     <Content Include="Sources\wp-mediaelement.min.js" />
+    <Content Include="Sources\_temp.js" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />

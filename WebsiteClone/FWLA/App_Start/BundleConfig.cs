@@ -26,6 +26,8 @@ namespace FWLA
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/Sources/workflow-rpa.js").Include("~/Sources/workflow-rpa.js"));
         }
     }
 }
