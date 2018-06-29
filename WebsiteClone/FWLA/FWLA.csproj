@@ -239,6 +239,7 @@
     <Content Include="Sources\additional-methods.js" />
     <Content Include="Sources\add_icon.png" />
     <Content Include="Sources\ajax-loader.gif" />
+    <Content Include="Sources\attach.png" />
     <Content Include="Sources\b57b8f191a1a6776abf59e4581ed4cd4.js" />
     <Content Include="Sources\basic.css" />
     <Content Include="Sources\bg_home.png" />
@@ -253,6 +254,8 @@
     <Content Include="Sources\css%282%29.css" />
     <Content Include="Sources\css.css" />
     <Content Include="Sources\custom.js" />
+    <Content Include="Sources\customers_edit.png" />
+    <Content Include="Sources\customers_preview.png" />
     <Content Include="Sources\customers_preview_small.png" />
     <Content Include="Sources\dataTables.colReorder.min.js" />
     <Content Include="Sources\dataTables.jqueryui.min.css" />
@@ -279,6 +282,8 @@
     <Content Include="Sources\glyphicons-halflings-regular.ttf" />
     <Content Include="Sources\glyphicons-halflings-regular.woff" />
     <Content Include="Sources\glyphicons-halflings-regular.woff2" />
+    <Content Include="Sources\good_edit.png" />
+    <Content Include="Sources\good_preview.png" />
     <Content Include="Sources\good_preview_small.png" />
     <Content Include="Sources\go_pricing_scripts.js" />
     <Content Include="Sources\go_pricing_styles.css" />
