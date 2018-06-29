@@ -102,13 +102,12 @@ namespace WebBrowserLaboratory
                         vNewScriptTag.SetAttribute("src", vJavaScriptLibrary);
                         vHead.AppendChild(vNewScriptTag);
                     }
-                    pBrowser.Refresh();
-                    this.RunActionAndWaitUntilPageLoaded(pBrowser);
+                    //pBrowser.Refresh();
+                    //this.RunActionAndWaitUntilPageLoaded(pBrowser);
                 }
             }
             catch (Exception vE)
             {
-
                 throw vE;
             }
         }

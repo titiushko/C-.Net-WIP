@@ -30,13 +30,28 @@ namespace WebBrowserLaboratory.Helpers
             }
         }
 
-        public static Action ClickElement(HtmlDocument pHtmlDoc, string pIdentifier, string pTag = null, string pAttributeValue = null)
+        public static Action ClickElement(HtmlDocument pHtmlDoc, string pIdentifier, bool pDoInvoke = false, string pTag = null, string pAttributeValue = null)
         {
             try
             {
                 HtmlElement vHtmlElement = GetHtmlElement(pHtmlDoc, pIdentifier, pTag, pAttributeValue);
-                if (vHtmlElement != null) return new Action(() => vHtmlElement.InvokeMember("Click"));
-                else throw new Exception(string.Format("No se encontró el elemento [pIdentifier={0}] para darle click.", pIdentifier));
+                if (vHtmlElement != null)
+                {
+                    Action vActionToRun = new Action(() => vHtmlElement.InvokeMember("Click"));
+                    if (pDoInvoke)
+                    {
+                        vActionToRun.Invoke();
+                        return null;
+                    }
+                    else
+                    {
+                        return vActionToRun;
+                    }
+                }
+                else
+                {
+                    throw new Exception(string.Format("No se encontró el elemento [pIdentifier={0}] para darle click.", pIdentifier));
+                }
             }
             catch (Exception vE)
             {
