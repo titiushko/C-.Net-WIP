@@ -88,7 +88,7 @@ ul.nav li.current:hover ul li a:active {color:#F30; background:#fff;}
 /* navigation (vertical subnavigation)
 ----------------------------------------------- */
 ul.nav {
-  background: url('../images/bg_menu.png') repeat-x;
+  background: url('../Sources/bg_menu.png') repeat-x;
 }
 ul.main li {
   position:relative;
@@ -106,7 +106,7 @@ ul.main li a {
 	line-height:41px;
 	border:0;
 	color:#f1592a;
-	background:url('../images/bg_menu.png') repeat-x;
+	background:url('../Sources/bg_menu.png') repeat-x;
 }
 ul.main li ul li a {
   width:13em;
@@ -124,7 +124,7 @@ ul.main li ul li a:hover {
 }
 ul.main li:hover a {
   color:#fff;
-  background:url('../images/bg_menu_hover.png') repeat-x;
+  background:url('../Sources/bg_menu_hover.png') repeat-x;
   background-color: #4f8caf;
 }
 ul.main li:hover ul li a {color:#fff;}
@@ -174,7 +174,7 @@ ul.nav li.secondary span.status span {
 }
 ul.nav li.secondary:hover a {
 	color:#fff;
-	background:url('../images/bg_menu_hover.png') repeat-x;
+	background:url('../Sources/bg_menu_hover.png') repeat-x;
 	background-color:#cd3000;
 }
 ul.nav li.secondary:hover a:hover {

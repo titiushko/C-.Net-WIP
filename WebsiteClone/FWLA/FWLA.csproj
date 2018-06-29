@@ -253,6 +253,7 @@
     <Content Include="Sources\css%282%29.css" />
     <Content Include="Sources\css.css" />
     <Content Include="Sources\custom.js" />
+    <Content Include="Sources\customers_preview_small.png" />
     <Content Include="Sources\dataTables.colReorder.min.js" />
     <Content Include="Sources\dataTables.jqueryui.min.css" />
     <Content Include="Sources\dataTables.jqueryui.min.js" />
@@ -278,6 +279,7 @@
     <Content Include="Sources\glyphicons-halflings-regular.ttf" />
     <Content Include="Sources\glyphicons-halflings-regular.woff" />
     <Content Include="Sources\glyphicons-halflings-regular.woff2" />
+    <Content Include="Sources\good_preview_small.png" />
     <Content Include="Sources\go_pricing_scripts.js" />
     <Content Include="Sources\go_pricing_styles.css" />
     <Content Include="Sources\greensock.js" />
@@ -358,6 +360,7 @@
     <Content Include="Sources\PositiveSSL_tl_trans2.png" />
     <Content Include="Sources\pqselect.min.js" />
     <Content Include="Sources\prettyLoader.css" />
+    <Content Include="Sources\prettyLoader.png" />
     <Content Include="Sources\prettyPhoto.css" />
     <Content Include="Sources\profile.png" />
     <Content Include="Sources\profile_close.png" />
