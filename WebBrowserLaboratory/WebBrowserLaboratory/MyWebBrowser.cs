@@ -6,14 +6,18 @@ using Titiushko.Utilities.Extensions;
 
 namespace WebBrowserLaboratory
 {
-    public partial class Form1 : BaseForm
+    public partial class MyWebBrowser : BaseForm
     {
-        private const string URL = "http://54.173.64.156/";
+        private string SystemWebsite_Url = ConfigurationManager.AppSettings["SystemWebsite.Url"];
+        private string SystemWebsite_UserName = ConfigurationManager.AppSettings["SystemWebsite.UserName"];
+        private string SystemWebsite_Password = ConfigurationManager.AppSettings["SystemWebsite.Password"];
+        private string DeathByCaptchaService_UserName = ConfigurationManager.AppSettings["DeathByCaptchaService.UserName"];
+        private string DeathByCaptchaService_Password = ConfigurationManager.AppSettings["DeathByCaptchaService.Password"];
 
-        public Form1()
+        public MyWebBrowser()
         {
             InitializeComponent();
-            this.urlTextBox.Text = URL;
+            this.urlTextBox.Text = SystemWebsite_Url;
             this.webBrowser.Navigate(this.urlTextBox.Text);
         }
 
@@ -25,7 +29,7 @@ namespace WebBrowserLaboratory
             }
             catch (Exception vE)
             {
-                JavaScriptAlertMessage(this.webBrowser, vE.GetExceptionMessage());
+                this.JavaScriptAlertMessage(this.webBrowser, vE.GetExceptionMessage());
             }
         }
 
@@ -38,15 +42,15 @@ namespace WebBrowserLaboratory
         {
             try
             {
-                HtmlHelper.SetValueToElement(this.webBrowser.Document, "UserName", ConfigurationManager.AppSettings["SystemLogin.UserName"]);
-                HtmlHelper.SetValueToElement(this.webBrowser.Document, "Password", ConfigurationManager.AppSettings["SystemLogin.Password"]);
+                HtmlHelper.SetValueToElement(this.webBrowser.Document, "UserName", SystemWebsite_UserName);
+                HtmlHelper.SetValueToElement(this.webBrowser.Document, "Password", SystemWebsite_Password);
 
-                DeathByCaptcha.Client client = (DeathByCaptcha.Client)new DeathByCaptcha.HttpClient(ConfigurationManager.AppSettings["DeathByCaptchaService.UserName"], ConfigurationManager.AppSettings["DeathByCaptchaService.Password"]);
+                DeathByCaptcha.Client client = (DeathByCaptcha.Client)new DeathByCaptcha.HttpClient(DeathByCaptchaService_UserName, DeathByCaptchaService_Password);
                 DeathByCaptcha.Captcha captcha = client.Decode(
                     DeathByCaptcha.Client.DefaultTokenTimeout,
                     new Hashtable() {
                     { "type", 4 },
-                    { "token_params", "{ \"googlekey\": \"" + HtmlHelper.GetGoogleKey(this.webBrowser.DocumentText) + "\", \"pageurl\": \"" + URL + "\" }" }
+                    { "token_params", "{ \"googlekey\": \"" + HtmlHelper.GetGoogleKey(this.webBrowser.DocumentText) + "\", \"pageurl\": \"" + SystemWebsite_Url + "\" }" }
                     }
                 );
 

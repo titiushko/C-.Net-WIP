@@ -1,6 +1,6 @@
 ﻿namespace WebBrowserLaboratory
 {
-    partial class Form1
+    partial class MyWebBrowser
     {
         private System.Windows.Forms.Panel myPanel;
         private System.Windows.Forms.WebBrowser webBrowser;
@@ -95,8 +95,8 @@
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.navigateButton);
             this.Controls.Add(this.myPanel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "WebBrowserLaboratory";
+            this.Text = "Web Browser Laboratory";
             this.myPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
