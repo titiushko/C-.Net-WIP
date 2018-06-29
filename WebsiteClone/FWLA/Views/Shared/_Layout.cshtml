@@ -53,230 +53,307 @@
     <script type="text/javascript" src="@Url.Content("~/Sources/dataTables.jqueryui.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Sources/dataTables.colReorder.min.js")"></script>
     <script type="text/javascript">
-$(function(){
+        $(function () {
+            /*function stopRKey(evt) {
+              var evt = (evt) ? evt : ((event) ? event : null);
+              var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+              if ((evt.keyCode == 13) && (node.type=="text"))  {evt.preventDefault();}
+              if ((evt.keyCode == 8) && (!evt.target.is('input,[contenteditable="true"],textarea')))  {evt.preventDefault();}
+            }
 
-/*function stopRKey(evt) {
-  var evt = (evt) ? evt : ((event) ? event : null);
-  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-  if ((evt.keyCode == 13) && (node.type=="text"))  {evt.preventDefault();}
-  if ((evt.keyCode == 8) && (!evt.target.is('input,[contenteditable="true"],textarea')))  {evt.preventDefault();}
-}
+            document.onkeypress = stopRKey;*/
 
-document.onkeypress = stopRKey;*/
+            $(document).on("keydown", function (e) {
+                if (e.which === 8 && !$(e.target).is("input:not([readonly]):not([type=radio]):not([type=checkbox]), textarea, [contentEditable], [contentEditable=true]")) {
+                    e.preventDefault();
+                }
+                if (e.which === 13) {
+                    e.preventDefault();
+                }
+            });
 
-$(document).on("keydown", function (e) {
-    if (e.which === 8 && !$(e.target).is("input:not([readonly]):not([type=radio]):not([type=checkbox]), textarea, [contentEditable], [contentEditable=true]")) {
-        e.preventDefault();
-    }
-	if (e.which === 13) {
-        e.preventDefault();
-    }
-});
+            $('a').filter('[href*=".php"]').click(function () {
+                $.blockUI({
+                    theme: true,
+                    title: 'Procesando',
+                    message: '<div id="floatingCirclesG">' +
+                     '<div class="f_circleG" id="frotateG_01"></div>' +
+                     '<div class="f_circleG" id="frotateG_02"></div>' +
+                     '<div class="f_circleG" id="frotateG_03"></div>' +
+                     '<div class="f_circleG" id="frotateG_04"></div>' +
+                     '<div class="f_circleG" id="frotateG_05"></div>' +
+                     '<div class="f_circleG" id="frotateG_06"></div>' +
+                     '<div class="f_circleG" id="frotateG_07"></div>' +
+                     '<div class="f_circleG" id="frotateG_08"></div>' +
+                     '</div>' +
+                     '<strong>Favor espere...</strong>',
+                    themedCSS: {
+                        width: '10%',
+                        textAlign: 'center',
+                        top: ($(window).height() - ($(window).height() * .10)) / 2 + 'px',
+                        left: ($(window).width() - ($(window).height() * .10)) / 2 + 'px',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                        'border-radius': '10px'
+                    },
+                    centerX: true,
+                    centerY: true,
+                    timeout: 10000
+                });
+            });
+            $(":input:visible:enabled").first().focus();
+            $('#epiClock').epiclock({
+                format: 'l, d F Y \| g:i:s a'
+            }); // Creates a text clock displaying local time
+            $.epiclock(); // Starts all the clocks you've created
+            $("a[rel^='prettyPhoto']").prettyPhoto({
+                theme: 'facebook',
+                social_tools: false,
+                allow_resize: true
+            });
+            $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content"
+            });
 
-	$('a').filter('[href*=".php"]').click(function() {
-		$.blockUI({theme:     true,
-            title:    'Procesando',
-            message: '<div id="floatingCirclesG">' +
-                '<div class="f_circleG" id="frotateG_01"></div>' +
-                '<div class="f_circleG" id="frotateG_02"></div>' +
-                '<div class="f_circleG" id="frotateG_03"></div>' +
-                '<div class="f_circleG" id="frotateG_04"></div>' +
-                '<div class="f_circleG" id="frotateG_05"></div>' +
-                '<div class="f_circleG" id="frotateG_06"></div>' +
-                '<div class="f_circleG" id="frotateG_07"></div>' +
-                '<div class="f_circleG" id="frotateG_08"></div>' +
-                '</div>' +
-                '<strong>Favor espere...</strong>',
-			themedCSS: {
-        width:          '10%',
-        textAlign:      'center',
-		top:  ($(window).height() - ($(window).height()*.10) ) /2 + 'px',
-        left: ($(window).width() - ($(window).height()*.10) ) /2 + 'px',
-		'-webkit-border-radius': '10px',
-        '-moz-border-radius':    '10px',
-		'border-radius': '10px'
-    },
-	centerX: true,
-    centerY: true,
-	timeout: 10000});
-	});
-	$(":input:visible:enabled").first().focus();
-  	$('#epiClock').epiclock({format: 'l, d F Y \| g:i:s a' });   // Creates a text clock displaying local time
-  	$.epiclock();                // Starts all the clocks you've created
-	$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook',social_tools: false,allow_resize: true});
-	$("#accordion").accordion({collapsible:true,heightStyle: "content"});
+            $('#DateStartC').datepicker({
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Sources/calendar_icon.png")',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(2000, 1 - 1, 1),
+                dateFormat: 'yy-mm-dd'
+            });
+            $('#DateEndC').datepicker({
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Sources/calendar_icon.png")',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(2000, 1 - 1, 1),
+                dateFormat: 'yy-mm-dd'
+            });
+            $('#CDateStart,#InvestEmitedDate,#SDateStart,#SInvestEmitedDate,#CPayStart,#CDateEmitted,#CDateDue,#CDisbursementDate,#CDateEmittedStart,#CDateEmittedEnd,#CDateDueStart,#CDateDueEnd,#CDateInactiveStart,#CDateInactiveEnd,#DateCreatedStart,#DateCreatedEnd,#OrderDStart,#OrderDEnd').datepicker({
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Sources/calendar_icon.png")',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(1 - 1, 1),
+                dateFormat: 'yy-mm-dd'
+            });
+            $('#CDateEnd,#InvestExpiryDate,#SDateEnd,#SInvestExpiryDate').datepicker({
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Sources/calendar_icon.png")',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(1 - 1, 1),
+                dateFormat: 'yy-mm-dd',
+                defaultDate: '+7Y'
+            });
+            //$.prettyLoader({bind_to_ajax:true,offset_top:13,offset_left:10});
+            $('#CarLastRDate').datepicker({
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Sources/calendar_icon.png")',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(1 - 1, 1),
+                dateFormat: 'yy-mm-dd'
+            });
 
-	$('#DateStartC').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(2000, 1 - 1, 1),dateFormat: 'yy-mm-dd'});
-	$('#DateEndC').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(2000, 1 - 1, 1),dateFormat: 'yy-mm-dd'});
-	$('#CDateStart,#InvestEmitedDate,#SDateStart,#SInvestEmitedDate,#CPayStart,#CDateEmitted,#CDateDue,#CDisbursementDate,#CDateEmittedStart,#CDateEmittedEnd,#CDateDueStart,#CDateDueEnd,#CDateInactiveStart,#CDateInactiveEnd,#DateCreatedStart,#DateCreatedEnd,#OrderDStart,#OrderDEnd').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date( 1 - 1, 1),dateFormat: 'yy-mm-dd'});
-	$('#CDateEnd,#InvestExpiryDate,#SDateEnd,#SInvestExpiryDate').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(1 - 1, 1),dateFormat: 'yy-mm-dd',defaultDate: '+7Y'});
-	//$.prettyLoader({bind_to_ajax:true,offset_top:13,offset_left:10});
-	$('#CarLastRDate').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date( 1 - 1, 1),dateFormat: 'yy-mm-dd'});
+            $("#altgrid tr:odd,#facility tr:odd,#auto tr:odd,#equipo tr:odd,#inmueble tr:odd,#deposito tr:odd,#otros tr:odd,#autoT tr:odd,#autoV tr:odd,#equipoT tr:odd,#inmuebleT tr:odd,#depositoT tr:odd,#otrosT tr:odd").addClass("odd");
+            $("#UserTable,#tableInvestments,#BanksTable,#TContractTable,#DistributorTable,#ProvinceTable").DataTable({
+                colReorder: true
+            });
 
-    $("#altgrid tr:odd,#facility tr:odd,#auto tr:odd,#equipo tr:odd,#inmueble tr:odd,#deposito tr:odd,#otros tr:odd,#autoT tr:odd,#autoV tr:odd,#equipoT tr:odd,#inmuebleT tr:odd,#depositoT tr:odd,#otrosT tr:odd").addClass("odd");
-	$("#UserTable,#tableInvestments,#BanksTable,#TContractTable,#DistributorTable,#ProvinceTable").DataTable( {
-		colReorder: true
-    } );
+            $('#tableCustomer,#tableContract,#tableUnmoveable,#tableBOrders').DataTable({
+                order: [
+                 [0, 'desc']
+                ],
+                colReorder: true,
+                columns: [
+                 null,
+                 null,
+                 null,
+                 null,
+                 null,
+                 null, {
+                     orderable: false,
+                     width: "10%"
+                 }, {
+                     orderable: false,
+                     width: "10%"
+                 }
+                ]
+            });
 
-	$('#tableCustomer,#tableContract,#tableUnmoveable,#tableBOrders').DataTable( {
-		order: [[0,'desc']],
-		colReorder: true,
-		columns: [
-    null,
-	null,
-    null,
-    null,
-    null,
-	null,
-    { orderable: false, width: "10%" },
-    { orderable: false, width: "10%"  }
-]
-    } );
+            $('#tableMoveable').DataTable({
+                order: [
+                 [0, 'desc']
+                ],
+                colReorder: true,
+                columns: [
+                 null,
+                 null,
+                 null,
+                 null,
+                 null,
+                 null,
+                 null, {
+                     orderable: false,
+                     width: "10%"
+                 }, {
+                     orderable: false,
+                     width: "10%"
+                 }
+                ]
+            });
 
-	$('#tableMoveable').DataTable( {
-		order: [[0,'desc']],
-		colReorder: true,
-		columns: [
-    null,
-	null,
-	null,
-    null,
-    null,
-    null,
-	null,
-    { orderable: false, width: "10%" },
-    { orderable: false, width: "10%"  }
-]
-    } );
+            $('#tableDeposits').DataTable({
+                order: [
+                 [0, 'desc']
+                ],
+                colReorder: true,
+                columns: [
+                 null,
+                 null,
+                 null,
+                 null, {
+                     orderable: false,
+                     width: "10%"
+                 }, {
+                     orderable: false,
+                     width: "10%"
+                 }
+                ]
+            });
 
-	$('#tableDeposits').DataTable( {
-		order: [[0,'desc']],
-		colReorder: true,
-		columns: [
-    null,
-    null,
-    null,
-	null,
-    { orderable: false, width: "10%" },
-    { orderable: false, width: "10%"  }
-]
-    } );
-
-	$('#tableOrders').DataTable( {
-		order: [[0,'desc']],
-		colReorder: true,
-		columns: [
-    null,
-	null,
-    null,
-    null,
-    null,
-	null,
-	null,
-    { orderable: false, width: "10%" },
-    { orderable: false, width: "10%"  }
-]
-    } );
-
-
-	});
-
-
-function randomString() {
-	var chars = "023456789abcdefghikmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#*()=";
-	var string_length = 12;
-	var randomstring = '';
-	for (var i=0; i
-
-																									<string_length; i++) {
-		var rnum = Math.floor(Math.random() * chars.length);
-		randomstring += chars.substring(rnum,rnum+1);
-	}
-	document.AddUsr.Password.value = randomstring;
-}
+            $('#tableOrders').DataTable({
+                order: [
+                 [0, 'desc']
+                ],
+                colReorder: true,
+                columns: [
+                 null,
+                 null,
+                 null,
+                 null,
+                 null,
+                 null,
+                 null, {
+                     orderable: false,
+                     width: "10%"
+                 }, {
+                     orderable: false,
+                     width: "10%"
+                 }
+                ]
+            });
 
 
+        });
+
+        function randomString() {
+            var chars = "023456789abcdefghikmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#*()=";
+            var string_length = 12;
+            var randomstring = '';
+            for (var i = 0; i
+
+             < string_length; i++) {
+                var rnum = Math.floor(Math.random() * chars.length);
+                randomstring += chars.substring(rnum, rnum + 1);
+            }
+            document.AddUsr.Password.value = randomstring;
+        }
     </script>
     <script type="text/javascript">
-var params = {};
-params.wmode = "transparent";
+        var params = {};
+        params.wmode = "transparent";
 
-swfobject.embedSWF(
-  "modules/open-flash-chart.swf", "contracts", "100%", "355",
-  "9.0.0", "expressInstall.swf",{"data-file":".%2Fmodules%2Fdata_contractspermonth.php%3FUserBank%3D88","loading":"Cargando data..."},params);
+        swfobject.embedSWF(
+         "modules/open-flash-chart.swf", "contracts", "100%", "355",
+         "9.0.0", "expressInstall.swf", {
+             "data-file": ".%2Fmodules%2Fdata_contractspermonth.php%3FUserBank%3D88",
+             "loading": "Cargando data..."
+         }, params);
 
-swfobject.embedSWF(
-"modules/open-flash-chart.swf", "banks", "100%", "355",
-  "9.0.0", "expressInstall.swf",{"data-file":".%2Fmodules%2Fdata_contractsperbanks.php%3FUserBank%3D88","loading":"Cargando data..."},params);
+        swfobject.embedSWF(
+         "modules/open-flash-chart.swf", "banks", "100%", "355",
+         "9.0.0", "expressInstall.swf", {
+             "data-file": ".%2Fmodules%2Fdata_contractsperbanks.php%3FUserBank%3D88",
+             "loading": "Cargando data..."
+         }, params);
 
-swfobject.embedSWF(
-  "modules/open-flash-chart.swf", "assets", "100%", "355",
-  "9.0.0", "expressInstall.swf",{"data-file":".%2Fmodules%2Fdata_carsperbrands.php%3FUserBank%3D88","loading":"Cargando data..."},params);
+        swfobject.embedSWF(
+         "modules/open-flash-chart.swf", "assets", "100%", "355",
+         "9.0.0", "expressInstall.swf", {
+             "data-file": ".%2Fmodules%2Fdata_carsperbrands.php%3FUserBank%3D88",
+             "loading": "Cargando data..."
+         }, params);
 
-swfobject.embedSWF(
-  "modules/open-flash-chart.swf", "productivity", "100%", "355",
-  "9.0.0", "expressInstall.swf",{"data-file":".%2Fmodules%2Fdata_contractsperuser.php%3FUserBank%3D88","loading":"Cargando data..."},params);
+        swfobject.embedSWF(
+         "modules/open-flash-chart.swf", "productivity", "100%", "355",
+         "9.0.0", "expressInstall.swf", {
+             "data-file": ".%2Fmodules%2Fdata_contractsperuser.php%3FUserBank%3D88",
+             "loading": "Cargando data..."
+         }, params);
 
-function findSWF(movieName) {
-  if (navigator.appName.indexOf("Microsoft")!= -1) {
-    return window[movieName];
-  } else {
-    return document[movieName];
-  }
-}
-function reloadChart(chartName,chartUrl) {
-	var movieUrl = "";
-	if (chartUrl == "Contratos por Mes") {
-		movieUrl = "./modules/data_contractspermonth.php?UserBank=88";
-	}
-	else if (chartUrl == "Contratos por Banco") {
-		movieUrl = "./modules/data_contractsperbanks.php?UserBank=88";
-	}
-	else if (chartUrl == "Autos") {
-		movieUrl = "./modules/data_carsperbrands.php?UserBank=88";
-	}
-	else if (chartUrl == "Productividad por Usuario") {
-		movieUrl = "./modules/data_contractsperuser.php?UserBank=88";
-	}
-	tmp = findSWF(chartName);
-	x = tmp.reload(movieUrl);
-}
+        function findSWF(movieName) {
+            if (navigator.appName.indexOf("Microsoft") != -1) {
+                return window[movieName];
+            } else {
+                return document[movieName];
+            }
+        }
 
-function ChangeCharts() {
-	var DateStart = $("#DateStartC").val();
-	var DateEnd = $("#DateEndC").val();
-	switch($("#Graph").val()) {
-	case "Contratos":
-	var movieUrl = "./modules/data_contractspermonth.php?UserBank=88";
-	var moviel = "contracts";
-	break;
-	case "Bancos":
-	var movieUrl = "./modules/data_contractsperbanks.php?UserBank=88";
-	var moviel = "banks";
-	break;
-	case "Autos":
-	var movieUrl = "./modules/data_carsperbrands.php?UserBank=88";
-	var moviel = "assets";
-	break;
-	case "Productividad":
-	var movieUrl = "./modules/data_contractsperuser.php?UserBank=88";
-	var moviel = "productivity";
-	break;
-	}
-		whereclause = "DateStart="+DateStart+"&DateEnd="+DateEnd;
-	tmp = findSWF(moviel);
-	 	x = tmp.reload(movieUrl+"&"+whereclause);
-	//	tmp1 = findSWF("my_banks");
-//	y = tmp1.reload(movieUrl1+"?"+whereclause);
-//	tmp2 = findSWF("my_assets");
-//	z = tmp2.reload(movieUrl2+"?"+whereclause);
-}
+        function reloadChart(chartName, chartUrl) {
+            var movieUrl = "";
+            if (chartUrl == "Contratos por Mes") {
+                movieUrl = "./modules/data_contractspermonth.php?UserBank=88";
+            } else if (chartUrl == "Contratos por Banco") {
+                movieUrl = "./modules/data_contractsperbanks.php?UserBank=88";
+            } else if (chartUrl == "Autos") {
+                movieUrl = "./modules/data_carsperbrands.php?UserBank=88";
+            } else if (chartUrl == "Productividad por Usuario") {
+                movieUrl = "./modules/data_contractsperuser.php?UserBank=88";
+            }
+            tmp = findSWF(chartName);
+            x = tmp.reload(movieUrl);
+        }
 
+        function ChangeCharts() {
+            var DateStart = $("#DateStartC").val();
+            var DateEnd = $("#DateEndC").val();
+            switch ($("#Graph").val()) {
+                case "Contratos":
+                    var movieUrl = "./modules/data_contractspermonth.php?UserBank=88";
+                    var moviel = "contracts";
+                    break;
+                case "Bancos":
+                    var movieUrl = "./modules/data_contractsperbanks.php?UserBank=88";
+                    var moviel = "banks";
+                    break;
+                case "Autos":
+                    var movieUrl = "./modules/data_carsperbrands.php?UserBank=88";
+                    var moviel = "assets";
+                    break;
+                case "Productividad":
+                    var movieUrl = "./modules/data_contractsperuser.php?UserBank=88";
+                    var moviel = "productivity";
+                    break;
+            }
+            whereclause = "DateStart=" + DateStart + "&DateEnd=" + DateEnd;
+            tmp = findSWF(moviel);
+            x = tmp.reload(movieUrl + "&" + whereclause);
+            //	tmp1 = findSWF("my_banks");
+            //	y = tmp1.reload(movieUrl1+"?"+whereclause);
+            //	tmp2 = findSWF("my_assets");
+            //	z = tmp2.reload(movieUrl2+"?"+whereclause);
+        }
     </script>
-    <style type="text/css" media="screen"></style>
-    <style type="text/css" media="screen"></style>
-    <style type="text/css" media="screen"></style>
-    <style type="text/css" media="screen"></style>
 </head>
 <body>
     <div class="container_12 home">
@@ -295,7 +372,7 @@ function ChangeCharts() {
                 <strong>Lian Ríos</strong>
                 <br>
                 Último acceso registrado:
-                Jueves, 21 de junio de 2018 | 11:11:20
+                Jueves, 21 de junio de 2018 | <digiclock>11:11:20</digiclock>
 
                 <br>
                 Nivel de Usuario:
@@ -578,67 +655,82 @@ function ChangeCharts() {
             </div>
 
             <script type="text/javascript">
-$('#AssetType').on('change', function () {
-		switch($(this).val()) {
-			default:
-			$('#Mueble').hide().children(":input").prop("disabled", true);
-			$('#Inmueble').hide().children(":input").prop("disabled", true);
-			$('#Depositos').hide().children(":input").prop("disabled", true);
-			$('#Inversion').hide().children(":input").prop("disabled", true);
-			$('#Otros').hide().children(":input").prop("disabled", true);
-			$('#subAsset').hide();
-			break;
-			case "M":
-			$('#Inmueble').hide().children(":input").prop("disabled", true);
-			$('#Depositos').hide().children(":input").prop("disabled", true);
-			$('#Inversion').hide().children(":input").prop("disabled", true);
-			$('#Otros').hide().children(":input").prop("disabled", true);
-			$('#Mueble').fadeIn(500).children(":input").prop("disabled", false);
-			$('#subAsset').fadeIn(500);
-			break;
-			case "I":
-			$('#Mueble').hide().children(":input").prop("disabled", true);
-			$('#Depositos').hide().children(":input").prop("disabled", true);
-			$('#Inversion').hide().children(":input").prop("disabled", true);
-			$('#Otros').hide().children(":input").prop("disabled", true);
-			$('#Inmueble').fadeIn(500).children(":input").prop("disabled", false);
-			$('#subAsset').fadeIn(500);
-			break;
-			case "D":
-			$('#Mueble').hide().children(":input").prop("disabled", true);
-			$('#Inmueble').hide().children(":input").prop("disabled", true);
-			$('#Inversion').hide().children(":input").prop("disabled", true);
-			$('#Otros').hide().children(":input").prop("disabled", true);
-			$('#Depositos').fadeIn(500).children(":input").prop("disabled", false);
-			$('#subAsset').fadeIn(500);
-			break;
-			case "B":
-			$('#Mueble').hide().children(":input").prop("disabled", true);
-			$('#Inmueble').hide().children(":input").prop("disabled", true);
-			$('#Depositos').hide().children(":input").prop("disabled", true);
-			$('#Otros').hide().children(":input").prop("disabled", true);
-			$('#Inversion').fadeIn(500).children(":input").prop("disabled", false);
-			$('#subAsset').fadeIn(500);
-			break;
-			case "O":
-			$('#Mueble').hide().children(":input").prop("disabled", true);
-			$('#Inmueble').hide().children(":input").prop("disabled", true);
-			$('#Depositos').hide().children(":input").prop("disabled", true);
-			$('#Inversion').hide().children(":input").prop("disabled", true);
-			$('#Otros').fadeIn(500).children(":input").prop("disabled", false);
-			$('#subAsset').fadeIn(500);
-			break;
-		}
-});
-$(function() {
-	$( "#tabs-buttons" ).tabs();
-});
+                $('#AssetType').on('change', function () {
+                    switch ($(this).val()) {
+                        default:
+                            $('#Mueble').hide().children(":input").prop("disabled", true);
+                            $('#Inmueble').hide().children(":input").prop("disabled", true);
+                            $('#Depositos').hide().children(":input").prop("disabled", true);
+                            $('#Inversion').hide().children(":input").prop("disabled", true);
+                            $('#Otros').hide().children(":input").prop("disabled", true);
+                            $('#subAsset').hide();
+                            break;
+                        case "M":
+                            $('#Inmueble').hide().children(":input").prop("disabled", true);
+                            $('#Depositos').hide().children(":input").prop("disabled", true);
+                            $('#Inversion').hide().children(":input").prop("disabled", true);
+                            $('#Otros').hide().children(":input").prop("disabled", true);
+                            $('#Mueble').fadeIn(500).children(":input").prop("disabled", false);
+                            $('#subAsset').fadeIn(500);
+                            break;
+                        case "I":
+                            $('#Mueble').hide().children(":input").prop("disabled", true);
+                            $('#Depositos').hide().children(":input").prop("disabled", true);
+                            $('#Inversion').hide().children(":input").prop("disabled", true);
+                            $('#Otros').hide().children(":input").prop("disabled", true);
+                            $('#Inmueble').fadeIn(500).children(":input").prop("disabled", false);
+                            $('#subAsset').fadeIn(500);
+                            break;
+                        case "D":
+                            $('#Mueble').hide().children(":input").prop("disabled", true);
+                            $('#Inmueble').hide().children(":input").prop("disabled", true);
+                            $('#Inversion').hide().children(":input").prop("disabled", true);
+                            $('#Otros').hide().children(":input").prop("disabled", true);
+                            $('#Depositos').fadeIn(500).children(":input").prop("disabled", false);
+                            $('#subAsset').fadeIn(500);
+                            break;
+                        case "B":
+                            $('#Mueble').hide().children(":input").prop("disabled", true);
+                            $('#Inmueble').hide().children(":input").prop("disabled", true);
+                            $('#Depositos').hide().children(":input").prop("disabled", true);
+                            $('#Otros').hide().children(":input").prop("disabled", true);
+                            $('#Inversion').fadeIn(500).children(":input").prop("disabled", false);
+                            $('#subAsset').fadeIn(500);
+                            break;
+                        case "O":
+                            $('#Mueble').hide().children(":input").prop("disabled", true);
+                            $('#Inmueble').hide().children(":input").prop("disabled", true);
+                            $('#Depositos').hide().children(":input").prop("disabled", true);
+                            $('#Inversion').hide().children(":input").prop("disabled", true);
+                            $('#Otros').fadeIn(500).children(":input").prop("disabled", false);
+                            $('#subAsset').fadeIn(500);
+                            break;
+                    }
+                });
+                $(function () {
+                    $("#tabs-buttons").tabs();
+                });
             </script>
-
         </div><div class="clear"></div><div class="grid_12"></div><div class="clear"></div><div id="site_info" class="grid_12"><div class="box"><p class="footer" align="center"> Financial Warehousing of Latin America, Inc. © 2018 Derechos Reservados.  Para mayor información contacte al <a href="mailto: web@fwlatrust.com" target="_blank">Administrador</a>.</p></div></div><div class="clear"></div>
 
     </div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
-
+    <script type="text/javascript">
+        (function () {
+            var clock = document.querySelector('digiclock');
+            var pad = function (x) {
+                return x < 10 ? '0' + x : x;
+            };
+            var ticktock = function () {
+                var d = new Date();
+                var h = pad(d.getHours());
+                var m = pad(d.getMinutes());
+                var s = pad(d.getSeconds());
+                var current_time = [h, m, s].join(':');
+                clock.innerHTML = current_time;
+            };
+            ticktock();
+            setInterval(ticktock, 1000);
+        }());
+    </script>
 </body>
-
 </html>
