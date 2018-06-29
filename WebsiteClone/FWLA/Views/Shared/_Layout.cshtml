@@ -103,7 +103,7 @@ $(document).on("keydown", function (e) {
 	$(":input:visible:enabled").first().focus();
   	$('#epiClock').epiclock({format: 'l, d F Y \| g:i:s a' });   // Creates a text clock displaying local time
   	$.epiclock();                // Starts all the clocks you've created
-	//$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook',social_tools: false,allow_resize: true});
+	$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook',social_tools: false,allow_resize: true});
 	$("#accordion").accordion({collapsible:true,heightStyle: "content"});
 
 	$('#DateStartC').datepicker({showOn: 'button',buttonImageOnly: true,buttonImage: '@Url.Content("~/Sources/calendar_icon.png")', changeMonth: true , changeYear: true,minDate: new Date(2000, 1 - 1, 1),dateFormat: 'yy-mm-dd'});

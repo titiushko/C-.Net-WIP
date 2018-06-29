@@ -1238,6 +1238,7 @@
                 //$("#addCar").val("");
                 //$("[name='formBack0']").val("");
                 $("#cSubmitA").click();
+                afterSubmitForm();
                 //$("#MaEVin").val("");
                 //$("#MaEBrand").val("");
                 //$("#MaEModel").val("");
@@ -1301,6 +1302,19 @@
         }
     }
 
+    function afterSubmitForm() {
+        $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+            if (ajaxOptions.url.indexOf("admin_create_contract.php") != -1 && ajaxOptions.type == "POST") {
+                $("#altgrid").find("a").each(function () {
+                    $(this).attr("href", updateUrl($(this).attr("href")));
+                });
+                $("#altgrid").find("img").each(function () {
+                    $(this).attr("src", updateImage($(this).attr("src")));
+                });
+            }
+        });
+    }
+
     function getAllFileds() {
         var fields = "";
         $("#mlgform").find(":input").each(function () {
@@ -1320,9 +1334,17 @@
     }
 
     function correctFromExternalRequest(text) {
-        text = text.replace("./modules", "https://www.fwlatrust.com/eFWLA/modules");
-        text = text.replace(/\.\/images\/icons/gim, "../Sources");
+        text = updateUrl(text);
+        text = updateImage(text);
         return text;
+    }
+
+    function updateUrl(url) {
+        return url.replace(/\.\/modules/gim, "https://www.fwlatrust.com/eFWLA/modules");
+    }
+
+    function updateImage(image) {
+        return image.replace(/\.\/images\/icons/gim, "../Sources");
     }
 
     $(function () {
@@ -1717,10 +1739,10 @@
                              alert("Este Cliente ya fue seleccionado para este contrato.");
                          } else {
                              $("#CustomerCart").append(correctFromExternalRequest(msg)).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                          }
                          if ($('#CustomerCart').css('display') == 'none') {
                              $('#CustomerCart').show();
@@ -1778,10 +1800,10 @@
                  .done(function (result) {
                      if (result != "false") {
                          $("#CustomerCart").append(correctFromExternalRequest(result)).show();
-                         /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                         $("a[rel^='prettyPhoto']").prettyPhoto({
                              theme: 'facebook',
                              social_tools: false
-                         });*/
+                         });
                          $("#CLegalID").removeClass("required");
                          $('#CustInfo').children().find('input[type=text],select,textarea').each(function () {
                              $(this).val('');
@@ -1938,10 +1960,10 @@
                              alert("Este Auto ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableCart").append(correctFromExternalRequest(msg['response'])).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                              $("#cSubmitA").show('slow');
                          }
 
@@ -1992,11 +2014,11 @@
                          $('#MoveableCart').show();
                      }
                      $("#MoveableCart tbody").append(correctFromExternalRequest(result)).show();
-                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                     $("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });*/
+                     });
                      $("#MaVin").removeClass("required");
                      $('#CarInfo').children().find('input[type=text],select').each(function () {
                          $(this).val('');
@@ -2033,10 +2055,10 @@
                              alert("Este Equipo ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableECart").append(correctFromExternalRequest(msg['response'])).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                          }
 
                          $("#MaEVin").removeClass("required");
@@ -2076,11 +2098,11 @@
                          $('#MoveableECart').show();
                      }
                      $("#MoveableECart tbody").append(correctFromExternalRequest(result)).show();
-                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                     $("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });*/
+                     });
                      $("#MaEVin").removeClass("required");
                      $('#equipment').children().find('input[type=text],select').each(function () {
                          $(this).val('');
@@ -2117,10 +2139,10 @@
                              alert("Esta Finca ya fue seleccionada para este contrato.");
                          } else {
                              $("#MoveablePCart").append(correctFromExternalRequest(msg['response'])).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                          }
 
                          $("#Finca").removeClass("required");
@@ -2162,11 +2184,11 @@
                          $('#MoveablePCart').show();
                      }
                      $("#MoveablePCart tbody").append(correctFromExternalRequest(result)).show();
-                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                     $("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });*/
+                     });
                      $('#finca').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2202,10 +2224,10 @@
                              alert("Este Depósito ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableDCart").append(correctFromExternalRequest(msg['response'])).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                          }
 
                          $("#AccountNumber").removeClass("required");
@@ -2244,11 +2266,11 @@
                      $("#AccountNumber").val("");
                      $("#AccountNumber").removeClass("required");
                      $("#MoveableDCart tbody").append(correctFromExternalRequest(result)).show();
-                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                     $("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });*/
+                     });
                      $('#fdeposit').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2284,10 +2306,10 @@
                              alert("Esta Inversión ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableICart").append(correctFromExternalRequest(msg['response'])).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                          }
 
                          $("#InvestNumber").removeClass("required");
@@ -2327,11 +2349,11 @@
                          $('#MoveableICart').show();
                      }
                      $("#MoveableICart tbody").append(correctFromExternalRequest(result)).show();
-                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                     $("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });*/
+                     });
                      $('#inversion').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2367,10 +2389,10 @@
                              alert("Este Bien ya fue seleccionado para este contrato.");
                          } else {
                              $("#MoveableOCart").append(correctFromExternalRequest(msg['response'])).show();
-                             /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
                                  theme: 'facebook',
                                  social_tools: false
-                             });*/
+                             });
                          }
 
                          $("#OtherNumber").removeClass("required");
@@ -2405,11 +2427,11 @@
              .done(function (result) {
                  if (result != "false") {
                      $("#MoveableOCart").append(correctFromExternalRequest(result)).show();
-                     /*$("a[rel^='prettyPhoto']").prettyPhoto({
+                     $("a[rel^='prettyPhoto']").prettyPhoto({
                          theme: 'facebook',
                          social_tools: false,
                          allow_resize: true
-                     });*/
+                     });
                      $('#others').children().find('input[type=text],select').each(function () {
                          $(this).val('');
                      });
@@ -2425,10 +2447,10 @@
     function removeCustomer(id) {
         if (confirm("¿Está seguro que desea eliminar este cliente?") == true) {
             $('#c' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false
-            });*/
+            });
             if ($.trim($('#CustomerCart tbody').html()) == '') {
                 $("#CustomerCart").hide();
                 $("#NextButtons3").hide();
@@ -2442,11 +2464,11 @@
     function removeCar(id) {
         if (confirm("¿Está seguro que desea eliminar este vehículo?") == true) {
             $('#m' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });*/
+            });
             if ($.trim($('#MoveableCart tbody').html()) == '') {
                 $("#MoveableCart").hide();
                 $("#cSubmitA").hide();
@@ -2460,11 +2482,11 @@
     function removeEquipment(id) {
         if (confirm("¿Está seguro que desea eliminar este equipo?") == true) {
             $('#e' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });*/
+            });
             if ($.trim($('#MoveableECart tbody').html()) == '') {
                 $("#MoveableECart").hide();
                 $("#cSubmitE").hide();
@@ -2478,11 +2500,11 @@
     function removeProperty(id) {
         if (confirm("¿Está seguro que desea eliminar esta propiedad?") == true) {
             $('#u' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });*/
+            });
             if ($.trim($('#MoveablePCart tbody').html()) == '') {
                 $("#finca").fadeIn(1000);
                 $("#MoveablePCart").hide();
@@ -2496,11 +2518,11 @@
     function removeDeposit(id) {
         if (confirm("¿Está seguro que desea eliminar este depósito?") == true) {
             $('#d' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });*/
+            });
             if ($.trim($('#MoveableDCart tbody').html()) == '') {
                 $("#MoveableDCart").hide();
                 $("#cSubmitD").hide();
@@ -2513,11 +2535,11 @@
     function removeInvestment(id) {
         if (confirm("¿Está seguro que desea eliminar esta inversión?") == true) {
             $('#i' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });*/
+            });
             if ($.trim($('#MoveableICart tbody').html()) == '') {
                 $("#inversion").fadeIn(1000);
                 $("#MoveableICart").hide();
@@ -2531,11 +2553,11 @@
     function removeOther(id) {
         if (confirm("¿Está seguro que desea eliminar este bien?") == true) {
             $('#o' + id).remove();
-            /*$("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'facebook',
                 social_tools: false,
                 allow_resize: true
-            });*/
+            });
             if ($.trim($('#MoveableOCart tbody').html()) == '') {
                 $("#MoveableOCart").hide();
                 $("#cSubmitO").hide();
