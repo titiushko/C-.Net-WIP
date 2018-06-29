@@ -715,22 +715,30 @@
 
     </div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
     <script type="text/javascript">
-        (function () {
+        var updateClock = false;
+        var runClock = function (run) {
+            updateClock = run;
+            ticktock.run();
+        };
+        (function (w, d) {
             var clock = document.querySelector('digiclock');
-            var pad = function (x) {
+            var zeroPrefix = function (x) {
                 return x < 10 ? '0' + x : x;
             };
-            var ticktock = function () {
-                var d = new Date();
-                var h = pad(d.getHours());
-                var m = pad(d.getMinutes());
-                var s = pad(d.getSeconds());
-                var current_time = [h, m, s].join(':');
-                clock.innerHTML = current_time;
+            w.ticktock = {
+                run: function () {
+                    var d = new Date();
+                    var h = zeroPrefix(d.getHours());
+                    var m = zeroPrefix(d.getMinutes());
+                    var s = zeroPrefix(d.getSeconds());
+                    if (updateClock) {
+                        clock.innerHTML = [h, m, s].join(':');
+                        setInterval(ticktock.run, 1000);
+                    }
+                }
             };
-            ticktock();
-            setInterval(ticktock, 1000);
-        }());
+            ticktock.run();
+        })(window, document);
     </script>
 </body>
 </html>
