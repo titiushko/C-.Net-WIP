@@ -1,22 +1,80 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="@Url.Content("~/Sources/Login/favicon.ico")" rel="shorcut icon" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Panamá, Panama, FWLA, Administración, Fideicomisos" />
+    <meta name="description" content="eFWLA es una plataforma completa para administración de fideicomisos." />
+    <meta name="Author" content="Bol&iacute;var Mu&ntilde;oz - bmunoz@fwlatrust.com" />
+    <meta name="copyright" content="&copy; 2018 FWLA">
+    <title>Area de Entrada - Administración</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/reset.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/text.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/960fluid.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/layout.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/nav.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/jquery-ui.min.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/jquery-ui.theme.min.css")" media="screen" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Sources/Login/jquery-ui.structure.min.css")" media="screen" />
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="./css/ie6.css")" media="screen" />
+    <![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="./css/ie.css")" media="screen" />
+    <![endif]-->
+    <script type="text/javascript" src="@Url.Content("~/Sources/Login/jquery-2.0.3.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Sources/Login/jquery.blockUI.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Sources/Login/jquery-fluid16.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Sources/Login/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Sources/Login/jquery.maskedinput.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Sources/Login/login_validation.js")"></script>
+    <script type="text/javascript">
+$(function(){
+function stopRKey(evt) {
+  var evt = (evt) ? evt : ((event) ? event : null);
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
+}
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+document.onkeypress = stopRKey;
+
+	$('form:first *:input[type!=hidden]:first').focus();
+	$("*").dblclick(function(e){
+    e.preventDefault();
+  });
+
+});
+    </script>
+</head>
+<body>
+    <div class="main_container">
+        <div class="container_12 login">
+            <div class="grid_12">
+                <p align="center">
+                    <img src="@Url.Content("~/Sources/Login/logo_fwla_login.png")" width="300" height="120" alt="" />
+                </p>
+            </div>
+            <div class="clear"></div>
+            <div class="grid_3">
+                &nbsp;
+            </div>
+            <div class="grid_6">
+                @RenderBody()
+            </div>
+            <div class="grid_3">
+                &nbsp;
+            </div>
+            <div class="clear"></div>
+            <div class="grid_12" id="site_info">
+                <div class="box">
+                    <p align="center" class="footer">
+                        Financial Warehousing of Latin America, Inc. &copy; 2018 Derechos Reservados.  Para mayor información contacte al
+                        <a href="mailto: web@fwlatrust.com" target="_blank">Administrador</a>.
+                    </p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</body>
+</html>
