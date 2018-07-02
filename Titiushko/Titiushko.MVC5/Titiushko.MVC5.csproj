@@ -343,6 +343,13 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\titiushko\constants.js" />
+    <Content Include="Scripts\titiushko\loading-page.js" />
+    <Content Include="Scripts\titiushko\messages.js" />
+    <Content Include="Scripts\titiushko\my-alertify.js" />
+    <Content Include="Scripts\titiushko\return-top.js" />
+    <Content Include="Scripts\titiushko\system.js" />
+    <Content Include="Scripts\titiushko\utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
