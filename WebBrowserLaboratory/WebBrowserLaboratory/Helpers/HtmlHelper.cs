@@ -11,8 +11,8 @@ namespace WebBrowserLaboratory.Helpers
         private static HtmlElement GetHtmlElement(HtmlDocument pHtmlDoc, string pIdentifier, string pTag = null, string pAttributeValue = null)
         {
             HtmlElement vHtmlElement = null;
-            if (string.IsNullOrWhiteSpace(pTag) && string.IsNullOrWhiteSpace(pAttributeValue)) vHtmlElement = Titiushko.HtmlHelpers.Helpers.HtmlHelper.GetHtmlElement(pHtmlDoc, pIdentifier);
-            else vHtmlElement = Titiushko.HtmlHelpers.Helpers.HtmlHelper.GetHtmlElementByAttribute(pHtmlDoc, pTag, pIdentifier, pAttributeValue);
+            if (string.IsNullOrWhiteSpace(pTag) && string.IsNullOrWhiteSpace(pAttributeValue)) vHtmlElement = BaseHelper.GetHtmlElement(pHtmlDoc, pIdentifier);
+            else vHtmlElement = BaseHelper.GetHtmlElementByAttribute(pHtmlDoc, pTag, pIdentifier, pAttributeValue);
             return vHtmlElement;
         }
 
@@ -50,7 +50,7 @@ namespace WebBrowserLaboratory.Helpers
                 }
                 else
                 {
-                    throw new Exception(string.Format("No se encontró el elemento [pIdentifier={0}] para darle click.", pIdentifier));
+                    throw new Exception(string.Format("No se encontró el elemento [pIdentifier={0}] para dar click.", pIdentifier));
                 }
             }
             catch (Exception vE)
