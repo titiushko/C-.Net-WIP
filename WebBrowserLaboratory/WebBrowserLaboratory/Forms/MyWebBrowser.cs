@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using log4net;
+using System.Collections;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Automation;
@@ -24,8 +25,12 @@ namespace WebBrowserLaboratory.Forms
         private const string ENTER_KEY = "{ENTER}";
         private const string DEFAULT_ATTACHMENTS_FOLDER = @"C:\ApptividadAttachments\";
 
+        private static ILog logger;
+
         public MyWebBrowser()
         {
+            Log4Net.Init();
+            logger = LogManager.GetLogger(typeof(MyWebBrowser));
             InitializeComponent();
             this.urlTextBox.Text = SystemWebsite_Url;
             this.webBrowser.Navigate(this.urlTextBox.Text);
@@ -39,6 +44,7 @@ namespace WebBrowserLaboratory.Forms
             }
             catch (Exception vE)
             {
+                logger.Error(vE);
                 this.JavaScriptAlertMessage(this.webBrowser, vE.GetExceptionMessage());
             }
         }
@@ -201,7 +207,7 @@ namespace WebBrowserLaboratory.Forms
                     }
                     catch (Exception vE)
                     {
-                        throw vE;
+                        logger.Error(vE);
                     }
                 });
 

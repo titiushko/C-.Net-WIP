@@ -133,6 +133,7 @@
       <DependentUpon>MyWebBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="Log4Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MyWebBrowser.resx">
