@@ -97,6 +97,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>C:\Users\jose.hernandez\Desktop\PCOMM_V13.0_FOR_Win_EVL\mtri1122\mtri1122\combo\Disk1\GlobalAssemblyCache\Interop.AutXferTypeLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -146,6 +149,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="log4net.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
