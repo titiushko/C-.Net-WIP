@@ -1,4 +1,4 @@
-﻿namespace WebBrowserLaboratory
+﻿namespace WebBrowserLaboratory.Forms
 {
     partial class MyWebBrowser
     {

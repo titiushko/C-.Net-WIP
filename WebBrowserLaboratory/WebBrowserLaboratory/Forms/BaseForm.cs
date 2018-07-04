@@ -2,7 +2,7 @@
 using System;
 using mshtml;
 
-namespace WebBrowserLaboratory
+namespace WebBrowserLaboratory.Forms
 {
     public class BaseForm : Form
     {

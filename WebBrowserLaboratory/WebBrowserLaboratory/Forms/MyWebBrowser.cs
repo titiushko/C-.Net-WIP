@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System;
 using WebBrowserLaboratory.Helpers;
 
-namespace WebBrowserLaboratory
+namespace WebBrowserLaboratory.Forms
 {
     public partial class MyWebBrowser : BaseForm
     {
