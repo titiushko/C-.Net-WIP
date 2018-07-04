@@ -119,6 +119,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Titiushko.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationClientsideProviders" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseForm.cs">
