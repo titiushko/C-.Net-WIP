@@ -18,8 +18,8 @@ namespace WebBrowserLaboratory
 
         private const string WEBBROWSER_TITLE = "Web Browser Laboratory";
         private const string CLICK_EVENT = "Click";
-        private const string OPEN_BUTTON = "&Open";
-        private const string SAVE_BUTTON = "&Save";
+        private const string OPEN_BUTTON = "Open";
+        private const string SAVE_BUTTON = "Save";
         private const string CANCEL_BUTTON = "Cancel";
         private const string ENTER_KEY = "{ENTER}";
         private const string DEFAULT_ATTACHMENTS_FOLDER = @"C:\ApptividadAttachments\";
@@ -35,7 +35,7 @@ namespace WebBrowserLaboratory
         {
             try
             {
-                UploadFile();
+                DownloadFile();
             }
             catch (Exception vE)
             {
@@ -48,7 +48,7 @@ namespace WebBrowserLaboratory
             this.webBrowser.Navigate(this.urlTextBox.Text);
         }
 
-        private void Login()
+        private void ResolveGoogleCaptcha()
         {
             try
             {
@@ -165,59 +165,38 @@ namespace WebBrowserLaboratory
 
                         #region WebBrowserWindow
                         // Obtener la ventana del robot, por medio del titulo 'RPA'
-                        PropertyCondition vWebBrowserName = new PropertyCondition(AutomationElement.NameProperty, WEBBROWSER_TITLE);
-                        AutomationElement vWebBrowserWindow = vDesktopObject.FindFirst(TreeScope.Children, vWebBrowserName);
+                        AutomationElement vWebBrowserWindow = vDesktopObject.FindFirst(TreeScope.Children, this.NameProperty(WEBBROWSER_TITLE));
                         #endregion
 
                         #region DownloadDialog
                         // Obtener el Dialog de "File Download" por medio del título y el nombre de la ventana que lo levantó
-                        PropertyCondition vDownloadDialogName = new PropertyCondition(AutomationElement.NameProperty, vDownloadDialogTitle);
-                        AutomationElement vDownloadDialogWindow = vWebBrowserWindow.FindFirst(TreeScope.Children, vDownloadDialogName);
+                        AutomationElement vDownloadDialogWindow = vDesktopObject.FindFirst(TreeScope.Children, this.NameProperty(vDownloadDialogTitle));
 
                         // Obtener el Button de "Save"
-                        AndCondition vDownloadDialogSaveButtonCondition = new AndCondition(
-                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button),
-                            new PropertyCondition(AutomationElement.NameProperty, vDownloadDialogSaveButton)
-                        );
-                        AutomationElement vDownloadDialogSaveButtonElement = vWebBrowserWindow.FindFirst(TreeScope.Descendants, vDownloadDialogSaveButtonCondition);
+                        AutomationElement vDownloadDialogSaveButtonElement = vDownloadDialogWindow.FindFirst(TreeScope.Descendants, this.ButtonCondition(vDownloadDialogSaveButton));
 
                         // Establecer el foco al Button de "Save" y hacer {{Enter}}
-                        if (vDownloadDialogSaveButtonElement != null)
-                        {
-                            vDownloadDialogSaveButtonElement.SetFocus();
-                            SendKeys.SendWait(ENTER_KEY);
-                        }
+                        vDownloadDialogSaveButtonElement.SetFocus();
+                        SendKeys.SendWait(ENTER_KEY);
                         #endregion
 
                         #region SaveAsDialog
                         // Obtener el Dialog de "File SaveAs" por medio del título y el nombre de la ventana que lo levantó
-                        PropertyCondition vSaveAsDialogName = new PropertyCondition(AutomationElement.NameProperty, vSaveAsDialogTitle);
-                        AutomationElement vSaveAsDialogWindow = vWebBrowserWindow.FindFirst(TreeScope.Children, vSaveAsDialogName);
+                        AutomationElement vSaveAsDialogWindow = vDesktopObject.FindFirst(TreeScope.Children, this.NameProperty(vSaveAsDialogTitle));
 
                         // Obtener el Field de "File name" utilizando ControlId, para esto se usa el Spy++ (Visual Studio 2013: Menú > Tools > Spy++)
-                        AndCondition vSaveAsDialogFileNameFieldCondition = new AndCondition(
-                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit),
-                            new PropertyCondition(AutomationElement.AutomationIdProperty, vSaveAsDialogFileNameFieldId)
-                        );
-                        AutomationElement vSaveAsDialogFileNameFieldElement = vSaveAsDialogWindow.FindFirst(TreeScope.Descendants, vSaveAsDialogFileNameFieldCondition);
+                        AutomationElement vSaveAsDialogFileNameFieldElement = vSaveAsDialogWindow.FindFirst(TreeScope.Descendants, this.FieldIdCondition(vSaveAsDialogFileNameFieldId));
                         ValuePattern vSaveAsDialogFileNameFieldValuePattern = vSaveAsDialogFileNameFieldElement.GetCurrentPattern(ValuePattern.Pattern) as ValuePattern;
 
                         // Establecer la dirección y nombre del archivos con extensión que se va a descargar
                         vSaveAsDialogFileNameFieldValuePattern.SetValue(DEFAULT_ATTACHMENTS_FOLDER + vFileNameToDownload);
 
                         // Obtener el Button de "Save"
-                        AndCondition vSaveAsDialogSaveButtonCondition = new AndCondition(
-                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button),
-                            new PropertyCondition(AutomationElement.NameProperty, vSaveAsDialogSaveButton)
-                        );
-                        AutomationElement vSaveAsDialogSaveButtonElement = vWebBrowserWindow.FindFirst(TreeScope.Descendants, vSaveAsDialogSaveButtonCondition);
+                        AutomationElement vSaveAsDialogSaveButtonElement = vSaveAsDialogWindow.FindFirst(TreeScope.Descendants, this.ButtonCondition(vSaveAsDialogSaveButton));
 
                         // Establecer el foco al Button de "Save" y hacer {{Enter}}
-                        if (vSaveAsDialogSaveButtonElement != null)
-                        {
-                            vSaveAsDialogSaveButtonElement.SetFocus();
-                            SendKeys.SendWait(ENTER_KEY);
-                        }
+                        vSaveAsDialogSaveButtonElement.SetFocus();
+                        SendKeys.SendWait(ENTER_KEY);
                         #endregion
                     }
                     catch (Exception vE)
@@ -275,6 +254,27 @@ namespace WebBrowserLaboratory
             {
                 throw vE;
             }
+        }
+
+        private PropertyCondition NameProperty(string pName)
+        {
+            return new PropertyCondition(AutomationElement.NameProperty, pName);
+        }
+
+        private AndCondition ButtonCondition(string pButton)
+        {
+            return new AndCondition(
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button),
+                this.NameProperty(pButton)
+            );
+        }
+
+        private AndCondition FieldIdCondition(string pFieldId)
+        {
+            return new AndCondition(
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit),
+                new PropertyCondition(AutomationElement.AutomationIdProperty, pFieldId)
+            );
         }
     }
 }
