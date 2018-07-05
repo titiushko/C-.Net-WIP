@@ -179,7 +179,7 @@ namespace WebBrowserLaboratory.Forms
                         AutomationElement vDownloadDialogWindow = vDesktopObject.FindFirst(TreeScope.Children, this.NameProperty(vDownloadDialogTitle));
 
                         // Obtener el Button de "Save"
-                        AutomationElement vDownloadDialogSaveButtonElement = vDownloadDialogWindow.FindFirst(TreeScope.Descendants, this.ButtonCondition(vDownloadDialogSaveButton));
+                        AutomationElement vDownloadDialogSaveButtonElement = vWebBrowserWindow.FindFirst(TreeScope.Descendants, this.ButtonCondition(vDownloadDialogSaveButton));
 
                         // Establecer el foco al Button de "Save" y hacer {{Enter}}
                         vDownloadDialogSaveButtonElement.SetFocus();
@@ -243,7 +243,7 @@ namespace WebBrowserLaboratory.Forms
                         vUploadDialogFileNameFieldValuePattern.SetValue(DEFAULT_ATTACHMENTS_FOLDER + "report_108370888.pdf");
                         AndCondition vUploadDialogOpenButtonCondition = new AndCondition(
                             new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button),
-                            new PropertyCondition(AutomationElement.NameProperty, CANCEL_BUTTON)
+                            new PropertyCondition(AutomationElement.NameProperty, OPEN_BUTTON)
                         );
                         AutomationElement vUploadDialogOpenButtonElement = vWebBrowserWindow.FindFirst(TreeScope.Descendants, vUploadDialogOpenButtonCondition);
                         vUploadDialogOpenButtonElement.SetFocus();
