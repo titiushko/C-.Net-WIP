@@ -14,6 +14,7 @@ namespace WebBrowserLaboratory.Forms
         private string SystemWebsite_Url = ConfigurationManager.AppSettings["SystemWebsite.Url"];
         private string SystemWebsite_UserName = ConfigurationManager.AppSettings["SystemWebsite.UserName"];
         private string SystemWebsite_Password = ConfigurationManager.AppSettings["SystemWebsite.Password"];
+        private string SystemWebsite_Captcha = ConfigurationManager.AppSettings["SystemWebsite.Captcha"];
         private string DeathByCaptchaService_UserName = ConfigurationManager.AppSettings["DeathByCaptchaService.UserName"];
         private string DeathByCaptchaService_Password = ConfigurationManager.AppSettings["DeathByCaptchaService.Password"];
 
@@ -38,7 +39,7 @@ namespace WebBrowserLaboratory.Forms
         {
             try
             {
-                DownloadFile();
+                Fwla();
             }
             catch (Exception vE)
             {
@@ -84,46 +85,17 @@ namespace WebBrowserLaboratory.Forms
                 #region login
                 HtmlHelper.SetValueToElement(this.webBrowser.Document, "UserName", SystemWebsite_UserName);
                 HtmlHelper.SetValueToElement(this.webBrowser.Document, "Password", SystemWebsite_Password);
-                HtmlHelper.SetValueToElement(this.webBrowser.Document, "captcha", "4vwrs");
+                HtmlHelper.SetValueToElement(this.webBrowser.Document, "captcha", SystemWebsite_Captcha);
                 this.RunActionAndWaitUntilPageLoaded(this.webBrowser, HtmlHelper.ClickElement(this.webBrowser.Document, "button_validate"));
                 #endregion
 
                 if (this.webBrowser.Url.ToString().Equals("http://localhost:17720/eFWLA/index"))
                 {
                     #region inscribir
+                    // Entrar al formulario "Inscribir Contrato"
                     this.RunActionAndWaitUntilPageLoaded(this.webBrowser, HtmlHelper.ClickElement(this.webBrowser.Document, "href", false, "a", "http://localhost:17720/eFWLA/create_contract"));
 
-                    string[] vJavaScriptLibraries = new string[] {
-                        "http://localhost:17720/Sources/jquery-2.0.3.min.js",
-                        "http://localhost:17720/Sources/jquery.mb.browser.min.js",
-                        "http://localhost:17720/Sources/jquery-ui.min.js",
-                        "http://localhost:17720/Sources/jquery.ui.datepicker-es.min.js",
-                        "http://localhost:17720/Sources/jquery-fluid16.js",
-                        "http://localhost:17720/Sources/pqselect.min.js",
-                        "http://localhost:17720/Sources/multiselect.min.js",
-                        "http://localhost:17720/Sources/jquery.formatCurrency-1.4.0.js",
-                        "http://localhost:17720/Sources/jquery.epiclock.min.js",
-                        "http://localhost:17720/Sources/jquery.validate.js",
-                        "http://localhost:17720/Sources/additional-methods.js",
-                        "http://localhost:17720/Sources/jquery.maskedinput.js",
-                        "http://localhost:17720/Sources/fwla_validation.js",
-                        "http://localhost:17720/Sources/jquery.prettyPhoto.js",
-                        "http://localhost:17720/Sources/jquery.form.js",
-                        "http://localhost:17720/Sources/jquery.prettyLoader.js",
-                        "http://localhost:17720/Sources/jquery.blockUI.js",
-                        "http://localhost:17720/Sources/swfobject.js",
-                        "http://localhost:17720/Sources/passwordStrengthMeter.js",
-                        "http://localhost:17720/Sources/custom.js",
-                        "http://localhost:17720/Sources/plupload.full.min.js",
-                        "http://localhost:17720/Sources/jquery.plupload.queue.js",
-                        "http://localhost:17720/Sources/jquery.ui.plupload.min.js",
-                        "http://localhost:17720/Sources/es.js",
-                        "http://localhost:17720/Sources/datatables.min.js",
-                        "http://localhost:17720/Sources/dataTables.jqueryui.min.js",
-                        "http://localhost:17720/Sources/dataTables.colReorder.min.js"
-                    };
-                    this.ImportJavaScriptLibraries(this.webBrowser, vJavaScriptLibraries);
-
+                    // Establecer valores a los campos del paso 1
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "CBond", "SJNFBA11Z2200602");
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "CBondValue", "25,000.00");
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "TContractID", "01");
