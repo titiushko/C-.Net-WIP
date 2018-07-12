@@ -1,3 +1,7 @@
+$(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+    if (ajaxOptions.url.indexOf("admin_create_contract.php") != -1 && ajaxOptions.type == "POST") submit();
+});
+
 function updateUrl(url) {
     return url.replace(/\.\/modules/gim, "https://www.fwlatrust.com/eFWLA/modules");
 }
