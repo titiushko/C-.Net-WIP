@@ -6,6 +6,9 @@ using System.Windows.Automation;
 using System.Windows.Forms;
 using System;
 using WebBrowserLaboratory.Helpers;
+using System.Net;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace WebBrowserLaboratory.Forms
 {
@@ -39,7 +42,7 @@ namespace WebBrowserLaboratory.Forms
         {
             try
             {
-                Fwla();
+                FwlaV2();
             }
             catch (Exception vE)
             {
@@ -78,7 +81,7 @@ namespace WebBrowserLaboratory.Forms
             }
         }
 
-        private void Fwla()
+        private void FwlaV1()
         {
             try
             {
@@ -89,13 +92,14 @@ namespace WebBrowserLaboratory.Forms
                 this.RunActionAndWaitUntilPageLoaded(this.webBrowser, HtmlHelper.ClickElement(this.webBrowser.Document, "button_validate"));
                 #endregion
 
-                if (this.webBrowser.Url.ToString().Equals("http://localhost:17720/eFWLA/index"))
+                if (this.webBrowser.Url.ToString().Equals("https://crediquick.apptividad.net/Apptividad/z_MockPages/FWLA.MOCK/eFWLA/index"))
                 {
                     #region inscribir
                     // Entrar al formulario "Inscribir Contrato"
-                    this.RunActionAndWaitUntilPageLoaded(this.webBrowser, HtmlHelper.ClickElement(this.webBrowser.Document, "href", false, "a", "http://localhost:17720/eFWLA/create_contract"));
+                    this.RunActionAndWaitUntilPageLoaded(this.webBrowser, HtmlHelper.ClickElement(this.webBrowser.Document, "href", false, "a", "https://crediquick.apptividad.net/Apptividad/z_MockPages/FWLA.MOCK/eFWLA/create_contract"));
 
                     // Establecer valores a los campos del paso 1
+                    /*
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "CBond", "SJNFBA11Z2200602");
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "CBondValue", "25,000.00");
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "TContractID", "01");
@@ -107,7 +111,42 @@ namespace WebBrowserLaboratory.Forms
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "CPayDay", "10");
                     HtmlHelper.SetValueToElement(this.webBrowser.Document, "CContractType", "P");
                     HtmlHelper.ClickElement(this.webBrowser.Document, "className", true, "input", "open1 nextbutton");
+                    */
                     #endregion
+
+                    this.ExecuteJavaScript(this.webBrowser, "workflowRpa()");
+                }
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+
+        private void FwlaV2()
+        {
+            try
+            {
+                Dictionary<string, string> vFilesToDownload = new Dictionary<string, string>()
+                {
+                    { "CONTRATO Y PAGARÉ", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\"" },
+                    { "CARTAS", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\\[iframe\\]\"" }
+                };
+
+                using (WebClient vClient = new WebClient())
+                {
+                    foreach (KeyValuePair<string, string> vFileToDownload in vFilesToDownload)
+                    {
+                        string vFileName = string.Format("{0}{1}.pdf", DEFAULT_ATTACHMENTS_FOLDER, vFileToDownload.Key);
+                        string vFileUrl = string.Empty;
+                        Match vMatch = Regex.Match(this.webBrowser.DocumentText, vFileToDownload.Value);
+                        if (vMatch.Success)
+                        {
+                            vFileUrl = vMatch.Groups[1].Value.CleanText();
+                            vFileUrl = string.IsNullOrWhiteSpace(vFileUrl) ? vMatch.Value.CleanText() : vFileUrl;
+                        }
+                        if (!string.IsNullOrWhiteSpace(vFileUrl)) vClient.DownloadFile(vFileUrl, vFileName);
+                    }
                 }
             }
             catch (Exception vE)

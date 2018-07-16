@@ -121,5 +121,24 @@ namespace WebBrowserLaboratory.Forms
             vHead.AppendChild(vNewScriptTag);
             pBrowser.Document.InvokeScript("AlertMessage");
         }
+
+        protected void ExecuteJavaScript(WebBrowser pBrowser, string pJavaScriptToExecute)
+        {
+            try
+            {
+                if (pBrowser != null && pBrowser != null && !string.IsNullOrWhiteSpace(pJavaScriptToExecute))
+                {
+                    HtmlElement vScriptTag = pBrowser.Document.CreateElement("script");
+                    IHTMLScriptElement vScriptElement = (IHTMLScriptElement)vScriptTag.DomElement;
+                    vScriptElement.text = "function ExecuteJavaScript() {" + pJavaScriptToExecute + "}";
+                    pBrowser.Document.GetElementsByTagName("head")[0].AppendChild(vScriptTag);
+                    pBrowser.Document.InvokeScript("ExecuteJavaScript");
+                }
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
     }
 }

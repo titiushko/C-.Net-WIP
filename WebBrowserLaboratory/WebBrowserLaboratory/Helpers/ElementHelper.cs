@@ -14,6 +14,8 @@ namespace WebBrowserLaboratory.Helpers
         private const string HTML_TAGS_PATTERN = @"<[^>]+>";
         private const string HTML_START_TAGS_PATTERN = @"<\s*\w.*?>";
         private const string HTML_END_TAGS_PATTERN = @"<\s*\/\s*\w\s*.*?>|<\s*br\s*>";
+        private const string SPACES_REPLACE_PATTERN = @"\t|\n|\r";
+        private const string EXTRA_WHITESPACE_REPLACE_PATTERN = @"[ ]{2,}";
 
         public static string ReplaceMultiple(this string pText, Dictionary<string, string> pReplaces)
         {
@@ -70,6 +72,22 @@ namespace WebBrowserLaboratory.Helpers
                     vStripped = Regex.Replace(vStripped, HTML_END_TAGS_PATTERN, "", ExpressionOptions);
                 }
                 return pDecode ? HttpUtility.HtmlDecode(vStripped) ?? vStripped : vStripped;
+            }
+            catch
+            {
+                return pText;
+            }
+        }
+
+        public static string CleanText(this string pText)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(pText)) return pText;
+                pText = pText.RemoveHtmlTags();
+                pText = Regex.Replace(pText, SPACES_REPLACE_PATTERN, "");
+                pText = Regex.Replace(pText, EXTRA_WHITESPACE_REPLACE_PATTERN, " ").Trim();
+                return pText;
             }
             catch
             {
