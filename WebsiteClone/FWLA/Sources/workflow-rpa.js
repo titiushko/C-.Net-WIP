@@ -190,3 +190,62 @@ var submit = function () {
 function workflowRpa() {
     step1();
 }
+
+$(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+    if (ajaxOptions.url.indexOf("check_customer.php") != -1 && ajaxOptions.type == "GET") {
+        var response = false;
+        try {
+            response = eval(jqXHR.responseText);
+        }
+        catch (e) {
+            response = true;
+        }
+        $("#ui-id-3").prepend("<div id='CheckCustomerResponse'><p id='CheckCustomerResponse-Message'>The customer search was done</p><p id='CheckCustomerResponse-Result'>" + (response ? "CUSTOMER_FOUND" : "NO_CUSTOMER_FOUND") + "</p></div>");
+    }
+});
+
+$("#addCustomer").click(function () {
+    if ($("#mlgform").valid()) {
+        $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+            if (ajaxOptions.url.indexOf("admin_add_customer.php") != -1 && ajaxOptions.type == "POST") {
+                var response = false;
+                try {
+                    response = eval(jqXHR.responseText);
+                }
+                catch (e) {
+                    response = true;
+                }
+                $("#ui-id-3").prepend("<div id='AddCustomerResponse'><p id='AddCustomerResponse-Message'>The customer creation was done</p><p id='AddCustomerResponse-Result'>" + (response ? "CUSTOMER_CREATED" : "NO_CUSTOMER_CREATED") + "</p></div>");
+            }
+        });
+    }
+    else {
+        $("#ui-id-3").prepend("<div id='AddCustomerResponse'><p id='AddCustomerResponse-Message'>The customer creation was done</p><p id='AddCustomerResponse-Result'>NO_CUSTOMER_CREATED</p></div>");
+    }
+});
+
+$(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+    if (ajaxOptions.url.indexOf("check_moveable_vin.php") != -1 && ajaxOptions.type == "GET") {
+        var response = false;
+        try {
+            response = jqXHR.responseJSON != undefined && jqXHR.responseJSON.response != undefined && jqXHR.responseJSON.response === "Favor llenar los datos del bien.";
+        }
+        catch (e) {
+            response = false;
+        }
+        $("#ui-id-4").prepend("<div id='CheckCarResponse'><p id='CheckCarResponse-Message'>The car search was done</p><p id='CheckCarResponse-Result'>" + (response ? "NO_CAR_FOUND" : "CAR_FOUND") + "</p></div>");
+    }
+});
+
+$(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+    if (ajaxOptions.url.indexOf("admin_add_moveable.php") != -1 && ajaxOptions.type == "POST") {
+        var response = false;
+        try {
+            response = eval(jqXHR.responseText);
+        }
+        catch (e) {
+            response = true;
+        }
+        $("#ui-id-4").prepend("<div id='AddCarResponse'><p id='AddCarResponse-Message'>The car creation was done</p><p id='AddCarResponse-Result'>" + (response ? "CAR_CREATED" : "NO_CAR_CREATED") + "</p></div>");
+    }
+});

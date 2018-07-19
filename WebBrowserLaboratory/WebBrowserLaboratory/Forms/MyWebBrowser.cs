@@ -129,15 +129,17 @@ namespace WebBrowserLaboratory.Forms
             {
                 Dictionary<string, string> vFilesToDownload = new Dictionary<string, string>()
                 {
-                    { "CONTRATO Y PAGARÉ", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\"" },
-                    { "CARTAS", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\\[iframe\\]\"" }
+                    { "DATOS CLIENTE.html", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\\[ajax\\]\"" },
+                    { "DATOS BIEN.html", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\\[auto\\]\"" },
+                    { "CONTRATO Y PAGARÉ.pdf", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\"" },
+                    { "CARTAS.pdf", "<a\\s+(?:[^>]*?\\s+)?href=\"([^\"]*)\".rel=\"prettyPhoto\\[iframe\\]\"" }
                 };
 
                 using (WebClient vClient = new WebClient())
                 {
                     foreach (KeyValuePair<string, string> vFileToDownload in vFilesToDownload)
                     {
-                        string vFileName = string.Format("{0}{1}.pdf", DEFAULT_ATTACHMENTS_FOLDER, vFileToDownload.Key);
+                        string vFileName = string.Format("{0}{1} - {2}", DEFAULT_ATTACHMENTS_FOLDER, DateTime.Now.ToString("yyyymmdd HH-mm-ss"), vFileToDownload.Key);
                         string vFileUrl = string.Empty;
                         Match vMatch = Regex.Match(this.webBrowser.DocumentText, vFileToDownload.Value);
                         if (vMatch.Success)
