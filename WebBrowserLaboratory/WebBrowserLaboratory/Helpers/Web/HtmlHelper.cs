@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace WebBrowserLaboratory.Helpers
+namespace WebBrowserLaboratory.Helpers.Web
 {
     public class HtmlHelper
     {

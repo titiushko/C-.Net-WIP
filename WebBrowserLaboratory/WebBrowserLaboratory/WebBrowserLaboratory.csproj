@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\DeathByCaptcha.dll</HintPath>
     </Reference>
+    <Reference Include="FlexCel">
+      <HintPath>lib\FlexCel.dll</HintPath>
+    </Reference>
     <Reference Include="IBM.Data.DB2.iSeries, Version=12.0.0.0, Culture=neutral, PublicKeyToken=9cdb2ebfb1f93a26, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\IBM\Client Access\IBM.Data.DB2.iSeries.dll</HintPath>
@@ -124,15 +127,21 @@
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\BaseHelper.cs" />
-    <Compile Include="Helpers\ElementHelper.cs" />
+    <Compile Include="Forms\FlexCelAPI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlexCelAPI.Designer.cs">
+      <DependentUpon>FlexCelAPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Web\BaseHelper.cs" />
+    <Compile Include="Helpers\Web\ElementHelper.cs" />
     <Compile Include="Forms\MyWebBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MyWebBrowser.Designer.cs">
       <DependentUpon>MyWebBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="Helpers\Web\HtmlHelper.cs" />
     <Compile Include="Log4Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

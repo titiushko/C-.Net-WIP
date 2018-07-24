@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Forms;
 using System;
-using WebBrowserLaboratory.Helpers;
+using WebBrowserLaboratory.Helpers.Web;
 using System.Net;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
