@@ -133,8 +133,9 @@
     <Compile Include="Forms\FlexCelAPI.Designer.cs">
       <DependentUpon>FlexCelAPI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Web\BaseHelper.cs" />
-    <Compile Include="Helpers\Web\ElementHelper.cs" />
+    <Compile Include="Helpers\Excel\XlsHelper.cs" />
+    <Compile Include="Helpers\Web\BaseWebHelper.cs" />
+    <Compile Include="Helpers\ElementHelper.cs" />
     <Compile Include="Forms\MyWebBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +176,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

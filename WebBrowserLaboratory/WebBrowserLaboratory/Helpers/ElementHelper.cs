@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace WebBrowserLaboratory.Helpers.Web
+namespace WebBrowserLaboratory.Helpers
 {
     public static class ElementHelper
     {

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace WebBrowserLaboratory.Helpers.Web
 {
-    class BaseHelper
+    class BaseWebHelper
     {
         /// <summary>
         /// Obtener un HtmlElement de HtmlDocument.Window.Frames
