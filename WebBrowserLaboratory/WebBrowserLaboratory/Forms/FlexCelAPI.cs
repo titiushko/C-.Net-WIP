@@ -24,7 +24,8 @@ namespace WebBrowserLaboratory.Forms
             {
                 string vFilename = "1.Control Consecutivos de Cartas.xlsx";
                 string vFilePath = DEFAULT_ATTACHMENTS_FOLDER + vFilename;
-                XlsHelper XlsHelper = new XlsHelper(vFilePath);
+                XlsHelper XlsHelper = new XlsHelper();
+                XlsHelper.InitializeExcel(vFilePath);
 
                 string SheetName = DateTime.Now.ToString("yyyy");
                 string vNumeroCartaPromesaPago = string.Empty;
@@ -43,7 +44,7 @@ namespace WebBrowserLaboratory.Forms
                 XlsHelper.SetValueFromColAndRow(vRowNumber, 2, "Tito Miguel", SheetName);
                 XlsHelper.SetValueFromColAndRow(vRowNumber, 3, "Carta Promesa", SheetName);
                 XlsHelper.SetValueFromColAndRow(vRowNumber, 4, "Principal", SheetName);
-                XlsHelper.SetValueFromColAndRow(vRowNumber, 5, DateTime.Now.ToString("MM/dd/yyyy"), SheetName);
+                XlsHelper.SetValueFromColAndRow(vRowNumber, 5, DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"), SheetName);
                 XlsHelper.SetValueFromColAndRow(vRowNumber, 6, "Lian Ríos", SheetName);
                 XlsHelper.SaveExcelFile(vFilePath);
                 XlsHelper.CloseExcel();

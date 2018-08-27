@@ -10,6 +10,11 @@ namespace WebBrowserLaboratory.Helpers.Excel
     {
         XlsFile XlsFile;
 
+        public XlsHelper()
+        {
+
+        }
+
         public XlsHelper(string pFilePath = null)
         {
             try
