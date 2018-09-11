@@ -1,0 +1,1150 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="box">
+    <h2>
+        <a id="toggle-mymain" href="javascript:;">Inscribir Contrato</a>
+    </h2>
+    <div id="mymain" class="block">
+        <p>Complete los pasos a seguir.</p>
+        <div style="display: none;" class="error">
+            <img style="margin-right: 5px; float: left;" alt="Advertencia!" src="@Url.Content("~/Sources/warning_icon.png")" width="24" height="24">
+            <span></span>.
+
+            <br clear="all">
+        </div>
+        <form id="mlgform" method="POST" name="AddUsr" action="https://www.fwlatrust.com/eFWLA/modules/admin_create_contract.php" novalidate="novalidate">
+            <div id="stepForm" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
+                <h3 aria-expanded="true" id="sf1" class="ui-accordion-header ui-state-default ui-accordion-header-active ui-state-active ui-corner-top ui-accordion-icons" role="tab" tabIndex="0" aria-selected="true" aria-controls="ui-id-1">
+                    <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>1. Datos del Contrato
+
+                </h3>
+                <div aria-hidden="false" style="display: block;" id="ui-id-1" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" role="tabpanel" aria-labelledby="sf1">
+                    <p>Ingrese los datos del contrato.</p>
+                    <table id="altgrid">
+                        <tbody>
+                            <tr>
+                                <td>Nº Bono/Deuda o Pagaré</td>
+                                <td>
+                                    <input id="CBond" class="required" aria-required="true" name="CBond" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Saldo Inicial</td>
+                                <td>
+                                    <input id="CBondValue" class="required" aria-required="true" name="CBondValue" size="10" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tipo de Contrato</td>
+                                <td>
+                                    <select id="TContractID" onchange="TCN_reload(this)" class="required select" aria-required="true" name="TContractID">
+                                        <option selected="" value="">Seleccione el Tipo de Contrato</option>
+                                        <option value="04">Depósitos Bancarios</option>
+                                        <option value="02">Inmueble</option>
+                                        <option value="01">Mueble</option>
+                                        <option value="03">Otros</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Garantía</td>
+                                <td>
+                                    <select id="WarrantyID" onchange="TCN_reload(this)" class="required select" aria-required="true" name="WarrantyID">
+                                        <option selected="" value="">Seleccione la Garantía</option>
+                                        <option value="0107">Equipo Agrícola</option>
+                                        <option value="0106">Equipo Industrial</option>
+                                        <option value="0108">Equipos Varios</option>
+                                        <option value="0105">Flotas</option>
+                                        <option value="0104">Moto Comercial</option>
+                                        <option value="0103">Moto Particular</option>
+                                        <option value="0109">Naves Sin Registro</option>
+                                        <option value="0102">Vehículo Comercial</option>
+                                        <option value="0101">Vehículo Particular</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Fecha
+
+                                    <span id="EDateLabel" td="" <="">de Emisión
+
+													</span>
+                                <td>
+                                    <input id="CDateStart" class="required dateISO hasDatepicker" aria-required="true" name="CDateStart" size="10" type="text">
+                                    <img class="ui-datepicker-trigger" title="..." alt="..." src="@Url.Content("~/Sources/calendar_icon.png")" width="25" height="25">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Fecha de Vencimiento</td>
+                                <td>
+                                    <input id="CDateEnd" class="required dateISO hasDatepicker" aria-required="true" name="CDateEnd" size="10" type="text">
+                                    <img class="ui-datepicker-trigger" title="..." alt="..." src="@Url.Content("~/Sources/calendar_icon.png")" width="25" height="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Fecha
+
+                                    <span id="PDateLabel">de Primer Pago</span>
+                                </td>
+                                <td>
+                                    <input id="CPayStart" class="required dateISO hasDatepicker" aria-required="true" name="CPayStart" size="10" type="text">
+                                    <img class="ui-datepicker-trigger" title="..." alt="..." src="@Url.Content("~/Sources/calendar_icon.png")" width="25" height="25">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>
+                                    Fecha
+
+                                    <span id="DDateLabel">de Desembolso</span>
+                                </td>
+                                <td>
+                                    <input id="CDisbursementDate" class="dateISO hasDatepicker" name="CDisbursementDate" size="10" type="text">
+                                    <img class="ui-datepicker-trigger" title="..." alt="..." src="@Url.Content("~/Sources/calendar_icon.png")" width="25" height="25">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Día de Pago Mensual</td>
+                                <td>
+                                    <select class="required" aria-required="true" name="CPayDay">
+                                        <option selected="" value="">Seleccione un día</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Tipo de Contrato</td>
+                                <td>
+                                    <select id="CContractType" class="required" aria-required="true" name="CContractType">
+                                        <option selected="" value="">Seleccione el tipo de Contrato</option>
+                                        <option value="P">Personal</option>
+                                        <option value="C">Comercial</option>
+                                        <option value="E">Colaborador</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="odd button1">
+                                <td colSpan="2">
+                                    <input class="open1 nextbutton" title="Siguiente Paso" name="formNext1" alt="Siguiente Paso" value="Siguiente Paso" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 aria-expanded="false" id="sf2" class="ui-accordion-header ui-state-default ui-corner-all ui-accordion-icons" role="tab" tabIndex="-1" aria-selected="false" aria-controls="ui-id-2">
+                    <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>2. Datos del Fideicomiso
+
+                </h3>
+                <div aria-hidden="true" style="display: none;" id="ui-id-2" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" aria-labelledby="sf2">
+                    <p>Ingrese los datos del fideicomiso.</p>
+                    <table id="facility">
+                        <tbody>
+                            <tr>
+                                <td>Acreedor</td>
+                                <td>
+                                    BANCO DAVIVIENDA, S.A.
+
+                                    <input id="BankID" name="BankID" value="88" type="hidden">
+                                </td>
+                            </tr>
+                        <tbody id="empower"></tbody>
+                        <tbody id="authorized"></tbody>
+                        <tbody>
+                            <tr class="odd">
+                                <td>
+                                    <span id="CAssetLabel">Valor Actual del Bien</span>
+                                </td>
+                                <td>
+                                    <input id="CAssetValue" class="required" aria-required="true" name="CAssetValue" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Letra Mensual</td>
+                                <td>
+                                    <input id="CMonthlyPayment" class="required" aria-required="true" name="CMonthlyPayment" size="10" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Tasa de Interés</td>
+                                <td>
+                                    <input id="CInterestRate" class="required" aria-required="true" name="CInterestRate" size="5" type="text" placeholder="%">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tasa de Interés Efectiva</td>
+                                <td>
+                                    <input id="CEffectiveRate" name="CEffectiveRate" size="5" type="text" placeholder="%">
+                                </td>
+                            </tr>
+                            <tr id="CCommissionLabel" class="odd">
+                                <td>Comisión de Cierre</td>
+                                <td>
+                                    <input id="CClosingCommission" name="CClosingCommission" size="5" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr id="CCRateLabel">
+                                <td>% Comisión de Trámite</td>
+                                <td>
+                                    <input id="CClosingRate" name="CClosingRate" size="5" type="text" placeholder="%">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Timbres</td>
+                                <td>
+                                    <input id="CPostalFee" name="CPostalFee" size="5" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gastos de Notaría</td>
+                                <td>
+                                    <input id="CNotary" name="CNotary" size="5" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Comisión Fiduciaria</td>
+                                <td>
+                                    <input id="CCommission" name="CCommission" size="5" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Honorarios</td>
+                                <td>
+                                    <input id="CFees" name="CFees" size="5" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr id="CAgencyLabel" class="odd">
+                                <td>Agencia Vendedora</td>
+                                <td>
+                                    <select id="CAgency" name="CAgency">
+                                        <option selected="" value="">Seleccione un Distribuidor</option>
+                                        <option value="37">AE ENTERPRISE, S.A.</option>
+                                        <option value="1">ALEMAUTOS, S.A.</option>
+                                        <option value="2">AUTOMOTORA AUTOSTAR, S.A.</option>
+                                        <option value="36">AUTOMOVILES DE VERAGUAS, S.A.</option>
+                                        <option value="4">BAHIA MOTORS, S.A.</option>
+                                        <option value="5">BAVARIAN MOTOR PANAMA, S.A.</option>
+                                        <option value="6">BERING MOTORS, S.A.</option>
+                                        <option value="39">BORCA MOTORS</option>
+                                        <option value="3">COMERCIAL AUTOSTAR, S.A.</option>
+                                        <option value="32">COMPAÑIA CHIRICANA DE AUTOMOVILES, S.A.</option>
+                                        <option value="8">CONSULTENOS, S.A.</option>
+                                        <option value="9">DISTRIBUIDORA DAVID FORD COMPANY, S.A</option>
+                                        <option value="7">EMPRESAS MELO, S.A.</option>
+                                        <option value="10">EXCEL AUTOMOTRIZ, S.A.</option>
+                                        <option value="34">FOR AUTO PANAMA, S.A.</option>
+                                        <option value="12">GRUPO LOS TRES, S.A.</option>
+                                        <option value="13">GRUPO TIESA</option>
+                                        <option value="14">JAGUAR DE PANAMA, S.A.</option>
+                                        <option value="15">LUMOVIL, S.A.</option>
+                                        <option value="17">MC AUTOMOTRIZ</option>
+                                        <option value="33">MOTOR EMOTION, S.A.</option>
+                                        <option value="16">MOTORES JAPONESES, S.A.</option>
+                                        <option value="18">OXFORD MOTORS, S.A.</option>
+                                        <option value="19">PANAMEÑA DE MOTORES, S.A.</option>
+                                        <option value="21">PETROAUTOS, S.A.</option>
+                                        <option value="20">PREMIER MOTOR GROUP</option>
+                                        <option value="35">PREMIUM AUTO, S.A.</option>
+                                        <option value="22">PS AUTO PANAMA, S.A.</option>
+                                        <option value="38">REPUESTOS Y MOTORES, S.A.</option>
+                                        <option value="31">REVENDEDOR</option>
+                                        <option value="23">RICARDO PEREZ, S.A.</option>
+                                        <option value="11">SILABA MOTORS, S.A.</option>
+                                        <option value="24">SILVER MOTORS, S.A.</option>
+                                        <option value="25">SUBARU DEL CANAL, S.A.</option>
+                                        <option value="26">SUN MOTORS, S.A.</option>
+                                        <option value="27">TOCHISA DE PANAMA, S.A.</option>
+                                        <option value="28">TRANSPORTE Y EQUIPO, S.A.</option>
+                                        <option value="29">TURIN MOTOR, S.A.</option>
+                                        <option value="30">UNITED CARS, S.A.</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="resell">
+                                <td>Revendedor</td>
+                                <td>
+                                    <input style="text-transform: uppercase;" id="CReseller" name="CReseller" size="50" type="text">
+                                </td>
+                            </tr>
+                            <tr id="CPayPromiseLabel" class="odd">
+                                <td>Número de Carta Promesa de Pago</td>
+                                <td>
+                                    <input style="text-transform: uppercase;" id="CPayPromise" name="CPayPromise" size="25" type="text">
+                                </td>
+                            </tr>
+                            <tr id="CAAmountLabel">
+                                <td>Monto a Desembolsar a Agencia</td>
+                                <td>
+                                    <input id="CAAmount" name="CAAmount" size="25" type="text" placeholder="$">
+                                </td>
+                            </tr>
+                            <tr id="CBeneficiaryLabel" class="odd">
+                                <td>Beneficiario en caso de muerte</td>
+                                <td>
+                                    <input id="CBeneficiary" name="CBeneficiary" size="35" type="text">
+                                </td>
+                            </tr>
+                            <tr id="CBeneficiaryTIDLabel">
+                                <td>Tipo de Identificación del Beneficiario</td>
+                                <td>
+                                    <select id="CBeneficiaryTID" name="CBeneficiaryTID">
+                                        <option selected="" value="">Seleccione el Tipo</option>
+                                        <option value="C">Cédula</option>
+                                        <option value="P">Pasaporte</option>
+                                        <option value="E">Cédula de Extranjero</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr id="CBeneficiaryIDLabel" class="odd">
+                                <td>Identificación del Beneficiario</td>
+                                <td>
+                                    <input id="CBeneficiaryID" name="CBeneficiaryID" size="15" type="text">
+                                </td>
+                            </tr>
+                        <tbody id="lifeins"></tbody>
+                        <tbody id="autoins"></tbody>
+                        <tbody id="guarantee">
+                            <tr></tr>
+                        <tbody id="guarantee">
+                            <tr class="odd">
+                                <td>Facilidad Garantizada</td>
+                                <td>Monto Garantizado</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select id="CGuarantee" name="CGuarantee[0]">
+                                        <option selected="" value="">Seleccione una Facilidad</option>
+                                        <option value="01">Préstamo</option>
+                                        <option value="02">Préstamo Comercial</option>
+                                        <option value="03">Línea de Crédito</option>
+                                        <option value="04">Línea de Sobregiro</option>
+                                        <option value="05">Emisión de Bonos</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input id="CGuaranteedAmount" name="CGuaranteedAmount[0]" size="15" type="text">
+                                    <a id="add_row">
+                                        <img border="0" alt="" src="@Url.Content("~/Sources/add_icon.png")" width="20" height="20">
+                                    </a>
+                                    <a id="rem_row">
+                                        <img border="0" alt="" src="@Url.Content("~/Sources/remove_icon.png")" width="20" height="20">
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr class="odd button2">
+                                <td colSpan="2">
+                                    <input class="prevbutton0" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button">
+                                    <input class="open2 nextbutton" title="Siguiente Paso" name="formNext2" alt="Siguiente Paso" value="Siguiente Paso" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 aria-expanded="false" id="sf3" class="ui-accordion-header ui-state-default ui-corner-all ui-accordion-icons" role="tab" tabIndex="-1" aria-selected="false" aria-controls="ui-id-3">
+                    <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>3. Datos del Cliente
+
+                </h3>
+                <div aria-hidden="true" style="display: none;" id="ui-id-3" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" aria-labelledby="sf3">
+                    <p>Ingrese la identificación del Fideicomitente.</p>
+                    <table id="altgrid">
+                        <tbody>
+                            <tr class="odd">
+                                <td>Identificación</td>
+                                <td>
+                                    <input id="CLegalID" class="required" aria-required="true" name="CLegalID" size="25" type="text">
+                                    <img id="getuser" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24">
+                                </td>
+                            </tr>
+                        <tbody style="display: none;" id="CustInfo">
+                            <tr>
+                                <td>Tipo de Cliente</td>
+                                <td>
+                                    <select id="CCustType" class="required select" aria-required="true" name="CCustType">
+                                        <option selected="selected" value="">Seleccione Tipo de Cliente</option>
+                                        <option value="N">Persona Natural</option>
+                                        <option value="J">Persona Jurídica</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Tipo de Documento</td>
+                                <td>
+                                    <select id="CLegalType" class="required select" aria-required="true" name="CLegalType">
+                                        <option selected="selected" value="">Seleccione Tipo de Documento</option>
+                                        <option value="C">Cedula Nacional</option>
+                                        <option value="E">Cedula de Extranjero</option>
+                                        <option value="P">Pasaporte</option>
+                                        <option value="R">RUC</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr id="CustN">
+                                <td>Nombre Legal Completo</td>
+                                <td>
+                                    <input id="CLegalName" class="required" aria-required="true" name="CLegalName" size="30" type="text">
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="CustCN" class="odd">
+                                <td>Nombre Comercial Completo</td>
+                                <td>
+                                    <input id="CCommercialName" class="required" aria-required="true" name="CCommercialName" size="30" type="text">
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="CustR">
+                                <td>Representante Legal</td>
+                                <td>
+                                    <input id="CLegalRep" class="required" aria-required="true" name="CLegalRep" size="30" type="text">
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="CustT" class="odd">
+                                <td>Tipo de Identificación</td>
+                                <td>
+                                    <select id="CLegalRT" class="required select" aria-required="true" name="CLegalRT">
+                                        <option selected="selected" value="">Seleccione Tipo de Identificación</option>
+                                        <option value="C">Cedula Nacional</option>
+                                        <option value="E">Cedula de Extranjero</option>
+                                        <option value="P">Pasaporte</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="CustRI">
+                                <td>Número de Identificación</td>
+                                <td>
+                                    <input id="CLegalRID" class="required" aria-required="true" name="CLegalRID" size="30" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                            <tr style="display: none;" id="Sexo">
+                                <td>Sexo</td>
+                                <td>
+                                    <select id="CSex" class="required select" aria-required="true" name="CSex">
+                                        <option selected="" value="">Seleccione un Sexo</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="CustCit" class="odd">
+                                <td>Ciudadanía</td>
+                                <td>
+                                    <select id="CCitizenship" class="required select" aria-required="true" name="CCitizenship">
+                                        <option selected="" value="">Seleccione una Ciudadanía</option>
+                                        <option value="004">Afgana</option>
+                                        <option value="248">Alandesa</option>
+                                        <option value="008">Albanesa</option>
+                                        <option value="276">Alemana</option>
+                                        <option value="020">Andorrana</option>
+                                        <option value="024">Angoleña</option>
+                                        <option value="660">Anguilense</option>
+                                        <option value="010">Antártica</option>
+                                        <option value="028">Antiguana</option>
+                                        <option value="530">Antillana</option>
+                                        <option value="012">Argelina</option>
+                                        <option value="032">Argentina</option>
+                                        <option value="051">Armenia</option>
+                                        <option value="533">Arubeño</option>
+                                        <option value="036">Australiana</option>
+                                        <option value="031">Austríaca</option>
+                                        <option value="044">Bahameña</option>
+                                        <option value="048">Bahreiní</option>
+                                        <option value="052">Barbadense</option>
+                                        <option value="056">Belga</option>
+                                        <option value="084">Beliceña</option>
+                                        <option value="050">Bengalí</option>
+                                        <option value="204">Beninesa</option>
+                                        <option value="060">Bermudeña</option>
+                                        <option value="112">Bielorrusa</option>
+                                        <option value="104">Birmana</option>
+                                        <option value="624">Bisauguineana</option>
+                                        <option value="068">Boliviana</option>
+                                        <option value="070">Bosnia</option>
+                                        <option value="072">Botsuana</option>
+                                        <option value="074">Bouvetiana</option>
+                                        <option value="076">Brasileña</option>
+                                        <option value="096">Bruneana</option>
+                                        <option value="100">Búlgara</option>
+                                        <option value="854">Burkinesa</option>
+                                        <option value="108">Burundesa</option>
+                                        <option value="064">Butanesa</option>
+                                        <option value="132">Caboverdiana</option>
+                                        <option value="136">Caimanesa</option>
+                                        <option value="116">Camboyana</option>
+                                        <option value="120">Camerunesa</option>
+                                        <option value="124">Canadiense</option>
+                                        <option value="630">Catarí</option>
+                                        <option value="140">Centroafricana</option>
+                                        <option value="148">Chadiana</option>
+                                        <option value="203">Checa</option>
+                                        <option value="152">Chilena</option>
+                                        <option value="156">China</option>
+                                        <option value="196">Chipriota</option>
+                                        <option value="166">Cocana</option>
+                                        <option value="170">Colombiana</option>
+                                        <option value="174">Comorensa</option>
+                                        <option value="180">Congoleña</option>
+                                        <option value="178">Congolesa</option>
+                                        <option value="184">Cookiana</option>
+                                        <option value="188">Costarricense</option>
+                                        <option value="191">Croata</option>
+                                        <option value="192">Cubana</option>
+                                        <option value="208">Danesa</option>
+                                        <option value="214">Dominicana</option>
+                                        <option value="212">Dominiquesa</option>
+                                        <option value="226">Ecuatoguineana</option>
+                                        <option value="218">Ecuatoriana</option>
+                                        <option value="818">Egipcia</option>
+                                        <option value="784">Emiratí</option>
+                                        <option value="">Escocesa</option>
+                                        <option value="703">Eslovaca</option>
+                                        <option value="705">Eslovena</option>
+                                        <option value="724">Española</option>
+                                        <option value="840">Estadounidense</option>
+                                        <option value="233">Estonia</option>
+                                        <option value="231">Etíope</option>
+                                        <option value="234">Feroesa</option>
+                                        <option value="608">Filipina</option>
+                                        <option value="246">Finlandesa</option>
+                                        <option value="242">Fiyiana</option>
+                                        <option value="250">Francesa</option>
+                                        <option value="258">Francopolinesia</option>
+                                        <option value="266">Gabonesa</option>
+                                        <option value="270">Gambiana</option>
+                                        <option value="288">Ganesa</option>
+                                        <option value="268">Georgiana</option>
+                                        <option value="292">Gibraltareña</option>
+                                        <option value="308">Granadina</option>
+                                        <option value="300">Griega</option>
+                                        <option value="304">Groenlandesa</option>
+                                        <option value="312">Guadalupeña</option>
+                                        <option value="316">Guameña</option>
+                                        <option value="320">Guatemalteca</option>
+                                        <option value="831">Guernesiais</option>
+                                        <option value="324">Guineano</option>
+                                        <option value="652">Gustavesa</option>
+                                        <option value="328">Guyanesa</option>
+                                        <option value="332">Haitiana</option>
+                                        <option value="086">Hindobritánica</option>
+                                        <option value="356">Hindú</option>
+                                        <option value="528">Holandesa</option>
+                                        <option value="340">Hondureña</option>
+                                        <option value="344">Hongkonesa</option>
+                                        <option value="348">Húngara</option>
+                                        <option value="360">Indonesia</option>
+                                        <option value="826">Inglesa</option>
+                                        <option value="364">Iraní</option>
+                                        <option value="368">Iraquí</option>
+                                        <option value="372">Irlandesa</option>
+                                        <option value="352">Islandesa</option>
+                                        <option value="376">Israelí</option>
+                                        <option value="380">Italiana</option>
+                                        <option value="388">Jamaiquina</option>
+                                        <option value="392">Japonesa</option>
+                                        <option value="832">Jerseyesa</option>
+                                        <option value="400">Jordana</option>
+                                        <option value="404">Kasaja</option>
+                                        <option value="296">Keniana</option>
+                                        <option value="417">Kirguisa</option>
+                                        <option value="414">Kuwaití</option>
+                                        <option value="426">Lesotense</option>
+                                        <option value="428">Letona</option>
+                                        <option value="422">Libanesa</option>
+                                        <option value="430">Liberiana</option>
+                                        <option value="434">Libia</option>
+                                        <option value="440">Lituana</option>
+                                        <option value="442">Luxemburguesa</option>
+                                        <option value="446">Macaensa</option>
+                                        <option value="807">Macedonia</option>
+                                        <option value="458">Malasia</option>
+                                        <option value="454">Malaui</option>
+                                        <option value="462">Maldiva</option>
+                                        <option value="450">Malgache</option>
+                                        <option value="466">Maliense</option>
+                                        <option value="470">Maltesa</option>
+                                        <option value="238">Malvinensa</option>
+                                        <option value="833">Manesa</option>
+                                        <option value="384">Marfileña</option>
+                                        <option value="504">Marroquí</option>
+                                        <option value="584">Marshalesa</option>
+                                        <option value="474">Martinicana</option>
+                                        <option value="480">Mauriciana</option>
+                                        <option value="478">Mauritana</option>
+                                        <option value="175">Mayotesa</option>
+                                        <option value="484">Mexicana</option>
+                                        <option value="583">Micronesia</option>
+                                        <option value="498">Moldava</option>
+                                        <option value="492">Monegasca</option>
+                                        <option value="496">Mongola</option>
+                                        <option value="499">Montenegrina</option>
+                                        <option value="500">Montserratense</option>
+                                        <option value="508">Mozambiqueña</option>
+                                        <option value="516">Namibia</option>
+                                        <option value="520">Nauruana</option>
+                                        <option value="162">Navideña</option>
+                                        <option value="540">Neocaledonia</option>
+                                        <option value="554">Neozelandesa</option>
+                                        <option value="524">Nepalesa</option>
+                                        <option value="558">Nicaragüense</option>
+                                        <option value="566">Nigeriana</option>
+                                        <option value="562">Nigerina</option>
+                                        <option value="570">Niueña</option>
+                                        <option value="408">Norcoreana</option>
+                                        <option value="574">Norfolkense</option>
+                                        <option value="580">Normariana</option>
+                                        <option value="578">Noruega</option>
+                                        <option value="512">Omaní</option>
+                                        <option value="586">Pakistaní</option>
+                                        <option value="585">Palauana</option>
+                                        <option value="275">Palestina</option>
+                                        <option value="591">Panameña</option>
+                                        <option value="598">Papuana</option>
+                                        <option value="600">Paraguaya</option>
+                                        <option value="604">Peruana</option>
+                                        <option value="612">Pitcaimesa</option>
+                                        <option value="616">Polaca</option>
+                                        <option value="620">Portuguesa</option>
+                                        <option value="638">Reunionesa</option>
+                                        <option value="646">Ruandesa</option>
+                                        <option value="642">Rumana</option>
+                                        <option value="643">Rusa</option>
+                                        <option value="732">Saharaui</option>
+                                        <option value="090">Salomonense</option>
+                                        <option value="222">Salvadoreña</option>
+                                        <option value="882">Samoana</option>
+                                        <option value="659">Sancristobaleña</option>
+                                        <option value="674">Sanmarinense</option>
+                                        <option value="663">Sanmartinense</option>
+                                        <option value="666">Sanpedrina</option>
+                                        <option value="654">Santahelena</option>
+                                        <option value="662">Santalucense</option>
+                                        <option value="678">Santotomense</option>
+                                        <option value="670">Sanvicentina</option>
+                                        <option value="682">Saudita</option>
+                                        <option value="686">Senegalesa</option>
+                                        <option value="688">Serbia</option>
+                                        <option value="690">Seychellense</option>
+                                        <option value="694">Sierraleonesa</option>
+                                        <option value="702">Singapurense</option>
+                                        <option value="760">Siria</option>
+                                        <option value="706">Somalí</option>
+                                        <option value="144">Srilanquesa</option>
+                                        <option value="748">Suazi</option>
+                                        <option value="710">Sudafricana</option>
+                                        <option value="736">Sudanesa</option>
+                                        <option value="752">Sueca</option>
+                                        <option value="756">Suiza</option>
+                                        <option value="410">Surcoreana</option>
+                                        <option value="239">Surgeorgiana</option>
+                                        <option value="740">Surinamesa</option>
+                                        <option value="744">Svalbarense</option>
+                                        <option value="764">Tailandés</option>
+                                        <option value="158">Taiwanesa</option>
+                                        <option value="834">Tanzana</option>
+                                        <option value="762">Tayika</option>
+                                        <option value="626">Timorensa</option>
+                                        <option value="768">Togolesa</option>
+                                        <option value="772">Tokelauana</option>
+                                        <option value="776">Tongana</option>
+                                        <option value="780">Trinitense</option>
+                                        <option value="788">Tunisia</option>
+                                        <option value="796">Turcocaica</option>
+                                        <option value="792">Turcomano</option>
+                                        <option value="798">Tuvaluana</option>
+                                        <option value="804">Ucraniana</option>
+                                        <option value="800">Ugandesa</option>
+                                        <option value="858">Uruguaya</option>
+                                        <option value="860">Uzbeka</option>
+                                        <option value="548">Vanuatuense</option>
+                                        <option value="336">Vaticana</option>
+                                        <option value="862">Venezolana</option>
+                                        <option value="704">Vietnamita</option>
+                                        <option value="850">Virgenense</option>
+                                        <option value="092">Virgenense Británica</option>
+                                        <option value="876">Walisiana</option>
+                                        <option value="887">Yemení</option>
+                                        <option value="262">Yibutiana</option>
+                                        <option value="891">Yugoslava</option>
+                                        <option value="894">Zambiana</option>
+                                        <option value="716">Zimbabuense</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr style="display: none;" id="CRLang">
+                                <td colSpan="2">
+                                    ¿El cliente entiende Español y no requiere intérprete? Sí
+
+                                    <input id="CLanguage" name="CLanguage" value="Y" type="checkbox">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Ocupación</td>
+                                <td>
+                                    <input id="COccupation" name="COccupation" size="30" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Provincia</td>
+                                <td>
+                                    <select id="CProvince" onchange="TCN_reloadL(this)" class="required select" aria-required="true" name="CProvince">
+                                        <option selected="" value="">Seleccione una Provincia</option>
+                                        <option value="1">Bocas del Toro</option>
+                                        <option value="4">Chiriquí</option>
+                                        <option value="2">Coclé</option>
+                                        <option value="3">Colón</option>
+                                        <option value="5">Darién</option>
+                                        <option value="6">Herrera</option>
+                                        <option value="7">Los Santos</option>
+                                        <option value="8">Panamá</option>
+                                        <option value="10">Panamá Oeste</option>
+                                        <option value="9">Veraguas</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Distrito</td>
+                                <td>
+                                    <select id="CDistrict" onchange="TCN_reloadL(this)" class="required select" aria-required="true" name="CDistrict">
+                                        <option selected="" value="">Seleccione un Distrito</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Corregimiento</td>
+                                <td>
+                                    <select id="CCorregiment" onchange="TCN_reloadL(this)" class="required select" aria-required="true" name="CCorregiment">
+                                        <option selected="" value="">Seleccione un Corregimiento</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Dirección</td>
+                                <td>
+                                    <textarea id="CStreet" class="required" aria-required="true" name="CStreet"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apartado Postal</td>
+                                <td>
+                                    <input id="CPostalAddress" name="CPostalAddress" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Correo Electrónico</td>
+                                <td>
+                                    <input id="CEmail" name="CEmail" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono Residencia</td>
+                                <td>
+                                    <input id="CPhoneH" class="required" aria-required="true" name="CPhoneH" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Residencia Adicional</td>
+                                <td>
+                                    <input id="CPhoneHa" name="CPhoneHa" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono Oficina</td>
+                                <td>
+                                    <input id="CPhoneO" name="CPhoneO" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Oficina Adicional</td>
+                                <td>
+                                    <input id="CPhoneOa" name="CPhoneOa" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono Celular</td>
+                                <td>
+                                    <input id="CMobile" name="CMobile" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Celular Adicional</td>
+                                <td>
+                                    <input id="CMobilea" name="CMobilea" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2">
+                                    Este cliente está inscrito en ANPYME?
+                                    <input id="CAnpyme" name="CAnpyme" value="Y" type="checkbox">Sí
+
+
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td colSpan="2">
+                                    <input id="addCustomer" class="addbutton" title="Agregar Cliente" name="addCustomer" alt="Agregar Cliente" value="Agregar Cliente" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td colSpan="2">
+                                    <table style="display: none;" id="CustomerCart">
+                                        <tbody></tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        <tbody style="display: none;" id="NextButtons3">
+                            <tr class="odd button3">
+                                <td colSpan="2">
+                                    <input class="prevbutton1" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button">
+                                    <input class="open3 nextbutton" title="Siguiente Paso" name="formNext2" alt="Siguiente Paso" value="Siguiente Paso" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 aria-expanded="false" id="sf4" class="ui-accordion-header ui-state-default ui-corner-all ui-accordion-icons" role="tab" tabIndex="-1" aria-selected="false" aria-controls="ui-id-4">
+                    <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>4. Datos del Bien
+                </h3>
+                <div aria-hidden="true" style="display: none;" id="ui-id-4" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" aria-labelledby="sf4">
+                    <p>Ingrese los datos del Bien.</p>
+                    <table style="display: none;" id="auto">
+                        <tbody>
+                            <tr>
+                                <td>Chasis</td>
+                                <td>
+                                    <input id="MaVin" class="required" aria-required="true" name="MaVin" size="20" type="text">
+                                    <img id="getcar" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24">
+                                </td>
+                            </tr>
+                        <tbody style="display: none;" id="CarInfo">
+                            <tr class="odd">
+                                <td>Marca</td>
+                                <td>
+                                    <input style="text-transform: uppercase;" id="MaBrand" class="required" aria-required="true" name="MaBrand" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Modelo</td>
+                                <td>
+                                    <input style="text-transform: uppercase;" id="MaModel" class="required" aria-required="true" name="MaModel" size="60" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Año</td>
+                                <td>
+                                    <select id="MaYear" class="required select" aria-required="true" name="MaYear">
+                                        <option selected="" value="">Seleccione un Año</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Valor</td>
+                                <td>
+                                    <input id="MaValue" class="required" aria-required="true" name="MaValue" size="15" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Motor</td>
+                                <td>
+                                    <input style="text-transform: uppercase;" id="MaEngineN" class="required" aria-required="true" name="MaEngineN" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Color</td>
+                                <td>
+                                    <input style="text-transform: uppercase;" id="MaColor" class="required" aria-required="true" name="MaColor" size="15" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Municipio</td>
+                                <td>
+                                    <select id="MaMunicipality" name="MaMunicipality">
+                                        <option selected="" value="">Seleccione un Municipio</option>
+                                        <option value="BOCAS DEL TORO">Bocas del Toro</option>
+                                        <option value="CHANGUINOLA">Changuinola</option>
+                                        <option value="CHIRIQUI GRANDE">Chiriquí Grande</option>
+                                        <option value="ALANJE">Alanje</option>
+                                        <option value="BARU">Barú</option>
+                                        <option value="BOQUERON">Boquerón</option>
+                                        <option value="BOQUETE">Boquete</option>
+                                        <option value="BUGABA">Bugaba</option>
+                                        <option value="DAVID">David</option>
+                                        <option value="DOLEGA">Dolega</option>
+                                        <option value="GUALACA">Gualaca</option>
+                                        <option value="REMEDIOS">Remedios</option>
+                                        <option value="RENACIMIENTO">Renacimiento</option>
+                                        <option value="SAN FELIX">San Félix</option>
+                                        <option value="SAN LORENZO">San Lorenzo</option>
+                                        <option value="TOLE">Tolé</option>
+                                        <option value="AGUADULCE">Aguadulce</option>
+                                        <option value="ANTON">Antón</option>
+                                        <option value="LA PINTADA">La Pintada</option>
+                                        <option value="NATA">Natá</option>
+                                        <option value="OLA">Olá</option>
+                                        <option value="PENONOME">Penonomé</option>
+                                        <option value="CHAGRES">Chagres</option>
+                                        <option value="COLON">Colón</option>
+                                        <option value="DONOSO">Donoso</option>
+                                        <option value="PORTOBELO">Portobelo</option>
+                                        <option value="SANTA ISABEL">Santa Isabel</option>
+                                        <option value="CHEPIGANA">Chepigana</option>
+                                        <option value="PINOGANA">Pinogana</option>
+                                        <option value="CHITRE">Chitré</option>
+                                        <option value="LAS MINAS">Las Minas</option>
+                                        <option value="LOS POZOS">Los Pozos</option>
+                                        <option value="OCU">Ocú</option>
+                                        <option value="PARITA">Parita</option>
+                                        <option value="PESE">Pesé</option>
+                                        <option value="SANTA MARIA">Santa María</option>
+                                        <option value="GUARARE">Guararé</option>
+                                        <option value="LAS TABLAS">Las Tablas</option>
+                                        <option value="LOS SANTOS">Los Santos</option>
+                                        <option value="MACARACAS">Macaracas</option>
+                                        <option value="PEDASI">Pedasí</option>
+                                        <option value="POCRI">Pocrí</option>
+                                        <option value="TONOSI">Tonosí</option>
+                                        <option value="BALBOA">Balboa</option>
+                                        <option value="CHEPO">Chepo</option>
+                                        <option value="CHIMAN">Chimán</option>
+                                        <option value="PANAMA">Panamá</option>
+                                        <option value="SAN MIGUELITO">San Miguelito</option>
+                                        <option value="TABOGA">Taboga</option>
+                                        <option value="ARRAIJAN">Arraiján</option>
+                                        <option value="CAPIRA">Capira</option>
+                                        <option value="CHAME">Chame</option>
+                                        <option value="LA CHORRERA">La Chorrera</option>
+                                        <option value="SAN CARLOS">San Carlos</option>
+                                        <option value="ATALAYA">Atalaya</option>
+                                        <option value="CALOBRE">Calobre</option>
+                                        <option value="CAñAZAS">Cañazas</option>
+                                        <option value="LA MESA">La Mesa</option>
+                                        <option value="LAS PALMAS">Las Palmas</option>
+                                        <option value="MARIATO">Mariato</option>
+                                        <option value="MONTIJO">Montijo</option>
+                                        <option value="RIO DE JESUS">Río de Jesús</option>
+                                        <option value="SAN FRANCISCO">San Francisco</option>
+                                        <option value="SANTA FE">Santa Fé</option>
+                                        <option value="SANTIAGO">Santiago</option>
+                                        <option value="SONA">Soná</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pasajeros</td>
+                                <td>
+                                    <input id="MaCapacity" name="MaCapacity" size="5" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Tipo de Vehículo</td>
+                                <td>
+                                    <input id="MaVehicleType" name="MaVehicleType" size="25" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tipo de Placa</td>
+                                <td>
+                                    <input id="MaType" name="MaType" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Comentarios</td>
+                                <td>
+                                    <textarea id="MaComments" cols="40" rows="6" name="MaComments"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2">
+                                    <input id="PType" name="PType" value="auto" type="hidden">
+                                    <input id="MaTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_moveable.php" type="hidden">
+                                    <input id="addCar" class="addbutton" title="Agregar Vehìculo" name="addCar" alt="Agregar Vehìculo" value="Agregar Vehìculo" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr class="odd">
+                                <td colSpan="2">
+                                    <table style="display: none;" id="MoveableCart">
+                                        <tbody></tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        <tbody id="NextButtons4">
+                            <tr class="odd button4">
+                                <td colSpan="2">
+                                    <input class="prevbutton2" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button">
+                                    <input style="display: none;" id="cSubmitA" class="open4 subbutton" title="Agregar Contrato" name="submit" alt="Agregar Contrato" value="Agregar Contrato" type="submit">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="display: none;" id="equipo">
+                        <tbody>
+                            <tr>
+                                <td>Chasis o Serie</td>
+                                <td>
+                                    <input id="MaEVin" class="required" aria-required="true" name="MaEVin" size="20" type="text">
+                                    <img id="getequipment" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24">
+                                </td>
+                            </tr>
+                        <tbody style="display: none;" id="equipment">
+                            <tr class="odd">
+                                <td>Marca</td>
+                                <td>
+                                    <input id="MaEBrand" class="required" aria-required="true" name="MaEBrand" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Modelo</td>
+                                <td>
+                                    <input id="MaEModel" class="required" aria-required="true" name="MaEModel" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Año</td>
+                                <td>
+                                    <select id="MaEYear" class="required select" aria-required="true" name="MaEYear">
+                                        <option selected="" value="">Seleccione un Año</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Valor</td>
+                                <td>
+                                    <input id="MaEValue" class="required" aria-required="true" name="MaEValue" size="15" type="text">
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Motor</td>
+                                <td>
+                                    <input id="MaEEngineN" class="required" aria-required="true" name="MaEEngineN" size="20" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Comentarios</td>
+                                <td>
+                                    <textarea id="MaEComments" cols="40" rows="6" name="MaEComments"></textarea>
+                                </td>
+                            </tr>
+                            <tr class="odd">
+                                <td colSpan="2">
+                                    <input id="PTypeE" name="PTypeE" value="equipo" type="hidden">
+                                    <input id="MaTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_moveable.php" type="hidden">
+                                    <input id="addEquipment" class="addbutton" title="Agregar Equipo" name="addEquipment" alt="Agregar Equipo" value="Agregar Equipo" type="button">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td colSpan="2">
+                                    <table style="display: none;" id="MoveableECart">
+                                        <tbody></tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        <tbody id="NextEButtons4">
+                            <tr class="odd button4">
+                                <td colSpan="2">
+                                    <input class="prevbutton2" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button">
+                                    <input style="display: none;" id="cSubmitE" class="open4 subbutton" title="Agregar Contrato" name="submit" alt="Agregar Contrato" value="Agregar Contrato" type="submit">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="display: none;" id="inmueble">
+                        <tbody>
+                            <tr>
+                                <td>Nº de Finca</td>
+                                <td>
+                                    <input id="Finca" class="required" aria-required="true" name="Finca" size="20" type="text"><img id="getfinca" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24">
+                                </td>
+                            </tr>
+                            <tr class="odd"></tr>
+                        <tbody style="display: none;" id="finca"><tr><td>Tomo</td><td><input id="Tomo" name="Tomo" size="20" type="text"></td></tr><tr class="odd"><td>Rollo</td><td><input id="Rollo" name="Rollo" size="20" type="text"></td></tr><tr><td>Asiento</td><td><input id="Asiento" name="Asiento" size="20" type="text"></td></tr><tr class="odd"><td>Folio</td><td><input id="Folio" name="Folio" size="20" type="text"></td></tr><tr><td>Documento</td><td><input id="Documento" name="Documento" size="20" type="text"></td></tr><tr class="odd"><td>Código de Ubicación</td><td><input id="CUbicacion" name="CUbicacion" size="20" type="text"></td></tr><tr><td>NIT</td><td><input id="NIT" name="NIT" size="20" type="text"></td></tr><tr class="odd"><td>Valor</td><td><input id="PValue" class="required" aria-required="true" name="PValue" size="15" type="text"></td></tr><tr><td>Comentarios</td><td><textarea id="PropertyComments" cols="40" rows="6" name="PropertyComments"></textarea></td></tr><tr class="odd"><td colSpan="2"><input id="MpTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_unmoveable.php" type="hidden"><input id="addProperty" class="addbutton" title="Agregar Inmueble" name="addProperty" alt="Agregar Inmueble" value="Agregar Inmueble" type="button"></td></tr></tbody>
+                        <tbody><tr><td colSpan="2"><table style="display: none;" id="MoveablePCart"><tbody></tbody></table></td></tr>
+                        <tbody id="NextPButtons4"><tr class="odd button4"><td colSpan="2"><input class="prevbutton2" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button"><input style="display: none;" id="cSubmitP" class="open4 subbutton" title="Agregar Contrato" name="submit" alt="Agregar Contrato" value="Agregar Contrato" type="submit"></td></tr></tbody>
+                    </table><table style="display: none;" id="deposito"><tbody><tr><td>Número de Cuenta</td><td><input id="AccountNumber" class="required" aria-required="true" name="AccountNumber" size="20" type="text"><img id="getdeposit" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24"></td></tr><tbody style="display: none;" id="fdeposit"><tr class="odd"><td>Tipo de Cuenta</td><td><select id="AccountType" class="required select" aria-required="true" name="AccountType"><option selected="" value="">Seleccione el Tipo de Cuenta</option><option value="10">A La Vista</option><option value="20">A Plazo</option><option value="30">Ahorro Corrientes</option><option value="40">Ahorro de Navidad</option><option value="50">Certificados de Depósito</option><option value="70">Otros Depósitos</option></select></td></tr><tr><td>Banco</td><td><select id="AccountBank" class="required" aria-required="true" name="AccountBank"><option selected="" value="">Seleccione un Banco</option><option value="1">BAC International Bank, Inc.</option><option value="2">Balboa Bank &amp; Trust, Corp.</option><option value="3">Bancafé, S.A.</option><option value="4">Banco Aliado, S.A.</option><option value="5">Banco Azteca, S.A.</option><option value="6">Banco Bilbao Vizcaya Argentaria, S.A. (BBVA)</option><option value="7">Banco Bolivariano, S.A.</option><option value="8">Banco Citibank, S.A.</option><option value="9">Banco de Bogotá, S.A.</option><option value="10">Banco de Guayaquil, S.A.</option><option value="11">Banco Delta, S.A.</option><option value="12">Banco General, S.A.</option><option value="13">Banco Hipotecario Nacional</option><option value="14">Banco Internacional de Costa Rica, S.A.</option><option value="15">Banco Latinoamericano de Comercio Exterior, S.A.</option><option value="16">Banco Nacional de Panamá</option><option value="17">Banco Panamá, S.A.</option><option value="18">Banco Panameño de la Vivienda</option><option value="19">Banco Pichincha Panamá, S.A.</option><option value="20">Banco Trasatlántico, S.A.</option><option value="21">Banco Universal, S.A.</option><option value="22">Banesco, S.A.</option><option value="23">Bank Leumi Le-Israel B.M.</option><option value="24">Bank of China</option><option value="25">Caja de Ahorros</option><option value="26">Capital Bank, Inc.</option><option value="27">Citibank, N.A.</option><option value="28">Credicorp Bank, S.A.</option><option value="29">Global Bank Corporation</option><option value="30">HSBC Bank, S.A.</option><option value="31">Korea Exchange Bank</option><option value="32">Mega International Commercial Bank, Ltd.</option><option value="33">Mercantil Bank, S.A.</option><option value="34">Metrobank, S.A.</option><option value="35">MMG Bank Corporation</option><option value="36">Multibank, Inc.</option><option value="37">Prival Bank, S.A.</option><option value="38">Produbank, S.A.</option><option value="39">St. Georges Bank, Inc.</option><option value="40">The Bank of Nova Scotia</option><option value="41">Towerbank International, Inc.</option></select></td></tr><tr class="odd"><td>Saldo Inicial</td><td><input id="AccountAmount" class="required" aria-required="true" name="AccountAmount" size="10" type="text"></td></tr><tr><td>Saldo A La Fecha</td><td><input id="AccountBalance" class="required" aria-required="true" name="AccountBalance" size="10" type="text"></td></tr><tr class="odd"><td>Comentarios</td><td><textarea id="AccountComments" cols="40" rows="6" name="AccountComments"></textarea></td></tr><tr><td colSpan="2"><input id="MdTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_deposit.php" type="hidden"><input id="addDeposit" class="addbutton" title="Agregar Depósito" name="addDeposit" alt="Agregar Depósito" value="Agregar Depósito" type="button"></td></tr></tbody><tbody><tr class="odd"><td colSpan="2"><table style="display: none;" id="MoveableDCart"><tbody></tbody></table></td></tr><tbody id="NextDButtons4"><tr class="odd button4"><td colSpan="2"><input class="prevbutton2" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button"><input style="display: none;" id="cSubmitD" class="open4 subbutton" title="Agregar Contrato" name="submit" alt="Agregar Contrato" value="Agregar Contrato" type="submit"></td></tr></tbody></table><table style="display: none;" id="otros"><tbody><tr><td>Identificación del Bien</td><td><input id="OtherNumber" class="required" aria-required="true" name="OtherNumber" size="20" type="text"><img id="getother" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24"></td></tr><tbody style="display: none;" id="others"><tr class="odd"><td>Tipo de Bien</td><td><select id="OtherType" class="required select" aria-required="true" name="OtherType"><option selected="" value="">Seleccione el Tipo de Bien</option><option value="0301">Metales y Piedras Preciosas</option><option value="0302">Inventario</option><option value="0303">Cuentas por Cobrar</option><option value="0304">Obras de Arte</option><option value="0305">Póliza de Seguro</option><option value="0306">Pagarés</option><option value="0307">Pagos Anticipados</option></select></td></tr><tr><td>Cantidad</td><td><input id="OtherQty" class="required" aria-required="true" name="OtherQty" size="10" type="text"></td></tr><tr class="odd"><td>Valor Inicial</td><td><input id="OtherAmount" class="required" aria-required="true" name="OtherAmount" size="10" type="text"></td></tr><tr><td>Comentarios</td><td><textarea id="OtherComments" cols="40" rows="6" name="OtherComments"></textarea></td></tr><tr class="odd"><td colSpan="2"><input id="MoTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_other.php" type="hidden"><input id="addOther" class="addbutton" title="Agregar Bien" name="addOther" alt="Agregar Bien" value="Agregar Bien" type="button"></td></tr></tbody><tbody><tr><td colSpan="2"><table style="display: none;" id="MoveableOCart"><tbody></tbody></table></td></tr><tbody id="NextOButtons4"><tr class="odd button4"><td colSpan="2"><input class="prevbutton2" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button"><input style="display: none;" id="cSubmitO" class="open4 subbutton" title="Agregar Contrato" name="submit" alt="Agregar Contrato" value="Agregar Contrato" type="submit"></td></tr></tbody></table><table style="display: none;" id="investment"><tbody><tr><td>Número Certificado</td><td><input id="InvestNumber" class="required" aria-required="true" name="InvestNumber" size="20" type="text"><img id="getinvest" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24"></td></tr><tbody style="display: none;" id="inversion"><tr><td>Tipo de Inversión</td><td><select id="InvestType" class="required select" aria-required="true" name="InvestType"><option selected="" value="">Seleccione el Tipo de Inversión</option><option value="11">Letras del Tesoro</option><option value="12">Notas del Tesoro</option><option value="13">Bonos del Tesoro</option><option value="14">Bonos del Estado</option><option value="15">Bonos de Agencia</option><option value="16">Bonos PDI</option><option value="17">Bonos FIRB</option><option value="18">Bonos IRB</option><option value="19">Bonos Discount</option><option value="20">Bonos Globales</option><option value="21">VNC's</option><option value="22">Bonos Corporativos</option><option value="23">Aceptaciones</option><option value="24">Reportes</option><option value="25">Papeles Comerciales</option><option value="26">CERPAN</option><option value="27">Títulos Prestacionales</option><option value="28">Títulos de Deudas de Proceso de Titulación</option><option value="29">Títulos de Participación de Proceso de Titulación</option><option value="30">Participación en Fondos de Inversiones</option><option value="31">Bonos Hipotecarios</option><option value="32">Acciones cotizadas en un Mercado Organizado</option><option value="33">Acciones no cotizadas</option><option value="34">CAT (Certificado de Abono Tributario)</option><option value="35">Bonos Corporativos cotizados en un Mercado Organizado</option><option value="36">Bonos Corporativos no cotizados</option><option value="37">Bonos Subordinados</option><option value="38">Derivados</option><option value="39">ETF's (Exchange Trade Funds)</option><option value="40">Bonos Forestales</option><option value="50">Otros Títulos</option></select></td></tr><tr><td>Emisor</td><td><input id="InvestIssuer" class="required" aria-required="true" name="InvestIssuer" size="20" type="text"></td></tr><tr><td>Cantidad</td><td><input id="InvestQty" class="required" aria-required="true" name="InvestQty" size="10" type="text"></td></tr><tr><td>Fecha de Emisión</td><td><input id="InvestEmitedDate" class="hasDatepicker" name="InvestEmitedDate" size="10" type="text"><img class="ui-datepicker-trigger" title="..." alt="..." src="@Url.Content("~/Sources/calendar_icon.png")" width="25" height="25"></td></tr><tr><td>Fecha de Vencimiento</td><td><input id="InvestExpiryDate" class="hasDatepicker" name="InvestExpiryDate" size="10" type="text"><img class="ui-datepicker-trigger" title="..." alt="..." src="@Url.Content("~/Sources/calendar_icon.png")" width="25" height="25"></td></tr><tr><td>Valor</td><td><input id="InvestAmount" class="required" aria-required="true" name="InvestAmount" size="10" type="text"></td></tr><tr><td>Comentarios</td><td><textarea id="InvestComments" cols="40" rows="6" name="InvestComments"></textarea></td></tr><tr><td colSpan="2"><input id="MiTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_investment.php" type="hidden"><input id="addInvestment" class="addbutton" title="Agregar Inversión" name="addInvestment" alt="Agregar Inversión" value="Agregar Inversión" type="button"></td></tr></tbody><tbody><tr><td colSpan="2"><table style="display: none;" id="MoveableICart"><tbody></tbody></table></td></tr><tbody id="NextIButtons4"><tr class="odd button4"><td colSpan="2"><input class="prevbutton2" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button"><input style="display: none;" id="cSubmitI" class="open4 subbutton" title="Agregar Contrato" name="submit" alt="Agregar Contrato" value="Agregar Contrato" type="submit"></td></tr></tbody></table>
+                </div>
+            </div><input id="MM_insert" name="MM_insert" value="AddUsr" type="hidden"><input id="UsrCreated" name="UsrCreated" value="lirios" type="hidden">
+        </form>
+    </div>
+</div>
+@Scripts.Render("~/Sources/create-contract.js")
+@Scripts.Render("~/Sources/workflow-rpa.js")
