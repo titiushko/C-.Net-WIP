@@ -12,9 +12,93 @@ namespace Titiushko.HtmlHelpers.Helpers
     public class HtmlHelper
     {
         /// <summary>
+        /// Obtener listado de frames de HtmlDocument.Window.Frames
+        /// </summary>
+        /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
+        /// <returns>HtmlWindowCollection listado de frames</returns>
+        private static HtmlWindowCollection GetFramesFromDocument(HtmlDocument pHtmlDoc)
+        {
+            try
+            {
+                return pHtmlDoc != null && pHtmlDoc.Window != null && pHtmlDoc.Window.Frames != null && pHtmlDoc.Window.Frames.Count > 0
+                    ? pHtmlDoc.Window.Frames
+                    : null;
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+
+        /// <summary>
+        /// Evaluar si el frame (objeto HtmlWindow) es distinto de núlo y contenga HtmlWindow.Document
+        /// </summary>
+        /// <param name="pFrame">Objeto HtmlWindow a evaluar</param>
+        /// <returns>Boolean</returns>
+        private static bool FrameIsNotNull(HtmlWindow pFrame)
+        {
+            try
+            {
+                return pFrame != null && pFrame.Document != null;
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+
+        /// <summary>
+        /// Obtener listado de HtmlElement de HtmlDocument.Window.Frames por nombre de etiqueta
+        /// </summary>
+        /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
+        /// <param name="pTag">Nombre de la etiqueta para hacer la búsqueda</param>
+        /// <returns>HtmlElementCollection listado de HtmlElement</returns>
+        private static HtmlElementCollection GetHtmlElementsFromFramesByTagName(HtmlDocument pHtmlDoc, string pTag)
+        {
+            try
+            {
+                HtmlElementCollection vHtmlElements = null;
+                HtmlWindowCollection vFrames = GetFramesFromDocument(pHtmlDoc);
+                if (vFrames != null)
+                {
+                    for (int i = 0; i < vFrames.Count; i++)
+                    {
+                        if (vHtmlElements == null)
+                        {
+                            try
+                            {
+                                HtmlWindow vFrame = vFrames[i];
+                                if (FrameIsNotNull(vFrame))
+                                {
+                                    vHtmlElements = vFrame.Document.Body.GetElementsByTagName(pTag).Count > 0
+                                        ? vFrame.Document.Body.GetElementsByTagName(pTag)
+                                        : null;
+                                }
+                            }
+                            catch (Exception vE)
+                            {
+                                // Continuar si falla
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                return vHtmlElements;
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+
+        /// <summary>
         /// Obtener un HtmlElement de HtmlDocument.Window.Frames
         /// </summary>
-        /// <param name="pHtmlDoc">HtmlDoc donde se va a buscar</param>
+        /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
         /// <param name="pIdentifier">Identificador del elemento que se está buscando (id o name o attribute)</param>
         /// <returns>HtmlElement encontrado o nulo si no se encontró</returns>
         private static HtmlElement GetHtmlElementFromFrames(HtmlDocument pHtmlDoc, string pIdentifier)
@@ -22,22 +106,32 @@ namespace Titiushko.HtmlHelpers.Helpers
             try
             {
                 HtmlElement vHtmlElement = null;
-                if (pHtmlDoc != null && pHtmlDoc.Window != null && pHtmlDoc.Window.Frames != null && pHtmlDoc.Window.Frames.Count > 0)
+                HtmlWindowCollection vFrames = GetFramesFromDocument(pHtmlDoc);
+                if (vFrames != null)
                 {
-                    for (int i = 0; i < pHtmlDoc.Window.Frames.Count; i++)
+                    for (int i = 0; i < vFrames.Count; i++)
                     {
                         if (vHtmlElement == null)
                         {
                             try
                             {
-                                vHtmlElement = pHtmlDoc.Window.Frames[i].Document.GetElementById(pIdentifier) != null
-                                ? pHtmlDoc.Window.Frames[i].Document.GetElementById(pIdentifier)
-                                : (pHtmlDoc.Window.Frames[i].Document.All[pIdentifier] != null ? pHtmlDoc.Window.Frames[i].Document.All[pIdentifier] : null);
+                                HtmlWindow vFrame = vFrames[i];
+                                if (FrameIsNotNull(vFrame))
+                                {
+                                    vHtmlElement = vFrame.Document.GetElementById(pIdentifier) != null
+                                    ? vFrame.Document.GetElementById(pIdentifier)
+                                    : (vFrame.Document.All[pIdentifier] != null ? vFrame.Document.All[pIdentifier] : null);
+                                }
                             }
                             catch (Exception vE)
                             {
+                                // Continuar si falla
                                 continue;
                             }
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                 }
@@ -133,12 +227,17 @@ namespace Titiushko.HtmlHelpers.Helpers
                 }
                 else if (!string.IsNullOrEmpty(pTag))   // Si no se obtuvo el identificador, pero se conoce el tag del elemento
                 {
-                    foreach (HtmlElement vElement in pHtmlDoc.Body.GetElementsByTagName(pTag))
+                    HtmlElementCollection vHtmlElements = pHtmlDoc.Body.GetElementsByTagName(pTag);
+                    if (vHtmlElements == null || vHtmlElements.Count == 0) vHtmlElements = GetHtmlElementsFromFramesByTagName(pHtmlDoc, pTag);
+                    if (vHtmlElements != null && vHtmlElements.Count > 0)
                     {
-                        if (Regex.IsMatch(vElement.OuterHtml.RemoveTildes(), pRegexExpression, RegexOptions.IgnoreCase))  // Si elemento por tag es igual a la primera coincidencia
+                        foreach (HtmlElement vElement in vHtmlElements)
                         {
-                            vHtmlElement = vElement;    // Obtener el elemento por tag
-                            break;
+                            if (Regex.IsMatch(vElement.OuterHtml.RemoveTildes(), pRegexExpression, RegexOptions.IgnoreCase))  // Si elemento por tag es igual a la primera coincidencia
+                            {
+                                vHtmlElement = vElement;    // Obtener el elemento por tag
+                                break;
+                            }
                         }
                     }
                 }
@@ -151,6 +250,52 @@ namespace Titiushko.HtmlHelpers.Helpers
         }
 
         /// <summary>
+        /// Obtener el string del HTML de un HtmlElement que se obtiene por identificador.
+        /// Si no está definido el identificador para obtener el HtmlElement, entonces el string del HTML se toma de pHtmlDocument.
+        /// </summary>
+        /// <param name="pHtmlDoc">HtmlDocument que proviene del WebBrowser actual. Se utiliza para obtener el string del HTML.</param>
+        /// <param name="pElementIdentifier">Opcional: Identificador para buscar el HtmlElement.</param>
+        /// <returns>String del HTML de un HtmlElement o de HtmlDocument del WebBrowser.</returns>
+        public static string GetHtmlFromElementByIdentifier(HtmlDocument pHtmlDoc, string pElementIdentifier = null)
+        {
+            try
+            {
+                string vHtml = string.Empty;
+                if (string.IsNullOrWhiteSpace(pElementIdentifier))
+                {
+                    // Si no está definido el identificador para obtener el HtmlElement, entonces el string del HTML se toma de HtmlDocument del WebBrowser
+                    vHtml = pHtmlDoc.Body.InnerHtml;
+                }
+                else
+                {
+                    // Si está definido el identificador para obtener el HtmlElement, entonces se busca dentro de HtmlDocument del WebBrowser
+                    HtmlElement vHtmlElement = GetHtmlElement(pHtmlDoc, pElementIdentifier);
+                    if (vHtmlElement != null)
+                    {
+                        // Si se logró obtener el HtmlElement, entonces se toma el string del HTML
+                        vHtml = vHtmlElement.Document.Body.InnerHtml;
+                    }
+                    else
+                    {
+                        // Si no se logró obtener ningún HtmlElement, entonces se devuelve una cadena vacía para esperar hasta volver a intentar buscar un elemento
+                        vHtml = string.Empty;
+                    }
+                }
+                return vHtml;
+            }
+            catch (NullReferenceException vE)
+            {
+                // No se obtuvo ningún elemento, entonces se devuelve una cadena vacía
+                return string.Empty;
+            }
+            catch (Exception vE)
+            {
+                // Error desconocido, se devuelve la excepción
+                throw vE;
+            }
+        }
+
+        /// <summary>
         /// Devuelve un DataTable basado en una tabla HTML String
         /// </summary>
         /// <param name="pHtmlTable">Estructura de tabla HTML</param>
@@ -158,7 +303,7 @@ namespace Titiushko.HtmlHelpers.Helpers
         /// <param name="pRemoveTildes">Si se establece en True si las tildes se deben eliminar del nombre de las columnas de encabezado, de lo contrario, el nombre permanece como está</param>
         /// <param name="pTableName">Nombre del objeto DataTable</param>
         /// <returns>DataTable con los datos de la tabla HTML</returns>
-        public static DataTable ConvertHTMLTablesToDataTable(string pHtmlTable, bool pFirstRowAsColumnNames = true, bool pRemoveTildes = false, string pTableName = null)
+        public static DataTable ConvertHtmlTablesToDataTable(string pHtmlTable, bool pFirstRowAsColumnNames = true, bool pRemoveTildes = false, string pTableName = null)
         {
             try
             {
