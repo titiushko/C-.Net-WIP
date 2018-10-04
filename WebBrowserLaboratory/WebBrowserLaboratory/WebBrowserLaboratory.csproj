@@ -134,7 +134,7 @@
       <DependentUpon>FlexCelAPI.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Excel\XlsHelper.cs" />
-    <Compile Include="Helpers\Web\BaseWebHelper.cs" />
+    <Compile Include="Helpers\Web\BaseHtmlHelper.cs" />
     <Compile Include="Helpers\ElementHelper.cs" />
     <Compile Include="Forms\MyWebBrowser.cs">
       <SubType>Form</SubType>

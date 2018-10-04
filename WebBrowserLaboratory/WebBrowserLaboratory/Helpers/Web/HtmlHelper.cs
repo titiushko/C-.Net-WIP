@@ -11,8 +11,8 @@ namespace WebBrowserLaboratory.Helpers.Web
         private static HtmlElement GetHtmlElement(HtmlDocument pHtmlDoc, string pIdentifier, string pTag = null, string pAttributeValue = null)
         {
             HtmlElement vHtmlElement = null;
-            if (string.IsNullOrWhiteSpace(pTag) && string.IsNullOrWhiteSpace(pAttributeValue)) vHtmlElement = BaseWebHelper.GetHtmlElement(pHtmlDoc, pIdentifier);
-            else vHtmlElement = BaseWebHelper.GetHtmlElementByAttribute(pHtmlDoc, pTag, pIdentifier, pAttributeValue);
+            if (string.IsNullOrWhiteSpace(pTag) && string.IsNullOrWhiteSpace(pAttributeValue)) vHtmlElement = BaseHtmlHelper.GetHtmlElement(pHtmlDoc, pIdentifier);
+            else vHtmlElement = BaseHtmlHelper.GetHtmlElementByAttribute(pHtmlDoc, pTag, pIdentifier, pAttributeValue);
             return vHtmlElement;
         }
 

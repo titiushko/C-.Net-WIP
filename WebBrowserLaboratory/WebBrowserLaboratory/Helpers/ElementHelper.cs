@@ -10,6 +10,7 @@ namespace WebBrowserLaboratory.Helpers
         public const RegexOptions ExpressionOptions = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase;
         public const string IDENTIFIER_PATTERN = "(id|name)=\"([^\"]*)\"";
         public const string IDENTIFIER_PATTERN_REPLACE = "((id|name)=\"|\")";
+        public const string IFRAME_NAME_TAG = "IFRAME";
         private const string CDATA_TAG_PATTERN = @"//<!\[CDATA\[.*?\]\]>|\t";
         private const string HTML_TAGS_PATTERN = @"<[^>]+>";
         private const string HTML_START_TAGS_PATTERN = @"<\s*\w.*?>";
