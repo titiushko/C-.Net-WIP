@@ -151,6 +151,8 @@ namespace WebBrowserLaboratory.Forms
                         if (!string.IsNullOrWhiteSpace(vFileUrl)) vClient.DownloadFile(vFileUrl, vFileName);
                     }
                 }
+
+                MessageBox.Show("Se descargaron los archivos", "Resultado", MessageBoxButtons.OK);
             }
             catch (Exception vE)
             {

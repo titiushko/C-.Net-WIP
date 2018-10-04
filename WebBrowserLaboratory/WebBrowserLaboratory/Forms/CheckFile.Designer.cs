@@ -1,6 +1,6 @@
 ﻿namespace WebBrowserLaboratory.Forms
 {
-    partial class FlexCelAPI
+    partial class CheckFile
     {
         /// <summary>
         /// Required designer variable.
@@ -53,18 +53,18 @@
             this.demoLabe.Name = "demoLabe";
             this.demoLabe.Size = new System.Drawing.Size(336, 44);
             this.demoLabe.TabIndex = 2;
-            this.demoLabe.Text = "A demo on how to use FlexCel API.";
+            this.demoLabe.Text = "A demo on how to check file.";
             this.demoLabe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FlexCelAPI Form
+            // CheckFile Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 114);
             this.Controls.Add(this.demoLabe);
             this.Controls.Add(this.runButton);
-            this.Name = "FlexCelAPI";
-            this.Text = "FlexCel API";
+            this.Name = "CheckFile";
+            this.Text = "CheckFile";
             this.ResumeLayout(false);
         }
 

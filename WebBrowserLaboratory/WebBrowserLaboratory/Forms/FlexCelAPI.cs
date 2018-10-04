@@ -63,6 +63,10 @@ namespace WebBrowserLaboratory.Forms
                 logger.Error(vE);
                 MessageBox.Show(vE.GetExceptionMessage(), "Error", MessageBoxButtons.OK);
             }
+            finally
+            {
+                this.Close();
+            }
         }
     }
 }

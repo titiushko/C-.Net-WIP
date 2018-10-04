@@ -14,7 +14,9 @@ namespace WebBrowserLaboratory
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FlexCelAPI());
+            //Application.Run(new MyWebBrowser());
+            //Application.Run(new FlexCelAPI());
+            Application.Run(new CheckFile());
         }
     }
 }
