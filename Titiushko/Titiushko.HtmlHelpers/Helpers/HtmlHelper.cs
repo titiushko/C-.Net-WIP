@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -11,12 +10,13 @@ namespace Titiushko.HtmlHelpers.Helpers
 {
     public class HtmlHelper
     {
+        #region DOM Element Helpers
         /// <summary>
         /// Obtener listado de frames de HtmlDocument.Window.Frames
         /// </summary>
         /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
         /// <returns>HtmlWindowCollection listado de frames</returns>
-        private static HtmlWindowCollection GetFramesFromDocument(HtmlDocument pHtmlDoc)
+        public static HtmlWindowCollection GetFramesFromDocument(HtmlDocument pHtmlDoc)
         {
             try
             {
@@ -31,11 +31,28 @@ namespace Titiushko.HtmlHelpers.Helpers
         }
 
         /// <summary>
+        /// Evaluar si contiene HtmlDocument.Body.InnerHtml
+        /// </summary>
+        /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
+        /// <returns>Boolean</returns>
+        public static bool BodyHasHtmlFromDocument(HtmlDocument pHtmlDoc)
+        {
+            try
+            {
+                return pHtmlDoc != null && pHtmlDoc.Body != null && !string.IsNullOrWhiteSpace(pHtmlDoc.Body.InnerHtml);
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+
+        /// <summary>
         /// Evaluar si el frame (objeto HtmlWindow) es distinto de núlo y contenga HtmlWindow.Document
         /// </summary>
         /// <param name="pFrame">Objeto HtmlWindow a evaluar</param>
         /// <returns>Boolean</returns>
-        private static bool FrameIsNotNull(HtmlWindow pFrame)
+        public static bool FrameIsNotNull(HtmlWindow pFrame)
         {
             try
             {
@@ -53,26 +70,29 @@ namespace Titiushko.HtmlHelpers.Helpers
         /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
         /// <param name="pTag">Nombre de la etiqueta para hacer la búsqueda</param>
         /// <returns>HtmlElementCollection listado de HtmlElement</returns>
-        private static HtmlElementCollection GetHtmlElementsFromFramesByTagName(HtmlDocument pHtmlDoc, string pTag)
+        public static HtmlElementCollection GetHtmlElementsFromFramesByTagName(HtmlDocument pHtmlDoc, string pTag)
         {
             try
             {
                 HtmlElementCollection vHtmlElements = null;
-                HtmlWindowCollection vFrames = GetFramesFromDocument(pHtmlDoc);
-                if (vFrames != null)
+                HtmlWindowCollection vParentFrames = GetFramesFromDocument(pHtmlDoc);
+                if (vParentFrames != null)
                 {
-                    for (int i = 0; i < vFrames.Count; i++)
+                    foreach (HtmlWindow vParentFrame in vParentFrames)
                     {
                         if (vHtmlElements == null)
                         {
                             try
                             {
-                                HtmlWindow vFrame = vFrames[i];
-                                if (FrameIsNotNull(vFrame))
+                                if (FrameIsNotNull(vParentFrame))
                                 {
-                                    vHtmlElements = vFrame.Document.Body.GetElementsByTagName(pTag).Count > 0
-                                        ? vFrame.Document.Body.GetElementsByTagName(pTag)
-                                        : null;
+                                    vHtmlElements = vParentFrame.Document.GetElementsByTagName(pTag).Count > 0
+                                        ? vParentFrame.Document.GetElementsByTagName(pTag) : null;
+                                    if (vHtmlElements == null)
+                                    {
+                                        if (GetFramesFromDocument(vParentFrame.Document) != null)
+                                            vHtmlElements = GetHtmlElementsFromFramesByTagName(vParentFrame.Document, pTag);
+                                    }
                                 }
                             }
                             catch (Exception vE)
@@ -101,26 +121,31 @@ namespace Titiushko.HtmlHelpers.Helpers
         /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
         /// <param name="pIdentifier">Identificador del elemento que se está buscando (id o name o attribute)</param>
         /// <returns>HtmlElement encontrado o nulo si no se encontró</returns>
-        private static HtmlElement GetHtmlElementFromFrames(HtmlDocument pHtmlDoc, string pIdentifier)
+        public static HtmlElement GetHtmlElementFromFrames(HtmlDocument pHtmlDoc, string pIdentifier)
         {
             try
             {
+                if (pHtmlDoc == null) return null;
                 HtmlElement vHtmlElement = null;
-                HtmlWindowCollection vFrames = GetFramesFromDocument(pHtmlDoc);
-                if (vFrames != null)
+                HtmlWindowCollection vParentFrames = GetFramesFromDocument(pHtmlDoc);
+                if (vParentFrames != null)
                 {
-                    for (int i = 0; i < vFrames.Count; i++)
+                    foreach (HtmlWindow vParentFrame in vParentFrames)
                     {
                         if (vHtmlElement == null)
                         {
                             try
                             {
-                                HtmlWindow vFrame = vFrames[i];
-                                if (FrameIsNotNull(vFrame))
+                                if (FrameIsNotNull(vParentFrame))
                                 {
-                                    vHtmlElement = vFrame.Document.GetElementById(pIdentifier) != null
-                                    ? vFrame.Document.GetElementById(pIdentifier)
-                                    : (vFrame.Document.All[pIdentifier] != null ? vFrame.Document.All[pIdentifier] : null);
+                                    vHtmlElement = vParentFrame.Document.GetElementById(pIdentifier) != null
+                                    ? vParentFrame.Document.GetElementById(pIdentifier)
+                                    : (vParentFrame.Document.All[pIdentifier] != null ? vParentFrame.Document.All[pIdentifier] : null);
+                                    if (vHtmlElement == null)
+                                    {
+                                        if (GetFramesFromDocument(vParentFrame.Document) != null)
+                                            vHtmlElement = GetHtmlElementFromFrames(vParentFrame.Document, pIdentifier);
+                                    }
                                 }
                             }
                             catch (Exception vE)
@@ -153,7 +178,7 @@ namespace Titiushko.HtmlHelpers.Helpers
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(pIdentifier)) return null;
+                if (pHtmlDoc == null || string.IsNullOrWhiteSpace(pIdentifier)) return null;
                 HtmlElement vHtmlElement = pHtmlDoc.GetElementById(pIdentifier) != null
                     ? pHtmlDoc.GetElementById(pIdentifier)
                     : (pHtmlDoc.All[pIdentifier] != null ? pHtmlDoc.All[pIdentifier] : null);
@@ -178,13 +203,14 @@ namespace Titiushko.HtmlHelpers.Helpers
         {
             try
             {
+                if (pHtmlDoc == null) return null;
                 pTag = string.IsNullOrWhiteSpace(pTag) ? string.Empty : pTag;
                 pAttribute = string.IsNullOrWhiteSpace(pAttribute) ? string.Empty : pAttribute;
                 pValue = string.IsNullOrWhiteSpace(pValue) ? string.Empty : pValue;
                 HtmlElement vHtmlElement = null;
                 if (pHtmlDoc != null)
                 {
-                    foreach (HtmlElement element in pHtmlDoc.Body.GetElementsByTagName(pTag))
+                    foreach (HtmlElement element in pHtmlDoc.GetElementsByTagName(pTag))
                     {
                         if (element.GetAttribute(pAttribute) != null && element.GetAttribute(pAttribute).Length != 0 && element.GetAttribute(pAttribute) == pValue)
                         {
@@ -206,15 +232,16 @@ namespace Titiushko.HtmlHelpers.Helpers
         /// Obtiene el primer elemento que coincida con la expresión regular
         /// Si no se puede obtener el elemento por identificador de la primera coincidencia, se busca el elemento por tag de la primera coincidencia
         /// </summary>
-        /// <param name="pHtmlDoc"></param>
-        /// <param name="pHtml"></param>
-        /// <param name="pRegexExpression"></param>
-        /// <param name="pTag"></param>
+        /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
+        /// <param name="pHtml">HTML string para evaluar pRegexExpression</param>
+        /// <param name="pRegexExpression">Expersión regular para buscar el elemento</param>
+        /// <param name="pTag">Opcional: nombre del tag HTML para buscar el elemento</param>
         /// <returns>Si se encuentra el elemento se retorna el objeto HtmlElement, de lo contrario se retorna null</returns>
         public static HtmlElement GetHtmlElementByRegexExpression(HtmlDocument pHtmlDoc, string pHtml, string pRegexExpression, string pTag = null)
         {
             try
             {
+                if (pHtmlDoc == null || string.IsNullOrWhiteSpace(pHtml)) return null;
                 pRegexExpression = string.IsNullOrWhiteSpace(pRegexExpression) ? string.Empty : pRegexExpression;
                 Match vMatch = Regex.Match(pHtml.RemoveTildes(), pRegexExpression, RegexOptions.IgnoreCase);
                 if (!vMatch.Success) return null;
@@ -227,7 +254,7 @@ namespace Titiushko.HtmlHelpers.Helpers
                 }
                 else if (!string.IsNullOrEmpty(pTag))   // Si no se obtuvo el identificador, pero se conoce el tag del elemento
                 {
-                    HtmlElementCollection vHtmlElements = pHtmlDoc.Body.GetElementsByTagName(pTag);
+                    HtmlElementCollection vHtmlElements = pHtmlDoc.GetElementsByTagName(pTag);
                     if (vHtmlElements == null || vHtmlElements.Count == 0) vHtmlElements = GetHtmlElementsFromFramesByTagName(pHtmlDoc, pTag);
                     if (vHtmlElements != null && vHtmlElements.Count > 0)
                     {
@@ -251,7 +278,8 @@ namespace Titiushko.HtmlHelpers.Helpers
 
         /// <summary>
         /// Obtener el string del HTML de un HtmlElement que se obtiene por identificador.
-        /// Si no está definido el identificador para obtener el HtmlElement, entonces el string del HTML se toma de pHtmlDocument.
+        /// Si no está definido el identificador para obtener el HtmlElement, entonces el string del HTML se toma de HtmlDocument.
+        /// Si se encuentra un HtmlElement con el identificador definido y el HtmlElement es un IFRAME, entonces el string del HTML se toma de HtmlDocument del IFRAME.
         /// </summary>
         /// <param name="pHtmlDoc">HtmlDocument que proviene del WebBrowser actual. Se utiliza para obtener el string del HTML.</param>
         /// <param name="pElementIdentifier">Opcional: Identificador para buscar el HtmlElement.</param>
@@ -260,11 +288,12 @@ namespace Titiushko.HtmlHelpers.Helpers
         {
             try
             {
+                if (pHtmlDoc == null) return string.Empty;
                 string vHtml = string.Empty;
                 if (string.IsNullOrWhiteSpace(pElementIdentifier))
                 {
                     // Si no está definido el identificador para obtener el HtmlElement, entonces el string del HTML se toma de HtmlDocument del WebBrowser
-                    vHtml = pHtmlDoc.Body.InnerHtml;
+                    vHtml = BodyHasHtmlFromDocument(pHtmlDoc) ? pHtmlDoc.Body.InnerHtml : string.Empty;
                 }
                 else
                 {
@@ -273,7 +302,9 @@ namespace Titiushko.HtmlHelpers.Helpers
                     if (vHtmlElement != null)
                     {
                         // Si se logró obtener el HtmlElement, entonces se toma el string del HTML
-                        vHtml = vHtmlElement.Document.Body.InnerHtml;
+                        vHtml = vHtmlElement.TagName.Equals(ElementHelper.IFRAME_NAME_TAG)
+                            ? GetHtmlFromFrameByIdentifier(pHtmlDoc, pElementIdentifier) // Si el HtmlElement es iframe, entonces se busca el HTML dentro del iframe
+                            : (!string.IsNullOrWhiteSpace(vHtmlElement.InnerHtml) ? vHtmlElement.InnerHtml : string.Empty);
                     }
                     else
                     {
@@ -296,14 +327,77 @@ namespace Titiushko.HtmlHelpers.Helpers
         }
 
         /// <summary>
-        /// Devuelve un DataTable basado en una tabla HTML String
+        /// Obtener el string HTML de un IFrame. Se busca recursivamente dentro de child frames o sub-frames
         /// </summary>
+        /// <param name="pHtmlDoc">HtmlDocument donde se va a buscar</param>
+        /// <param name="pFrameIdentifier">Identificador del IFrame HTML</param>
+        /// <returns>String del HTML del IFrame, si no se encuentra se obtiene string.Empty</returns>
+        public static string GetHtmlFromFrameByIdentifier(HtmlDocument pHtmlDoc, string pFrameIdentifier = null)
+        {
+            try
+            {
+                if (pHtmlDoc == null) return string.Empty;
+                string vHtml = string.Empty;
+                // Evaluar si el HtmlDocument tiene frames
+                HtmlWindowCollection vParentFrames = GetFramesFromDocument(pHtmlDoc);
+                if (vParentFrames != null)
+                {
+                    // Recorrer los frames del HtmlDocument
+                    foreach (HtmlWindow vParentFrame in vParentFrames)
+                    {
+                        if (FrameIsNotNull(vParentFrame))
+                        {
+                            // Si se conoce el Id del frame, entonces se busca por Id, de lo contrario se busca para todos los frames
+                            bool vByIdentifier = !string.IsNullOrWhiteSpace(pFrameIdentifier) ? vParentFrame.WindowFrameElement.Id.Equals(pFrameIdentifier) : true;
+                            if (vByIdentifier)
+                            {
+                                // Obtener el HTML del frame
+                                vHtml = BodyHasHtmlFromDocument(vParentFrame.Document) ? vParentFrame.Document.Body.InnerHtml : vHtml;
+                                break;
+                            }
+                            // Evaluar si el HtmlDocument del frame tiene frames (child frames o sub-frames)
+                            else if (GetFramesFromDocument(vParentFrame.Document) != null)
+                            {
+                                // Buscar recursivamente el HTML dentro de los child frames
+                                vHtml = GetHtmlFromFrameByIdentifier(vParentFrame.Document, pFrameIdentifier);
+                            }
+                            else
+                            {
+                                vHtml = string.Empty;
+                            }
+                        }
+                        else
+                        {
+                            vHtml = string.Empty;
+                        }
+                    }
+                }
+                else
+                {
+                    vHtml = string.Empty;
+                }
+                return vHtml;
+            }
+            catch (NullReferenceException vE)
+            {
+                return string.Empty;
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+        #endregion
+
+        #region Table Helpers
+        /// <summary>
+        /// Devuelve un DataTable basado en una tabla HTML String
         /// <param name="pHtmlTable">Estructura de tabla HTML</param>
         /// <param name="pFirstRowAsColumnNames">True si la primera fila se tomará como la estructura del encabezado</param>
         /// <param name="pRemoveTildes">Si se establece en True si las tildes se deben eliminar del nombre de las columnas de encabezado, de lo contrario, el nombre permanece como está</param>
         /// <param name="pTableName">Nombre del objeto DataTable</param>
         /// <returns>DataTable con los datos de la tabla HTML</returns>
-        public static DataTable ConvertHtmlTablesToDataTable(string pHtmlTable, bool pFirstRowAsColumnNames = true, bool pRemoveTildes = false, string pTableName = null)
+        public static DataTable ConvertHTMLTablesToDataTable(string pHtmlTable, bool pFirstRowAsColumnNames = true, bool pRemoveTildes = false, string pTableName = null, bool pUseRegexToEvaluateTable = true)
         {
             try
             {
@@ -323,7 +417,7 @@ namespace Titiushko.HtmlHelpers.Helpers
                         vDataTable = new DataTable();
 
                         #region Obtiene los encabezados si existe
-                        MatchCollection vHeaders = vTable.Value.GetHeaders();
+                        MatchCollection vHeaders = null != vTable.Value.GetHeaders() ? vTable.Value.GetHeaders() : null;
                         vHeadersExist = vHeaders != null && vHeaders.Count > 0;   // Evaluar si se obtuvieron HEADERS
                         if (vHeadersExist)
                         {
@@ -335,8 +429,10 @@ namespace Titiushko.HtmlHelpers.Helpers
                         }
                         else if (pFirstRowAsColumnNames)
                         {
-                            Match vHeaderRow = vTable.Value.GetHeaderRow();
-                            if (vHeaderRow.Success)
+                            Match vHeaderRow = null;
+                            vHeaderRow = vTable.Value.GetHeaderRow();
+
+                            if (null != vHeaderRow && vHeaderRow.Success)
                             {
                                 MatchCollection vColumns = Regex.Matches(vHeaderRow.Value, ElementHelper.TD_PATTERN, ElementHelper.ExpressionOptions);
                                 vHeadersExist = vHeadersFromFirstRow = vColumns.Count > 0; // Evaluar si se obtuvieron HEADERS
@@ -369,28 +465,55 @@ namespace Titiushko.HtmlHelpers.Helpers
                         #endregion
 
                         #region Obtener una coincidencia para todas las filas en la tabla
-                        MatchCollection vRows = vTable.Value.GetRows();
-                        if (vRows != null && vRows.Count > 0)
+                        if (pUseRegexToEvaluateTable)
                         {
-                            int vCurrentRow = 0;
-                            foreach (Match vRow in vRows)
+                            MatchCollection vRows = vTable.Value.GetRows();
+                            if (vRows != null && vRows.Count > 0)
                             {
-                                // Si vHeadersExist = true y vHeadersFromFirstRow = true, entonces no se encontraron HEADERS y se tomarón como HEADERS los TD del primer TR de TABLE
-                                // Por lo tanto no se agrega el primer TR al DataTable
-                                if (!(vCurrentRow == 0 && vHeadersExist && vHeadersFromFirstRow))
+                                int vCurrentRow = 0;
+                                foreach (Match vRow in vRows)
                                 {
-                                    MatchCollection vColumns = Regex.Matches(vRow.Value, ElementHelper.TD_PATTERN, ElementHelper.ExpressionOptions);
-                                    if (vColumns.Count > 0)
+                                    // Si vHeadersExist = true y vHeadersFromFirstRow = true, entonces no se encontraron HEADERS y se tomarón como HEADERS los TD del primer TR de TABLE
+                                    // Por lo tanto no se agrega el primer TR al DataTable
+                                    if (!(vCurrentRow == 0 && vHeadersExist && vHeadersFromFirstRow))
                                     {
-                                        DataRow vDataRow = vDataTable.NewRow();
-                                        int vCurrentColumn = 0;
-                                        foreach (Match vColumn in vColumns)
+                                        MatchCollection vColumns = Regex.Matches(vRow.Value, ElementHelper.TD_PATTERN, ElementHelper.ExpressionOptions);
+                                        if (vColumns.Count > 0)
                                         {
-                                            vDataRow[vCurrentColumn++] = vColumn.Groups[1].GetString().RemoveHtmlTags();
+                                            DataRow vDataRow = vDataTable.NewRow();
+                                            int vCurrentColumn = 0;
+                                            foreach (Match vColumn in vColumns)
+                                            {
+                                                vDataRow[vCurrentColumn++] = vColumn.Groups[1].GetString().RemoveHtmlTags();
+                                            }
+                                            vDataTable.Rows.Add(vDataRow);
                                         }
-                                        vDataTable.Rows.Add(vDataRow);
                                     }
+                                    vCurrentRow++;
                                 }
+                            }
+                        }
+                        else
+                        {
+                            var vDocument = new HtmlAgilityPack.HtmlDocument();
+                            vDocument.LoadHtml(pHtmlTable);
+                            List<List<string>> vParsedTable = vDocument.DocumentNode.SelectSingleNode("//table")
+                               .Descendants("tr")
+                               .Skip(1)
+                               .Where(tr => tr.Elements("td").Count() > 1)
+                               .Select(tr => tr.Elements("td").Select(td => td.InnerText.Trim()).ToList())
+                               .ToList();
+                            int vCurrentRow = 1;
+                            foreach (var vRow in vParsedTable)
+                            {
+                                DataRow vDataRow = vDataTable.NewRow();
+                                int vCurrentColumn = 0;
+                                foreach (var vValue in vRow)
+                                {
+                                    vDataRow[vCurrentColumn++] = vValue;
+                                }
+
+                                vDataTable.Rows.Add(vDataRow);
                                 vCurrentRow++;
                             }
                         }
@@ -415,33 +538,37 @@ namespace Titiushko.HtmlHelpers.Helpers
         public static ICollection<XElement> ConvertDataTableRowsToXElements(DataTable pDataTable)
         {
             ICollection<XElement> vRows = new HashSet<XElement>();
-            foreach (DataRow vRow in pDataTable.AsEnumerable())
+            if (null != pDataTable)
             {
-                try
+                foreach (DataRow vRow in pDataTable.AsEnumerable())
                 {
-                    ICollection<XAttribute> vCols = new HashSet<XAttribute>();
-                    foreach (DataColumn vCol in pDataTable.Columns.Cast<DataColumn>())
+                    try
                     {
-                        try
+                        ICollection<XAttribute> vCols = new HashSet<XAttribute>();
+                        foreach (DataColumn vCol in pDataTable.Columns)
                         {
-                            string vAttributeValue = Regex.Replace(vCol.ColumnName, "[^A-Za-z0-9]", string.Empty);
-                            XAttribute vXAttribute = new XAttribute(vAttributeValue, vRow[vCol]);
-                            vCols.Add(vXAttribute);
+                            try
+                            {
+                                string vAttributeValue = Regex.Replace(vCol.ColumnName, "[^A-Za-z0-9]", string.Empty);
+                                XAttribute vXAttribute = new XAttribute(vAttributeValue, vRow[vCol]);
+                                vCols.Add(vXAttribute);
+                            }
+                            catch (Exception vE)
+                            {
+                                throw vE;
+                            }
                         }
-                        catch (Exception vE)
-                        {
-                            throw vE;
-                        }
+                        XElement vXElement = new XElement("row", vCols);
+                        vRows.Add(vXElement);
                     }
-                    XElement vXElement = new XElement("row", vCols);
-                    vRows.Add(vXElement);
-                }
-                catch (Exception vE)
-                {
-                    throw vE;
+                    catch (Exception vE)
+                    {
+                        throw vE;
+                    }
                 }
             }
             return vRows;
         }
+        #endregion
     }
 }

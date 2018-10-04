@@ -19,6 +19,7 @@ namespace Titiushko.HtmlHelpers.Helpers
         public const string TD_PATTERN = "<td[^>]*>(.*?)</td>";
         public const string THEAD_TAG = "<thead";
         public const string TH_TAG = "<th";
+        public const string IFRAME_NAME_TAG = "IFRAME";
         public const string DEFAULT_COLUMN_NAME = "COLUMN";
 
         /// <summary>

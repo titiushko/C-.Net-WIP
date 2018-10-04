@@ -10,6 +10,7 @@ namespace Titiushko.Utilities.Extensions
     {
         private const RegexOptions ExpressionOptions = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase;
         private const string CULTURE_INFO_NAME = "es-ES";
+        private const string SPACES_PATTERN = @"\t|\n|\r";
         private const string SPECIAL_CHARACTERS_PATTERN = @"[^\w\s]+";
         private const string WHITESPACE_PATTERN = @"[ ]{2,}";
         private const string SEPARATOR_SLUG = "-";
@@ -287,6 +288,54 @@ namespace Titiushko.Utilities.Extensions
             catch
             {
                 return vDefaultValue;
+            }
+        }
+
+        /// <summary>
+        /// Obtener texto sin etiquetas HTML y sin extras de espacios en blancos;
+        /// Si ocurre un error, se obtiene el texto que se recibe
+        /// </summary>
+        /// <param name="pText"></param>
+        /// <returns>Texto limpio de etiquetas HTML y de extras de espacios en blancos</returns>
+        public static string CleanText(this string pText)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(pText)) return string.Empty;
+                pText = pText.RemoveHtmlTags(); // Remove HTML tags
+                pText = Regex.Replace(pText, SPACES_PATTERN, ""); // Remove tabs, newlines and lines breaks
+                pText = Regex.Replace(pText, WHITESPACE_PATTERN, " ").Trim(); // Remove extra white spaces
+                return pText;
+            }
+            catch
+            {
+                return pText;
+            }
+        }
+
+        /// <summary>
+        /// Cuenta las veces que pPattern está en pText
+        /// </summary>
+        /// <param name="pText">String donde se va a buscar pPattern</param>
+        /// <param name="pPattern">String que se va a buscar en pText</param>
+        /// <returns>Cantidad de ocurrencias</returns>
+        public static int CountOccurrences(this string pText, string pPattern)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(pText) || string.IsNullOrWhiteSpace(pPattern)) return 0;
+                int vCountResult = 0;
+                int vStartIndex = 0;
+                while ((vStartIndex = pText.IndexOf(pPattern, vStartIndex)) != -1)
+                {
+                    vStartIndex += pPattern.Length;
+                    vCountResult++;
+                }
+                return vCountResult;
+            }
+            catch
+            {
+                return 0;
             }
         }
     }
