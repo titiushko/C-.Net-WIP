@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -495,24 +496,23 @@ namespace Titiushko.HtmlHelpers.Helpers
                         }
                         else
                         {
-                            var vDocument = new HtmlAgilityPack.HtmlDocument();
+                            HtmlAgilityPack.HtmlDocument vDocument = new HtmlAgilityPack.HtmlDocument();
                             vDocument.LoadHtml(pHtmlTable);
                             List<List<string>> vParsedTable = vDocument.DocumentNode.SelectSingleNode("//table")
-                               .Descendants("tr")
-                               .Skip(1)
-                               .Where(tr => tr.Elements("td").Count() > 1)
-                               .Select(tr => tr.Elements("td").Select(td => td.InnerText.Trim()).ToList())
-                               .ToList();
+                            .Descendants("tr")
+                            .Skip(1)
+                            .Where(tr => tr.Elements("td").Count() > 1)
+                            .Select(tr => tr.Elements("td").Select(td => td.InnerText.Trim()).ToList())
+                            .ToList();
                             int vCurrentRow = 1;
-                            foreach (var vRow in vParsedTable)
+                            foreach (List<string> vRow in vParsedTable)
                             {
                                 DataRow vDataRow = vDataTable.NewRow();
                                 int vCurrentColumn = 0;
-                                foreach (var vValue in vRow)
+                                foreach (string vValue in vRow)
                                 {
                                     vDataRow[vCurrentColumn++] = vValue;
                                 }
-
                                 vDataTable.Rows.Add(vDataRow);
                                 vCurrentRow++;
                             }
