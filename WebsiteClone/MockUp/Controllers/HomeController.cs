@@ -68,5 +68,12 @@ namespace MockUp.Controllers
                 return Json(new { result = "found", response = "Favor llenar los datos del bien." }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpPost]
+        [Route("eFWLA/modules/admin_create_contract")]
+        public ActionResult AdminCreateContract(string MaVin, string BankID)
+        {
+            return PartialView();
+        }
     }
 }

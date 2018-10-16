@@ -1,5 +1,5 @@
 $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
-    if (ajaxOptions.url.indexOf("admin_create_contract.php") != -1 && ajaxOptions.type == "POST") submit();
+    if (ajaxOptions.url.indexOf("admin_create_contract") != -1 && ajaxOptions.type == "POST") submit();
 });
 
 function updateUrl(url) {
@@ -63,7 +63,7 @@ var step1 = function () {
     $(".open2.nextbutton").click();
     $("#CLegalID").val("8-310-78");
     $("#getuser").click();
-    afterRequest("check_customer.php", "GET", step2);
+    afterRequest("check_customer", "GET", step2);
 };
 
 var step2 = function () {
@@ -96,7 +96,7 @@ var step2 = function () {
     $(".open3.nextbutton").click();
     $("#MaVin").val("SJNFBA11Z2201603");
     $("#getcar").click();
-    afterRequest("check_moveable_vin.php", "GET", step3);
+    afterRequest("check_moveable_vin", "GET", step3);
 };
 
 var step3 = function () {
@@ -116,7 +116,7 @@ var step3 = function () {
     //$("#addCar").val("");
     //$("[name='formBack0']").val("");
     $("#cSubmitA").click();
-    afterRequest("admin_create_contract.php", "POST", submit);
+    afterRequest("admin_create_contract", "POST", submit);
     //$("#MaEVin").val("");
     //$("#MaEBrand").val("");
     //$("#MaEModel").val("");
@@ -192,7 +192,7 @@ function workflowRpa() {
 }
 
 $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
-    if (ajaxOptions.url.indexOf("check_customer.php") != -1 && ajaxOptions.type == "GET") {
+    if (ajaxOptions.url.indexOf("check_customer") != -1 && ajaxOptions.type == "GET") {
         var response = false;
         try {
             response = eval(jqXHR.responseText);
@@ -207,7 +207,7 @@ $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
 $("#addCustomer").click(function () {
     if ($("#mlgform").valid()) {
         $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
-            if (ajaxOptions.url.indexOf("admin_add_customer.php") != -1 && ajaxOptions.type == "POST") {
+            if (ajaxOptions.url.indexOf("admin_add_customer") != -1 && ajaxOptions.type == "POST") {
                 var response = false;
                 try {
                     response = eval(jqXHR.responseText);
@@ -225,7 +225,7 @@ $("#addCustomer").click(function () {
 });
 
 $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
-    if (ajaxOptions.url.indexOf("check_moveable_vin.php") != -1 && ajaxOptions.type == "GET") {
+    if (ajaxOptions.url.indexOf("check_moveable_vin") != -1 && ajaxOptions.type == "GET") {
         var response = false;
         try {
             response = jqXHR.responseJSON != undefined && jqXHR.responseJSON.response != undefined && jqXHR.responseJSON.response === "Favor llenar los datos del bien.";
@@ -238,7 +238,7 @@ $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
 });
 
 $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
-    if (ajaxOptions.url.indexOf("admin_add_moveable.php") != -1 && ajaxOptions.type == "POST") {
+    if (ajaxOptions.url.indexOf("admin_add_moveable") != -1 && ajaxOptions.type == "POST") {
         var response = false;
         try {
             response = eval(jqXHR.responseText);

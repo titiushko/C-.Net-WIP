@@ -273,7 +273,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <None Include="Scripts\_references.js" />
     <Content Include="Sources\960fluid.css" />
     <Content Include="Sources\additional-methods.js" />
     <Content Include="Sources\add_icon.png" />
@@ -309,16 +308,27 @@
     <Content Include="Sources\es.js" />
     <Content Include="Sources\favicon.ico" />
     <Content Include="Sources\favicon.png" />
+    <Content Include="Sources\fontawesome-webfont.eot" />
     <Content Include="Sources\fontawesome-webfont.svg" />
+    <Content Include="Sources\fontawesome-webfont.ttf" />
+    <Content Include="Sources\fontawesome-webfont.woff" />
+    <Content Include="Sources\fontawesome-webfont.woff2" />
+    <Content Include="Sources\FontAwesome.otf" />
     <Content Include="Sources\fusion-global.css" />
     <Content Include="Sources\fwla_validation.js" />
+    <Content Include="Sources\glyphicons-halflings-regular.eot" />
     <Content Include="Sources\glyphicons-halflings-regular.svg" />
+    <Content Include="Sources\glyphicons-halflings-regular.ttf" />
+    <Content Include="Sources\glyphicons-halflings-regular.woff" />
+    <Content Include="Sources\glyphicons-halflings-regular.woff2" />
     <Content Include="Sources\good_edit.png" />
     <Content Include="Sources\good_preview.png" />
     <Content Include="Sources\good_preview_small.png" />
     <Content Include="Sources\go_pricing_scripts.js" />
     <Content Include="Sources\go_pricing_styles.css" />
     <Content Include="Sources\greensock.js" />
+    <Content Include="Sources\icomoon.ttf" />
+    <Content Include="Sources\icomoon.woff" />
     <Content Include="Sources\images\ui-bg_glass_20_555555_1x400.png" />
     <Content Include="Sources\images\ui-bg_glass_40_0078a3_1x400.png" />
     <Content Include="Sources\images\ui-bg_glass_40_ffc73d_1x400.png" />
@@ -434,9 +444,13 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Errors\404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\AdminCreateContract.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\CreateContract.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -465,20 +479,9 @@
     <None Include="Project_Readme.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Sources\fontawesome-webfont.eot" />
-    <Content Include="Sources\fontawesome-webfont.ttf" />
-    <Content Include="Sources\fontawesome-webfont.woff" />
-    <Content Include="Sources\fontawesome-webfont.woff2" />
-    <Content Include="Sources\FontAwesome.otf" />
-    <Content Include="Sources\glyphicons-halflings-regular.eot" />
-    <Content Include="Sources\glyphicons-halflings-regular.ttf" />
-    <Content Include="Sources\glyphicons-halflings-regular.woff" />
-    <Content Include="Sources\glyphicons-halflings-regular.woff2" />
-    <Content Include="Sources\icomoon.ttf" />
-    <Content Include="Sources\icomoon.woff" />
-    <Content Include="Views\Errors\404.cshtml" />
-    <Content Include="Views\Home\CreateContract.cshtml" />
-    <Content Include="Views\Home\Inicio.cshtml" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Sources\88-03-18-SJNFBA11Z2200602.pdf" />
+    <Content Include="Sources\Cartas88-03-18-SJNFBA11Z2200602.pdf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
