@@ -1,3 +1,5 @@
+var continueNextStep = false;
+
 $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
     if (ajaxOptions.url.indexOf("admin_create_contract") != -1 && ajaxOptions.type == "POST") submit();
 });
@@ -63,7 +65,7 @@ var step1 = function () {
     $(".open2.nextbutton").click();
     $("#CLegalID").val("8-310-78");
     $("#getuser").click();
-    afterRequest("check_customer", "GET", step2);
+    if (continueNextStep) afterRequest("check_customer", "GET", step2);
 };
 
 var step2 = function () {
@@ -96,7 +98,7 @@ var step2 = function () {
     $(".open3.nextbutton").click();
     $("#MaVin").val("SJNFBA11Z2201603");
     $("#getcar").click();
-    afterRequest("check_moveable_vin", "GET", step3);
+    if (continueNextStep) afterRequest("check_moveable_vin", "GET", step3);
 };
 
 var step3 = function () {
@@ -116,7 +118,7 @@ var step3 = function () {
     //$("#addCar").val("");
     //$("[name='formBack0']").val("");
     $("#cSubmitA").click();
-    afterRequest("admin_create_contract", "POST", submit);
+    if (continueNextStep) afterRequest("admin_create_contract", "POST", submit);
     //$("#MaEVin").val("");
     //$("#MaEBrand").val("");
     //$("#MaEModel").val("");
@@ -188,6 +190,7 @@ var submit = function () {
 };
 
 function workflowRpa() {
+    continueNextStep = true;
     step1();
 }
 

@@ -426,7 +426,8 @@ $(function () {
             $("#CustInfo").fadeOut(1000);
             $.ajax({
                 type: "POST",
-                url: "https://www.fwlatrust.com/eFWLA/modules/admin_add_customer.php",
+                //url: "https://www.fwlatrust.com/eFWLA/modules/admin_add_customer.php",
+                url: BASE_URL + "eFWLA/admin_add_customer",
                 data: {
                     CLegalID: $("#CLegalID").val(),
                     CLegalType: $("#CLegalType").val(),

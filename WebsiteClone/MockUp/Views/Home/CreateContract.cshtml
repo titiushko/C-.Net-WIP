@@ -14,7 +14,7 @@
             <br clear="all">
         </div>
         <!--<form id="mlgform" method="POST" name="AddUsr" action="https://www.fwlatrust.com/eFWLA/modules/admin_create_contract.php" novalidate="novalidate">-->
-        @using (Html.BeginForm("admin_create_contract", "eFWLA/modules", FormMethod.Post, new { id = "mlgform", name = "AddUsr", novalidate = "novalidate" }))
+        @using (Html.BeginForm("admin_create_contract", "eFWLA", FormMethod.Post, new { id = "mlgform", name = "AddUsr", novalidate = "novalidate" }))
         {
             <div id="stepForm" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
                 <h3 aria-expanded="true" id="sf1" class="ui-accordion-header ui-state-default ui-accordion-header-active ui-state-active ui-corner-top ui-accordion-icons" role="tab" tabIndex="0" aria-selected="true" aria-controls="ui-id-1">
@@ -386,15 +386,16 @@
                             <tr class="odd">
                                 <td>Identificación</td>
                                 <td>
-                                    <input id="CLegalID" class="required" aria-required="true" name="CLegalID" size="25" type="text">
-                                    <img id="getuser" alt="" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24">
+                                    <input name="CLegalID" type="text" id="CLegalID" size="25" class="valid required" aria-required="true" aria-invalid="false"><label id="CLegalID-error" class="error checked" for="CLegalID" style="display: inline;">&nbsp;</label>
+                                    <img id="getuser" src="@Url.Content("~/Sources/search_icon.png")" width="24" height="24" alt="">
                                 </td>
                             </tr>
+                        </tbody>
                         <tbody style="display: none;" id="CustInfo">
                             <tr>
                                 <td>Tipo de Cliente</td>
                                 <td>
-                                    <select id="CCustType" class="required select" aria-required="true" name="CCustType">
+                                    <select name="CCustType" id="CCustType" class="required select" aria-required="true">
                                         <option selected="selected" value="">Seleccione Tipo de Cliente</option>
                                         <option value="N">Persona Natural</option>
                                         <option value="J">Persona Jurídica</option>
@@ -404,7 +405,7 @@
                             <tr class="odd">
                                 <td>Tipo de Documento</td>
                                 <td>
-                                    <select id="CLegalType" class="required select" aria-required="true" name="CLegalType">
+                                    <select name="CLegalType" id="CLegalType" class="required select" aria-required="true">
                                         <option selected="selected" value="">Seleccione Tipo de Documento</option>
                                         <option value="C">Cedula Nacional</option>
                                         <option value="E">Cedula de Extranjero</option>
@@ -413,28 +414,28 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr id="CustN">
+                            <tr>
+                                <td>Fecha de Vencimiento</td>
+                                <td>
+                                    <input name="CLegalIDExpiry" type="text" class="required dateISO hasDatepicker" id="CLegalIDExpiry" size="10" aria-required="true"><img class="ui-datepicker-trigger" src="@Url.Content("~/Sources/calendar_icon.png")" alt="..." title="...">
+                                </td>
+                            </tr>
+                            <tr id="CustN" class="odd">
                                 <td>Nombre Legal Completo</td>
-                                <td>
-                                    <input id="CLegalName" class="required" aria-required="true" name="CLegalName" size="30" type="text">
-                                </td>
+                                <td><input name="CLegalName" id="CLegalName" type="text" size="30" class="required" aria-required="true"></td>
                             </tr>
-                            <tr style="display: none;" id="CustCN" class="odd">
+                            <tr id="CustCN" style="display:none">
                                 <td>Nombre Comercial Completo</td>
-                                <td>
-                                    <input id="CCommercialName" class="required" aria-required="true" name="CCommercialName" size="30" type="text">
-                                </td>
+                                <td><input name="CCommercialName" id="CCommercialName" type="text" size="30" class="required" aria-required="true"></td>
                             </tr>
-                            <tr style="display: none;" id="CustR">
+                            <tr id="CustR" style="display:none" class="odd">
                                 <td>Representante Legal</td>
-                                <td>
-                                    <input id="CLegalRep" class="required" aria-required="true" name="CLegalRep" size="30" type="text">
-                                </td>
+                                <td><input name="CLegalRep" id="CLegalRep" type="text" size="30" class="required" aria-required="true"></td>
                             </tr>
-                            <tr style="display: none;" id="CustT" class="odd">
+                            <tr id="CustT" style="display:none">
                                 <td>Tipo de Identificación</td>
                                 <td>
-                                    <select id="CLegalRT" class="required select" aria-required="true" name="CLegalRT">
+                                    <select name="CLegalRT" id="CLegalRT" class="required select" aria-required="true">
                                         <option selected="selected" value="">Seleccione Tipo de Identificación</option>
                                         <option value="C">Cedula Nacional</option>
                                         <option value="E">Cedula de Extranjero</option>
@@ -442,27 +443,26 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr style="display: none;" id="CustRI">
+
+                            <tr id="CustRI" style="display:none" class="odd">
                                 <td>Número de Identificación</td>
-                                <td>
-                                    <input id="CLegalRID" class="required" aria-required="true" name="CLegalRID" size="30" type="text">
-                                </td>
+                                <td><input name="CLegalRID" id="CLegalRID" type="text" size="30" class="required" aria-required="true"></td>
                             </tr>
-                            <tr class="odd">
-                            <tr style="display: none;" id="Sexo">
+                            <tr></tr>
+                            <tr id="Sexo" style="display:none" class="odd">
                                 <td>Sexo</td>
                                 <td>
-                                    <select id="CSex" class="required select" aria-required="true" name="CSex">
+                                    <select id="CSex" name="CSex" class="required select" aria-required="true">
                                         <option selected="" value="">Seleccione un Sexo</option>
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
                                     </select>
                                 </td>
                             </tr>
-                            <tr style="display: none;" id="CustCit" class="odd">
+                            <tr id="CustCit" style="display:none">
                                 <td>Ciudadanía</td>
                                 <td>
-                                    <select id="CCitizenship" class="required select" aria-required="true" name="CCitizenship">
+                                    <select id="CCitizenship" name="CCitizenship" class="required select" aria-required="true">
                                         <option selected="" value="">Seleccione una Ciudadanía</option>
                                         <option value="004">Afgana</option>
                                         <option value="248">Alandesa</option>
@@ -703,23 +703,26 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr style="display: none;" id="CRLang">
-                                <td colSpan="2">
-                                    ¿El cliente entiende Español y no requiere intérprete? Sí
-
-                                    <input id="CLanguage" name="CLanguage" value="Y" type="checkbox">
+                            <tr id="CRLang" style="display:none" class="odd">
+                                <td colspan="2">¿El cliente entiende Español y no requiere intérprete? Sí <input type="checkbox" name="CLanguage" id="CLanguage" value="Y"></td>
+                            </tr>
+                            <tr>
+                                <td>Tipo de Ocupación</td>
+                                <td>
+                                    <select name="COccupation" id="COccupation" class="required select" aria-required="true">
+                                        <option selected="selected" value="">Seleccione el Tipo de Ocupación</option>
+                                        <option value="APR">Asalariados Empresa Privada</option>
+                                        <option value="APU">Asalariados Empresa Pública</option>
+                                        <option value="IND">Independiente</option>
+                                        <option value="JUB">Jubilados</option>
+                                        <option value="OTR">Otros</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="odd">
-                                <td>Ocupación</td>
-                                <td>
-                                    <input id="COccupation" name="COccupation" size="30" type="text">
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>Provincia</td>
                                 <td>
-                                    <select id="CProvince" onchange="TCN_reloadL(this)" class="required select" aria-required="true" name="CProvince">
+                                    <select id="CProvince" name="CProvince" onchange="TCN_reloadL(this)" class="required select" aria-required="true">
                                         <option selected="" value="">Seleccione una Provincia</option>
                                         <option value="1">Bocas del Toro</option>
                                         <option value="4">Chiriquí</option>
@@ -734,104 +737,97 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="odd">
+                            <tr>
                                 <td>Distrito</td>
                                 <td>
-                                    <select id="CDistrict" onchange="TCN_reloadL(this)" class="required select" aria-required="true" name="CDistrict">
+                                    <select id="CDistrict" name="CDistrict" onchange="TCN_reloadL(this)" class="required select" aria-required="true">
                                         <option selected="" value="">Seleccione un Distrito</option>
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="odd">
                                 <td>Corregimiento</td>
                                 <td>
-                                    <select id="CCorregiment" onchange="TCN_reloadL(this)" class="required select" aria-required="true" name="CCorregiment">
+                                    <select id="CCorregiment" name="CCorregiment" onchange="TCN_reloadL(this)" class="required select" aria-required="true">
                                         <option selected="" value="">Seleccione un Corregimiento</option>
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="odd">
+                            <tr>
                                 <td>Dirección</td>
                                 <td>
-                                    <textarea id="CStreet" class="required" aria-required="true" name="CStreet"></textarea>
+                                    <textarea id="CStreet" name="CStreet" class="required" aria-required="true"></textarea>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="odd">
                                 <td>Apartado Postal</td>
                                 <td>
-                                    <input id="CPostalAddress" name="CPostalAddress" type="text">
+                                    <input type="text" id="CPostalAddress" name="CPostalAddress">
                                 </td>
                             </tr>
-                            <tr class="odd">
+                            <tr>
                                 <td>Correo Electrónico</td>
                                 <td>
-                                    <input id="CEmail" name="CEmail" type="text">
+                                    <input type="text" id="CEmail" name="CEmail">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="odd">
                                 <td>Teléfono Residencia</td>
                                 <td>
-                                    <input id="CPhoneH" class="required" aria-required="true" name="CPhoneH" type="text">
+                                    <input type="text" id="CPhoneH" name="CPhoneH" class="required" aria-required="true">
                                 </td>
                             </tr>
-                            <tr class="odd">
+                            <tr>
                                 <td>Residencia Adicional</td>
                                 <td>
-                                    <input id="CPhoneHa" name="CPhoneHa" type="text">
+                                    <input type="text" id="CPhoneHa" name="CPhoneHa">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="odd">
                                 <td>Teléfono Oficina</td>
                                 <td>
-                                    <input id="CPhoneO" name="CPhoneO" type="text">
+                                    <input type="text" id="CPhoneO" name="CPhoneO">
                                 </td>
                             </tr>
-                            <tr class="odd">
+                            <tr>
                                 <td>Oficina Adicional</td>
                                 <td>
-                                    <input id="CPhoneOa" name="CPhoneOa" type="text">
+                                    <input type="text" id="CPhoneOa" name="CPhoneOa">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="odd">
                                 <td>Teléfono Celular</td>
                                 <td>
-                                    <input id="CMobile" name="CMobile" type="text">
-                                </td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Celular Adicional</td>
-                                <td>
-                                    <input id="CMobilea" name="CMobilea" type="text">
+                                    <input type="text" id="CMobile" name="CMobile">
                                 </td>
                             </tr>
                             <tr>
-                                <td colSpan="2">
-                                    Este cliente está inscrito en ANPYME?
-                                    <input id="CAnpyme" name="CAnpyme" value="Y" type="checkbox">Sí
-
-
+                                <td>Celular Adicional</td>
+                                <td>
+                                    <input type="text" id="CMobilea" name="CMobilea">
                                 </td>
                             </tr>
                             <tr class="odd">
-                                <td colSpan="2">
-                                    <input id="addCustomer" class="addbutton" title="Agregar Cliente" name="addCustomer" alt="Agregar Cliente" value="Agregar Cliente" type="button">
+                                <td colspan="2">
+                                    Este cliente está inscrito en ANPYME? <input type="checkbox" id="CAnpyme" name="CAnpyme" value="Y">Sí
                                 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input name="addCustomer" id="addCustomer" type="button" class="addbutton" value="Agregar Cliente" alt="Agregar Cliente" title="Agregar Cliente"></td>
                             </tr>
                         </tbody>
                         <tbody>
-                            <tr>
-                                <td colSpan="2">
-                                    <table style="display: none;" id="CustomerCart">
+                            <tr class="odd">
+                                <td colspan="2">
+                                    <table id="CustomerCart" style="display: none;">
                                         <tbody></tbody>
                                     </table>
                                 </td>
                             </tr>
-                        <tbody style="display: none;" id="NextButtons3">
+                        </tbody>
+                        <tbody id="NextButtons3" style="display: none;">
                             <tr class="odd button3">
-                                <td colSpan="2">
-                                    <input class="prevbutton1" title="Paso Anterior" name="formBack0" alt="Paso Anterior" value="Paso Anterior" type="button">
-                                    <input class="open3 nextbutton" title="Siguiente Paso" name="formNext2" alt="Siguiente Paso" value="Siguiente Paso" type="button">
-                                </td>
+                                <td colspan="2"><input name="formBack0" type="button" class="prevbutton1" value="Paso Anterior" alt="Paso Anterior" title="Paso Anterior"><input name="formNext2" type="button" class="open3 nextbutton" value="Siguiente Paso" alt="Siguiente Paso" title="Siguiente Paso"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1013,7 +1009,8 @@
                             <tr>
                                 <td colSpan="2">
                                     <input id="PType" name="PType" value="auto" type="hidden">
-                                    <input id="MaTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_moveable.php" type="hidden">
+                                    <!--<input id="MaTable" name="MaTable" value="https://www.fwlatrust.com/eFWLA/modules/admin_add_moveable.php" type="hidden">-->
+                                    <input id="MaTable" name="MaTable" value="@Url.Action("admin_add_moveable", "eFWLA")" type="hidden">
                                     <input id="addCar" class="addbutton" title="Agregar Vehìculo" name="addCar" alt="Agregar Vehìculo" value="Agregar Vehìculo" type="button">
                                 </td>
                             </tr>
