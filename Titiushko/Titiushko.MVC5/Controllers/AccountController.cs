@@ -17,7 +17,7 @@ namespace Titiushko.MVC5.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
-        private SeguimientoProyectosEntities db = new SeguimientoProyectosEntities();
+        private ProjectFollowingEntities db = new ProjectFollowingEntities();
         private ApplicationDbContext _db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

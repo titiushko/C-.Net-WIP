@@ -264,35 +264,53 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaims.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogins.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Constants\Constant.cs" />
-    <Compile Include="Models\DatabaseModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DatabaseModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DatabaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProjectFollowing.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectFollowing.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectFollowing.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectFollowing.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectFollowing.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitiushkoAssignments.cs">
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitiushkoProject.cs">
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitiushkoSprint.cs">
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitiushkoStatus.cs">
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitiushkoTask.cs">
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitiushkoTaskType.cs">
+      <DependentUpon>ProjectFollowing.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -303,15 +321,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DatabaseModel.Context.tt">
+    <Content Include="Models\ProjectFollowing.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
-      <LastGenOutput>DatabaseModel.Context.cs</LastGenOutput>
+      <DependentUpon>ProjectFollowing.edmx</DependentUpon>
+      <LastGenOutput>ProjectFollowing.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DatabaseModel.tt">
+    <Content Include="Models\ProjectFollowing.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
-      <LastGenOutput>DatabaseModel.cs</LastGenOutput>
+      <DependentUpon>ProjectFollowing.edmx</DependentUpon>
+      <LastGenOutput>ProjectFollowing.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -321,12 +339,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net.properties" />
-    <EntityDeploy Include="Models\DatabaseModel.edmx">
+    <EntityDeploy Include="Models\ProjectFollowing.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectFollowing.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DatabaseModel.edmx.diagram">
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    <Content Include="Models\ProjectFollowing.edmx.diagram">
+      <DependentUpon>ProjectFollowing.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
