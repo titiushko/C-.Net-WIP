@@ -511,7 +511,7 @@ namespace Titiushko.HtmlHelpers.Helpers
                                 int vCurrentColumn = 0;
                                 foreach (string vValue in vRow)
                                 {
-                                    vDataRow[vCurrentColumn++] = vValue;
+                                    vDataRow[vCurrentColumn++] = vValue.RemoveHtmlTags();
                                 }
                                 vDataTable.Rows.Add(vDataRow);
                                 vCurrentRow++;
