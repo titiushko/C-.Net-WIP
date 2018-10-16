@@ -381,7 +381,8 @@ $(function () {
         if ($('#mlgform').valid()) {
             $.ajax({
                 type: "GET",
-                url: "https://www.fwlatrust.com/eFWLA/modules/check_customer.php",
+                //url: "https://www.fwlatrust.com/eFWLA/modules/check_customer.php",
+                url: BASE_URL + "eFWLA/check_customer",
                 data: {
                     CLegalID: $("#CLegalID").val(),
                     UserBank: '88'
@@ -601,7 +602,8 @@ $("#getcar").click(function () {
         if ($('#mlgform').valid()) {
             $.ajax({
                 type: "GET",
-                url: "https://www.fwlatrust.com/eFWLA/modules/check_moveable_vin.php",
+                //url: "https://www.fwlatrust.com/eFWLA/modules/check_moveable_vin.php",
+                url: BASE_URL + "eFWLA/check_moveable_vin",
                 dataType: 'json',
                 data: {
                     MaVin: $("#MaVin").val(),

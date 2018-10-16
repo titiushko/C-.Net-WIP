@@ -715,6 +715,7 @@
 
     </div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
     <script type="text/javascript">
+        var BASE_URL = "@(Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/")";
         var updateClock = false;
         var runClock = function (run) {
             updateClock = run;
