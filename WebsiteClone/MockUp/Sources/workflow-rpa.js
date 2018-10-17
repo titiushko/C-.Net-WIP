@@ -252,3 +252,8 @@ $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
         $("#ui-id-4").prepend("<div id='AddCarResponse'><p id='AddCarResponse-Message'>The car creation was done</p><p id='AddCarResponse-Result'>" + (response ? "CAR_CREATED" : "NO_CAR_CREATED") + "</p></div>");
     }
 });
+
+console.log("Run step1() to execute step 1");
+console.log("Run step2() to execute step 2");
+console.log("Run step3() to execute step 3");
+console.log("Run workflowRpa() to execute all steps");
