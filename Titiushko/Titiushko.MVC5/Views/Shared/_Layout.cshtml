@@ -1,44 +1,76 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html class="no-js" lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard V.1 | jeweler - Material Admin Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/img/favicon.ico")">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/owl")
+    @Styles.Render("~/Content/animate")
+    @Styles.Render("~/Content/normalize")
+    @Styles.Render("~/Content/meanmenu")
+    @Styles.Render("~/Content/main")
+    @Styles.Render("~/Content/morris")
+    @Styles.Render("~/Content/mCustomScrollbar")
+    @Styles.Render("~/Content/metisMenu")
+    @Styles.Render("~/Content/fullcalendar")
+    @Styles.Render("~/Content/style")
+    @Styles.Render("~/Content/responsive")
+    @Scripts.Render("~/Scripts/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    @Html.Partial("LeftSidebar")
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="@Url.Content("~/img/logo/logo.png")" )" alt="" /></a>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="header-advance-area">
+            @Html.Partial("HeaderTop")
+            @Html.Partial("MobileMenu")
+            @Html.Partial("BreadcomeArea")
+        </div>
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+        @Html.Partial("Footer")
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/bootstrap")
+    @Scripts.Render("~/Scripts/wow")
+    @Scripts.Render("~/Scripts/jquery.price.slider")
+    @Scripts.Render("~/Scripts/meanmenu")
+    @Scripts.Render("~/Scripts/owl.carousel")
+    @Scripts.Render("~/Scripts/jquery.sticky")
+    @Scripts.Render("~/Scripts/jquery.scrollUp")
+    @Scripts.Render("~/Scripts/mCustomScrollbar")
+    @Scripts.Render("~/Scripts/metisMenu")
+    @Scripts.Render("~/Scripts/morris")
+    @Scripts.Render("~/Scripts/sparkline")
+    @Scripts.Render("~/Scripts/fullcalendar")
+    @Scripts.Render("~/Scripts/plugins")
+    @Scripts.Render("~/Scripts/main")
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        @RenderSection("ScriptsReady", required: false)
+    </script>
 </body>
 </html>
