@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Web.Mvc.Html;
 using System.Web.Mvc;
 using Titiushko.MVC5.Models;
+using Titiushko.MVC5.Models.Constants.Names;
+using Titiushko.MVC5.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
-    public class TitiushkoStatusController : Controller
+    [RoutePrefix(Module.STATUS)]
+    public class TitiushkoStatusController : BaseController
     {
         private ProjectFollowingEntities db = new ProjectFollowingEntities();
 
-        // GET: TitiushkoStatus
         public ActionResult Index()
         {
+            ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName);
+            ViewBag.BreadcomeArea.Level1 = new MvcHtmlString((string)ViewBag.BreadcomeArea.Title);
             return View(db.TitiushkoStatus.ToList());
         }
 
@@ -27,17 +28,20 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TitiushkoStatus titiushkoStatus = db.TitiushkoStatus.Find(id);
-            if (titiushkoStatus == null)
+            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+            if (vTitiushkoStatus == null)
             {
                 return HttpNotFound();
             }
-            return View(titiushkoStatus);
+            return View(vTitiushkoStatus);
         }
 
         // GET: TitiushkoStatus/Create
         public ActionResult Create()
         {
+            ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextCreateNewFor, Resources.Resource.ModuleStatusName);
+            ViewBag.BreadcomeArea.Level1 = this.GetHtmlHelper().ActionLink(string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName), Action.INDEX, Module.STATUS);
+            ViewBag.BreadcomeArea.Level2 = new MvcHtmlString((string)ViewBag.BreadcomeArea.Title);
             return View();
         }
 
@@ -46,16 +50,16 @@ namespace Titiushko.MVC5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,DateCreated,UserCreated,DateModified,UserModified")] TitiushkoStatus titiushkoStatus)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,DateCreated,UserCreated,DateModified,UserModified")] TitiushkoStatus vTitiushkoStatus)
         {
             if (ModelState.IsValid)
             {
-                db.TitiushkoStatus.Add(titiushkoStatus);
+                db.TitiushkoStatus.Add(vTitiushkoStatus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(titiushkoStatus);
+            return View(vTitiushkoStatus);
         }
 
         // GET: TitiushkoStatus/Edit/5
@@ -65,12 +69,12 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TitiushkoStatus titiushkoStatus = db.TitiushkoStatus.Find(id);
-            if (titiushkoStatus == null)
+            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+            if (vTitiushkoStatus == null)
             {
                 return HttpNotFound();
             }
-            return View(titiushkoStatus);
+            return View(vTitiushkoStatus);
         }
 
         // POST: TitiushkoStatus/Edit/5
@@ -78,15 +82,15 @@ namespace Titiushko.MVC5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,DateCreated,UserCreated,DateModified,UserModified")] TitiushkoStatus titiushkoStatus)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,DateCreated,UserCreated,DateModified,UserModified")] TitiushkoStatus vTitiushkoStatus)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(titiushkoStatus).State = EntityState.Modified;
+                db.Entry(vTitiushkoStatus).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(titiushkoStatus);
+            return View(vTitiushkoStatus);
         }
 
         // GET: TitiushkoStatus/Delete/5
@@ -96,12 +100,12 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TitiushkoStatus titiushkoStatus = db.TitiushkoStatus.Find(id);
-            if (titiushkoStatus == null)
+            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+            if (vTitiushkoStatus == null)
             {
                 return HttpNotFound();
             }
-            return View(titiushkoStatus);
+            return View(vTitiushkoStatus);
         }
 
         // POST: TitiushkoStatus/Delete/5
@@ -109,8 +113,8 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TitiushkoStatus titiushkoStatus = db.TitiushkoStatus.Find(id);
-            db.TitiushkoStatus.Remove(titiushkoStatus);
+            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+            db.TitiushkoStatus.Remove(vTitiushkoStatus);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

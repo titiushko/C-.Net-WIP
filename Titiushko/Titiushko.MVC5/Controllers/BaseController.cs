@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Web.Mvc;
+using Titiushko.MVC5.Models;
 using Titiushko.Utilities.Extensions;
 
 namespace Titiushko.MVC5.Controllers
@@ -12,6 +13,11 @@ namespace Titiushko.MVC5.Controllers
         public BaseController()
         {
             logger = LogManager.GetLogger(typeof(BaseController));
+
+            ViewBag.BreadcomeArea = new BreadcomeArea()
+            {
+                Title = Resources.Resource.ModuleHomeName
+            };
         }
 
         #region Exceptions
