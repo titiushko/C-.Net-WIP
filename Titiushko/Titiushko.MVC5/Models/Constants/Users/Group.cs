@@ -1,4 +1,4 @@
-﻿namespace Titiushko.MVC5.Models.Constants.User
+﻿namespace Titiushko.MVC5.Models.Constants.Users
 {
     public class Group
     {

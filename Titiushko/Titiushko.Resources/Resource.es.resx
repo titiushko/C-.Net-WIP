@@ -135,6 +135,12 @@
   <data name="FormatTime" xml:space="preserve">
     <value>hh:mm:ss tt</value>
   </data>
+  <data name="ListOf" xml:space="preserve">
+    <value>Listado de {0}</value>
+  </data>
+  <data name="ModuleStatusName" xml:space="preserve">
+    <value>Estado</value>
+  </data>
   <data name="PermissionErrorAccessDenied" xml:space="preserve">
     <value>Inicie sesión en el sistema para acceder al contenido.</value>
   </data>

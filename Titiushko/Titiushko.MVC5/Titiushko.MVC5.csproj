@@ -250,6 +250,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TitiushkoStatusController.cs" />
+    <Compile Include="Extensions\ControllerExtension.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -276,10 +277,11 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Constants\Constant.cs" />
-    <Compile Include="Models\Constants\User\Group.cs" />
-    <Compile Include="Models\Constants\User\Role.cs" />
-    <Compile Include="Models\Constants\User\User.cs" />
+    <Compile Include="Models\BreadcomeMenu.cs" />
+    <Compile Include="Models\Constants\Names\Action.cs" />
+    <Compile Include="Models\Constants\Names\Module.cs" />
+    <Compile Include="Models\Constants\Users\Group.cs" />
+    <Compile Include="Models\Constants\Users\Role.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectFollowing.Context.cs">
@@ -635,6 +637,12 @@
     <EmbeddedResource Include="Migrations\201806182017046_Init.resx">
       <DependentUpon>201806182017046_Init.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Titiushko.Resources\Titiushko.Resources.csproj">
+      <Project>{d9277596-5e99-4cc1-9fdd-c69f62de07ac}</Project>
+      <Name>Titiushko.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

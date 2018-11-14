@@ -13,7 +13,7 @@ namespace Titiushko.MVC5.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.CurrentDate = DateTime.Now.ToString(Titiushko.Utilities.Constants.Formats.DateTime.DATE);
+            ViewBag.CurrentDate = DateTime.Now.ToString(Resources.Resource.FormatDate);
             return View();
         }
 

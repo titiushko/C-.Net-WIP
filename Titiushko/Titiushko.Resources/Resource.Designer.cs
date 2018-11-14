@@ -115,6 +115,24 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List of {0}.
+        /// </summary>
+        public static string ListOf {
+            get {
+                return ResourceManager.GetString("ListOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string ModuleStatusName {
+            get {
+                return ResourceManager.GetString("ModuleStatusName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in to the system to access the content..
         /// </summary>
         public static string PermissionErrorAccessDenied {
