@@ -205,11 +205,29 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string TextDescription {
+            get {
+                return ResourceManager.GetString("TextDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List of {0}.
         /// </summary>
         public static string TextListOf {
             get {
                 return ResourceManager.GetString("TextListOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string TextName {
+            get {
+                return ResourceManager.GetString("TextName", resourceCulture);
             }
         }
     }

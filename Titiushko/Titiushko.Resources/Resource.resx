@@ -165,7 +165,13 @@
   <data name="TextCreateNewFor" xml:space="preserve">
     <value>Create New {0}</value>
   </data>
+  <data name="TextDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="TextListOf" xml:space="preserve">
     <value>List of {0}</value>
+  </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name</value>
   </data>
 </root>
