@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard V.1 | jeweler - Material Admin Template</title>
+    <title>@ViewBag.Title</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -19,12 +19,12 @@
     @Styles.Render("~/Content/normalize")
     @Styles.Render("~/Content/meanmenu")
     @Styles.Render("~/Content/main")
-    @Styles.Render("~/Content/morris")
     @Styles.Render("~/Content/mCustomScrollbar")
     @Styles.Render("~/Content/metisMenu")
     @Styles.Render("~/Content/fullcalendar")
     @Styles.Render("~/Content/style")
     @Styles.Render("~/Content/responsive")
+    @Styles.Render("~/Content/titiushko")
     @Scripts.Render("~/Scripts/modernizr")
 </head>
 <body>
@@ -48,7 +48,7 @@
             @Html.Partial("MobileMenu")
             @Html.Partial("BreadcomeArea")
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid container-main">
             @RenderBody()
         </div>
         @Html.Partial("Footer")
@@ -63,7 +63,6 @@
     @Scripts.Render("~/Scripts/jquery.scrollUp")
     @Scripts.Render("~/Scripts/mCustomScrollbar")
     @Scripts.Render("~/Scripts/metisMenu")
-    @Scripts.Render("~/Scripts/morris")
     @Scripts.Render("~/Scripts/sparkline")
     @Scripts.Render("~/Scripts/fullcalendar")
     @Scripts.Render("~/Scripts/plugins")

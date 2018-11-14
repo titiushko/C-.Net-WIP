@@ -135,8 +135,8 @@
   <data name="FormatTime" xml:space="preserve">
     <value>hh:mm:ss tt</value>
   </data>
-  <data name="ListOf" xml:space="preserve">
-    <value>Listado de {0}</value>
+  <data name="ModuleHomeName" xml:space="preserve">
+    <value>Inicio</value>
   </data>
   <data name="ModuleStatusName" xml:space="preserve">
     <value>Estado</value>
@@ -152,5 +152,20 @@
   </data>
   <data name="PermissionErrorPrivilegeDenied" xml:space="preserve">
     <value> para ver &lt;b&gt;{0}&lt;/b&gt;.</value>
+  </data>
+  <data name="TextBackToList" xml:space="preserve">
+    <value>Volver a la Lista</value>
+  </data>
+  <data name="TextCreate" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="TextCreateNew" xml:space="preserve">
+    <value>Crear Nuevo</value>
+  </data>
+  <data name="TextCreateNewFor" xml:space="preserve">
+    <value>Crear Nuevo {0}</value>
+  </data>
+  <data name="TextListOf" xml:space="preserve">
+    <value>Listado de {0}</value>
   </data>
 </root>

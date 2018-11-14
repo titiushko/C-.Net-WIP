@@ -115,11 +115,11 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to List of {0}.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
-        public static string ListOf {
+        public static string ModuleHomeName {
             get {
-                return ResourceManager.GetString("ListOf", resourceCulture);
+                return ResourceManager.GetString("ModuleHomeName", resourceCulture);
             }
         }
         
@@ -165,6 +165,51 @@ namespace Titiushko.Resources {
         public static string PermissionErrorPrivilegeDenied {
             get {
                 return ResourceManager.GetString("PermissionErrorPrivilegeDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string TextBackToList {
+            get {
+                return ResourceManager.GetString("TextBackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string TextCreate {
+            get {
+                return ResourceManager.GetString("TextCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New.
+        /// </summary>
+        public static string TextCreateNew {
+            get {
+                return ResourceManager.GetString("TextCreateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New {0}.
+        /// </summary>
+        public static string TextCreateNewFor {
+            get {
+                return ResourceManager.GetString("TextCreateNewFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of {0}.
+        /// </summary>
+        public static string TextListOf {
+            get {
+                return ResourceManager.GetString("TextListOf", resourceCulture);
             }
         }
     }

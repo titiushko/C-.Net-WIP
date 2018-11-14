@@ -76,6 +76,10 @@ body {}
 .mt-b-30{
 	margin-bottom:30px;
 }
+.container-main {
+    padding-top:30px;
+    padding-bottom:30px;
+}
 /*----------------------------------------*/
 /*  8. Menu collapse Area
 /*----------------------------------------*/

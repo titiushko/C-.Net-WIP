@@ -10,74 +10,78 @@ namespace Titiushko.MVC5
             #region ScriptBundle
             bundles
             .Add(new ScriptBundle("~/Scripts/main")
-            .Include("~/Scripts/main.js"));
+            .Include("~/Scripts/resources/main.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/plugins")
-            .Include("~/Scripts/plugins.js"));
+            .Include("~/Scripts/resources/plugins.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery")
-            .Include("~/Scripts/vendor/jquery-1.11.3.min.js"));
+            .Include("~/Scripts/resources/vendor/jquery-1.11.3.min.js"));
+
+            bundles
+            .Add(new ScriptBundle("~/Scripts/jquery.validate")
+            .Include("~/Scripts/resources/jquery.validate.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/modernizr")
-            .Include("~/Scripts/vendor/modernizr-2.8.3.min.js"));
+            .Include("~/Scripts/resources/vendor/modernizr-2.8.3.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/wow")
-            .Include("~/Scripts/wow.min.js"));
+            .Include("~/Scripts/resources/wow.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.price.slider")
-            .Include("~/Scripts/jquery-price-slider.js"));
+            .Include("~/Scripts/resources/jquery-price-slider.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/meanmenu")
-            .Include("~/Scripts/jquery.meanmenu.js"));
+            .Include("~/Scripts/resources/jquery.meanmenu.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/owl.carousel")
-            .Include("~/Scripts/owl.carousel.min.js"));
+            .Include("~/Scripts/resources/owl.carousel.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/bootstrap")
-            .Include("~/Scripts/bootstrap.min.js"));
+            .Include("~/Scripts/resources/bootstrap.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.sticky")
-            .Include("~/Scripts/jquery.sticky.js"));
+            .Include("~/Scripts/resources/jquery.sticky.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.scrollUp")
-            .Include("~/Scripts/jquery.scrollUp.js"));
+            .Include("~/Scripts/resources/jquery.scrollUp.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/mCustomScrollbar")
-            .Include("~/Scripts/scrollbar/jquery.mCustomScrollbar.concat.min.js",
-                     "~/Scripts/scrollbar/mCustomScrollbar-active.js"));
+            .Include("~/Scripts/resources/scrollbar/jquery.mCustomScrollbar.concat.min.js",
+                     "~/Scripts/resources/scrollbar/mCustomScrollbar-active.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/metisMenu")
-            .Include("~/Scripts/metisMenu/metisMenu.min.js",
-                     "~/Scripts/metisMenu/metisMenu-active.js"));
+            .Include("~/Scripts/resources/metisMenu/metisMenu.min.js",
+                     "~/Scripts/resources/metisMenu/metisMenu-active.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/morris")
-            .Include("~/Scripts/morrisjs/raphael-min.js",
-                     "~/Scripts/morrisjs/morris.js",
-                     "~/Scripts/morrisjs/morris-active.js"));
+            .Include("~/Scripts/resources/morrisjs/raphael-min.js",
+                     "~/Scripts/resources/morrisjs/morris.js",
+                     "~/Scripts/resources/morrisjs/morris-active.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/sparkline")
-            .Include("~/Scripts/sparkline/jquery.sparkline.min.js",
-                     "~/Scripts/sparkline/jquery.charts-sparkline.js"));
+            .Include("~/Scripts/resources/sparkline/jquery.sparkline.min.js",
+                     "~/Scripts/resources/sparkline/jquery.charts-sparkline.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/fullcalendar")
-            .Include("~/Scripts/calendar/moment.min.js",
-                     "~/Scripts/calendar/fullcalendar.min.js",
-                     "~/Scripts/calendar/fullcalendar-active.js"));
+            .Include("~/Scripts/resources/calendar/moment.min.js",
+                     "~/Scripts/resources/calendar/fullcalendar.min.js",
+                     "~/Scripts/resources/calendar/fullcalendar-active.js"));
             #endregion
 
             #region StyleBundle
@@ -136,6 +140,10 @@ namespace Titiushko.MVC5
             bundles
             .Add(new StyleBundle("~/Content/responsive")
             .Include("~/Content/resources/responsive.css"));
+
+            bundles
+            .Add(new StyleBundle("~/Content/titiushko")
+            .Include("~/Content/titiushko/text.css"));
             #endregion
         }
     }

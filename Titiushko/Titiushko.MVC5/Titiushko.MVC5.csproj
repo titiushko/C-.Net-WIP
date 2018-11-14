@@ -277,7 +277,7 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BreadcomeMenu.cs" />
+    <Compile Include="Models\BreadcomeArea.cs" />
     <Compile Include="Models\Constants\Names\Action.cs" />
     <Compile Include="Models\Constants\Names\Module.cs" />
     <Compile Include="Models\Constants\Users\Group.cs" />
@@ -375,7 +375,7 @@
     <Content Include="Content\resources\tree-viewer\32px.png" />
     <Content Include="Content\resources\tree-viewer\throbber.gif" />
     <Content Include="Content\resources\tree-viewer\tree-viewer.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\titiushko\text.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
