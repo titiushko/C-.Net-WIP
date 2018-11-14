@@ -50,13 +50,21 @@ namespace Titiushko.MVC5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,DateCreated,UserCreated,DateModified,UserModified")] TitiushkoStatus vTitiushkoStatus)
+        public ActionResult Create(StatusModel vTitiushkoStatus)
         {
             if (ModelState.IsValid)
             {
-                db.TitiushkoStatus.Add(vTitiushkoStatus);
+                db.TitiushkoStatus.Add(new TitiushkoStatus()
+                {
+                    Name = vTitiushkoStatus.Name,
+                    Description = vTitiushkoStatus.Description,
+                    DateCreated = System.DateTime.Now,
+                    UserCreated = User.Identity.Name,
+                    DateModified = System.DateTime.Now,
+                    UserModified = User.Identity.Name
+                });
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(Action.INDEX);
             }
 
             return View(vTitiushkoStatus);
@@ -88,7 +96,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 db.Entry(vTitiushkoStatus).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(Action.INDEX);
             }
             return View(vTitiushkoStatus);
         }
@@ -116,7 +124,7 @@ namespace Titiushko.MVC5.Controllers
             TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
             db.TitiushkoStatus.Remove(vTitiushkoStatus);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction(Action.INDEX);
         }
 
         protected override void Dispose(bool disposing)

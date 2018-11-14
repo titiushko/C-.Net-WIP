@@ -282,6 +282,7 @@
     <Compile Include="Models\Constants\Names\Module.cs" />
     <Compile Include="Models\Constants\Users\Group.cs" />
     <Compile Include="Models\Constants\Users\Role.cs" />
+    <Compile Include="Models\Customizations\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectFollowing.Context.cs">
@@ -299,6 +300,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProjectFollowing.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Models\TitiushkoAssignments.cs">
       <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
