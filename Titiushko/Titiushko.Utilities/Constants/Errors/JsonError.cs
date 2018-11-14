@@ -46,7 +46,7 @@ namespace Titiushko.Utilities.Constants.Errors
                     {
                         error = true,
                         type = TypeError.Code.PERMISSION_ACCESS_DENIED,
-                        message = new HashSet<string>() { PermissionError.ACCESS_DENIED }
+                        message = new HashSet<string>() { Resources.Resource.PermissionErrorAccessDenied }
                     }
                 };
             }

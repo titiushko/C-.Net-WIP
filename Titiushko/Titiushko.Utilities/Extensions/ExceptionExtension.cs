@@ -36,9 +36,9 @@ namespace Titiushko.Utilities.Extensions
         /// </summary>
         /// <param name="pException">Exception</param>
         /// <returns>Messages</returns>
-        public static string GetExceptionMessage(this Exception pException)
+        public static string GetExceptionMessage(this Exception pException, string pSeparator = Constants.Basic.BREAK_LINE_HTML)
         {
-            return string.Join("<br>", pException.GetExceptionMessages());
+            return string.Join(pSeparator, pException.GetExceptionMessages());
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Titiushko.Utilities.Extensions
         /// </summary>
         /// <param name="pEntityException">DbEntityValidationException</param>
         /// <returns>Messages</returns>
-        public static string GetEntityExceptionMessage(this DbEntityValidationException pEntityException)
+        public static string GetEntityExceptionMessage(this DbEntityValidationException pEntityException, string pSeparator = Constants.Basic.BREAK_LINE_HTML)
         {
             ICollection<string> vMessages = new HashSet<string>();
             string vMessageAux = string.Empty;
@@ -61,7 +61,7 @@ namespace Titiushko.Utilities.Extensions
                     }
                 }
             }
-            return string.Join("<br>", vMessages);
+            return string.Join(pSeparator, vMessages);
         }
 
         /// <summary>

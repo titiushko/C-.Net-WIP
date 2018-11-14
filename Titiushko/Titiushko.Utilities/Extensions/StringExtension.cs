@@ -112,7 +112,7 @@ namespace Titiushko.Utilities.Extensions
         /// <returns>String to a DateTime</returns>
         public static DateTime ToDateTime(this string pStringDateTime)
         {
-            string[] vFormats = new string[] { Constants.Formats.DateTime.DATE, Constants.Formats.DateTime.DATE_TIME, Constants.Formats.DateTime.FULL_DATE };
+            string[] vFormats = new string[] { Resources.Resource.FormatDate, Resources.Resource.FormatDateTime, Resources.Resource.FormatFullDate };
             return ToDateTime(pStringDateTime, vFormats);
         }
 
@@ -154,7 +154,7 @@ namespace Titiushko.Utilities.Extensions
                     pSeparator = string.IsNullOrWhiteSpace(pSeparator) ? SEPARATOR_SLUG : pSeparator;
                     TextInfo vTextInfo = new CultureInfo(string.IsNullOrWhiteSpace(pCultureInfoName) ? CULTURE_INFO_NAME : pCultureInfoName, false).TextInfo;
                     pText = vTextInfo.ToLower(pText);                               // Convert to lowercase
-                    pText = Regex.Replace(pText, SPECIAL_CHARACTERS_PATTERN, "");   // Remove special characters
+                    pText = Regex.Replace(pText, SPECIAL_CHARACTERS_PATTERN, string.Empty);   // Remove special characters
                     pText = Regex.Replace(pText, WHITESPACE_PATTERN, " ").Trim();   // Removes excess whitespace
                     pText = Regex.Replace(pText, "_", pSeparator);                  // Replace underscore by separator
                     pText = Regex.Replace(pText, " ", pSeparator);                  // Replace spaces by separator
@@ -179,12 +179,12 @@ namespace Titiushko.Utilities.Extensions
             try
             {
                 if (string.IsNullOrWhiteSpace(pText)) return string.Empty;
-                string vStripped = Regex.Replace(pText, CDATA_TAG_PATTERN, "", ExpressionOptions);
-                vStripped = Regex.Replace(vStripped, HTML_TAGS_PATTERN, "", ExpressionOptions);
+                string vStripped = Regex.Replace(pText, CDATA_TAG_PATTERN, string.Empty, ExpressionOptions);
+                vStripped = Regex.Replace(vStripped, HTML_TAGS_PATTERN, string.Empty, ExpressionOptions);
                 if (Regex.IsMatch(vStripped, HTML_START_TAGS_PATTERN, ExpressionOptions) || Regex.IsMatch(vStripped, HTML_END_TAGS_PATTERN, ExpressionOptions))
                 {
-                    vStripped = Regex.Replace(vStripped, HTML_START_TAGS_PATTERN, "", ExpressionOptions);
-                    vStripped = Regex.Replace(vStripped, HTML_END_TAGS_PATTERN, "", ExpressionOptions);
+                    vStripped = Regex.Replace(vStripped, HTML_START_TAGS_PATTERN, string.Empty, ExpressionOptions);
+                    vStripped = Regex.Replace(vStripped, HTML_END_TAGS_PATTERN, string.Empty, ExpressionOptions);
                 }
                 return pDecode ? HttpUtility.HtmlDecode(vStripped) ?? vStripped : vStripped;
             }
@@ -303,7 +303,7 @@ namespace Titiushko.Utilities.Extensions
             {
                 if (string.IsNullOrWhiteSpace(pText)) return string.Empty;
                 pText = pText.RemoveHtmlTags(); // Remove HTML tags
-                pText = Regex.Replace(pText, SPACES_PATTERN, ""); // Remove tabs, newlines and lines breaks
+                pText = Regex.Replace(pText, SPACES_PATTERN, string.Empty); // Remove tabs, newlines and lines breaks
                 pText = Regex.Replace(pText, WHITESPACE_PATTERN, " ").Trim(); // Remove extra white spaces
                 return pText;
             }
