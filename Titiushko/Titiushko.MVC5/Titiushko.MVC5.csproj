@@ -250,7 +250,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TitiushkoStatusController.cs" />
-    <Compile Include="Extensions\ControllerExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -284,7 +283,6 @@
     <Compile Include="Constants\Names\ControllerName.cs" />
     <Compile Include="Constants\Users\Group.cs" />
     <Compile Include="Constants\Users\Role.cs" />
-    <Compile Include="CustomDataAnnotations\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectFollowing.Context.cs">
@@ -643,6 +641,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Titiushko.MVC.Utils\Titiushko.MVC.Utils.csproj">
+      <Project>{e9fc32ad-2fb9-4cd8-b770-24b02882d295}</Project>
+      <Name>Titiushko.MVC.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Titiushko.Resources\Titiushko.Resources.csproj">
       <Project>{d9277596-5e99-4cc1-9fdd-c69f62de07ac}</Project>
       <Name>Titiushko.Resources</Name>

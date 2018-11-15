@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
-using Titiushko.MVC5.Models;
-using Titiushko.MVC5.Constants.Names;
 
 namespace Titiushko.MVC5.Extensions
 {
