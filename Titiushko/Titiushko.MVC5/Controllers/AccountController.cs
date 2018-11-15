@@ -415,7 +415,7 @@ namespace Titiushko.MVC5.Controllers
             try
             {
                 RoleManager<IdentityRole> vRoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_db));
-                foreach (string role in Titiushko.MVC5.Models.Constants.Users.Role.ROLES)
+                foreach (string role in Titiushko.MVC5.Constants.Users.Role.ROLES)
                 {
                     vRoleManager.Create(new IdentityRole(role));
                 }
@@ -439,7 +439,7 @@ namespace Titiushko.MVC5.Controllers
             try
             {
                 UserManager<ApplicationUser> vUserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_db));
-                foreach (string role in Titiushko.MVC5.Models.Constants.Users.Role.ROLES)
+                foreach (string role in Titiushko.MVC5.Constants.Users.Role.ROLES)
                 {
                     ApplicationUser user = new ApplicationUser()
                     {
