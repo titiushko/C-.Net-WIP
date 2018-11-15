@@ -138,8 +138,23 @@
   <data name="ModuleHomeName" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="ModuleProjectName" xml:space="preserve">
+    <value>Proyecto</value>
+  </data>
+  <data name="ModuleSprintName" xml:space="preserve">
+    <value>Sprint</value>
+  </data>
   <data name="ModuleStatusName" xml:space="preserve">
     <value>Estado</value>
+  </data>
+  <data name="ModuleTaskName" xml:space="preserve">
+    <value>Tarea</value>
+  </data>
+  <data name="ModuleTaskTypeName" xml:space="preserve">
+    <value>Tipo de Tarea</value>
+  </data>
+  <data name="ModuleUserName" xml:space="preserve">
+    <value>Usuario</value>
   </data>
   <data name="PermissionErrorAccessDenied" xml:space="preserve">
     <value>Inicie sesión en el sistema para acceder al contenido.</value>
@@ -167,6 +182,18 @@
   </data>
   <data name="TextDescription" xml:space="preserve">
     <value>Descripción</value>
+  </data>
+  <data name="TextDetails" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="TextDetailsFor" xml:space="preserve">
+    <value>Detalles de {0}</value>
+  </data>
+  <data name="TextEdit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="TextEditFor" xml:space="preserve">
+    <value>Editar {0}</value>
   </data>
   <data name="TextListOf" xml:space="preserve">
     <value>Listado de {0}</value>

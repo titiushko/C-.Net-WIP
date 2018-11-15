@@ -124,11 +124,56 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string ModuleProjectName {
+            get {
+                return ResourceManager.GetString("ModuleProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sprint.
+        /// </summary>
+        public static string ModuleSprintName {
+            get {
+                return ResourceManager.GetString("ModuleSprintName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string ModuleStatusName {
             get {
                 return ResourceManager.GetString("ModuleStatusName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task.
+        /// </summary>
+        public static string ModuleTaskName {
+            get {
+                return ResourceManager.GetString("ModuleTaskName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Type.
+        /// </summary>
+        public static string ModuleTaskTypeName {
+            get {
+                return ResourceManager.GetString("ModuleTaskTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string ModuleUserName {
+            get {
+                return ResourceManager.GetString("ModuleUserName", resourceCulture);
             }
         }
         
@@ -210,6 +255,42 @@ namespace Titiushko.Resources {
         public static string TextDescription {
             get {
                 return ResourceManager.GetString("TextDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string TextDetails {
+            get {
+                return ResourceManager.GetString("TextDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Details.
+        /// </summary>
+        public static string TextDetailsFor {
+            get {
+                return ResourceManager.GetString("TextDetailsFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string TextEdit {
+            get {
+                return ResourceManager.GetString("TextEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit {0}.
+        /// </summary>
+        public static string TextEditFor {
+            get {
+                return ResourceManager.GetString("TextEditFor", resourceCulture);
             }
         }
         
