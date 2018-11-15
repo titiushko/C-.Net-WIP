@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Titiushko.MVC5.Models.Customizations
+namespace Titiushko.MVC5.CustomDataAnnotations
 {
     /// <summary>
     /// Obtener el DisplayName de los Resources
