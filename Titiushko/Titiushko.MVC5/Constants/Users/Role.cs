@@ -1,4 +1,4 @@
-﻿namespace Titiushko.MVC5.Models.Constants.Users
+﻿namespace Titiushko.MVC5.Constants.Users
 {
     public class Role
     {

@@ -1,6 +1,6 @@
-﻿namespace Titiushko.MVC5.Models.Constants.Names
+﻿namespace Titiushko.MVC5.Constants.Names
 {
-    public class Module
+    public class ControllerName
     {
         public const string PROJECT = "Project";
         public const string STATUS = "Status";
