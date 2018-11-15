@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web.Mvc.Html;
 using System.Web.Mvc;
 using Titiushko.MVC5.Models;
 using Titiushko.MVC5.Constants.Names;
 using Titiushko.MVC5.Extensions;
+using Titiushko.MVC5.Helpers;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -33,14 +33,14 @@ namespace Titiushko.MVC5.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BreadcomeArea = this.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
+            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
             return View(vTitiushkoStatus);
         }
 
         // GET: TitiushkoStatus/Create
         public ActionResult Create()
         {
-            ViewBag.BreadcomeArea = this.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.CREATE, ControllerName.STATUS);
+            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.CREATE, ControllerName.STATUS);
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BreadcomeArea = this.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
+            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
             return View(vTitiushkoStatus);
         }
 
