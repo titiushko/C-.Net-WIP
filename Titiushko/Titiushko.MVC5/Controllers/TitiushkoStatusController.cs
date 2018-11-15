@@ -4,12 +4,12 @@ using System.Net;
 using System.Web.Mvc.Html;
 using System.Web.Mvc;
 using Titiushko.MVC5.Models;
-using Titiushko.MVC5.Models.Constants.Names;
+using Titiushko.MVC5.Constants.Names;
 using Titiushko.MVC5.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
-    [RoutePrefix(Module.STATUS)]
+    [RoutePrefix(ControllerName.STATUS)]
     public class TitiushkoStatusController : BaseController
     {
         private ProjectFollowingEntities db = new ProjectFollowingEntities();
@@ -33,15 +33,14 @@ namespace Titiushko.MVC5.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BreadcomeArea = this.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
             return View(vTitiushkoStatus);
         }
 
         // GET: TitiushkoStatus/Create
         public ActionResult Create()
         {
-            ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextCreateNewFor, Resources.Resource.ModuleStatusName);
-            ViewBag.BreadcomeArea.Level1 = this.GetHtmlHelper().ActionLink(string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName), Action.INDEX, Module.STATUS);
-            ViewBag.BreadcomeArea.Level2 = new MvcHtmlString((string)ViewBag.BreadcomeArea.Title);
+            ViewBag.BreadcomeArea = this.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.CREATE, ControllerName.STATUS);
             return View();
         }
 
@@ -64,9 +63,8 @@ namespace Titiushko.MVC5.Controllers
                     UserModified = User.Identity.Name
                 });
                 db.SaveChanges();
-                return RedirectToAction(Action.INDEX);
+                return RedirectToAction(ActionName.INDEX);
             }
-
             return View(vTitiushkoStatus);
         }
 
@@ -82,6 +80,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BreadcomeArea = this.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
             return View(vTitiushkoStatus);
         }
 
@@ -96,7 +95,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 db.Entry(vTitiushkoStatus).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction(Action.INDEX);
+                return RedirectToAction(ActionName.INDEX);
             }
             return View(vTitiushkoStatus);
         }
@@ -124,7 +123,7 @@ namespace Titiushko.MVC5.Controllers
             TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
             db.TitiushkoStatus.Remove(vTitiushkoStatus);
             db.SaveChanges();
-            return RedirectToAction(Action.INDEX);
+            return RedirectToAction(ActionName.INDEX);
         }
 
         protected override void Dispose(bool disposing)
