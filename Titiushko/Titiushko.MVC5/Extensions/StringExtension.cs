@@ -4,7 +4,7 @@ namespace Titiushko.MVC5.Extensions
 {
     public static class StringExtension
     {
-        public static string GetResourceTextFor(this string pActionName)
+        public static string GetResourceViewName(this string pActionName)
         {
             if (string.IsNullOrWhiteSpace(pActionName)) return string.Empty;
             string vResourceTextFor = string.Empty;

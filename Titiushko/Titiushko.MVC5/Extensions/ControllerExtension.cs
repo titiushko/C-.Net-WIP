@@ -25,7 +25,7 @@ namespace Titiushko.MVC5.Extensions
         {
             string vModuleName = pCurrentControllerName.GetResourceModuleName();
             BreadcomeArea vBreadcomeArea = new BreadcomeArea();
-            vBreadcomeArea.Title = string.Format(pCurrentActionName.GetResourceTextFor(), vModuleName);
+            vBreadcomeArea.Title = string.Format(pCurrentActionName.GetResourceViewName(), vModuleName);
             vBreadcomeArea.Level1 = pHtmlHelper.ActionLink(string.Format(Resources.Resource.TextListOf, vModuleName), ActionName.INDEX, pCurrentControllerName);
             vBreadcomeArea.Level2 = new MvcHtmlString(vBreadcomeArea.Title);
             return vBreadcomeArea;
