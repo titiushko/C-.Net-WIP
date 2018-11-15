@@ -6,6 +6,7 @@ using Titiushko.MVC5.Models;
 using Titiushko.MVC5.Constants.Names;
 using Titiushko.MVC5.Extensions;
 using Titiushko.MVC5.Helpers;
+using Titiushko.MVC.Utils.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -28,7 +29,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+            StatusModel vTitiushkoStatus = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
             if (vTitiushkoStatus == null)
             {
                 return HttpNotFound();
@@ -75,7 +76,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+            StatusModel vTitiushkoStatus = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
             if (vTitiushkoStatus == null)
             {
                 return HttpNotFound();
