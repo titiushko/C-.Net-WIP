@@ -11,7 +11,7 @@ namespace Titiushko.Utilities.Constants.Errors
             return new Responses.ErrorResponse()
             {
                 error = true,
-                type = TypeError.Code.DEFAULT,
+                type = TypeError.DEFAULT,
                 message = new HashSet<string>() { BaseError.DEFAULT(pMessage) }
             };
         }
@@ -45,7 +45,7 @@ namespace Titiushko.Utilities.Constants.Errors
                     Error = new Responses.ErrorResponse()
                     {
                         error = true,
-                        type = TypeError.Code.PERMISSION_ACCESS_DENIED,
+                        type = TypeError.PERMISSION_ACCESS_DENIED,
                         message = new HashSet<string>() { Resources.Resource.PermissionErrorAccessDenied }
                     }
                 };

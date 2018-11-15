@@ -7,13 +7,13 @@ namespace Titiushko.Utilities.Responses
         public ErrorResponse()
         {
             error = false;
-            type = Constants.Errors.TypeError.Code.UNDEFINED;
+            type = Constants.Errors.TypeError.UNDEFINED;
             message = new HashSet<string>();
         }
 
         public bool error { get; set; }
 
-        public Constants.Errors.TypeError.Code type { get; set; }
+        public Constants.Errors.TypeError type { get; set; }
 
         public ICollection<string> message { get; set; }
     }
