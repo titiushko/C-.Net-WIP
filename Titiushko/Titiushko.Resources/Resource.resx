@@ -171,6 +171,9 @@
   <data name="TextBackToList" xml:space="preserve">
     <value>Back to List</value>
   </data>
+  <data name="TextConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete {0}?</value>
+  </data>
   <data name="TextCreate" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -179,6 +182,12 @@
   </data>
   <data name="TextCreateNewFor" xml:space="preserve">
     <value>Create New {0}</value>
+  </data>
+  <data name="TextDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="TextDeleteFor" xml:space="preserve">
+    <value>Delete {0}</value>
   </data>
   <data name="TextDescription" xml:space="preserve">
     <value>Description</value>
@@ -200,5 +209,8 @@
   </data>
   <data name="TextName" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="TextSave" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

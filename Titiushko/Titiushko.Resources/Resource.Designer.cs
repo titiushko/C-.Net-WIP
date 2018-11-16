@@ -223,6 +223,15 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete {0}?.
+        /// </summary>
+        public static string TextConfirmDelete {
+            get {
+                return ResourceManager.GetString("TextConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string TextCreate {
@@ -246,6 +255,24 @@ namespace Titiushko.Resources {
         public static string TextCreateNewFor {
             get {
                 return ResourceManager.GetString("TextCreateNewFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string TextDelete {
+            get {
+                return ResourceManager.GetString("TextDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete {0}.
+        /// </summary>
+        public static string TextDeleteFor {
+            get {
+                return ResourceManager.GetString("TextDeleteFor", resourceCulture);
             }
         }
         
@@ -309,6 +336,15 @@ namespace Titiushko.Resources {
         public static string TextName {
             get {
                 return ResourceManager.GetString("TextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string TextSave {
+            get {
+                return ResourceManager.GetString("TextSave", resourceCulture);
             }
         }
     }

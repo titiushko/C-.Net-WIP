@@ -19,6 +19,9 @@ namespace Titiushko.MVC5.Extensions
                 case ActionName.EDIT:
                     vResourceTextFor = Resources.Resource.TextEditFor;
                     break;
+                case ActionName.DELETE:
+                    vResourceTextFor = Resources.Resource.TextDeleteFor;
+                    break;
             }
             return vResourceTextFor;
         }

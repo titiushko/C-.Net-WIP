@@ -29,13 +29,13 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StatusModel vTitiushkoStatus = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
-            if (vTitiushkoStatus == null)
+            StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
+            if (vStatusModel == null)
             {
                 return HttpNotFound();
             }
             ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
-            return View(vTitiushkoStatus);
+            return View(vStatusModel);
         }
 
         // GET: TitiushkoStatus/Create
@@ -50,14 +50,14 @@ namespace Titiushko.MVC5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StatusModel vTitiushkoStatus)
+        public ActionResult Create(StatusModel pStatusModel)
         {
             if (ModelState.IsValid)
             {
                 db.TitiushkoStatus.Add(new TitiushkoStatus()
                 {
-                    Name = vTitiushkoStatus.Name,
-                    Description = vTitiushkoStatus.Description,
+                    Name = pStatusModel.Name,
+                    Description = pStatusModel.Description,
                     DateCreated = System.DateTime.Now,
                     UserCreated = User.Identity.Name,
                     DateModified = System.DateTime.Now,
@@ -66,7 +66,7 @@ namespace Titiushko.MVC5.Controllers
                 db.SaveChanges();
                 return RedirectToAction(ActionName.INDEX);
             }
-            return View(vTitiushkoStatus);
+            return View(pStatusModel);
         }
 
         // GET: TitiushkoStatus/Edit/5
@@ -76,13 +76,13 @@ namespace Titiushko.MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StatusModel vTitiushkoStatus = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
-            if (vTitiushkoStatus == null)
+            StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
+            if (vStatusModel == null)
             {
                 return HttpNotFound();
             }
             ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
-            return View(vTitiushkoStatus);
+            return View(vStatusModel);
         }
 
         // POST: TitiushkoStatus/Edit/5
@@ -90,15 +90,23 @@ namespace Titiushko.MVC5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,DateCreated,UserCreated,DateModified,UserModified")] TitiushkoStatus vTitiushkoStatus)
+        public ActionResult Edit(StatusModel pStatusModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vTitiushkoStatus).State = EntityState.Modified;
+                TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(pStatusModel.Id);
+                if (vTitiushkoStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                vTitiushkoStatus.Name = pStatusModel.Name;
+                vTitiushkoStatus.Description = pStatusModel.Description;
+                vTitiushkoStatus.DateModified = System.DateTime.Now;
+                vTitiushkoStatus.UserModified = User.Identity.Name;
                 db.SaveChanges();
                 return RedirectToAction(ActionName.INDEX);
             }
-            return View(vTitiushkoStatus);
+            return View(pStatusModel);
         }
 
         // GET: TitiushkoStatus/Delete/5
@@ -113,6 +121,7 @@ namespace Titiushko.MVC5.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DELETE, ControllerName.STATUS);
             return View(vTitiushkoStatus);
         }
 

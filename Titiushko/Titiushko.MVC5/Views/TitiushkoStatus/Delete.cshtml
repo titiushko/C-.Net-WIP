@@ -1,16 +1,12 @@
 ﻿@model Titiushko.MVC5.Models.TitiushkoStatus
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = ViewBag.BreadcomeArea.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>@string.Format(Titiushko.Resources.Resource.TextConfirmDelete, Titiushko.Resources.Resource.ModuleStatusName)</h3>
 <div>
-    <h4>TitiushkoStatus</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -27,47 +23,15 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateModified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateModified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserModified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserModified)
-        </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</button>
+            @Html.ActionLink(Titiushko.Resources.Resource.TextBackToList, Titiushko.MVC5.Constants.Names.ActionName.INDEX, null, new { @class = "btn btn-default" })
         </div>
     }
 </div>

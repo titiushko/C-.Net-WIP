@@ -1,4 +1,4 @@
-﻿@model Titiushko.MVC5.Models.TitiushkoStatus
+﻿@model Titiushko.MVC5.Models.StatusModel
 
 @{
     ViewBag.Title = ViewBag.BreadcomeArea.Title;
@@ -25,6 +25,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink(Titiushko.Resources.Resource.TextEdit, Titiushko.MVC5.Constants.Names.ActionName.EDIT, new { id = Model.Id }, new { @class = "btn btn-success" })
+    <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.EDIT, new { id = Model.Id })" class="btn btn-primary"><i class="fa fa-pencil"></i> @Titiushko.Resources.Resource.TextDelete</a>
     @Html.ActionLink(Titiushko.Resources.Resource.TextBackToList, Titiushko.MVC5.Constants.Names.ActionName.INDEX, null, new { @class = "btn btn-default" })
 </p>
