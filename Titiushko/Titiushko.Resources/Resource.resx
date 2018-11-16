@@ -183,6 +183,12 @@
   <data name="TextCreateNewFor" xml:space="preserve">
     <value>Create New {0}</value>
   </data>
+  <data name="TextDateCreated" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="TextDateModified" xml:space="preserve">
+    <value>Modification Date</value>
+  </data>
   <data name="TextDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -212,5 +218,11 @@
   </data>
   <data name="TextSave" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="TextUserCreated" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="TextUserModified" xml:space="preserve">
+    <value>Modified By</value>
   </data>
 </root>

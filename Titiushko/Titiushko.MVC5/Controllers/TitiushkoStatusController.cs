@@ -19,7 +19,7 @@ namespace Titiushko.MVC5.Controllers
         {
             ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName);
             ViewBag.BreadcomeArea.Level1 = new MvcHtmlString((string)ViewBag.BreadcomeArea.Title);
-            return View(db.TitiushkoStatus.ToList());
+            return View(db.TitiushkoStatus.ToCustomModelList());
         }
 
         // GET: TitiushkoStatus/Details/5

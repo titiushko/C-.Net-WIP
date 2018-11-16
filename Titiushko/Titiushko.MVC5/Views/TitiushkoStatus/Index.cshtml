@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TitiushkoStatus>
+﻿@model IEnumerable<StatusModel>
 @using Titiushko.MVC5.Models;
 
 @{
@@ -31,7 +31,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (TitiushkoStatus item in Model)
+    @foreach (StatusModel item in Model)
     {
         <tr>
             <td>
@@ -53,9 +53,11 @@
                 @Html.DisplayFor(modelItem => item.UserModified)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <div class="btn-group">
+                    <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.EDIT, new { id = item.Id })" class="btn btn-primary"><i class="fa fa-pencil"></i> @Titiushko.Resources.Resource.TextEdit</a>
+                    <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.DETAILS, new { id = item.Id })" class="btn btn-success"><i class="fa fa-eye"></i> @Titiushko.Resources.Resource.TextDetails</a>
+                    <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.DELETE, new { id = item.Id })" class="btn btn-danger"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</a>
+                </div>
             </td>
         </tr>
     }

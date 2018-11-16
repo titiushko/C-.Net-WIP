@@ -259,6 +259,24 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creation Date.
+        /// </summary>
+        public static string TextDateCreated {
+            get {
+                return ResourceManager.GetString("TextDateCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modification Date.
+        /// </summary>
+        public static string TextDateModified {
+            get {
+                return ResourceManager.GetString("TextDateModified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string TextDelete {
@@ -345,6 +363,24 @@ namespace Titiushko.Resources {
         public static string TextSave {
             get {
                 return ResourceManager.GetString("TextSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By.
+        /// </summary>
+        public static string TextUserCreated {
+            get {
+                return ResourceManager.GetString("TextUserCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modified By.
+        /// </summary>
+        public static string TextUserModified {
+            get {
+                return ResourceManager.GetString("TextUserModified", resourceCulture);
             }
         }
     }
