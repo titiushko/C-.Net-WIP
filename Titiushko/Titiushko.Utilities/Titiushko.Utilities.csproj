@@ -55,6 +55,7 @@
     <Compile Include="Constants\Errors\JsonError.cs" />
     <Compile Include="Constants\Errors\PermissionError.cs" />
     <Compile Include="Constants\Errors\TypeError.cs" />
+    <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Titiushko.Logging\Titiushko.Logging.csproj">
+      <Project>{46909e1b-97bc-49a3-948c-393110e6ee44}</Project>
+      <Name>Titiushko.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Titiushko.Resources\Titiushko.Resources.csproj">
       <Project>{d9277596-5e99-4cc1-9fdd-c69f62de07ac}</Project>
       <Name>Titiushko.Resources</Name>

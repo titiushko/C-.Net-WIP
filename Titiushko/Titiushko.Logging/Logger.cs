@@ -3,7 +3,6 @@ using log4net;
 using System.Linq;
 using log4net.Appender;
 using System.Runtime.CompilerServices;
-using Titiushko.Utilities.Extensions;
 
 namespace Titiushko.Logging
 {
@@ -37,7 +36,7 @@ namespace Titiushko.Logging
         public static void Error(Exception pException, bool pIncludeCaller = true,
             [CallerMemberName] string pMemberName = null, [CallerFilePath] string pFilePath = null, [CallerLineNumber] int pLineNumber = 0)
         {
-            object vMessage = pException.GetExceptionMessage();
+            object vMessage = pException.ToString();
             LogProperty.Error(pIncludeCaller ? GetFormattedMessage(vMessage, pMemberName, pFilePath, pLineNumber) : vMessage, pException);
         }
 

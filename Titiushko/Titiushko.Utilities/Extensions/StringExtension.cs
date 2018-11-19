@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -336,6 +337,38 @@ namespace Titiushko.Utilities.Extensions
             catch
             {
                 return 0;
+            }
+        }
+
+        /// <summary>
+        /// Crea el folder de la ruta pPath.
+        /// Si no se puede crear el folder de la ruta pPath, entonces se intenta crear el folder de la ruta predeterminada pDefaultPath.
+        /// </summary>
+        /// <param name="pPath">Ruta del folder a crear</param>
+        /// <param name="pDefaultPath">Opcional: Ruta predeterminada del folder a crear</param>
+        /// <returns>Ruta del folder (y archivo) creado</returns>
+        public static string CreateFolder(this string pPath, string pDefaultPath = null)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(pPath))
+                {
+                    if (string.IsNullOrWhiteSpace(pDefaultPath)) return string.Empty;
+                    else pPath = pDefaultPath;
+                }
+                FileInfo vFolder = new FileInfo(pPath);
+                // Se toma la ruta del directorio; si tiene extensión, entonces es un archivo
+                string vPathFolder = string.IsNullOrWhiteSpace(vFolder.Extension) ? vFolder.FullName : vFolder.DirectoryName;
+                // Si el folder no existe pero existe el directorio raíz, entonces se crea el folder
+                if (!Directory.Exists(vPathFolder) && Directory.Exists(vFolder.Directory.Root.Name)) Directory.CreateDirectory(vPathFolder);
+                // Si no se pudo crear el folder pero se tiene una ruta predeterminada, entonces se intenta crea el folder
+                if (!Directory.Exists(vPathFolder) && !string.IsNullOrWhiteSpace(pDefaultPath)) return CreateFolder(pDefaultPath);
+                // Si se pudo crear el folder, entonces devuelve la ruta completa si tiene extensión
+                return Directory.Exists(vPathFolder) ? (string.IsNullOrWhiteSpace(vFolder.Extension) ? vFolder.DirectoryName : vFolder.FullName) : string.Empty;
+            }
+            catch (Exception vException)
+            {
+                throw vException;
             }
         }
     }

@@ -123,6 +123,21 @@
   <data name="BaseErrorDefault" xml:space="preserve">
     <value>&lt;p&gt;Algo malo pasó{0}&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;b&gt;Por favor, inténtalo de nuevo más tarde.&lt;/b&gt;&lt;/p&gt;</value>
   </data>
+  <data name="DictionaryHasNoParameter" xml:space="preserve">
+    <value>El parámetro "{0}" no se encuentra en el dictionary</value>
+  </data>
+  <data name="DictionaryParameterDefaultValueIsNotNull" xml:space="preserve">
+    <value>{0}, se usará el valor predeterminado: {1}</value>
+  </data>
+  <data name="DictionaryParameterDefaultValueIsNull" xml:space="preserve">
+    <value>{0} y el valor predeterminado es nulo</value>
+  </data>
+  <data name="ExceptionDictionaryHasNoContent" xml:space="preserve">
+    <value>El dictionary no tiene contenido</value>
+  </data>
+  <data name="ExceptionGetValueFromDictionary" xml:space="preserve">
+    <value>No se pudo obtener el valor del parámetro</value>
+  </data>
   <data name="FormatDate" xml:space="preserve">
     <value>dd/MM/yyyy</value>
   </data>

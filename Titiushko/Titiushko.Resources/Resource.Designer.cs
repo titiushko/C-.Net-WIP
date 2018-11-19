@@ -79,6 +79,51 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &quot;{0}&quot; parameter was not found in the dictionary.
+        /// </summary>
+        public static string DictionaryHasNoParameter {
+            get {
+                return ResourceManager.GetString("DictionaryHasNoParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, default value will be use it: {1}.
+        /// </summary>
+        public static string DictionaryParameterDefaultValueIsNotNull {
+            get {
+                return ResourceManager.GetString("DictionaryParameterDefaultValueIsNotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} and the default value is null.
+        /// </summary>
+        public static string DictionaryParameterDefaultValueIsNull {
+            get {
+                return ResourceManager.GetString("DictionaryParameterDefaultValueIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dictionary has no content.
+        /// </summary>
+        public static string ExceptionDictionaryHasNoContent {
+            get {
+                return ResourceManager.GetString("ExceptionDictionaryHasNoContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parameter value could not be obtained.
+        /// </summary>
+        public static string ExceptionGetValueFromDictionary {
+            get {
+                return ResourceManager.GetString("ExceptionGetValueFromDictionary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to dd/MM/yyyy.
         /// </summary>
         public static string FormatDate {
