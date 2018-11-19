@@ -1,19 +1,14 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Web.Mvc;
 
 namespace Titiushko.MVC5.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController()
-        {
-            logger = LogManager.GetLogger(typeof(HomeController));
-        }
-
         public ActionResult Index()
         {
             ViewBag.CurrentDate = DateTime.Now.ToString(Resources.Resource.FormatDate);
+            Logging.Logger.Log(ViewBag.BreadcomeArea.Title, Logging.LogType.INFO);
             return View();
         }
 

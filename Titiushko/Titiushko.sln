@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titiushko.Resources", "Titi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titiushko.MVC.Utils", "Titiushko.MVC.Utils\Titiushko.MVC.Utils.csproj", "{E9FC32AD-2FB9-4CD8-B770-24B02882D295}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titiushko.Logging", "Titiushko.Logging\Titiushko.Logging.csproj", "{46909E1B-97BC-49A3-948C-393110E6EE44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E9FC32AD-2FB9-4CD8-B770-24B02882D295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9FC32AD-2FB9-4CD8-B770-24B02882D295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9FC32AD-2FB9-4CD8-B770-24B02882D295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46909E1B-97BC-49A3-948C-393110E6EE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46909E1B-97BC-49A3-948C-393110E6EE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46909E1B-97BC-49A3-948C-393110E6EE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46909E1B-97BC-49A3-948C-393110E6EE44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -642,6 +642,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Titiushko.Logging\Titiushko.Logging.csproj">
+      <Project>{46909e1b-97bc-49a3-948c-393110e6ee44}</Project>
+      <Name>Titiushko.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Titiushko.MVC.Utils\Titiushko.MVC.Utils.csproj">
       <Project>{e9fc32ad-2fb9-4cd8-b770-24b02882d295}</Project>
       <Name>Titiushko.MVC.Utils</Name>
