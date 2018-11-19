@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Titiushko.Utilities.Extensions;
 
-namespace Titiushko.HtmlHelpers.Helpers
+namespace Titiushko.HtmlHelpers
 {
     public class HtmlHelper
     {
@@ -303,7 +303,7 @@ namespace Titiushko.HtmlHelpers.Helpers
                     if (vHtmlElement != null)
                     {
                         // Si se logró obtener el HtmlElement, entonces se toma el string del HTML
-                        vHtml = vHtmlElement.TagName.Equals(ElementHelper.IFRAME_NAME_TAG)
+                        vHtml = vHtmlElement.TagName.Equals(HtmlHelperExtension.IFRAME_NAME_TAG)
                             ? GetHtmlFromFrameByIdentifier(pHtmlDoc, pElementIdentifier) // Si el HtmlElement es iframe, entonces se busca el HTML dentro del iframe
                             : (!string.IsNullOrWhiteSpace(vHtmlElement.InnerHtml) ? vHtmlElement.InnerHtml : string.Empty);
                     }
@@ -406,8 +406,8 @@ namespace Titiushko.HtmlHelpers.Helpers
                 bool vHeadersExist = false; // Verifica si encontraron HEADERS en TABLE
                 bool vHeadersFromFirstRow = false;  // Verifica se tomarón como HEADERS los TD del primer TR de TABLE
 
-                MatchCollection vTables = Regex.Matches(pHtmlTable, ElementHelper.TABLE_PATTERN, ElementHelper.ExpressionOptions);  // Obtener una coincidencia para todas las tablas en el HTML
-                vTables = vTables.Count > 0 ? vTables : Regex.Matches(string.Format(ElementHelper.TABLE_FORMAT, pHtmlTable), ElementHelper.TABLE_PATTERN, ElementHelper.ExpressionOptions);
+                MatchCollection vTables = Regex.Matches(pHtmlTable, HtmlHelperExtension.TABLE_PATTERN, HtmlHelperExtension.ExpressionOptions);  // Obtener una coincidencia para todas las tablas en el HTML
+                vTables = vTables.Count > 0 ? vTables : Regex.Matches(string.Format(HtmlHelperExtension.TABLE_FORMAT, pHtmlTable), HtmlHelperExtension.TABLE_PATTERN, HtmlHelperExtension.ExpressionOptions);
 
                 if (vTables.Count > 0)
                 {
@@ -425,7 +425,7 @@ namespace Titiushko.HtmlHelpers.Helpers
                             int vColumnIndex = 0;
                             foreach (Match vHeader in vHeaders)
                             {
-                                vDataTable.AddHeader(vHeader, ElementHelper.DEFAULT_COLUMN_NAME, ref vColumnIndex, pRemoveTildes);
+                                vDataTable.AddHeader(vHeader, HtmlHelperExtension.DEFAULT_COLUMN_NAME, ref vColumnIndex, pRemoveTildes);
                             }
                         }
                         else if (pFirstRowAsColumnNames)
@@ -435,14 +435,14 @@ namespace Titiushko.HtmlHelpers.Helpers
 
                             if (null != vHeaderRow && vHeaderRow.Success)
                             {
-                                MatchCollection vColumns = Regex.Matches(vHeaderRow.Value, ElementHelper.TD_PATTERN, ElementHelper.ExpressionOptions);
+                                MatchCollection vColumns = Regex.Matches(vHeaderRow.Value, HtmlHelperExtension.TD_PATTERN, HtmlHelperExtension.ExpressionOptions);
                                 vHeadersExist = vHeadersFromFirstRow = vColumns.Count > 0; // Evaluar si se obtuvieron HEADERS
                                 if (vHeadersExist)
                                 {
                                     int vColumnIndex = 0;
                                     foreach (Match vColumn in vColumns)
                                     {
-                                        vDataTable.AddHeader(vColumn, ElementHelper.DEFAULT_COLUMN_NAME, ref vColumnIndex, pRemoveTildes);
+                                        vDataTable.AddHeader(vColumn, HtmlHelperExtension.DEFAULT_COLUMN_NAME, ref vColumnIndex, pRemoveTildes);
                                     }
                                 }
                             }
@@ -453,12 +453,12 @@ namespace Titiushko.HtmlHelpers.Helpers
                             MatchCollection vRowsFromTable = vTable.Value.GetRows();
                             if (vRowsFromTable != null && vRowsFromTable.Count > 0)
                             {
-                                MatchCollection vColumnsFromTable = Regex.Matches(vRowsFromTable[0].Value, ElementHelper.TD_PATTERN, ElementHelper.ExpressionOptions);
+                                MatchCollection vColumnsFromTable = Regex.Matches(vRowsFromTable[0].Value, HtmlHelperExtension.TD_PATTERN, HtmlHelperExtension.ExpressionOptions);
                                 if (vColumnsFromTable.Count > 0)
                                 {
                                     for (int vColumnCount = 1; vColumnCount <= vColumnsFromTable.Count; vColumnCount++)
                                     {
-                                        vDataTable.Columns.Add(string.Format("{0}{1}", ElementHelper.DEFAULT_COLUMN_NAME, vColumnCount));
+                                        vDataTable.Columns.Add(string.Format("{0}{1}", HtmlHelperExtension.DEFAULT_COLUMN_NAME, vColumnCount));
                                     }
                                 }
                             }
@@ -478,7 +478,7 @@ namespace Titiushko.HtmlHelpers.Helpers
                                     // Por lo tanto no se agrega el primer TR al DataTable
                                     if (!(vCurrentRow == 0 && vHeadersExist && vHeadersFromFirstRow))
                                     {
-                                        MatchCollection vColumns = Regex.Matches(vRow.Value, ElementHelper.TD_PATTERN, ElementHelper.ExpressionOptions);
+                                        MatchCollection vColumns = Regex.Matches(vRow.Value, HtmlHelperExtension.TD_PATTERN, HtmlHelperExtension.ExpressionOptions);
                                         if (vColumns.Count > 0)
                                         {
                                             DataRow vDataRow = vDataTable.NewRow();

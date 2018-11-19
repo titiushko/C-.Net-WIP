@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Titiushko.Utilities.Extensions;
 
-namespace Titiushko.HtmlHelpers.Helpers
+namespace Titiushko.HtmlHelpers
 {
-    public static class ElementHelper
+    public static class HtmlHelperExtension
     {
         public const RegexOptions ExpressionOptions = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase;
         public const string IDENTIFIER_PATTERN = "(id|name)=\"([^\"]*)\"";

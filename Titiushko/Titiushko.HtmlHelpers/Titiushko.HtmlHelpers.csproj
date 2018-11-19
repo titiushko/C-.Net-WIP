@@ -45,11 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\ElementHelper.cs" />
-    <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="HtmlHelperCommon.cs" />
+    <Compile Include="HtmlHelperConstant.cs" />
+    <Compile Include="HtmlHelperExtension.cs" />
+    <Compile Include="HtmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Titiushko.Logging\Titiushko.Logging.csproj">
+      <Project>{46909e1b-97bc-49a3-948c-393110e6ee44}</Project>
+      <Name>Titiushko.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Titiushko.Utilities\Titiushko.Utilities.csproj">
       <Project>{C76E30A3-FCF0-4D02-86F9-DD328392F1C9}</Project>
       <Name>Titiushko.Utilities</Name>
