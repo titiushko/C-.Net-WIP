@@ -7,21 +7,6 @@ namespace Titiushko.HtmlHelpers
 {
     public static class HtmlHelperExtension
     {
-        public const RegexOptions ExpressionOptions = RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase;
-        public const string IDENTIFIER_PATTERN = "(id|name)=\"([^\"]*)\"";
-        public const string IDENTIFIER_PATTERN_REPLACE = "((id|name)=\"|\")";
-        public const string TABLE_FORMAT = "<TABLE>{0}</TABLE>";
-        public const string TABLE_PATTERN = "<table[^>]*>(.*?)</table>";
-        public const string THEAD_PATTERN = "<thead[^>]*>(.*?)</thead>";
-        public const string TBODY_PATTERN = "<tbody[^>]*>(.*?)</tbody>";
-        public const string TR_PATTERN = "<tr[^>]*>(.*?)</tr>";
-        public const string TH_PATTERN = "<th[^>]*>(.*?)</th>";
-        public const string TD_PATTERN = "<td[^>]*>(.*?)</td>";
-        public const string THEAD_TAG = "<thead";
-        public const string TH_TAG = "<th";
-        public const string IFRAME_NAME_TAG = "IFRAME";
-        public const string DEFAULT_COLUMN_NAME = "COLUMN";
-
         /// <summary>
         /// Obtiene el identificador (id o name) de un elemento html string
         /// </summary>
@@ -31,8 +16,8 @@ namespace Titiushko.HtmlHelpers
         {
             try
             {
-                Match vMatch = Regex.Match(pText, IDENTIFIER_PATTERN, RegexOptions.IgnoreCase);
-                return vMatch.Success ? Regex.Replace(vMatch.Value, IDENTIFIER_PATTERN_REPLACE, "", RegexOptions.IgnoreCase) : string.Empty;
+                Match vMatch = Regex.Match(pText, HtmlHelperConstant.IDENTIFIER_PATTERN, RegexOptions.IgnoreCase);
+                return vMatch.Success ? Regex.Replace(vMatch.Value, HtmlHelperConstant.IDENTIFIER_PATTERN_REPLACE, string.Empty, RegexOptions.IgnoreCase) : string.Empty;
             }
             catch
             {
@@ -50,15 +35,15 @@ namespace Titiushko.HtmlHelpers
             try
             {
                 MatchCollection vHeaders = null;
-                Match vThead = Regex.Match(pTable, THEAD_PATTERN, ExpressionOptions);
+                Match vThead = Regex.Match(pTable, HtmlHelperConstant.THEAD_PATTERN, HtmlHelperConstant.ExpressionOptions);
                 if (vThead.Success) // Si TABLE tiene THEAD
                 {
-                    vHeaders = Regex.Matches(vThead.Value, TH_PATTERN, ExpressionOptions);  // Obtener los TH de THEAD
-                    vHeaders = vHeaders.Count > 0 ? vHeaders : Regex.Matches(vThead.Value, TD_PATTERN, ExpressionOptions);  // Si el THEAD no tiene TH, entonces se obtienen los TD
+                    vHeaders = Regex.Matches(vThead.Value, HtmlHelperConstant.TH_PATTERN, HtmlHelperConstant.ExpressionOptions);  // Obtener los TH de THEAD
+                    vHeaders = vHeaders.Count > 0 ? vHeaders : Regex.Matches(vThead.Value, HtmlHelperConstant.TD_PATTERN, HtmlHelperConstant.ExpressionOptions);  // Si el THEAD no tiene TH, entonces se obtienen los TD
                 }
-                else if (Regex.IsMatch(pTable, TH_PATTERN, ExpressionOptions)) // Si TABLE no tiene THEAD, buscar si tiene TH
+                else if (Regex.IsMatch(pTable, HtmlHelperConstant.TH_PATTERN, HtmlHelperConstant.ExpressionOptions)) // Si TABLE no tiene THEAD, buscar si tiene TH
                 {
-                    vHeaders = Regex.Matches(pTable, TH_PATTERN, ExpressionOptions);  // Obtener los TH de TABLE
+                    vHeaders = Regex.Matches(pTable, HtmlHelperConstant.TH_PATTERN, HtmlHelperConstant.ExpressionOptions);  // Obtener los TH de TABLE
                 }
                 return vHeaders;
             }
@@ -77,11 +62,11 @@ namespace Titiushko.HtmlHelpers
         {
             try
             {
-                Match vThead = Regex.Match(pTable, THEAD_PATTERN, ExpressionOptions);
+                Match vThead = Regex.Match(pTable, HtmlHelperConstant.THEAD_PATTERN, HtmlHelperConstant.ExpressionOptions);
                 MatchCollection vRowsForHeader = null;
                 if (vThead.Success) // Si TABLE tiene THEAD
                 {
-                    vRowsForHeader = Regex.Matches(vThead.Value, TR_PATTERN, ExpressionOptions);  // Obtener los TR de THEAD
+                    vRowsForHeader = Regex.Matches(vThead.Value, HtmlHelperConstant.TR_PATTERN, HtmlHelperConstant.ExpressionOptions);  // Obtener los TR de THEAD
                 }
                 else // Si TABLE no tiene THEAD
                 {
@@ -104,15 +89,15 @@ namespace Titiushko.HtmlHelpers
         {
             try
             {
-                Match vTbody = Regex.Match(pTable, TBODY_PATTERN, ExpressionOptions);
+                Match vTbody = Regex.Match(pTable, HtmlHelperConstant.TBODY_PATTERN, HtmlHelperConstant.ExpressionOptions);
                 MatchCollection vRows = null;
                 if (vTbody.Success) // Si TABLE tiene TBODY
                 {
-                    vRows = Regex.Matches(vTbody.Value, TR_PATTERN, ExpressionOptions);  // Obtener los TR de TBODY
+                    vRows = Regex.Matches(vTbody.Value, HtmlHelperConstant.TR_PATTERN, HtmlHelperConstant.ExpressionOptions);  // Obtener los TR de TBODY
                 }
                 else // Si TABLE no tiene TBODY, buscar los TR
                 {
-                    vRows = Regex.Matches(pTable, TR_PATTERN, ExpressionOptions);  // Obtener los TR de TABLE
+                    vRows = Regex.Matches(pTable, HtmlHelperConstant.TR_PATTERN, HtmlHelperConstant.ExpressionOptions);  // Obtener los TR de TABLE
                 }
                 return vRows;
             }
@@ -162,9 +147,9 @@ namespace Titiushko.HtmlHelpers
             {
                 return pGroup.ToString().Trim().ReplaceMultiple(new Dictionary<string, string>()
                 {
-                    { "\r\n", "" },
-                    { "&nbsp;", "" },
-                    { "&NBSP;", "" }
+                    { "\r\n", string.Empty },
+                    { "&nbsp;", string.Empty },
+                    { "&NBSP;", string.Empty }
                 });
             }
             catch
