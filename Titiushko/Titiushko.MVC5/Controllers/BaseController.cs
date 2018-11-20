@@ -2,7 +2,6 @@
 using System;
 using System.Web.Mvc;
 using Titiushko.MVC5.Models;
-using Titiushko.Utilities.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -21,32 +20,6 @@ namespace Titiushko.MVC5.Controllers
         }
 
         #region Exceptions
-        /// <summary>
-        /// Get TempDataDictionary with exception messages
-        /// </summary>
-        /// <param name="pE">Exception</param>
-        /// <returns>TempDataDictionary</returns>
-        public TempDataDictionary TempDataExceptionMessage(Exception pE)
-        {
-            TempDataDictionary vError = new TempDataDictionary();
-            vError["error"] = Titiushko.Utilities.Constants.Basic.TRUE;
-            vError["error_message"] = Titiushko.Utilities.Constants.Errors.BaseError.DEFAULT(pE.GetExceptionMessage());
-            return vError;
-        }
-
-        /// <summary>
-        /// Get TempDataDictionary with database entity exception messages
-        /// </summary>
-        /// <param name="pE">DbEntityValidationException</param>
-        /// <returns>TempDataDictionary</returns>
-        public TempDataDictionary TempDataEntityExceptionMessage(System.Data.Entity.Validation.DbEntityValidationException pE)
-        {
-            TempDataDictionary vError = new TempDataDictionary();
-            vError["error"] = Titiushko.Utilities.Constants.Basic.TRUE;
-            vError["error_message"] = Titiushko.Utilities.Constants.Errors.BaseError.DEFAULT(pE.GetEntityExceptionMessage());
-            return vError;
-        }
-
         /// <summary>
         /// Process the request to register in the log the exception occurred in JS from the frontend
         /// </summary>
@@ -67,7 +40,9 @@ namespace Titiushko.MVC5.Controllers
                 return Json(Titiushko.Utilities.Constants.Errors.JsonError.EXCEPCION(vE));
             }
         }
+        #endregion
 
+        #region Errors
         [HttpGet]
         [Route("error/404")]
         public ActionResult Error404(bool pIsPartialView = false)
