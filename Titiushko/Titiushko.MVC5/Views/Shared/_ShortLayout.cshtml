@@ -30,27 +30,17 @@
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    @Html.Partial("LeftSidebar")
-    <!-- Start Welcome area -->
-    <div class="all-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="@Url.Content("~/img/logo/logo.png")" )" alt="" /></a>
-                    </div>
-                </div>
+    
+    <div class="color-line"></div>
+    <br />
+    <br />
+    <div class="container-fluid">
+        @RenderBody()
+        <div class="row">
+            <div class="col-md-12 col-md-12 col-sm-12 col-xs-12 text-center login-footer">
+                <p>Copyright © 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> All rights reserved.</p>
             </div>
         </div>
-        <div class="header-advance-area">
-            @Html.Partial("HeaderTop")
-            @Html.Partial("MobileMenu")
-            @Html.Partial("BreadcomeArea")
-        </div>
-        <div class="container-fluid container-main">
-            @RenderBody()
-        </div>
-        @Html.Partial("Footer")
     </div>
     @Scripts.Render("~/Scripts/jquery")
     @Scripts.Render("~/Scripts/bootstrap")
@@ -61,7 +51,9 @@
     @Scripts.Render("~/Scripts/jquery.sticky")
     @Scripts.Render("~/Scripts/jquery.scrollUp")
     @Scripts.Render("~/Scripts/mCustomScrollbar")
+    @Scripts.Render("~/Scripts/counterup")
     @Scripts.Render("~/Scripts/metisMenu")
+    @Scripts.Render("~/Scripts/tab")
     @Scripts.Render("~/Scripts/main")
     @RenderSection("Scripts", required: false)
     <script type="text/javascript">

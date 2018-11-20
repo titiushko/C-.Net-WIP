@@ -225,6 +225,18 @@
   <data name="TextEditFor" xml:space="preserve">
     <value>Editar {0}</value>
   </data>
+  <data name="TextError404Message" xml:space="preserve">
+    <value>Lo sentimos, pero la página que está buscando no ha sido encontrada.</value>
+  </data>
+  <data name="TextError404Title" xml:space="preserve">
+    <value>Página no Encontrada</value>
+  </data>
+  <data name="TextError500Message" xml:space="preserve">
+    <value>El servidor encontró algo inesperado que no le permitió completar la solicitud. Pedimos disculpas.</value>
+  </data>
+  <data name="TextError500Title" xml:space="preserve">
+    <value>Error Interno del Servidor</value>
+  </data>
   <data name="TextListOf" xml:space="preserve">
     <value>Listado de {0}</value>
   </data>

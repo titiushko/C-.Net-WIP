@@ -82,6 +82,16 @@ namespace Titiushko.MVC5
             .Include("~/Scripts/resources/calendar/moment.min.js",
                      "~/Scripts/resources/calendar/fullcalendar.min.js",
                      "~/Scripts/resources/calendar/fullcalendar-active.js"));
+
+            bundles
+            .Add(new ScriptBundle("~/Scripts/counterup")
+            .Include("~/Scripts/resources/counterup/jquery.counterup.min.js",
+                     "~/Scripts/resources/counterup/waypoints.min.js",
+                     "~/Scripts/resources/counterup/counterup-active.js"));
+
+            bundles
+            .Add(new ScriptBundle("~/Scripts/tab")
+            .Include("~/Scripts/resources/tab.js"));
             #endregion
 
             #region StyleBundle

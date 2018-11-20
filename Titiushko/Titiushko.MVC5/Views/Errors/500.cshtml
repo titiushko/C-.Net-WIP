@@ -1,14 +1,14 @@
 ﻿@{
-    ViewBag.Title = Titiushko.Resources.Resource.TextError404Title;
+    ViewBag.Title = Titiushko.Resources.Resource.TextError500Title;
     Layout = ViewBag.Layout;
 }
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
     <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
         <div class="content-error">
-            <h1>ERROR <span class="counter"> 404</span></h1>
-            <h2>@Titiushko.Resources.Resource.TextError404Title</h2>
-            <p>@Titiushko.Resources.Resource.TextError404Message</p>
+            <h1>ERROR <span class="counter"> 500</span></h1>
+            <h2>@Titiushko.Resources.Resource.TextError500Title</h2>
+            <p>@Titiushko.Resources.Resource.TextError500Message</p>
         </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
@@ -18,19 +18,6 @@
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
     <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
-        <strong>Las causas más probables:</strong>
-        <ul id="causes">
-            <li>El recurso que está buscando se ha eliminado, se ha cambiado su nombre o no está disponible temporalmente.</li>
-            <li>El directorio o archivo especificado no existe.</li>
-            <li>La URL no existe o contiene errores.</li>
-        </ul>
-        <br />
-        <strong>Lo que puede intentar:</strong>
-        <ul>
-            <li>Verifique que la URL esté bien escrita en la barra de direcciones del navegador web.</li>
-            <li>Si el problema continúa, por favor notifíquelo al administrador del sistema.</li>
-        </ul>
-        <br />
         <div class="btn-group pull-right">
             @if (ViewBag.Layout == null)
             {

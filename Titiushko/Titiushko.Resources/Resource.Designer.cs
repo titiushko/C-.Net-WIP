@@ -385,6 +385,42 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We&apos;re sorry, but the page you&apos;re looking for has not been found..
+        /// </summary>
+        public static string TextError404Message {
+            get {
+                return ResourceManager.GetString("TextError404Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page Not Found.
+        /// </summary>
+        public static string TextError404Title {
+            get {
+                return ResourceManager.GetString("TextError404Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The server encountered something unexpected that didn&apos;t allow it to complete the request. We apologize..
+        /// </summary>
+        public static string TextError500Message {
+            get {
+                return ResourceManager.GetString("TextError500Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal Server Error.
+        /// </summary>
+        public static string TextError500Title {
+            get {
+                return ResourceManager.GetString("TextError500Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List of {0}.
         /// </summary>
         public static string TextListOf {

@@ -610,6 +610,8 @@
     <Content Include="Views\Shared\MobileMenu.cshtml" />
     <Content Include="Views\Shared\BreadcomeArea.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\_ShortLayout.cshtml" />
+    <Content Include="Views\Errors\500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

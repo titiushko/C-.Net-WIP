@@ -68,6 +68,8 @@ namespace Titiushko.MVC5.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("error/404")]
         public ActionResult Error404(bool pIsPartialView = false)
         {
             string vViewTemplate = "~/Views/Errors/404.cshtml";
@@ -78,7 +80,24 @@ namespace Titiushko.MVC5.Controllers
             }
             else
             {
-                ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+                ViewBag.Layout = "~/Views/Shared/_ShortLayout.cshtml";
+                return View(vViewTemplate);
+            }
+        }
+
+        [HttpGet]
+        [Route("error/500")]
+        public ActionResult Error500(bool pIsPartialView = false)
+        {
+            string vViewTemplate = "~/Views/Errors/500.cshtml";
+            if (pIsPartialView)
+            {
+                ViewBag.Layout = null;
+                return PartialView(vViewTemplate);
+            }
+            else
+            {
+                ViewBag.Layout = "~/Views/Shared/_ShortLayout.cshtml";
                 return View(vViewTemplate);
             }
         }
