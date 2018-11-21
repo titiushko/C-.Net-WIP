@@ -385,6 +385,24 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incomplete URL.
+        /// </summary>
+        public static string TextError400Message {
+            get {
+                return ResourceManager.GetString("TextError400Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bad Request.
+        /// </summary>
+        public static string TextError400Title {
+            get {
+                return ResourceManager.GetString("TextError400Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We&apos;re sorry, but the page you&apos;re looking for has not been found..
         /// </summary>
         public static string TextError404Message {

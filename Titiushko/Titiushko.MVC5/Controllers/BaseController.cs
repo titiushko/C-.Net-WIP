@@ -1,5 +1,6 @@
 ﻿using log4net;
 using System;
+using System.Net;
 using System.Web.Mvc;
 using Titiushko.MVC5.Models;
 
@@ -43,11 +44,17 @@ namespace Titiushko.MVC5.Controllers
         #endregion
 
         #region Errors
+        /// <summary>
+        /// Muestra la vista de error pErrorCode personalizada
+        /// </summary>
+        /// <param name="pIsPartialView"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("error/404")]
-        public ActionResult Error404(bool pIsPartialView = false)
+        [Route("error/base")]
+        public ActionResult ErrorBase(HttpStatusCode pErrorCode = HttpStatusCode.ExpectationFailed, bool pIsPartialView = false)
         {
-            string vViewTemplate = "~/Views/Errors/404.cshtml";
+            if (pErrorCode.Equals(HttpStatusCode.ExpectationFailed)) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            string vViewTemplate = string.Format("~/Views/Errors/{0}.cshtml", (int)pErrorCode);
             if (pIsPartialView)
             {
                 ViewBag.Layout = null;
@@ -60,21 +67,40 @@ namespace Titiushko.MVC5.Controllers
             }
         }
 
+        /// <summary>
+        /// Muestra la vista de error 400 personalizada
+        /// </summary>
+        /// <param name="pIsPartialView"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("error/400")]
+        public ActionResult Error400(bool pIsPartialView = false)
+        {
+            return ErrorBase(HttpStatusCode.BadRequest, pIsPartialView);
+        }
+
+        /// <summary>
+        /// Muestra la vista de error 404 personalizada
+        /// </summary>
+        /// <param name="pIsPartialView"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("error/404")]
+        public ActionResult Error404(bool pIsPartialView = false)
+        {
+            return ErrorBase(HttpStatusCode.NotFound, pIsPartialView);
+        }
+
+        /// <summary>
+        /// Muestra la vista de error 500 personalizada
+        /// </summary>
+        /// <param name="pIsPartialView"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("error/500")]
         public ActionResult Error500(bool pIsPartialView = false)
         {
-            string vViewTemplate = "~/Views/Errors/500.cshtml";
-            if (pIsPartialView)
-            {
-                ViewBag.Layout = null;
-                return PartialView(vViewTemplate);
-            }
-            else
-            {
-                ViewBag.Layout = "~/Views/Shared/_ShortLayout.cshtml";
-                return View(vViewTemplate);
-            }
+            return ErrorBase(HttpStatusCode.InternalServerError, pIsPartialView);
         }
         #endregion
     }

@@ -22,17 +22,9 @@ namespace Titiushko.MVC5
             Exception vException = Server.GetLastError();
             Response.Clear();
             HttpException vHttpException = vException as HttpException;
-            int vError = vHttpException != null ? vHttpException.GetHttpCode() : 0;
             Server.ClearError();
             Logging.Logger.Error(vException);
-            if (vError == 404)
-            {
-                Response.Redirect("~/error/404");
-            }
-            else if (vError == 500)
-            {
-                Response.Redirect("~/error/500");
-            }
+            Response.Redirect(string.Format("~/error/{0}", vHttpException != null ? vHttpException.GetHttpCode() : 500));
         }
     }
 }

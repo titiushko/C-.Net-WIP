@@ -612,6 +612,7 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\_ShortLayout.cshtml" />
     <Content Include="Views\Errors\500.cshtml" />
+    <Content Include="Views\Errors\400.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = Titiushko.Resources.Resource.TextError400Title;
+    Layout = ViewBag.Layout;
+}
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+    <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="content-error">
+            <h1>ERROR <span class="counter"> 400</span></h1>
+            <h2>@Titiushko.Resources.Resource.TextError400Title</h2>
+            <p>@Titiushko.Resources.Resource.TextError400Message</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+    <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
+        <strong>Las causas más probables:</strong>
+        <ul id="causes">
+            <li>La URL no existe o contiene errores.</li>
+        </ul>
+        <br />
+        <strong>Lo que puede intentar:</strong>
+        <ul>
+            <li>Verifique que la URL esté bien escrita en la barra de direcciones del navegador web.</li>
+            <li>Si el problema continúa, por favor notifíquelo al administrador del sistema.</li>
+        </ul>
+        <br />
+        <div class="btn-group pull-right">
+            @if (ViewBag.Layout == null)
+            {
+                <a class="btn btn-sm btn-default" onclick="alertify.closeAll();"><i class="fa fa-times-circle"></i> Cerrar</a>
+            }
+            else
+            {
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-danger" href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.INDEX, "home")"><i class="fa fa-home"></i> @Titiushko.Resources.Resource.ModuleHomeName</a>
+                    <a class="btn btn-sm btn-default" id="BackPreviousPage"><i class="fa fa-reply"></i> Volver</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -225,6 +225,12 @@
   <data name="TextEditFor" xml:space="preserve">
     <value>Editar {0}</value>
   </data>
+  <data name="TextError400Message" xml:space="preserve">
+    <value>Dirección URL Incompleta</value>
+  </data>
+  <data name="TextError400Title" xml:space="preserve">
+    <value>Solicitud Incorrecta</value>
+  </data>
   <data name="TextError404Message" xml:space="preserve">
     <value>Lo sentimos, pero la página que está buscando no ha sido encontrada.</value>
   </data>
