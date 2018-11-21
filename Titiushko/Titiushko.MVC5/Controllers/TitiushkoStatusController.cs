@@ -29,7 +29,7 @@ namespace Titiushko.MVC5.Controllers
                 if (id == null) return Error400();
                 StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
                 if (vStatusModel == null) return Error404();
-                ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
+                ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.DETAILS, ControllerName.STATUS);
                 return View(vStatusModel);
             }
             catch (Exception vException)
@@ -42,7 +42,7 @@ namespace Titiushko.MVC5.Controllers
         // GET: TitiushkoStatus/Create
         public ActionResult Create()
         {
-            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.CREATE, ControllerName.STATUS);
+            ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.CREATE, ControllerName.STATUS);
             return View();
         }
 
@@ -89,7 +89,7 @@ namespace Titiushko.MVC5.Controllers
                 if (id == null) return Error400();
                 StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
                 if (vStatusModel == null) return Error404();
-                ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
+                ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.EDIT, ControllerName.STATUS);
                 return View(vStatusModel);
             }
             catch (Exception vException)
@@ -139,7 +139,7 @@ namespace Titiushko.MVC5.Controllers
                 if (id == null) return Error400();
                 TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
                 if (vTitiushkoStatus == null) return Error404();
-                ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DELETE, ControllerName.STATUS);
+                ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.DELETE, ControllerName.STATUS);
                 return View(vTitiushkoStatus);
             }
             catch (Exception vException)

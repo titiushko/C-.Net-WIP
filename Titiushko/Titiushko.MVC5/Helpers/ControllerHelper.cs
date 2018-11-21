@@ -7,9 +7,9 @@ using Titiushko.MVC5.Models;
 
 namespace Titiushko.MVC5.Helpers
 {
-    public class ControllerHelper
+    public static class ControllerHelper
     {
-        public static BreadcomeArea GetBreadcomeAreaUpToLevel2(HtmlHelper pHtmlHelper, string pCurrentActionName, string pCurrentControllerName)
+        public static BreadcomeArea GetBreadcomeAreaUpToLevel2(this HtmlHelper pHtmlHelper, string pCurrentActionName, string pCurrentControllerName)
         {
             string vModuleName = pCurrentControllerName.GetResourceModuleName();
             BreadcomeArea vBreadcomeArea = new BreadcomeArea();
