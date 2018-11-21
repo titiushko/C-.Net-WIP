@@ -101,6 +101,10 @@ namespace MockUp.Controllers
         [Route("eFWLA/admin_create_contract")]
         public ActionResult AdminCreateContract(string MaVin, string BankID)
         {
+            ViewBag.CDateStart = Request["CDateStart"];
+            ViewBag.CDateEnd = Request["CDateEnd"];
+            ViewBag.CPayStart = Request["CPayStart"];
+            ViewBag.CDisbursementDate = Request["CDisbursementDate"];
             return PartialView();
         }
     }

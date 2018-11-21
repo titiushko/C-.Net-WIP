@@ -30,10 +30,10 @@ var step1 = function () {
     $("#CBondValue").val("25,000.00");
     $("#TContractID").val("01");
     $("#WarrantyID").val("0101");
-    $("#CDateStart").val("2018-06-04");
-    $("#CDateEnd").val("2025-06-04");
-    $("#CPayStart").val("2018-07-10");
-    $("#CDisbursementDate").val("2018-06-20");
+    $("#CDateStart").val("2018-11-21");
+    $("#CDateEnd").val("2025-11-21");
+    $("#CPayStart").val("2018-12-10");
+    $("#CDisbursementDate").val("2018-11-31");
     $("[name='CPayDay']").val("10");
     $("#CContractType").val("P");
     $(".open1.nextbutton").click();
