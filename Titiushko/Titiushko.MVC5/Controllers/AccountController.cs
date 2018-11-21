@@ -10,6 +10,7 @@ using Titiushko.MVC5.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using log4net;
 using Titiushko.Utilities.Extensions;
+using Titiushko.MVC.Utils.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -427,7 +428,7 @@ namespace Titiushko.MVC5.Controllers
             catch (Exception vE)
             {
                 logger.Error(vE);
-                TempData = TempDataExceptionMessage(vE);
+                TempData = vE.TempDataExceptionMessage();
                 return RedirectToAction("index", "home");
             }
         }
@@ -463,7 +464,7 @@ namespace Titiushko.MVC5.Controllers
             catch (Exception vE)
             {
                 logger.Error(vE);
-                TempData = TempDataExceptionMessage(vE);
+                TempData = vE.TempDataExceptionMessage();
                 return RedirectToAction("index", "home");
             }
         }

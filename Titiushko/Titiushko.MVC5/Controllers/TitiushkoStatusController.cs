@@ -1,12 +1,11 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Titiushko.MVC5.Models;
 using Titiushko.MVC5.Constants.Names;
 using Titiushko.MVC5.Extensions;
 using Titiushko.MVC5.Helpers;
 using Titiushko.MVC.Utils.Extensions;
+using System;
+using System.Data.Entity.Validation;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -25,17 +24,19 @@ namespace Titiushko.MVC5.Controllers
         // GET: TitiushkoStatus/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null) return Error400();
+                StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
+                if (vStatusModel == null) return Error404();
+                ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
+                return View(vStatusModel);
             }
-            StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
-            if (vStatusModel == null)
+            catch (Exception vException)
             {
-                return HttpNotFound();
+                TempData = vException.TempDataExceptionMessage();
+                return RedirectToAction(ActionName.INDEX);
             }
-            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DETAILS, ControllerName.STATUS);
-            return View(vStatusModel);
         }
 
         // GET: TitiushkoStatus/Create
@@ -52,19 +53,30 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(StatusModel pStatusModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.TitiushkoStatus.Add(new TitiushkoStatus()
+                if (ModelState.IsValid)
                 {
-                    Name = pStatusModel.Name,
-                    Description = pStatusModel.Description,
-                    DateCreated = System.DateTime.Now,
-                    UserCreated = User.Identity.Name,
-                    DateModified = System.DateTime.Now,
-                    UserModified = User.Identity.Name
-                });
-                db.SaveChanges();
-                return RedirectToAction(ActionName.INDEX);
+                    db.TitiushkoStatus.Add(new TitiushkoStatus()
+                    {
+                        Name = pStatusModel.Name,
+                        Description = pStatusModel.Description,
+                        DateCreated = DateTime.Now,
+                        UserCreated = User.Identity.Name,
+                        DateModified = DateTime.Now,
+                        UserModified = User.Identity.Name
+                    });
+                    db.SaveChanges();
+                    return RedirectToAction(ActionName.INDEX);
+                }
+            }
+            catch (DbEntityValidationException vEntityException)
+            {
+                TempData = vEntityException.TempDataEntityExceptionMessage();
+            }
+            catch (Exception vException)
+            {
+                TempData = vException.TempDataExceptionMessage();
             }
             return View(pStatusModel);
         }
@@ -72,17 +84,19 @@ namespace Titiushko.MVC5.Controllers
         // GET: TitiushkoStatus/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null) return Error400();
+                StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
+                if (vStatusModel == null) return Error404();
+                ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
+                return View(vStatusModel);
             }
-            StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
-            if (vStatusModel == null)
+            catch (Exception vException)
             {
-                return HttpNotFound();
+                TempData = vException.TempDataExceptionMessage();
+                return RedirectToAction(ActionName.INDEX);
             }
-            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.EDIT, ControllerName.STATUS);
-            return View(vStatusModel);
         }
 
         // POST: TitiushkoStatus/Edit/5
@@ -92,19 +106,27 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(StatusModel pStatusModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(pStatusModel.Id);
-                if (vTitiushkoStatus == null)
+                if (ModelState.IsValid)
                 {
-                    return HttpNotFound();
+                    TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(pStatusModel.Id);
+                    if (vTitiushkoStatus == null) return Error404();
+                    vTitiushkoStatus.Name = pStatusModel.Name;
+                    vTitiushkoStatus.Description = pStatusModel.Description;
+                    vTitiushkoStatus.DateModified = DateTime.Now;
+                    vTitiushkoStatus.UserModified = User.Identity.Name;
+                    db.SaveChanges();
+                    return RedirectToAction(ActionName.INDEX);
                 }
-                vTitiushkoStatus.Name = pStatusModel.Name;
-                vTitiushkoStatus.Description = pStatusModel.Description;
-                vTitiushkoStatus.DateModified = System.DateTime.Now;
-                vTitiushkoStatus.UserModified = User.Identity.Name;
-                db.SaveChanges();
-                return RedirectToAction(ActionName.INDEX);
+            }
+            catch (DbEntityValidationException vEntityException)
+            {
+                TempData = vEntityException.TempDataEntityExceptionMessage();
+            }
+            catch (Exception vException)
+            {
+                TempData = vException.TempDataExceptionMessage();
             }
             return View(pStatusModel);
         }
@@ -112,28 +134,45 @@ namespace Titiushko.MVC5.Controllers
         // GET: TitiushkoStatus/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null) return Error400();
+                TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+                if (vTitiushkoStatus == null) return Error404();
+                ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DELETE, ControllerName.STATUS);
+                return View(vTitiushkoStatus);
             }
-            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
-            if (vTitiushkoStatus == null)
+            catch (Exception vException)
             {
-                return HttpNotFound();
+                TempData = vException.TempDataExceptionMessage();
+                return RedirectToAction(ActionName.INDEX);
             }
-            ViewBag.BreadcomeArea = ControllerHelper.GetBreadcomeAreaUpToLevel2(this.GetHtmlHelper(), ActionName.DELETE, ControllerName.STATUS);
-            return View(vTitiushkoStatus);
         }
 
         // POST: TitiushkoStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
-            db.TitiushkoStatus.Remove(vTitiushkoStatus);
-            db.SaveChanges();
-            return RedirectToAction(ActionName.INDEX);
+            try
+            {
+                if (id == null) return Error400();
+                TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
+                if (vTitiushkoStatus == null) return Error404();
+                db.TitiushkoStatus.Remove(vTitiushkoStatus);
+                db.SaveChanges();
+                return RedirectToAction(ActionName.INDEX);
+            }
+            catch (DbEntityValidationException vEntityException)
+            {
+                TempData = vEntityException.TempDataEntityExceptionMessage();
+                return RedirectToAction(ActionName.DELETE, new { id = id });
+            }
+            catch (Exception vException)
+            {
+                TempData = vException.TempDataExceptionMessage();
+                return RedirectToAction(ActionName.DELETE, new { id = id });
+            }
         }
 
         protected override void Dispose(bool disposing)
