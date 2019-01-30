@@ -1,3 +1,42 @@
-﻿.text-white {
-    color: #ffffff !important;
+﻿/* TEXT DECORATIONS */
+
+.text-wrap {
+    word-wrap: break-word !important;
+}
+
+.text-black {
+    color: #000000 !important;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.text-no-bold {
+    font-weight: normal !important;
+}
+
+.text-yellow {
+    color: #fde16d !important;
+}
+
+.text-red {
+    color: #a94442 !important;
+}
+
+.text-no-margin {
+    margin: 0px;
+}
+
+.text-white {
+    color: #FFFFFF !important;
+}
+
+.text-silver {
+    color: #1C1C43 !important;
+}
+
+.text-line-break {
+    display: block;
+    margin-bottom: 30px;
 }

@@ -23,6 +23,7 @@
     @Styles.Render("~/Content/metisMenu")
     @Styles.Render("~/Content/style")
     @Styles.Render("~/Content/responsive")
+    @Styles.Render("~/Content/alertify")
     @Styles.Render("~/Content/titiushko")
     @Scripts.Render("~/Scripts/modernizr")
 </head>
@@ -55,9 +56,13 @@
     @Scripts.Render("~/Scripts/metisMenu")
     @Scripts.Render("~/Scripts/tab")
     @Scripts.Render("~/Scripts/main")
-    @RenderSection("Scripts", required: false)
+    @Scripts.Render("~/Scripts/jquery.browser")
+    @Scripts.Render("~/Scripts/alertify")
+    @Scripts.Render("~/Scripts/titiushko")
     <script type="text/javascript">
+        @Html.Partial("Scripts")
         @RenderSection("ScriptsReady", required: false)
     </script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

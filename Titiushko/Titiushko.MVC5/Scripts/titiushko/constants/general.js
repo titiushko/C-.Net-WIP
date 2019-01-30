@@ -17,7 +17,6 @@ var Titiushko = new Object();
 Titiushko["Constants"] = new function () {
     this.TRUE = "TRUE";
     this.FALSE = "FALSE";
-    this.NO_MESSAGE = "Sin Mensaje";
 
     this.User = {
         Role: {
@@ -31,21 +30,6 @@ Titiushko["Constants"] = new function () {
     };
 
     this.Errors = new function () {
-        this.DELETE = "No se puede recuperar después de eliminar. ¿Está seguro de continuar?";
-
-        this.DEFAULT = function (elemento, mensaje) {
-            return "<p>Algo salió mal" + (elemento == undefined || elemento == null ? "" : " en " + elemento) + (mensaje == undefined ? "." : ":<br>" + mensaje) + "</p><br><p><b>Por favor, inténtelo de nuevo más tarde.</b></p>";
-        };
-
-        this.Permission = {
-            DENIED: "No tienes permiso para realizar esta acción.",
-            PRIVILEGE: "No tienes privilegios",
-            PRIVILEGE_DENIED: function (vista) {
-                return "No tienes privilegios para ver " + (vista == "" || vista == undefined ? "esta" : "<b>" + vista.toLowerCase() + "</b>") + " página.";
-            },
-            ACCESS_DENIED: "Inicie sesión en el sistema para acceder al contenido."
-        };
-
         this.Type = {
             UNDEFINED: -1,
             DEFAULT: 0,

@@ -325,6 +325,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\resources\accordions.css" />
+    <Content Include="Content\resources\alertifyjs\alertify.bootstrap.min.css" />
+    <Content Include="Content\resources\alertifyjs\alertify.css" />
+    <Content Include="Content\resources\alertifyjs\alertify.min.css" />
+    <Content Include="Content\resources\alertifyjs\themes\bootstrap.css" />
+    <Content Include="Content\resources\alertifyjs\themes\bootstrap.min.css" />
+    <Content Include="Content\resources\alertifyjs\themes\bootstrap.rtl.css" />
+    <Content Include="Content\resources\alertifyjs\themes\bootstrap.rtl.min.css" />
+    <Content Include="Content\resources\alertifyjs\themes\default.css" />
+    <Content Include="Content\resources\alertifyjs\themes\default.min.css" />
+    <Content Include="Content\resources\alertifyjs\themes\default.rtl.css" />
+    <Content Include="Content\resources\alertifyjs\themes\default.rtl.min.css" />
+    <Content Include="Content\resources\alertifyjs\themes\semantic.css" />
+    <Content Include="Content\resources\alertifyjs\themes\semantic.min.css" />
+    <Content Include="Content\resources\alertifyjs\themes\semantic.rtl.css" />
+    <Content Include="Content\resources\alertifyjs\themes\semantic.rtl.min.css" />
     <Content Include="Content\resources\alerts.css" />
     <Content Include="Content\resources\animate.css" />
     <Content Include="Content\resources\bootstrap.css" />
@@ -436,6 +451,8 @@
     </Content>
     <Content Include="Scripts\resources\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\resources\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\resources\alertifyjs\alertify.js" />
+    <Content Include="Scripts\resources\alertifyjs\alertify.min.js" />
     <Content Include="Scripts\resources\bootstrap.js" />
     <Content Include="Scripts\resources\bootstrap.min.js" />
     <Content Include="Scripts\resources\c3-charts\c3-active.js" />
@@ -495,21 +512,25 @@
     <Content Include="Scripts\resources\input-mask\jasny-bootstrap.min.js" />
     <Content Include="Scripts\resources\ionRangeSlider\ion.rangeSlider.active.js" />
     <Content Include="Scripts\resources\ionRangeSlider\ion.rangeSlider.min.js" />
-    <None Include="Scripts\resources\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\resources\jquery-3.3.1.js" />
-    <Content Include="Scripts\resources\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\resources\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\resources\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\resources\jquery-price-slider.js" />
-    <Content Include="Scripts\resources\jquery.meanmenu.js" />
-    <Content Include="Scripts\resources\jquery.payform.min.js" />
-    <Content Include="Scripts\resources\jquery.scrollUp.min.js" />
-    <Content Include="Scripts\resources\jquery.sticky.js" />
-    <None Include="Scripts\resources\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\resources\jquery.validate.js" />
-    <Content Include="Scripts\resources\jquery.validate.min.js" />
-    <Content Include="Scripts\resources\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\resources\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\resources\jquery\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\resources\jquery\jquery-3.3.1.js" />
+    <Content Include="Scripts\resources\jquery\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\resources\jquery\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery-price-slider.js" />
+    <Content Include="Scripts\resources\jquery\jquery.browser.js" />
+    <Content Include="Scripts\resources\jquery\jquery.browser.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery.cookie.js" />
+    <Content Include="Scripts\resources\jquery\jquery.highlight.js" />
+    <Content Include="Scripts\resources\jquery\jquery.meanmenu.js" />
+    <Content Include="Scripts\resources\jquery\jquery.payform.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery.scrollUp.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery.sticky.js" />
+    <None Include="Scripts\resources\jquery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\resources\jquery\jquery.validate.js" />
+    <Content Include="Scripts\resources\jquery\jquery.validate.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\resources\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\resources\knob\jquery.knob.js" />
     <Content Include="Scripts\resources\knob\knob-active.js" />
     <Content Include="Scripts\resources\main.js" />
@@ -557,13 +578,17 @@
     <Content Include="Scripts\resources\wizard\jquery.steps.js" />
     <Content Include="Scripts\resources\wizard\steps-active.js" />
     <Content Include="Scripts\resources\wow.min.js" />
-    <Content Include="Scripts\titiushko\constants.js" />
+    <Content Include="Scripts\titiushko\constants\messages.es.js" />
+    <Content Include="Scripts\titiushko\constants\general.js" />
+    <Content Include="Scripts\titiushko\global-events.js" />
     <Content Include="Scripts\titiushko\loading-page.js" />
-    <Content Include="Scripts\titiushko\messages.js" />
+    <Content Include="Scripts\titiushko\my-message.js" />
     <Content Include="Scripts\titiushko\my-alertify.js" />
     <Content Include="Scripts\titiushko\return-top.js" />
     <Content Include="Scripts\titiushko\system.js" />
     <Content Include="Scripts\titiushko\utilities.js" />
+    <Content Include="Scripts\resources\jquery\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\resources\jquery\jquery-3.3.1.slim.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -613,6 +638,7 @@
     <Content Include="Views\Shared\_ShortLayout.cshtml" />
     <Content Include="Views\Errors\500.cshtml" />
     <Content Include="Views\Errors\400.cshtml" />
+    <Content Include="Views\Shared\Scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -630,8 +656,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="img\logo\Thumbs.db" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\resources\jquery-3.3.1.min.map" />
-    <Content Include="Scripts\resources\jquery-3.3.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

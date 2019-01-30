@@ -22,7 +22,7 @@ namespace Titiushko.MVC5
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.validate")
-            .Include("~/Scripts/resources/jquery.validate.min.js"));
+            .Include("~/Scripts/resources/jquery/jquery.validate.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/modernizr")
@@ -34,11 +34,11 @@ namespace Titiushko.MVC5
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.price.slider")
-            .Include("~/Scripts/resources/jquery-price-slider.js"));
+            .Include("~/Scripts/resources/jquery/jquery-price-slider.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/meanmenu")
-            .Include("~/Scripts/resources/jquery.meanmenu.js"));
+            .Include("~/Scripts/resources/jquery/jquery.meanmenu.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/owl.carousel")
@@ -50,11 +50,11 @@ namespace Titiushko.MVC5
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.sticky")
-            .Include("~/Scripts/resources/jquery.sticky.js"));
+            .Include("~/Scripts/resources/jquery/jquery.sticky.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.scrollUp")
-            .Include("~/Scripts/resources/jquery.scrollUp.min.js"));
+            .Include("~/Scripts/resources/jquery/jquery.scrollUp.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/mCustomScrollbar")
@@ -92,6 +92,19 @@ namespace Titiushko.MVC5
             bundles
             .Add(new ScriptBundle("~/Scripts/tab")
             .Include("~/Scripts/resources/tab.js"));
+
+            bundles
+            .Add(new ScriptBundle("~/Scripts/jquery.browser")
+            .Include("~/Scripts/resources/jquery/jquery.browser.js"));
+
+            bundles
+            .Add(new ScriptBundle("~/Scripts/alertify")
+            .Include("~/Scripts/resources/alertifyjs/alertify.js"));
+
+            bundles
+            .Add(new ScriptBundle("~/Scripts/titiushko")
+            .Include("~/Scripts/titiushko/constants/*.js",
+                     "~/Scripts/titiushko/*.js"));
             #endregion
 
             #region StyleBundle
@@ -154,6 +167,11 @@ namespace Titiushko.MVC5
             bundles
             .Add(new StyleBundle("~/Content/titiushko")
             .Include("~/Content/titiushko/text.css"));
+
+            bundles
+            .Add(new StyleBundle("~/Content/alertify")
+            .Include("~/Content/resources/alertifyjs/alertify.css",
+                     "~/Content/resources/alertifyjs/alertify.bootstrap.min.css"));
             #endregion
         }
     }
