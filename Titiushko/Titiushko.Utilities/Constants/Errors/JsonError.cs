@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Titiushko.Utilities.Extensions;
 
 namespace Titiushko.Utilities.Constants.Errors
 {
     public class JsonError
     {
-        private static Responses.ErrorResponse DEFAULT(string pMessage = null)
+        private static Responses.ErrorResponse DEFAULT(string pMessage = null, TypeError pTypeError = TypeError.DEFAULT)
         {
             return new Responses.ErrorResponse()
             {
                 error = true,
-                type = TypeError.DEFAULT,
+                type = pTypeError,
                 message = new HashSet<string>() { BaseError.DEFAULT(pMessage) }
             };
         }
@@ -23,7 +24,7 @@ namespace Titiushko.Utilities.Constants.Errors
 
         public static Responses.JsonResponse EXCEPCION(string pMessage)
         {
-            return EXCEPCION(DEFAULT(pMessage));
+            return EXCEPCION(DEFAULT(pMessage, TypeError.EXCEPCION));
         }
 
         public static Responses.JsonResponse EXCEPCION(Exception pException)
@@ -42,12 +43,29 @@ namespace Titiushko.Utilities.Constants.Errors
             {
                 return new Responses.JsonResponse
                 {
-                    Error = new Responses.ErrorResponse()
-                    {
-                        error = true,
-                        type = TypeError.PERMISSION_ACCESS_DENIED,
-                        message = new HashSet<string>() { Resources.Resource.PermissionErrorAccessDenied }
-                    }
+                    Error = DEFAULT(Resources.Resource.PermissionErrorAccessDenied, TypeError.PERMISSION_ACCESS_DENIED)
+                };
+            }
+        }
+
+        public static Responses.JsonResponse ERROR_400
+        {
+            get
+            {
+                return new Responses.JsonResponse
+                {
+                    Error = DEFAULT(string.Format("{0}<br>{1}", Resources.Resource.TextError400Title, Resources.Resource.TextError400Message), (TypeError)HttpStatusCode.BadRequest)
+                };
+            }
+        }
+
+        public static Responses.JsonResponse ERROR_404
+        {
+            get
+            {
+                return new Responses.JsonResponse
+                {
+                    Error = DEFAULT(string.Format("{0}<br>{1}", Resources.Resource.TextError404Title, Resources.Resource.TextError404Message), (TypeError)HttpStatusCode.NotFound)
                 };
             }
         }

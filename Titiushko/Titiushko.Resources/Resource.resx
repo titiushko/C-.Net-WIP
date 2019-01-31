@@ -207,8 +207,14 @@
   <data name="TextDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="TextDeleteErrorFor" xml:space="preserve">
+    <value>Error trying to delete {0}.</value>
+  </data>
   <data name="TextDeleteFor" xml:space="preserve">
     <value>Delete {0}</value>
+  </data>
+  <data name="TextDeleteSuccessFor" xml:space="preserve">
+    <value>{0} successfully deleted.</value>
   </data>
   <data name="TextDescription" xml:space="preserve">
     <value>Description</value>

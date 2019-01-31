@@ -1,10 +1,10 @@
-﻿ALLOW_DEBUGGER["SYSTEM"] = true;
+﻿ALLOW_DEBUGGER["SYSTEM"] = false;
 
 Titiushko["Request"] = new function () {
     this.Response = function (pResponse, pCallBack) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
         if (!Titiushko.MyMessage.IsDenied(pResponse)) {
-            var vMessageSuccess = IsNullOrEmpty(pResponse.Content.message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Content.message;
+            var vMessageSuccess = IsNullOrEmpty(pResponse.Message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Message;
             if (vMessageSuccess !== Titiushko.Constants.Messages.NO_MESSAGE) Titiushko.MyMessage.Success(vMessageSuccess);
             if (pCallBack != null && typeof pCallBack == "function") pCallBack();
             else if (pCallBack != null && typeof pCallBack == "boolean" && pCallBack) setTimeout(function () { location.reload(true); }, 500);
@@ -18,25 +18,27 @@ Titiushko["DeleteRecord"] = new function () {
         if (pParams.asynchronous == undefined) pParams.asynchronous = false;
         if (pParams.typePetition == undefined) pParams.typePetition = "GET";
         if (pParams.data == undefined) pParams.data = {};
-        if (pParams.successfulResponse == undefined) pParams.successfulResponse = function () { };
+        if (pParams.successfulCallBackResponse == undefined) pParams.successfulCallBackResponse = true;
         if (pParams.titleName == undefined) pParams.titleName = "registro";
         pParams.titleName = pParams.titleName.capitalizeFirstLetter();
         Titiushko.MyAlertify.confirm({
             title: "<i class='fa fa-trash-o text-info'></i> Eliminar " + pParams.titleName,
-            content: Titiushko.Constants.MENSAJE_ELIMINAR,
+            content: Titiushko.Constants.Messages.Error.DELETE,
             closable: true,
             maximizable: false,
             hideFooter: false,
             onOk: function () {
                 if (ALLOW_DEBUGGER.SYSTEM) debugger;
                 if (pParams.asynchronous) {
+                    pParams.data["__RequestVerificationToken"] = $("input[name='__RequestVerificationToken']").val();
                     $.ajax({
                         url: BASE_URL + pParams.url,
                         type: pParams.typePetition,
                         dataType: "json",
                         data: pParams.data,
                         success: function (pResponse) {
-                            Titiushko.Request.Response(pResponse, pParams.successfulResponse);
+                            if (ALLOW_DEBUGGER.SYSTEM) debugger;
+                            Titiushko.Request.Response(pResponse, pParams.successfulCallBackResponse);
                         },
                         error: function (pException) {
                             Titiushko.MyMessage.Exception(pException, "eliminar " + pParams.titleName, pParams.url);
@@ -44,6 +46,7 @@ Titiushko["DeleteRecord"] = new function () {
                     });
                 }
                 else {
+                    if ($("form").find("input[name='__RequestVerificationToken']").size() == 0) $("form").append($("input[name='__RequestVerificationToken']"))
                     $("form").submit();
                 }
             }

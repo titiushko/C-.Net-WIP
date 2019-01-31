@@ -56,9 +56,23 @@
                 <div class="btn-group">
                     <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.EDIT, new { id = item.Id })" class="btn btn-primary"><i class="fa fa-pencil"></i> @Titiushko.Resources.Resource.TextEdit</a>
                     <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.DETAILS, new { id = item.Id })" class="btn btn-success"><i class="fa fa-eye"></i> @Titiushko.Resources.Resource.TextDetails</a>
-                    <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.DELETE, new { id = item.Id })" class="btn btn-danger"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</a>
+                    <button data-id="@item.Id" class="btn btn-danger @string.Format("{0}{1}", Titiushko.MVC5.Constants.Names.ActionName.DELETE, Titiushko.Resources.Resource.ModuleStatusName)"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</button>
                 </div>
             </td>
         </tr>
     }
 </table>
+@section Scripts {
+    <script type="text/javascript">
+        $(".@string.Format("{0}{1}", Titiushko.MVC5.Constants.Names.ActionName.DELETE, Titiushko.Resources.Resource.ModuleStatusName)").click(function (event) {
+            event.preventDefault();
+            Titiushko.DeleteRecord.Execute({
+                titleName: "@Titiushko.Resources.Resource.ModuleStatusName",
+                data: { id: $(this).data("id") },
+                asynchronous: true,
+                url: "@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.DELETE)",
+                typePetition: "@FormMethod.Post"
+            });
+        });
+    </script>
+}

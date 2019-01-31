@@ -1,6 +1,6 @@
 ﻿Titiushko["MyMessage"] = new function () {
     /**
-     * Display message error pResponse from an AJAX pRequest
+     * Display message error response from an AJAX request
      */
     this.Error = function (pMessage, pCloseModals) {
         if (pCloseModals != undefined && pCloseModals) alertify.closeAll();
@@ -9,16 +9,16 @@
             if (Array.isArray(pMessage)) {
                 if (pMessage.length > 3) {
                     vContent = "<ul>";
-                    pMessage.forEach(function (element, index) {
-                        console.warn(element);
-                        vContent += "<li>" + element + "</li>";
+                    pMessage.forEach(function (pElement, index) {
+                        console.warn(pElement);
+                        vContent += "<li>" + pElement + "</li>";
                     });
                     vContent += "</ul>";
                 }
                 else {
-                    pMessage.forEach(function (element, index) {
-                        console.warn(element);
-                        alertify.error(element);
+                    pMessage.forEach(function (pElement, index) {
+                        console.warn(pElement);
+                        alertify.error(pElement);
                     });
                 }
             }
@@ -71,14 +71,14 @@
     };
 
     /**
-     * Display message success pResponse from an AJAX pRequest
+     * Display message success response from an AJAX request
      */
     this.Success = function (pMessage, pCloseModals) {
         if (pCloseModals != undefined && pCloseModals) alertify.closeAll();
         if (pMessage != undefined) {
             if (Array.isArray(pMessage)) {
-                pMessage.forEach(function (element, index) {
-                    alertify.success(element);
+                pMessage.forEach(function (pElement, pIndex) {
+                    alertify.success(pElement);
                 });
             }
             else {
@@ -94,14 +94,16 @@
         alertify.closeAll();
         if (pRequest != undefined || pRequest != null) pRequest = pRequest.indexOf("://") == -1 ? BASE_URL + pRequest : pRequest; else pRequest = "";
 
-        var vErrorMessage = Titiushko.Constants.Errors.DEFAULT(null, "Mientras se intenta " + pMessage) + "<br>";
+        var vErrorMessage = Titiushko.Constants.Messages.Error.DEFAULT(null, "Mientras se intenta " + pMessage) + "<br>";
         var vErrorException = "";
 
         if (pException.status != undefined) {
             vErrorMessage += pException.status + " (" + pException.statusText + ").<br>";
             vErrorException = pException.responseText;
 
-            if ([400, 404, 500].indexOf(pException.status) != -1) {
+            var vServerErrorList = [400, 404, 500];
+            var vServerErrorCode = parseInt(pException.responseText.match(/<h1>ERROR <span class="counter"> ([0-9]+)<\/span><\/h1>/)[1]) || 0;
+            if (vServerErrorList.indexOf(pException.status) != -1 || vServerErrorList.indexOf(vServerErrorCode) != -1) {
                 var error = pException.responseText.toHtml();
                 var vContent =
                 "<p>" +
@@ -130,29 +132,30 @@
             data: { pException: JSON.stringify({ pException: vErrorException, pMessage: pMessage, location: location.href, pRequest: pRequest }) },
             type: "POST",
             dataType: "json",
-            url: BASE_URL + "log-pException",
+            url: BASE_URL + "log-exception",
             success: function (pResponse) { if (pResponse.error) console.warn(pResponse.pMessage); },
             error: function (pException) { console.warn(pException); }
         });
     };
 
     /**
-     * Do if pResponse is error or denied
+     * Do if response is error or denied
      */
     this.IsDenied = function (pResponse) {
-        var isDenied = false;
+        var vIsDenied = false;
         if (pResponse != undefined && pResponse.Error.error) {
-            if (pResponse.Error.type == Titiushko.Constants.Errors.Type.PERMISSION_ACCESS_DENIED || pResponse.Error.type == Titiushko.Constants.Errors.Type.AUTHENTICATED_DENIED) {
-                isDenied = true;
-                if (pResponse.Error.type == Titiushko.Constants.Errors.Type.AUTHENTICATED_DENIED) redirect_url = BASE_URL + "account/login";
-                else if (pResponse.Error.type == Titiushko.Constants.Errors.Type.PERMISSION_ACCESS_DENIED) redirect_url = pResponse.Content.return_url;
-                alertify.alert("<i class='fa fa-times-circle text-danger'></i> Acceso denegado", pResponse.Error.pMessage == undefined ? "No tienes privilegios." : pResponse.Error.pMessage, function () { location.href = redirect_url; }).set("label", "Cerrar");
+            if (pResponse.Error.type == Titiushko.Constants.TypeError.PERMISSION_ACCESS_DENIED || pResponse.Error.type == Titiushko.Constants.TypeError.AUTHENTICATED_DENIED) {
+                vIsDenied = true;
+                var vRedirectUrl = "";
+                if (pResponse.Error.type == Titiushko.Constants.TypeError.AUTHENTICATED_DENIED) vRedirectUrl = BASE_URL + "account/login";
+                else if (pResponse.Error.type == Titiushko.Constants.TypeError.PERMISSION_ACCESS_DENIED && pResponse.Content.returnUrl != undefined) vRedirectUrl = pResponse.Content.returnUrl;
+                alertify.alert("<i class='fa fa-times-circle text-danger'></i> Acceso denegado", pResponse.Error.message == undefined ? "No tienes privilegios." : pResponse.Error.message, function () { location.href = vRedirectUrl; }).set("label", "Cerrar");
             }
-            else if (pResponse.Error.pMessage != undefined) {
-                isDenied = true;
-                this.Error(pResponse.Error.pMessage);
+            else if (pResponse.Error.message != undefined) {
+                vIsDenied = true;
+                this.Error(pResponse.Error.message);
             }
         }
-        return isDenied;
+        return vIsDenied;
     };
 };

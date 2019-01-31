@@ -187,7 +187,7 @@
     <value>Volver a la Lista</value>
   </data>
   <data name="TextConfirmDelete" xml:space="preserve">
-    <value>¿Estás seguro de que deseas eliminar {0}?</value>
+    <value>¿Estás seguro que deseas eliminar {0}?</value>
   </data>
   <data name="TextCreate" xml:space="preserve">
     <value>Crear</value>
@@ -207,8 +207,14 @@
   <data name="TextDelete" xml:space="preserve">
     <value>Eliminar</value>
   </data>
+  <data name="TextDeleteErrorFor" xml:space="preserve">
+    <value>Error al intentar eliminar {0}.</value>
+  </data>
   <data name="TextDeleteFor" xml:space="preserve">
     <value>Eliminar {0}</value>
+  </data>
+  <data name="TextDeleteSuccessFor" xml:space="preserve">
+    <value>Se eliminó {0} exitosamente.</value>
   </data>
   <data name="TextDescription" xml:space="preserve">
     <value>Descripción</value>

@@ -24,7 +24,8 @@
         </dd>
     </dl>
 </div>
-<p>
+<div class="btn-group">
     <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.EDIT, new { id = Model.Id })" class="btn btn-primary"><i class="fa fa-pencil"></i> @Titiushko.Resources.Resource.TextEdit</a>
+    <a href="@Url.Action(Titiushko.MVC5.Constants.Names.ActionName.DELETE, new { id = Model.Id })" class="btn btn-danger"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</a>
     @Html.ActionLink(Titiushko.Resources.Resource.TextBackToList, Titiushko.MVC5.Constants.Names.ActionName.INDEX, null, new { @class = "btn btn-default" })
-</p>
+</div>

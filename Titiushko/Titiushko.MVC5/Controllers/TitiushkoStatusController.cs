@@ -1,11 +1,14 @@
-﻿using System.Web.Mvc;
-using Titiushko.MVC5.Models;
+﻿using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Web.Mvc;
+using System;
+using Titiushko.MVC.Utils.Extensions;
 using Titiushko.MVC5.Constants.Names;
 using Titiushko.MVC5.Extensions;
 using Titiushko.MVC5.Helpers;
-using Titiushko.MVC.Utils.Extensions;
-using System;
-using System.Data.Entity.Validation;
+using Titiushko.MVC5.Models;
+using Titiushko.Utilities.Constants.Errors;
+using Titiushko.Utilities.Responses;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -152,26 +155,24 @@ namespace Titiushko.MVC5.Controllers
         // POST: TitiushkoStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public JsonResult DeleteConfirmed(int? id)
         {
             try
             {
-                if (id == null) return Error400();
+                if (id == null) return Json(JsonError.ERROR_400);
                 TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
-                if (vTitiushkoStatus == null) return Error404();
+                if (vTitiushkoStatus == null) return Json(JsonError.ERROR_404);
                 db.TitiushkoStatus.Remove(vTitiushkoStatus);
                 db.SaveChanges();
-                return RedirectToAction(ActionName.INDEX);
+                return Json(new JsonResponse() { Message = new HashSet<string>() { string.Format(Resources.Resource.TextDeleteSuccessFor, Resources.Resource.ModuleStatusName) } });
             }
             catch (DbEntityValidationException vEntityException)
             {
-                TempData = vEntityException.TempDataEntityExceptionMessage();
-                return RedirectToAction(ActionName.DELETE, new { id = id });
+                return Json(JsonError.EXCEPCION(vEntityException));
             }
             catch (Exception vException)
             {
-                TempData = vException.TempDataExceptionMessage();
-                return RedirectToAction(ActionName.DELETE, new { id = id });
+                return Json(JsonError.EXCEPCION(vException));
             }
         }
 

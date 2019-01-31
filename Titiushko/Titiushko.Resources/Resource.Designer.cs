@@ -331,11 +331,29 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error trying to delete {0}..
+        /// </summary>
+        public static string TextDeleteErrorFor {
+            get {
+                return ResourceManager.GetString("TextDeleteErrorFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete {0}.
         /// </summary>
         public static string TextDeleteFor {
             get {
                 return ResourceManager.GetString("TextDeleteFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} successfully deleted..
+        /// </summary>
+        public static string TextDeleteSuccessFor {
+            get {
+                return ResourceManager.GetString("TextDeleteSuccessFor", resourceCulture);
             }
         }
         

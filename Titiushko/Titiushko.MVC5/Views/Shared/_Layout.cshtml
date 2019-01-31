@@ -49,6 +49,7 @@
             @Html.Partial("BreadcomeArea")
         </div>
         <div class="container-fluid container-main">
+            @Html.AntiForgeryToken()
             @RenderBody()
         </div>
         @Html.Partial("Footer")

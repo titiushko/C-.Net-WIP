@@ -27,11 +27,19 @@
 
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger" id="@string.Format("{0}{1}", Titiushko.MVC5.Constants.Names.ActionName.DELETE, Titiushko.Resources.Resource.ModuleStatusName)"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</button>
             @Html.ActionLink(Titiushko.Resources.Resource.TextBackToList, Titiushko.MVC5.Constants.Names.ActionName.INDEX, null, new { @class = "btn btn-default" })
         </div>
     }
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        $("#@string.Format("{0}{1}", Titiushko.MVC5.Constants.Names.ActionName.DELETE, Titiushko.Resources.Resource.ModuleStatusName)").click(function (event) {
+            event.preventDefault();
+            Titiushko.DeleteRecord.Execute({
+                titleName: "@Titiushko.Resources.Resource.ModuleStatusName"
+            });
+        });
+    </script>
+}

@@ -13,3 +13,5 @@ if ("@TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_POPUP]".isTrue()) {
         content: @Html.Raw(Json.Encode(TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_POPUP_MESSAGE])),
     });
 }
+
+Titiushko.Constants.TypeError = JSON.parse(@Html.Raw(Json.Encode(Titiushko.Utilities.Helpers.GlobalHelper.GetTypeErrorToJson())));
