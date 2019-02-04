@@ -37,7 +37,7 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (Exception vException)
             {
-                TempData = vException.TempDataExceptionMessage();
+                this.SetTempDataException(vException);
                 return RedirectToAction(ActionName.INDEX);
             }
         }
@@ -75,11 +75,11 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (DbEntityValidationException vEntityException)
             {
-                TempData = vEntityException.TempDataEntityExceptionMessage();
+                this.SetTempDataEntityException(vEntityException);
             }
             catch (Exception vException)
             {
-                TempData = vException.TempDataExceptionMessage();
+                this.SetTempDataException(vException);
             }
             return View(pStatusModel);
         }
@@ -97,7 +97,7 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (Exception vException)
             {
-                TempData = vException.TempDataExceptionMessage();
+                this.SetTempDataException(vException);
                 return RedirectToAction(ActionName.INDEX);
             }
         }
@@ -125,11 +125,11 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (DbEntityValidationException vEntityException)
             {
-                TempData = vEntityException.TempDataEntityExceptionMessage();
+                this.SetTempDataEntityException(vEntityException);
             }
             catch (Exception vException)
             {
-                TempData = vException.TempDataExceptionMessage();
+                this.SetTempDataException(vException);
             }
             return View(pStatusModel);
         }
@@ -147,7 +147,7 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (Exception vException)
             {
-                TempData = vException.TempDataExceptionMessage();
+                this.SetTempDataException(vException);
                 return RedirectToAction(ActionName.INDEX);
             }
         }
