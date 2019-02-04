@@ -3,9 +3,9 @@
 alertify.defaults.theme.ok = "btn btn-primary";
 alertify.defaults.theme.cancel = "btn btn-danger";
 alertify.defaults.theme.input = "form-control";
-alertify.defaults.glossary.title = "< class='fa fa-info-circle text-info'></i> Por favor selecciona una opción";
-alertify.defaults.glossary.ok = "Aceptar";
-alertify.defaults.glossary.cancel = "Cancelar";
+alertify.defaults.glossary.title = "<i class='fa fa-info-circle text-info'></i> Por favor selecciona una opción";
+alertify.defaults.glossary.ok = "<i class='fa fa-check-circle'></i> Aceptar";
+alertify.defaults.glossary.cancel = "<i class='fa fa-times-circle'></i> Cancelar";
 alertify.defaults.transition = "slide";
 alertify.defaults.maximizable = false;
 alertify.defaults.closable = true;
@@ -22,7 +22,7 @@ Titiushko["MyAlertify"] = new function () {
         if (config.url == undefined) config.url = null;
         if (config.content == undefined) config.content = null;
         if (config.parameters == undefined) config.parameters = null;
-        if (config.maximizable == undefined) config.maximizable = true;
+        if (config.maximizable == undefined) config.maximizable = false;
         if (config.startMaximized == undefined) config.startMaximized = false;
         if (config.label == undefined) config.label = "Cerrar";
         if (config.closeAll == undefined) config.closeAll = false;
@@ -74,7 +74,7 @@ Titiushko["MyAlertify"] = new function () {
                 $(this.elements.content).empty();
                 alertify.alert("<i class='fa fa-exclamation-triangle text-warning'></i> Alert", "", null)
                 .set({
-                    label: "Ok",
+                    label: alertify.defaults.glossary.ok,
                     maximizable: false,
                     startMaximized: false,
                     onshow: function () {
@@ -89,8 +89,7 @@ Titiushko["MyAlertify"] = new function () {
             "<span id='MyAlertTitle'></span>",
             "<div id='MyAlertContent'></div>",
             config.onOk,
-             config.onCancel
-
+            config.onCancel
         );
     };
 
