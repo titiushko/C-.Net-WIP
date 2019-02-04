@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Titiushko.MVC5.CustomDataAnnotations;
+using Titiushko.MVC.Utils.CustomDataAnnotations;
 
 namespace Titiushko.MVC5.Models
 {

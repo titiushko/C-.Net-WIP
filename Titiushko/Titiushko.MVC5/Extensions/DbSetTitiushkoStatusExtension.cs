@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using Titiushko.MVC5.Models;
 
-namespace Titiushko.MVC.Utils.Extensions
+namespace Titiushko.MVC5.Extensions
 {
     public static class DbSetTitiushkoStatusExtension
     {
