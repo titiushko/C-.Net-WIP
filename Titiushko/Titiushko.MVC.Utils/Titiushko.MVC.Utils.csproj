@@ -82,6 +82,7 @@
     <Compile Include="CustomDataAnnotations\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Extensions\ControllerExtension.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\HtmlHelperExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
