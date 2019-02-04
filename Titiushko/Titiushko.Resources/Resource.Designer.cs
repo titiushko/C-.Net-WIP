@@ -286,6 +286,15 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error trying to create {0}..
+        /// </summary>
+        public static string TextCreateErrorFor {
+            get {
+                return ResourceManager.GetString("TextCreateErrorFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create New.
         /// </summary>
         public static string TextCreateNew {
@@ -300,6 +309,15 @@ namespace Titiushko.Resources {
         public static string TextCreateNewFor {
             get {
                 return ResourceManager.GetString("TextCreateNewFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} successfully created..
+        /// </summary>
+        public static string TextCreateSuccessFor {
+            get {
+                return ResourceManager.GetString("TextCreateSuccessFor", resourceCulture);
             }
         }
         
@@ -394,11 +412,29 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error trying to edit {0}..
+        /// </summary>
+        public static string TextEditErrorFor {
+            get {
+                return ResourceManager.GetString("TextEditErrorFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit {0}.
         /// </summary>
         public static string TextEditFor {
             get {
                 return ResourceManager.GetString("TextEditFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} successfully edited..
+        /// </summary>
+        public static string TextEditSuccessFor {
+            get {
+                return ResourceManager.GetString("TextEditSuccessFor", resourceCulture);
             }
         }
         

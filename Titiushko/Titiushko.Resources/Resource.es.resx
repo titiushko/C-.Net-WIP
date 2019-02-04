@@ -192,11 +192,17 @@
   <data name="TextCreate" xml:space="preserve">
     <value>Crear</value>
   </data>
+  <data name="TextCreateErrorFor" xml:space="preserve">
+    <value>Error al intentar crear {0}.</value>
+  </data>
   <data name="TextCreateNew" xml:space="preserve">
     <value>Crear Nuevo</value>
   </data>
   <data name="TextCreateNewFor" xml:space="preserve">
     <value>Crear Nuevo {0}</value>
+  </data>
+  <data name="TextCreateSuccessFor" xml:space="preserve">
+    <value>Se creó {0} exitosamente.</value>
   </data>
   <data name="TextDateCreated" xml:space="preserve">
     <value>Fecha de Creación</value>
@@ -228,8 +234,14 @@
   <data name="TextEdit" xml:space="preserve">
     <value>Editar</value>
   </data>
+  <data name="TextEditErrorFor" xml:space="preserve">
+    <value>Error al intentar editar {0}.</value>
+  </data>
   <data name="TextEditFor" xml:space="preserve">
     <value>Editar {0}</value>
+  </data>
+  <data name="TextEditSuccessFor" xml:space="preserve">
+    <value>Se editó {0} exitosamente.</value>
   </data>
   <data name="TextError400Message" xml:space="preserve">
     <value>Dirección URL Incompleta</value>

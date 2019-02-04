@@ -70,7 +70,12 @@ namespace Titiushko.MVC5.Controllers
                         UserModified = User.Identity.Name
                     });
                     db.SaveChanges();
+                    this.SetTempDataSuccess(string.Format(Resources.Resource.TextCreateSuccessFor, Resources.Resource.ModuleStatusName));
                     return RedirectToAction(ActionName.INDEX);
+                }
+                else
+                {
+                    this.SetTempDataError(string.Format(Resources.Resource.TextCreateErrorFor, Resources.Resource.ModuleStatusName));
                 }
             }
             catch (DbEntityValidationException vEntityException)
@@ -120,7 +125,12 @@ namespace Titiushko.MVC5.Controllers
                     vTitiushkoStatus.DateModified = DateTime.Now;
                     vTitiushkoStatus.UserModified = User.Identity.Name;
                     db.SaveChanges();
+                    this.SetTempDataSuccess(string.Format(Resources.Resource.TextEditSuccessFor, Resources.Resource.ModuleStatusName));
                     return RedirectToAction(ActionName.INDEX);
+                }
+                else
+                {
+                    this.SetTempDataError(string.Format(Resources.Resource.TextEditErrorFor, Resources.Resource.ModuleStatusName));
                 }
             }
             catch (DbEntityValidationException vEntityException)
