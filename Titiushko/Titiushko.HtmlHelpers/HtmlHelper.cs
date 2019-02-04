@@ -257,15 +257,35 @@ namespace Titiushko.HtmlHelpers
                 {
                     HtmlElementCollection vHtmlElements = pHtmlDoc.GetElementsByTagName(pTag);
                     if (vHtmlElements == null || vHtmlElements.Count == 0) vHtmlElements = GetHtmlElementsFromFramesByTagName(pHtmlDoc, pTag);
-                    if (vHtmlElements != null && vHtmlElements.Count > 0)
+                    vHtmlElement = GetHtmlElementByRegexExpressionFromHtmlElementCollection(vHtmlElements, pRegexExpression);
+                    if (vHtmlElement == null && vHtmlElements != null && vHtmlElements.Count > 0)
                     {
-                        foreach (HtmlElement vElement in vHtmlElements)
+                        vHtmlElements = GetHtmlElementsFromFramesByTagName(pHtmlDoc, pTag);
+                        vHtmlElement = GetHtmlElementByRegexExpressionFromHtmlElementCollection(vHtmlElements, pRegexExpression);
+                    }
+                }
+                return vHtmlElement;
+            }
+            catch (Exception vE)
+            {
+                throw vE;
+            }
+        }
+
+        public static HtmlElement GetHtmlElementByRegexExpressionFromHtmlElementCollection(HtmlElementCollection pHtmlElements, string pRegexExpression)
+        {
+            try
+            {
+                if (pHtmlElements == null || string.IsNullOrWhiteSpace(pRegexExpression)) return null;
+                HtmlElement vHtmlElement = null;
+                if (pHtmlElements != null && pHtmlElements.Count > 0)
+                {
+                    foreach (HtmlElement vElement in pHtmlElements)
+                    {
+                        if (Regex.IsMatch(vElement.OuterHtml.RemoveTildes(), pRegexExpression, RegexOptions.IgnoreCase))  // Si elemento por tag es igual a la primera coincidencia
                         {
-                            if (Regex.IsMatch(vElement.OuterHtml.RemoveTildes(), pRegexExpression, RegexOptions.IgnoreCase))  // Si elemento por tag es igual a la primera coincidencia
-                            {
-                                vHtmlElement = vElement;    // Obtener el elemento por tag
-                                break;
-                            }
+                            vHtmlElement = vElement;    // Obtener el elemento por tag
+                            break;
                         }
                     }
                 }
