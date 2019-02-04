@@ -268,6 +268,15 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string TextCancel {
+            get {
+                return ResourceManager.GetString("TextCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete {0}?.
         /// </summary>
         public static string TextConfirmDelete {

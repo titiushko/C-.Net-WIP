@@ -449,6 +449,7 @@
     <Content Include="Models\ProjectFollowing.edmx.diagram">
       <DependentUpon>ProjectFollowing.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\modules\status\list.js" />
     <Content Include="Scripts\resources\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\resources\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\resources\alertifyjs\alertify.js" />
@@ -617,8 +618,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\TitiushkoStatus\Create.cshtml" />
-    <Content Include="Views\TitiushkoStatus\Delete.cshtml" />
-    <Content Include="Views\TitiushkoStatus\Details.cshtml" />
     <Content Include="Views\TitiushkoStatus\Edit.cshtml" />
     <Content Include="Views\TitiushkoStatus\Index.cshtml" />
     <Content Include="Views\Web.config" />

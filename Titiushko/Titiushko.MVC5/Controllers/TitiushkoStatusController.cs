@@ -24,29 +24,11 @@ namespace Titiushko.MVC5.Controllers
             return View(db.TitiushkoStatus.ToCustomModelList());
         }
 
-        // GET: TitiushkoStatus/Details/5
-        public ActionResult Details(int? id)
-        {
-            try
-            {
-                if (id == null) return Error400();
-                StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
-                if (vStatusModel == null) return Error404();
-                ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.DETAILS, ControllerName.STATUS);
-                return View(vStatusModel);
-            }
-            catch (Exception vException)
-            {
-                this.SetTempDataException(vException);
-                return RedirectToAction(ActionName.INDEX);
-            }
-        }
-
         // GET: TitiushkoStatus/Create
         public ActionResult Create()
         {
             ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.CREATE, ControllerName.STATUS);
-            return View();
+            return PartialView();
         }
 
         // POST: TitiushkoStatus/Create
@@ -98,7 +80,7 @@ namespace Titiushko.MVC5.Controllers
                 StatusModel vStatusModel = db.TitiushkoStatus.FindAndConvertToCustomModel(id);
                 if (vStatusModel == null) return Error404();
                 ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.EDIT, ControllerName.STATUS);
-                return View(vStatusModel);
+                return PartialView(vStatusModel);
             }
             catch (Exception vException)
             {
@@ -142,24 +124,6 @@ namespace Titiushko.MVC5.Controllers
                 this.SetTempDataException(vException);
             }
             return View(pStatusModel);
-        }
-
-        // GET: TitiushkoStatus/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id == null) return Error400();
-                TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
-                if (vTitiushkoStatus == null) return Error404();
-                ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.DELETE, ControllerName.STATUS);
-                return View(vTitiushkoStatus);
-            }
-            catch (Exception vException)
-            {
-                this.SetTempDataException(vException);
-                return RedirectToAction(ActionName.INDEX);
-            }
         }
 
         // POST: TitiushkoStatus/Delete/5

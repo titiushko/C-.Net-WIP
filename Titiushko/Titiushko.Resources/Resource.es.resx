@@ -186,6 +186,9 @@
   <data name="TextBackToList" xml:space="preserve">
     <value>Volver a la Lista</value>
   </data>
+  <data name="TextCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
   <data name="TextConfirmDelete" xml:space="preserve">
     <value>¿Estás seguro que deseas eliminar {0}?</value>
   </data>
