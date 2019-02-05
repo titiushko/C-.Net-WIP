@@ -18,7 +18,7 @@ namespace Titiushko.MVC5
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery")
-            .Include("~/Scripts/resources/vendor/jquery-1.11.3.min.js"));
+            .Include("~/Scripts/resources/jquery/jquery-1.11.3.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/jquery.validate")
@@ -26,7 +26,7 @@ namespace Titiushko.MVC5
 
             bundles
             .Add(new ScriptBundle("~/Scripts/modernizr")
-            .Include("~/Scripts/resources/vendor/modernizr-2.8.3.min.js"));
+            .Include("~/Scripts/resources/modernizr/modernizr-2.8.3.min.js"));
 
             bundles
             .Add(new ScriptBundle("~/Scripts/wow")
@@ -102,6 +102,10 @@ namespace Titiushko.MVC5
             .Include("~/Scripts/resources/alertifyjs/alertify.js"));
 
             bundles
+            .Add(new ScriptBundle("~/Scripts/bootstrap-data-table")
+            .Include("~/Scripts/resources/data-table/bootstrap-table.js"));
+
+            bundles
             .Add(new ScriptBundle("~/Scripts/titiushko")
             .Include("~/Scripts/titiushko/constants/*.js",
                      "~/Scripts/titiushko/*.js"));
@@ -165,13 +169,17 @@ namespace Titiushko.MVC5
             .Include("~/Content/resources/responsive.css"));
 
             bundles
-            .Add(new StyleBundle("~/Content/titiushko")
-            .Include("~/Content/titiushko/text.css"));
-
-            bundles
             .Add(new StyleBundle("~/Content/alertify")
             .Include("~/Content/resources/alertifyjs/alertify.css",
                      "~/Content/resources/alertifyjs/alertify.bootstrap.min.css"));
+
+            bundles
+            .Add(new StyleBundle("~/Content/bootstrap-data-table")
+            .Include("~/Content/data-table/bootstrap-table.css"));
+
+            bundles
+            .Add(new StyleBundle("~/Content/titiushko")
+            .Include("~/Content/titiushko/text.css"));
             #endregion
         }
     }

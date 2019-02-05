@@ -279,6 +279,7 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BootstrapDataTable.cs" />
     <Compile Include="Models\BreadcomeArea.cs" />
     <Compile Include="Constants\Names\ActionName.cs" />
     <Compile Include="Constants\Names\ControllerName.cs" />
@@ -574,8 +575,8 @@
     <Content Include="Scripts\resources\touchspin\touchspin-active.js" />
     <Content Include="Scripts\resources\tree-line\jstree.active.js" />
     <Content Include="Scripts\resources\tree-line\jstree.min.js" />
-    <Content Include="Scripts\resources\vendor\jquery-1.11.3.min.js" />
-    <Content Include="Scripts\resources\vendor\modernizr-2.8.3.min.js" />
+    <Content Include="Scripts\resources\jquery\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\resources\modernizr\modernizr-2.8.3.min.js" />
     <Content Include="Scripts\resources\wizard\jquery.steps.js" />
     <Content Include="Scripts\resources\wizard\steps-active.js" />
     <Content Include="Scripts\resources\wow.min.js" />

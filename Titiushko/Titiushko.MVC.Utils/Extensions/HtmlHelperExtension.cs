@@ -17,12 +17,12 @@ namespace Titiushko.MVC.Utils.Extensions
             return MvcHtmlString.Create(string.Format("<link type='text/css' href='{0}' rel='stylesheet' />", GetUrl(pHtmlHelper, pFilename)));
         }
 
-        private static string GetUrl(this HtmlHelper pHtmlHelper, string pFilename)
+        public static string GetUrl(this HtmlHelper pHtmlHelper, string pFilename)
         {
             return UrlHelper.GenerateContentUrl(pFilename + GetVersion(pHtmlHelper, pFilename), pHtmlHelper.ViewContext.RequestContext.HttpContext);
         }
 
-        private static string GetVersion(this HtmlHelper pHtmlHelper, string pFilename)
+        public static string GetVersion(this HtmlHelper pHtmlHelper, string pFilename)
         {
             HttpContextBase vHttpContext = pHtmlHelper.ViewContext.RequestContext.HttpContext;
             string vPhysicalPath = vHttpContext.Server.MapPath(pFilename);
