@@ -171,16 +171,16 @@
   <data name="ModuleUserName" xml:space="preserve">
     <value>Usuario</value>
   </data>
-  <data name="PermissionErrorAccessDenied" xml:space="preserve">
+  <data name="ErrorPermissionAccessDenied" xml:space="preserve">
     <value>Inicie sesión en el sistema para acceder al contenido.</value>
   </data>
-  <data name="PermissionErrorDenied" xml:space="preserve">
+  <data name="ErrorPermissionDenied" xml:space="preserve">
     <value>No tienes permiso para realizar esta acción.</value>
   </data>
-  <data name="PermissionErrorPrivilege" xml:space="preserve">
+  <data name="ErrorPermissionPrivilege" xml:space="preserve">
     <value>No tienes privilegios</value>
   </data>
-  <data name="PermissionErrorPrivilegeDenied" xml:space="preserve">
+  <data name="ErrorPermissionPrivilegeDenied" xml:space="preserve">
     <value> para ver &lt;b&gt;{0}&lt;/b&gt;.</value>
   </data>
   <data name="TextBackToList" xml:space="preserve">
@@ -278,5 +278,8 @@
   </data>
   <data name="TextUserModified" xml:space="preserve">
     <value>Modificado Por</value>
+  </data>
+  <data name="ErrorAjaxDenied" xml:space="preserve">
+    <value>Error de solicitud denegada: esta acción solo se puede ejecutar desde una llamada Ajax. Por favor, vaya a la página de inicio del sistema.</value>
   </data>
 </root>

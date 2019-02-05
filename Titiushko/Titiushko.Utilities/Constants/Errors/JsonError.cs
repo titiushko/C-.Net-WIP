@@ -43,7 +43,18 @@ namespace Titiushko.Utilities.Constants.Errors
             {
                 return new Responses.JsonResponse
                 {
-                    Error = DEFAULT(Resources.Resource.PermissionErrorAccessDenied, TypeError.PERMISSION_ACCESS_DENIED)
+                    Error = DEFAULT(Resources.Resource.ErrorPermissionAccessDenied, TypeError.PERMISSION_ACCESS_DENIED)
+                };
+            }
+        }
+
+        public static Responses.JsonResponse AJAX_DENIED
+        {
+            get
+            {
+                return new Responses.JsonResponse
+                {
+                    Error = DEFAULT(Resources.Resource.ErrorAjaxDenied, TypeError.AJAX_DENIED)
                 };
             }
         }

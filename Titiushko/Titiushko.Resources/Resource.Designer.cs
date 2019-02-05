@@ -106,6 +106,51 @@ namespace Titiushko.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request Denied Error: This action can only be executed from an Ajax call. Please go to return to home page of the system..
+        /// </summary>
+        public static string ErrorAjaxDenied {
+            get {
+                return ResourceManager.GetString("ErrorAjaxDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in to the system to access the content..
+        /// </summary>
+        public static string ErrorPermissionAccessDenied {
+            get {
+                return ResourceManager.GetString("ErrorPermissionAccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to perform this action..
+        /// </summary>
+        public static string ErrorPermissionDenied {
+            get {
+                return ResourceManager.GetString("ErrorPermissionDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have privileges.
+        /// </summary>
+        public static string ErrorPermissionPrivilege {
+            get {
+                return ResourceManager.GetString("ErrorPermissionPrivilege", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  to see &lt;b&gt;{0}&lt;/b&gt;..
+        /// </summary>
+        public static string ErrorPermissionPrivilegeDenied {
+            get {
+                return ResourceManager.GetString("ErrorPermissionPrivilegeDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The dictionary has no content.
         /// </summary>
         public static string ExceptionDictionaryHasNoContent {
@@ -219,42 +264,6 @@ namespace Titiushko.Resources {
         public static string ModuleUserName {
             get {
                 return ResourceManager.GetString("ModuleUserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log in to the system to access the content..
-        /// </summary>
-        public static string PermissionErrorAccessDenied {
-            get {
-                return ResourceManager.GetString("PermissionErrorAccessDenied", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to perform this action..
-        /// </summary>
-        public static string PermissionErrorDenied {
-            get {
-                return ResourceManager.GetString("PermissionErrorDenied", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You do not have privileges.
-        /// </summary>
-        public static string PermissionErrorPrivilege {
-            get {
-                return ResourceManager.GetString("PermissionErrorPrivilege", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  to see &lt;b&gt;{0}&lt;/b&gt;..
-        /// </summary>
-        public static string PermissionErrorPrivilegeDenied {
-            get {
-                return ResourceManager.GetString("PermissionErrorPrivilegeDenied", resourceCulture);
             }
         }
         

@@ -171,16 +171,16 @@
   <data name="ModuleUserName" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="PermissionErrorAccessDenied" xml:space="preserve">
+  <data name="ErrorPermissionAccessDenied" xml:space="preserve">
     <value>Log in to the system to access the content.</value>
   </data>
-  <data name="PermissionErrorDenied" xml:space="preserve">
+  <data name="ErrorPermissionDenied" xml:space="preserve">
     <value>You do not have permission to perform this action.</value>
   </data>
-  <data name="PermissionErrorPrivilege" xml:space="preserve">
+  <data name="ErrorPermissionPrivilege" xml:space="preserve">
     <value>You do not have privileges</value>
   </data>
-  <data name="PermissionErrorPrivilegeDenied" xml:space="preserve">
+  <data name="ErrorPermissionPrivilegeDenied" xml:space="preserve">
     <value> to see &lt;b&gt;{0}&lt;/b&gt;.</value>
   </data>
   <data name="TextBackToList" xml:space="preserve">
@@ -278,5 +278,8 @@
   </data>
   <data name="TextUserModified" xml:space="preserve">
     <value>Modified By</value>
+  </data>
+  <data name="ErrorAjaxDenied" xml:space="preserve">
+    <value>Request Denied Error: This action can only be executed from an Ajax call. Please go to return to home page of the system.</value>
   </data>
 </root>
