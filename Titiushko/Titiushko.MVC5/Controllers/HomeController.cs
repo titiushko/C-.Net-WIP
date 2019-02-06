@@ -8,7 +8,6 @@ namespace Titiushko.MVC5.Controllers
         public ActionResult Index()
         {
             ViewBag.CurrentDate = DateTime.Now.ToString(Resources.Resource.FormatDate);
-            Logging.Logger.Log(ViewBag.BreadcomeArea.Title, Logging.LogType.INFO);
             return View();
         }
 

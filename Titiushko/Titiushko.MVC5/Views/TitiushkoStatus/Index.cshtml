@@ -5,61 +5,71 @@
     ViewBag.Title = ViewBag.BreadcomeArea.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p>
-    <button id="CreateStatus" class="btn btn-success" data-action="create"><i class="fa fa-plus-square"></i> @Titiushko.Resources.Resource.TextCreateNew</button>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateModified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserModified)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (StatusModel item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateModified)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserModified)
-            </td>
-            <td>
-                <div class="btn-group">
-                    <button data-id="@item.Id" class="btn btn-primary EditStatus" data-action="edit"><i class="fa fa-pencil"></i> @Titiushko.Resources.Resource.TextEdit</button>
-                    <button data-id="@item.Id" class="btn btn-danger DeleteStatus" data-title-name="@Titiushko.Resources.Resource.ModuleStatusName"><i class="fa fa-trash"></i> @Titiushko.Resources.Resource.TextDelete</button>
+@Styles.Render("~/Content/bootstrap-data-table")
+<div class="data-table-area mg-tb-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <p>
+                                <button id="CreateStatus" class="btn btn-success" data-action="create"><i class="fa fa-plus-square"></i> @Titiushko.Resources.Resource.TextCreateNew</button>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="StatusTable"
+                                   data-toggle="table"
+                                   data-unique-id="Id"
+                                   data-pagination="true"
+                                   data-show-pagination-switch="true"
+                                   data-side-pagination="server"
+                                   data-url="@Url.Action("get")"
+                                   data-page-list="[5,10,20,50,100,200]"
+                                   data-search="true"
+                                   data-sortable="true"
+                                   data-show-columns="true"
+                                   data-show-refresh="true"
+                                   data-key-events="true"
+                                   data-show-toggle="true"
+                                   data-resizable="true"
+                                   data-cookie="true"
+                                   data-cookie-id-table="saveId"
+                                   data-show-export="true"
+                                   data-click-to-select="true"
+                                   data-response-handler="ModuleStatus.responseHandler"
+                                   data-toolbar="#toolbar"
+                                   class="table table-striped table-bordered table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th data-visible="false" data-field="Id">@Html.DisplayNameFor(model => model.Id)</th>
+                                        <th data-sortable="true" data-field="Name">@Html.DisplayNameFor(model => model.Name)</th>
+                                        <th data-sortable="true" data-field="Description">@Html.DisplayNameFor(model => model.Description)</th>
+                                        <th data-sortable="true" data-field="DateCreated">@Html.DisplayNameFor(model => model.DateCreated)</th>
+                                        <th data-sortable="true" data-field="UserCreated">@Html.DisplayNameFor(model => model.UserCreated)</th>
+                                        <th data-sortable="true" data-field="DateModified">@Html.DisplayNameFor(model => model.DateModified)</th>
+                                        <th data-sortable="true" data-field="UserModified">@Html.DisplayNameFor(model => model.UserModified)</th>
+                                        <th data-field="Options" data-width="10%"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </td>
-        </tr>
-    }
-</table>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
+    @Scripts.Render("~/Scripts/bootstrap-data-table")
     @Html.LoadVersionedScript("~/Scripts/modules/status/list.js")
 }

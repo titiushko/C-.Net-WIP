@@ -2,6 +2,11 @@
 {
     public class Request
     {
+        public Request()
+        {
+            sort = string.Empty;
+        }
+
         public int offset { get; set; }
         public int limit { get; set; }
         public string sort { get; set; }

@@ -9,6 +9,8 @@ using Titiushko.MVC5.Helpers;
 using Titiushko.MVC5.Models;
 using Titiushko.Utilities.Constants.Errors;
 using Titiushko.Utilities.Responses;
+using System.Linq;
+using Titiushko.Utilities.Extensions;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -21,7 +23,50 @@ namespace Titiushko.MVC5.Controllers
         {
             ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName);
             ViewBag.BreadcomeArea.Level1 = new MvcHtmlString((string)ViewBag.BreadcomeArea.Title);
-            return View(db.TitiushkoStatus.ToCustomModelList());
+            return View();
+        }
+
+        [HttpGet]
+        [Route("get")]
+        public JsonResult Get(Models.BootstrapDataTable.Request pDataTableRequest)
+        {
+            if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED, JsonRequestBehavior.AllowGet);
+            try
+            {
+                IEnumerable<StatusModel> vStatusModelList = db.TitiushkoStatus.ToCustomModelList();
+
+                //Total de todos los registros
+                int vTotalRows = vStatusModelList.Count();
+
+                //Buscar si pDataTableRequest.search se encuentra en Name o Description
+                if (!string.IsNullOrWhiteSpace(pDataTableRequest.search))
+                {
+                    pDataTableRequest.search = pDataTableRequest.search.ToLower();
+                    vStatusModelList = vStatusModelList.Where(m => m.Name.ToLower().Contains(pDataTableRequest.search) || m.Description.ToLower().Contains(pDataTableRequest.search));
+                }
+
+                //Ordenar por pDataTableRequest.order (ascendente o descendente) la columna pDataTableRequest.sort
+                Func<StatusModel, string> vOrderingFunction = (m =>
+                    pDataTableRequest.sort.Equals("Name") ? m.Name :
+                    pDataTableRequest.sort.Equals("Description") ? m.Description :
+                    pDataTableRequest.sort.Equals("DateCreated") ? m.DateCreated :
+                    pDataTableRequest.sort.Equals("UserCreated") ? m.UserCreated :
+                    pDataTableRequest.sort.Equals("DateModified") ? m.DateModified :
+                    pDataTableRequest.sort.Equals("UserModified") ? m.UserModified :
+                    m.Name /*Ordenamiento predeterminado*/);
+                if (pDataTableRequest.order.Equals("asc")) vStatusModelList = vStatusModelList.OrderBy(vOrderingFunction);
+                else if (pDataTableRequest.order.Equals("desc")) vStatusModelList = vStatusModelList.OrderByDescending(vOrderingFunction);
+
+                //Obtener paginación desde pDataTableRequest.offset hasta pDataTableRequest.limit
+                vStatusModelList = vStatusModelList.Skip(pDataTableRequest.offset).Take(pDataTableRequest.limit);
+
+                return Json(new JsonResponse() { Content = new Models.BootstrapDataTable.Response() { total = vTotalRows, rows = vStatusModelList } }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception vException)
+            {
+                Logging.Logger.Error(vException);
+                return Json(JsonError.EXCEPCION(vException).SetContent(new Models.BootstrapDataTable.Response()), JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: TitiushkoStatus/Create
@@ -62,10 +107,12 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (DbEntityValidationException vEntityException)
             {
+                Logging.Logger.Error(vEntityException);
                 this.SetTempDataEntityException(vEntityException);
             }
             catch (Exception vException)
             {
+                Logging.Logger.Error(vException);
                 this.SetTempDataException(vException);
             }
             return View(pStatusModel);
@@ -84,6 +131,7 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (Exception vException)
             {
+                Logging.Logger.Error(vException);
                 this.SetTempDataException(vException);
                 return RedirectToAction(ActionName.INDEX);
             }
@@ -117,10 +165,12 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (DbEntityValidationException vEntityException)
             {
+                Logging.Logger.Error(vEntityException);
                 this.SetTempDataEntityException(vEntityException);
             }
             catch (Exception vException)
             {
+                Logging.Logger.Error(vException);
                 this.SetTempDataException(vException);
             }
             return View(pStatusModel);
@@ -142,10 +192,12 @@ namespace Titiushko.MVC5.Controllers
             }
             catch (DbEntityValidationException vEntityException)
             {
+                Logging.Logger.Error(vEntityException);
                 return Json(JsonError.EXCEPCION(vEntityException));
             }
             catch (Exception vException)
             {
+                Logging.Logger.Error(vException);
                 return Json(JsonError.EXCEPCION(vException));
             }
         }
