@@ -1,22 +1,24 @@
-﻿var NotUnBlockUI = false;
+﻿Titiushko["LoadingPage"] = new function () {
+    this.notUnBlockUI = false;
 
-/**
- * Block modal
- */
-function BlockUI() {
-    $("body").addClass("modal-open");
-    $("#fade").show();
-}
+    /**
+     * Block modal
+     */
+    this.blockUI = function () {
+        $("body").addClass("modal-open");
+        $("#fade").show();
+    };
 
-/**
- * Unblock modal
- */
-function UnBlockUI() {
-    setTimeout(function () {
-        $("body").removeClass("modal-open");
-        $("#fade").hide();
-    }, 500);
-}
+    /**
+     * Unblock modal
+     */
+    this.unBlockUI = function () {
+        setTimeout(function () {
+            $("body").removeClass("modal-open");
+            $("#fade").hide();
+        }, 500);
+    };
+};
 
 $("body * .content-wrapper").prepend(
     "<div id='fade'>" +
@@ -35,16 +37,16 @@ $("body * .content-wrapper").prepend(
 );
 
 $(window).bind("beforeunload", function (event) {
-    BlockUI();
+    Titiushko.LoadingPage.blockUI();
 }).load(function () {
-    UnBlockUI();
+    Titiushko.LoadingPage.unBlockUI();
 });
 
 $(document).ready(function () {
     if (typeof afterAjaxInit === "function") afterAjaxInit();
     if ($.browser.msie) $.ajaxSetup({ cache: false });
 }).ajaxSend(function (event) {
-    BlockUI();
+    Titiushko.LoadingPage.blockUI();
 }).ajaxComplete(function (event) {
-    if (!NotUnBlockUI) UnBlockUI();
+    if (!Titiushko.LoadingPage.notUnBlockUI) Titiushko.LoadingPage.unBlockUI();
 });

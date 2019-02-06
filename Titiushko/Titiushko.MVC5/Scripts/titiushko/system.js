@@ -1,19 +1,19 @@
 ﻿ALLOW_DEBUGGER["SYSTEM"] = false;
 
 Titiushko["Request"] = new function () {
-    this.Response = function (pResponse, pCallBack) {
+    this.response = function (pResponse, pCallBack) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
-        if (!Titiushko.MyMessage.IsDenied(pResponse)) {
+        if (!Titiushko.MyMessage.isDenied(pResponse)) {
             var vMessageSuccess = IsNullOrEmpty(pResponse.Message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Message;
-            if (vMessageSuccess !== Titiushko.Constants.Messages.NO_MESSAGE) Titiushko.MyMessage.Success(vMessageSuccess);
-            if (pCallBack != null && typeof pCallBack == "function") pCallBack();
-            else if (pCallBack != null && typeof pCallBack == "boolean" && pCallBack) setTimeout(function () { location.reload(true); }, 500);
+            if (vMessageSuccess !== Titiushko.Constants.Messages.NO_MESSAGE) Titiushko.MyMessage.success(vMessageSuccess);
         }
+        if (pCallBack != null && typeof pCallBack == "function") pCallBack();
+        else if (pCallBack != null && typeof pCallBack == "boolean" && pCallBack) setTimeout(function () { location.reload(true); }, 500);
     };
 };
 
 Titiushko["DeleteRecord"] = new function () {
-    this.Execute = function (pParams) {
+    this.execute = function (pParams) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
         if (pParams.asynchronous == undefined) pParams.asynchronous = false;
         if (pParams.typePetition == undefined) pParams.typePetition = "GET";
@@ -38,10 +38,10 @@ Titiushko["DeleteRecord"] = new function () {
                         data: pParams.data,
                         success: function (pResponse) {
                             if (ALLOW_DEBUGGER.SYSTEM) debugger;
-                            Titiushko.Request.Response(pResponse, pParams.successfulCallBackResponse);
+                            Titiushko.Request.response(pResponse, pParams.successfulCallBackResponse);
                         },
                         error: function (pException) {
-                            Titiushko.MyMessage.Exception(pException, "eliminar " + pParams.titleName, pParams.url);
+                            Titiushko.MyMessage.exception(pException, "eliminar " + pParams.titleName, pParams.url);
                         }
                     });
                 }
@@ -55,7 +55,7 @@ Titiushko["DeleteRecord"] = new function () {
 };
 
 Titiushko["Redirect"] = new function () {
-    this.Back = function ($pElement) {
+    this.back = function ($pElement) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
         var vRedirect = undefined;
         if (!IsNullOrEmpty($pElement.data) && !IsNullOrEmpty($pElement.data("redireccionar-controlador")) && !IsNullOrEmpty($pElement.data("redireccionar-accion"))) {

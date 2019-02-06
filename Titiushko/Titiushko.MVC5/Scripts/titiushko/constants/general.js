@@ -8,6 +8,9 @@ var ALLOW_DEBUGGER = new Object();
  */
 var IS_ALLOWABLE_RESOLUTION = $(window).width() > 974;
 
+/**
+ * Objeto de configuraciones
+ */
 var Titiushko = new Object();
 
 /*

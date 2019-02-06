@@ -1,10 +1,10 @@
 ﻿var BASE_URL = "@(Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/")";
 
 if ("@TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_ERROR]".isTrue()) {
-    Titiushko.MyMessage.Error(@Html.Raw(Json.Encode(TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_ERROR_MESSAGE])));
+    Titiushko.MyMessage.error(@Html.Raw(Json.Encode(TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_ERROR_MESSAGE])));
 }
 if ("@TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_SUCCESS]".isTrue()) {
-    Titiushko.MyMessage.Success(@Html.Raw(Json.Encode(TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_SUCCESS_MESSAGE])));
+    Titiushko.MyMessage.success(@Html.Raw(Json.Encode(TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_SUCCESS_MESSAGE])));
 }
 if ("@TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_POPUP]".isTrue()) {
     var title = @Html.Raw(Json.Encode(TempData[Titiushko.MVC.Utils.Constants.Basic.TEMP_DATA_POPUP_TITLE]));

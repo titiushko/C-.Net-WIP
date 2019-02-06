@@ -9,10 +9,10 @@ $(document).ready(function () {
         "</button>"
     );
 
-    DisplayScrollTop();
+    displayScrollTop();
     $(window).on({
-        "scroll": DisplayScrollTop,
-        "resize": DisplayScrollTop
+        "scroll": displayScrollTop,
+        "resize": displayScrollTop
     });
 
     $("#scroll-top").click(function () {
@@ -24,7 +24,7 @@ $(document).ready(function () {
 /**
  * Event that is invoked each time you scroll on a page
  */
-var DisplayScrollTop = function () {
+var displayScrollTop = function () {
     if ($(window).scrollTop() > 100) {
         $("#scroll-top").slideDown(300, function () {
             $(this).css({

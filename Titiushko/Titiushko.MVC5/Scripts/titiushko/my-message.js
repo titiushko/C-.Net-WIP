@@ -2,7 +2,7 @@
     /**
      * Display message error response from an AJAX request
      */
-    this.Error = function (pMessage, pCloseModals) {
+    this.error = function (pMessage, pCloseModals) {
         if (pCloseModals != undefined && pCloseModals) alertify.closeAll();
         var vContent = undefined;
         if (pMessage != undefined) {
@@ -73,7 +73,7 @@
     /**
      * Display message success response from an AJAX request
      */
-    this.Success = function (pMessage, pCloseModals) {
+    this.success = function (pMessage, pCloseModals) {
         if (pCloseModals != undefined && pCloseModals) alertify.closeAll();
         if (pMessage != undefined) {
             if (Array.isArray(pMessage)) {
@@ -90,7 +90,7 @@
     /**
      * Display message exception from an AJAX request
      */
-    this.Exception = function (pException, pMessage, pRequest) {
+    this.exception = function (pException, pMessage, pRequest) {
         alertify.closeAll();
         if (pRequest != undefined || pRequest != null) pRequest = pRequest.indexOf("://") == -1 ? BASE_URL + pRequest : pRequest; else pRequest = "";
 
@@ -141,9 +141,9 @@
     /**
      * Do if response is error or denied
      */
-    this.IsDenied = function (pResponse) {
+    this.isDenied = function (pResponse) {
         var vIsDenied = false;
-        if (pResponse != undefined && pResponse.Error.error) {
+        if (pResponse != undefined && pResponse.Error != undefined && pResponse.Error.error) {
             if (pResponse.Error.type == Titiushko.Constants.TypeError.PERMISSION_ACCESS_DENIED || pResponse.Error.type == Titiushko.Constants.TypeError.AUTHENTICATED_DENIED) {
                 vIsDenied = true;
                 var vRedirectUrl = "";
@@ -153,7 +153,7 @@
             }
             else if (pResponse.Error.message != undefined) {
                 vIsDenied = true;
-                this.Error(pResponse.Error.message);
+                this.error(pResponse.Error.message);
             }
         }
         return vIsDenied;

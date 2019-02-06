@@ -1,3 +1,3 @@
 ﻿$("#BackPreviousPage").click(function () {
-    Titiushko.Redirect.Back(this);
+    Titiushko.Redirect.back(this);
 });
