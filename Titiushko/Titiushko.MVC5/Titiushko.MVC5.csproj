@@ -279,7 +279,8 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ProjectFollowing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BootstrapDataTable.cs" />
+    <Compile Include="Models\BootstrapDataTable\Request.cs" />
+    <Compile Include="Models\BootstrapDataTable\Response.cs" />
     <Compile Include="Models\BreadcomeArea.cs" />
     <Compile Include="Constants\Names\ActionName.cs" />
     <Compile Include="Constants\Names\ControllerName.cs" />

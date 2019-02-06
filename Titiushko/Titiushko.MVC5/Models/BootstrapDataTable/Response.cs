@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Titiushko.MVC5.Models
+namespace Titiushko.MVC5.Models.BootstrapDataTable
 {
-    public class BootstrapDataTable
+    public class Response
     {
-        public BootstrapDataTable()
+        public Response()
         {
             total = 0;
             rows = new HashSet<dynamic>();
