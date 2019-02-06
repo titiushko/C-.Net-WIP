@@ -1,14 +1,15 @@
 ﻿ALLOW_DEBUGGER["SYSTEM"] = false;
 
 Titiushko["Request"] = new function () {
-    this.response = function (pResponse, pCallBack) {
+    this.response = function (pResponse, pParams) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
+        if (pParams.showMessageSuccess == undefined) pParams.showMessageSuccess = true;
         if (!Titiushko.MyMessage.isDenied(pResponse)) {
             var vMessageSuccess = IsNullOrEmpty(pResponse.Message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Message;
-            if (vMessageSuccess !== Titiushko.Constants.Messages.NO_MESSAGE) Titiushko.MyMessage.success(vMessageSuccess);
+            if (pParams.showMessageSuccess) Titiushko.MyMessage.success(vMessageSuccess);
         }
-        if (pCallBack != null && typeof pCallBack == "function") pCallBack();
-        else if (pCallBack != null && typeof pCallBack == "boolean" && pCallBack) setTimeout(function () { location.reload(true); }, 500);
+        if (pParams.callBack != null && typeof pParams.callBack == "function") pParams.callBack();
+        else if (pParams.reload != null && typeof pParams.reload == "boolean" && pParams.reload) setTimeout(function () { location.reload(true); }, 500);
     };
 };
 
@@ -18,7 +19,7 @@ Titiushko["DeleteRecord"] = new function () {
         if (pParams.asynchronous == undefined) pParams.asynchronous = false;
         if (pParams.typePetition == undefined) pParams.typePetition = "GET";
         if (pParams.data == undefined) pParams.data = {};
-        if (pParams.successfulCallBackResponse == undefined) pParams.successfulCallBackResponse = true;
+        if (pParams.onDelete == undefined) pParams.onDelete = function () { };
         if (pParams.titleName == undefined) pParams.titleName = "registro";
         pParams.titleName = pParams.titleName.capitalizeFirstLetter();
         Titiushko.MyAlertify.confirm({
@@ -38,7 +39,7 @@ Titiushko["DeleteRecord"] = new function () {
                         data: pParams.data,
                         success: function (pResponse) {
                             if (ALLOW_DEBUGGER.SYSTEM) debugger;
-                            Titiushko.Request.response(pResponse, pParams.successfulCallBackResponse);
+                            Titiushko.Request.response(pResponse, { callBack: pParams.onDelete, reload: true });
                         },
                         error: function (pException) {
                             Titiushko.MyMessage.exception(pException, "eliminar " + pParams.titleName, pParams.url);
