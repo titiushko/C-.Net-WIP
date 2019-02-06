@@ -15,13 +15,13 @@ namespace Titiushko.MVC5.Models
         public string Description { get; set; }
 
         [LocalizedDisplayName("TextDateCreated")]
-        public System.DateTime DateCreated { get; set; }
+        public string DateCreated { get; set; }
 
         [LocalizedDisplayName("TextUserCreated")]
         public string UserCreated { get; set; }
 
         [LocalizedDisplayName("TextDateModified")]
-        public System.DateTime DateModified { get; set; }
+        public string DateModified { get; set; }
 
         [LocalizedDisplayName("TextUserModified")]
         public string UserModified { get; set; }

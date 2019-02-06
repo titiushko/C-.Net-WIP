@@ -22,17 +22,21 @@ namespace Titiushko.MVC5.Extensions
 
         public static IEnumerable<StatusModel> ToCustomModelList(this DbSet<TitiushkoStatus> pDbSetTitiushkoStatus)
         {
-            return pDbSetTitiushkoStatus.Select(m => new StatusModel()
+            ICollection<StatusModel> vStatusModelList = new HashSet<StatusModel>();
+            foreach (TitiushkoStatus vTitiushkoStatus in pDbSetTitiushkoStatus)
             {
-                Id = m.Id,
-                Name = m.Name,
-                Description = m.Description,
-                DateCreated = m.DateCreated,
-                UserCreated = m.UserCreated,
-                DateModified = m.DateModified,
-                UserModified = m.UserModified
-            })
-            .ToList();
+                vStatusModelList.Add(new StatusModel()
+                {
+                    Id = vTitiushkoStatus.Id,
+                    Name = vTitiushkoStatus.Name,
+                    Description = vTitiushkoStatus.Description,
+                    DateCreated = vTitiushkoStatus.DateCreated.ToShortDateString(),
+                    UserCreated = vTitiushkoStatus.UserCreated,
+                    DateModified = vTitiushkoStatus.DateModified.ToShortDateString(),
+                    UserModified = vTitiushkoStatus.UserModified
+                });
+            }
+            return vStatusModelList;
         }
     }
 }
