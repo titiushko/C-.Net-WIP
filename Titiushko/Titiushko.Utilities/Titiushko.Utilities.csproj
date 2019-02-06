@@ -58,6 +58,7 @@
     <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Extensions\IntExtension.cs" />
+    <Compile Include="Extensions\JsonResponseExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
