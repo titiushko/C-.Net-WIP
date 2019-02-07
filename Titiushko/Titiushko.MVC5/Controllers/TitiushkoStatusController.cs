@@ -183,6 +183,7 @@ namespace Titiushko.MVC5.Controllers
         {
             try
             {
+                if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED);
                 if (id == null) return Json(JsonError.ERROR_400);
                 TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
                 if (vTitiushkoStatus == null) return Json(JsonError.ERROR_404);

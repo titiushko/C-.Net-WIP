@@ -1,5 +1,4 @@
 ﻿using log4net;
-using System;
 using System.Net;
 using System.Web.Mvc;
 using Titiushko.MVC5.Models;
@@ -20,30 +19,7 @@ namespace Titiushko.MVC5.Controllers
             };
         }
 
-        #region Exceptions
-        /// <summary>
-        /// Process the request to register in the log the exception occurred in JS from the frontend
-        /// </summary>
-        /// <param name="pException"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ValidateInput(false)]
-        [Route("log-exception")]
-        public JsonResult LogExceptionFromJavaScript(string pException)
-        {
-            try
-            {
-                LogManager.GetLogger("BaseController.LogExceptionFromJavaScript").Error(new Exception(pException));
-                return Json(new Titiushko.Utilities.Responses.JsonResponse());
-            }
-            catch (Exception vE)
-            {
-                return Json(Titiushko.Utilities.Constants.Errors.JsonError.EXCEPCION(vE));
-            }
-        }
-        #endregion
-
-        #region Errors
+        #region HTTP Errors
         /// <summary>
         /// Muestra la vista de error pErrorCode personalizada
         /// </summary>

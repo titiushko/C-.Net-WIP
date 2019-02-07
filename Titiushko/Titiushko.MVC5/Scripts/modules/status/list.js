@@ -12,17 +12,17 @@
                     asynchronous: true,
                     url: "TitiushkoStatus/delete",
                     typePetition: "POST",
-                    onDelete: function () {
+                    beforeSuccessDelete: function () {
                         $("#StatusTable").bootstrapTable("removeByUniqueId", $vElement.data("id"));
                     }
                 });
             });
 
-            $("#StatusTable").on("click", "#CreateStatus, .EditStatus", function (event) {
+            $("#StatusList").on("click", "#CreateStatus, .EditStatus", function (event) {
                 event.preventDefault();
                 var $vElement = $(this);
                 Titiushko.MyAlertify.alert({
-                    title: $vElement.text().trim(),
+                    title: $(this).attr("title"),
                     url: BASE_URL + "TitiushkoStatus/" + $(this).data("action") + "/" + ($(this).data("action") == "edit" ? $(this).data("id") : ""),
                     hideFooter: true,
                     closable: true,
@@ -38,12 +38,14 @@
         this.responseHandler = function (pResponse) {
             if (ALLOW_DEBUGGER.MODULE_STATUS) debugger;
             Titiushko.Request.response(pResponse, { showMessageSuccess: false });
+            var vEditTitle = Titiushko.Request.getResource("TextEdit");
+            var vModuleName = Titiushko.Request.getResource("ModuleStatusName");
             $.map(pResponse.Content.rows, function (pElement, pIndex) {
                 if (ALLOW_DEBUGGER.MODULE_STATUS) debugger;
                 pElement["Options"] =
                     '<div class="btn-group">' +
-	                    '<button data-id="' + pElement.Id + '" class="btn btn-sm btn-primary EditStatus" data-action="edit"><i class="fa fa-pencil"></i></button>' +
-	                    '<button data-id="' + pElement.Id + '" class="btn btn-sm btn-danger DeleteStatus" data-title-name="Status"><i class="fa fa-trash"></i></button>' +
+	                    '<button data-id="' + pElement.Id + '" class="btn btn-sm btn-primary EditStatus" data-action="edit" title="' + vEditTitle + '"><i class="fa fa-pencil"></i></button>' +
+	                    '<button data-id="' + pElement.Id + '" class="btn btn-sm btn-danger DeleteStatus" data-title-name="' + vModuleName + '"><i class="fa fa-trash"></i></button>' +
                     '</div>';
                 return pElement;
             });

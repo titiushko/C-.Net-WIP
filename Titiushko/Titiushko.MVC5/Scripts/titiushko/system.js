@@ -7,9 +7,38 @@ Titiushko["Request"] = new function () {
         if (!Titiushko.MyMessage.isDenied(pResponse)) {
             var vMessageSuccess = IsNullOrEmpty(pResponse.Message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Message;
             if (pParams.showMessageSuccess) Titiushko.MyMessage.success(vMessageSuccess);
+            if (pParams.successCallBack != null && typeof pParams.successCallBack == "function") pParams.successCallBack(pResponse);
         }
-        if (pParams.callBack != null && typeof pParams.callBack == "function") pParams.callBack();
-        else if (pParams.reload != null && typeof pParams.reload == "boolean" && pParams.reload) setTimeout(function () { location.reload(true); }, 500);
+        else {
+            if (pParams.errorCallBack != null && typeof pParams.errorCallBack == "function") pParams.errorCallBack(pResponse);
+        }
+        if (pParams.reload != null && typeof pParams.reload == "boolean" && pParams.reload) setTimeout(function () { location.reload(true); }, 500);
+    };
+
+    this.getResource = function (pResourceName) {
+        if (ALLOW_DEBUGGER.SYSTEM) debugger;
+        var vResourceResult = "";
+        $.ajax({
+            url: BASE_URL + "ajax/get-resource",
+            type: "GET",
+            dataType: "json",
+            data: { pResource: pResourceName },
+            async: false,
+            success: function (pResponse) {
+                if (ALLOW_DEBUGGER.SYSTEM) debugger;
+                Titiushko.Request.response(pResponse, {
+                    showMessageSuccess: false,
+                    successCallBack: function (pResult) {
+                        if (ALLOW_DEBUGGER.SYSTEM) debugger;
+                        vResourceResult = pResult.Content;
+                    }
+                });
+            },
+            error: function (pException) {
+                Titiushko.MyMessage.exception(pException, "obtener el resource " + pResourceName, "ajax/get-resource");
+            }
+        });
+        return vResourceResult;
     };
 };
 
@@ -19,7 +48,7 @@ Titiushko["DeleteRecord"] = new function () {
         if (pParams.asynchronous == undefined) pParams.asynchronous = false;
         if (pParams.typePetition == undefined) pParams.typePetition = "GET";
         if (pParams.data == undefined) pParams.data = {};
-        if (pParams.onDelete == undefined) pParams.onDelete = function () { };
+        if (pParams.beforeSuccessDelete == undefined) pParams.beforeSuccessDelete = function () { };
         if (pParams.titleName == undefined) pParams.titleName = "registro";
         pParams.titleName = pParams.titleName.capitalizeFirstLetter();
         Titiushko.MyAlertify.confirm({
@@ -39,7 +68,7 @@ Titiushko["DeleteRecord"] = new function () {
                         data: pParams.data,
                         success: function (pResponse) {
                             if (ALLOW_DEBUGGER.SYSTEM) debugger;
-                            Titiushko.Request.response(pResponse, { callBack: pParams.onDelete, reload: true });
+                            Titiushko.Request.response(pResponse, { successCallBack: pParams.beforeSuccessDelete, reload: true });
                         },
                         error: function (pException) {
                             Titiushko.MyMessage.exception(pException, "eliminar " + pParams.titleName, pParams.url);

@@ -132,7 +132,7 @@
             data: { pException: JSON.stringify({ pException: vErrorException, pMessage: pMessage, location: location.href, pRequest: pRequest }) },
             type: "POST",
             dataType: "json",
-            url: BASE_URL + "log-exception",
+            url: BASE_URL + "ajax/log-exception",
             success: function (pResponse) { if (pResponse.error) console.warn(pResponse.pMessage); },
             error: function (pException) { console.warn(pException); }
         });
