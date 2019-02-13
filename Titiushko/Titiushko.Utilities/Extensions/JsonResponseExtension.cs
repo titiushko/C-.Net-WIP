@@ -40,8 +40,8 @@ namespace Titiushko.Utilities.Extensions
             try
             {
                 if (pModelStateDictionary != null && pModelStateDictionary.Any())
-                    pJsonResponse.Error.SetMessage(pModelStateDictionary.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList());
-                if (pAditionalMessage != null && pAditionalMessage.Any()) pJsonResponse.Error.SetMessage(pAditionalMessage);
+                    pJsonResponse.Error.AddMessage(pModelStateDictionary.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList());
+                if (pAditionalMessage != null && pAditionalMessage.Any()) pJsonResponse.Error.AddMessage(pAditionalMessage);
                 pJsonResponse.Error.error = pJsonResponse.Error.message.Count > 0;
                 return pJsonResponse;
             }

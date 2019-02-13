@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace Titiushko.Utilities.Responses
 {
@@ -18,16 +19,16 @@ namespace Titiushko.Utilities.Responses
         public ICollection<string> message { get; set; }
 
         /// <summary>
-        /// Asigna lista de mensajes
+        /// Agregar nueva lista de mensajes a la lista de mensajes
         /// </summary>
         /// <param name="pMessage"></param>
-        public void SetMessage(ICollection<string> pMessage)
+        public void AddMessage(ICollection<string> pMessage)
         {
-            message = pMessage;
+            message = message.Concat(pMessage).ToList();
         }
 
         /// <summary>
-        /// Agregar mensaje a la lista de mensajes
+        /// Agregar nuevo mensaje a la lista de mensajes
         /// </summary>
         /// <param name="pMessage"></param>
         public void AddMessage(string pMessage)
