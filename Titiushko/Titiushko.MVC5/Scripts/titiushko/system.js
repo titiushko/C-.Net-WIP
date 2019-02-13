@@ -3,6 +3,7 @@
 Titiushko["Request"] = new function () {
     this.response = function (pResponse, pParams) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
+        if (pParams == undefined) pParams = new Object();
         if (pParams.showMessageSuccess == undefined) pParams.showMessageSuccess = true;
         if (!Titiushko.MyMessage.isDenied(pResponse)) {
             var vMessageSuccess = IsNullOrEmpty(pResponse.Message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Message;
@@ -60,7 +61,6 @@ Titiushko["DeleteRecord"] = new function () {
             onOk: function () {
                 if (ALLOW_DEBUGGER.SYSTEM) debugger;
                 if (pParams.asynchronous) {
-                    pParams.data["__RequestVerificationToken"] = $("input[name='__RequestVerificationToken']").val();
                     $.ajax({
                         url: BASE_URL + pParams.url,
                         type: pParams.typePetition,

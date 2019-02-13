@@ -96,8 +96,8 @@ function IsNullOrEmpty(data) {
 /**
  * Open URL in new window
  */
-function OpenNewWindow(url, window_name) {
-    var new_window = window.open(url, window_name, "width=600, height=600, left=0, top=0, scrollbars=yes");
+function OpenNewWindow(url, windowName) {
+    var new_window = window.open(url, windowName, "width=600, height=600, left=0, top=0, scrollbars=yes");
     if (window.focus) new_window.focus();
 }
 
@@ -160,4 +160,16 @@ String.prototype.isTrue = function () {
  */
 String.prototype.isFalse = function () {
     return this.toUpperCase() === Titiushko.Constants.FALSE;
+};
+
+$.fn.toData = function () {
+    var $this = this;
+    var data = new Object();
+    $this.find("*").each(function () {
+        var attribute = $(this).attr("id");
+        if (attribute != undefined && data[attribute] == undefined) data[attribute] = $(this).val();
+        attribute = $(this).attr("name");
+        if (attribute != undefined && data[attribute] == undefined) data[attribute] = $(this).val();
+    });
+    return data;
 };
