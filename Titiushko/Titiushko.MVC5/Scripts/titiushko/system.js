@@ -7,7 +7,7 @@ Titiushko["Request"] = new function () {
         if (pParams.showMessageSuccess == undefined) pParams.showMessageSuccess = true;
         if (!Titiushko.MyMessage.isDenied(pResponse)) {
             var vMessageSuccess = IsNullOrEmpty(pResponse.Message) ? Titiushko.Constants.Messages.Request.SUCCESS : pResponse.Message;
-            if (pParams.showMessageSuccess) Titiushko.MyMessage.success(vMessageSuccess);
+            if (pParams.showMessageSuccess != null && typeof pParams.showMessageSuccess == "boolean" && pParams.showMessageSuccess) Titiushko.MyMessage.success(vMessageSuccess);
             if (pParams.successCallBack != null && typeof pParams.successCallBack == "function") pParams.successCallBack(pResponse);
         }
         else {
@@ -41,15 +41,14 @@ Titiushko["Request"] = new function () {
         });
         return vResourceResult;
     };
-};
 
-Titiushko["DeleteRecord"] = new function () {
-    this.execute = function (pParams) {
+    this.deleteRecord = function (pParams) {
         if (ALLOW_DEBUGGER.SYSTEM) debugger;
         if (pParams.asynchronous == undefined) pParams.asynchronous = false;
         if (pParams.typePetition == undefined) pParams.typePetition = "GET";
         if (pParams.data == undefined) pParams.data = {};
         if (pParams.beforeSuccessDelete == undefined) pParams.beforeSuccessDelete = function () { };
+        if (pParams.reload == undefined) pParams.reload = false;
         if (pParams.titleName == undefined) pParams.titleName = "registro";
         pParams.titleName = pParams.titleName.capitalizeFirstLetter();
         Titiushko.MyAlertify.confirm({
@@ -68,7 +67,7 @@ Titiushko["DeleteRecord"] = new function () {
                         data: pParams.data,
                         success: function (pResponse) {
                             if (ALLOW_DEBUGGER.SYSTEM) debugger;
-                            Titiushko.Request.response(pResponse, { successCallBack: pParams.beforeSuccessDelete, reload: true });
+                            Titiushko.Request.response(pResponse, { successCallBack: pParams.beforeSuccessDelete, reload: pParams.reload });
                         },
                         error: function (pException) {
                             Titiushko.MyMessage.exception(pException, "eliminar " + pParams.titleName, pParams.url);
@@ -81,7 +80,7 @@ Titiushko["DeleteRecord"] = new function () {
                 }
             }
         });
-    }
+    };
 };
 
 Titiushko["Redirect"] = new function () {

@@ -2,9 +2,8 @@
 @{
     Layout = null;
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("create", "status", FormMethod.Post, new { autocomplete = "off", data_toggle = "validator", id = "StatusForm" }))
 {
-    @Html.AntiForgeryToken()
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

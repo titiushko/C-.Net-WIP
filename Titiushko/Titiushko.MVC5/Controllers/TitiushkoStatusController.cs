@@ -19,6 +19,8 @@ namespace Titiushko.MVC5.Controllers
     {
         private ProjectFollowingEntities db = new ProjectFollowingEntities();
 
+        [HttpGet]
+        //[Route("index")]
         public ActionResult Index()
         {
             ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName);
@@ -70,6 +72,8 @@ namespace Titiushko.MVC5.Controllers
         }
 
         // GET: TitiushkoStatus/Create
+        [HttpGet]
+        [Route("create")]
         public ActionResult Create()
         {
             ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.CREATE, ControllerName.STATUS);
@@ -80,11 +84,13 @@ namespace Titiushko.MVC5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StatusModel pStatusModel)
+        public JsonResult Create(StatusModel pStatusModel)
         {
             try
             {
+                JsonResponse vJsonResponse = new JsonResponse();
                 if (ModelState.IsValid)
                 {
                     db.TitiushkoStatus.Add(new TitiushkoStatus()
@@ -97,28 +103,29 @@ namespace Titiushko.MVC5.Controllers
                         UserModified = User.Identity.Name
                     });
                     db.SaveChanges();
-                    this.SetTempDataSuccess(string.Format(Resources.Resource.TextCreateSuccessFor, Resources.Resource.ModuleStatusName));
-                    return RedirectToAction(ActionName.INDEX);
+                    vJsonResponse.Message.Add(string.Format(Resources.Resource.TextCreateSuccessFor, Resources.Resource.ModuleStatusName));
                 }
                 else
                 {
-                    this.SetTempDataError(string.Format(Resources.Resource.TextCreateErrorFor, Resources.Resource.ModuleStatusName));
+                    vJsonResponse.SetErrorMessage(ModelState, string.Format(Resources.Resource.TextCreateErrorFor, Resources.Resource.ModuleStatusName));
                 }
+                return Json(vJsonResponse);
             }
             catch (DbEntityValidationException vEntityException)
             {
                 Logging.Logger.Error(vEntityException);
-                this.SetTempDataEntityException(vEntityException);
+                return Json(JsonError.EXCEPCION(vEntityException));
             }
             catch (Exception vException)
             {
                 Logging.Logger.Error(vException);
-                this.SetTempDataException(vException);
+                return Json(JsonError.EXCEPCION(vException));
             }
-            return View(pStatusModel);
         }
 
         // GET: TitiushkoStatus/Edit/5
+        [HttpGet]
+        [Route("edit/{id}")]
         public ActionResult Edit(int? id)
         {
             try
@@ -141,11 +148,13 @@ namespace Titiushko.MVC5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(StatusModel pStatusModel)
         {
             try
             {
+                JsonResponse vJsonResponse = new JsonResponse();
                 if (ModelState.IsValid)
                 {
                     TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(pStatusModel.Id);
@@ -155,29 +164,28 @@ namespace Titiushko.MVC5.Controllers
                     vTitiushkoStatus.DateModified = DateTime.Now;
                     vTitiushkoStatus.UserModified = User.Identity.Name;
                     db.SaveChanges();
-                    this.SetTempDataSuccess(string.Format(Resources.Resource.TextEditSuccessFor, Resources.Resource.ModuleStatusName));
-                    return RedirectToAction(ActionName.INDEX);
+                    vJsonResponse.Message.Add(string.Format(Resources.Resource.TextEditSuccessFor, Resources.Resource.ModuleStatusName));
                 }
                 else
                 {
-                    this.SetTempDataError(string.Format(Resources.Resource.TextEditErrorFor, Resources.Resource.ModuleStatusName));
+                    vJsonResponse.SetErrorMessage(ModelState, string.Format(Resources.Resource.TextEditErrorFor, Resources.Resource.ModuleStatusName));
                 }
+                return Json(vJsonResponse);
             }
             catch (DbEntityValidationException vEntityException)
             {
                 Logging.Logger.Error(vEntityException);
-                this.SetTempDataEntityException(vEntityException);
+                return Json(JsonError.EXCEPCION(vEntityException));
             }
             catch (Exception vException)
             {
                 Logging.Logger.Error(vException);
-                this.SetTempDataException(vException);
+                return Json(JsonError.EXCEPCION(vException));
             }
-            return View(pStatusModel);
         }
 
         // POST: TitiushkoStatus/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), Route("delete")]
         [ValidateAntiForgeryToken]
         public JsonResult DeleteConfirmed(int? id)
         {
