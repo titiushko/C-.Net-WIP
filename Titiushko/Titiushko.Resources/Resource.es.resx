@@ -172,7 +172,7 @@
     <value>Usuario</value>
   </data>
   <data name="ErrorPermissionAccessDenied" xml:space="preserve">
-    <value>Inicie sesión en el sistema para acceder al contenido.</value>
+    <value>No tienes permiso para ver éste contenido.</value>
   </data>
   <data name="ErrorPermissionDenied" xml:space="preserve">
     <value>No tienes permiso para realizar esta acción.</value>
@@ -281,5 +281,8 @@
   </data>
   <data name="ErrorAjaxDenied" xml:space="preserve">
     <value>Error de solicitud denegada: esta acción solo se puede ejecutar desde una llamada Ajax. Por favor, vaya a la página de inicio del sistema.</value>
+  </data>
+  <data name="ErrorAuthenticatedDenied" xml:space="preserve">
+    <value>Inicie sesión en el sistema para acceder al contenido.</value>
   </data>
 </root>

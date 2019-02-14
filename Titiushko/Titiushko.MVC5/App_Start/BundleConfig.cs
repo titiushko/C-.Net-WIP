@@ -106,6 +106,11 @@ namespace Titiushko.MVC5
             .Include("~/Scripts/resources/data-table/bootstrap-table.js"));
 
             bundles
+            .Add(new ScriptBundle("~/Scripts/icheck")
+            .Include("~/Scripts/icheck/icheck.min.js",
+                     "~/Scripts/icheck/icheck-active.js"));
+
+            bundles
             .Add(new ScriptBundle("~/Scripts/titiushko")
             .Include("~/Scripts/titiushko/constants/*.js",
                      "~/Scripts/titiushko/*.js"));
@@ -175,7 +180,11 @@ namespace Titiushko.MVC5
 
             bundles
             .Add(new StyleBundle("~/Content/bootstrap-data-table")
-            .Include("~/Content/data-table/bootstrap-table.css"));
+            .Include("~/Content/resources/data-table/bootstrap-table.css"));
+
+            bundles
+            .Add(new StyleBundle("~/Content/all-type-forms")
+            .Include("~/Content/resources/all-type-forms.css"));
 
             bundles
             .Add(new StyleBundle("~/Content/titiushko")

@@ -117,6 +117,15 @@ namespace Titiushko.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Log in to the system to access the content..
         /// </summary>
+        public static string ErrorAuthenticatedDenied {
+            get {
+                return ResourceManager.GetString("ErrorAuthenticatedDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have permission to see this content..
+        /// </summary>
         public static string ErrorPermissionAccessDenied {
             get {
                 return ResourceManager.GetString("ErrorPermissionAccessDenied", resourceCulture);

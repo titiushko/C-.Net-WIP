@@ -3260,12 +3260,22 @@ ul.mailbox-list li:hover a, ul.h-list li:hover a {
 .inline-checkbox-cs .checkbox-inline{
 	padding-left:0px;
 }
+.hpanel .form-group, .checkbox.login-checkbox {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 .checkbox.login-checkbox label {
     padding-left: 0px;
 }
-.btn-success.loginbtn {
+.btn-success.loginbtn, .btn-success.loginbtn:link, .btn-success.loginbtn:visited {
     background-color: #e12503;
     border-color: #e12503;
+    color: #ffffff;
+}
+.btn-success.loginbtn:hover, .btn-success.loginbtn:focus {
+    background-color: #cb2305;
+    border-color: #e12505;
+    font-weight: bold;
 }
 .lock-inner i {
     font-size: 60px;

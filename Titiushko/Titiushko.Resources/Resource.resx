@@ -172,7 +172,7 @@
     <value>User</value>
   </data>
   <data name="ErrorPermissionAccessDenied" xml:space="preserve">
-    <value>Log in to the system to access the content.</value>
+    <value>You do not have permission to see this content.</value>
   </data>
   <data name="ErrorPermissionDenied" xml:space="preserve">
     <value>You do not have permission to perform this action.</value>
@@ -281,5 +281,8 @@
   </data>
   <data name="ErrorAjaxDenied" xml:space="preserve">
     <value>Request Denied Error: This action can only be executed from an Ajax call. Please go to return to home page of the system.</value>
+  </data>
+  <data name="ErrorAuthenticatedDenied" xml:space="preserve">
+    <value>Log in to the system to access the content.</value>
   </data>
 </root>

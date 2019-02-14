@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using log4net;
 using Titiushko.Utilities.Extensions;
 using Titiushko.MVC.Utils.Extensions;
+using System.Collections.Generic;
 
 namespace Titiushko.MVC5.Controllers
 {
@@ -27,10 +28,10 @@ namespace Titiushko.MVC5.Controllers
             logger = LogManager.GetLogger("AccountController");
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager pUserManager, ApplicationSignInManager pSignInManager)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            UserManager = pUserManager;
+            SignInManager = pSignInManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -73,26 +74,50 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            try
             {
-                return View(model);
-            }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                ApplicationUser vApplicationUser = UserManager.Users.Where(m => m.UserName.Equals(model.Email)).SingleOrDefault();
+                if (vApplicationUser == null) vApplicationUser = UserManager.Users.Where(m => m.Email.Equals(model.Email)).SingleOrDefault();
+                if (vApplicationUser != null)
+                {
+                    if (vApplicationUser.LockoutEnabled) return RedirectToAction("Lockout", new { returnUrl = returnUrl });
+                }
+                else
+                {
+                    this.SetTempDataError("Intento de inicio de sesión no válido.");
                     return View(model);
+                }
+                //TODO: Descomnetar en caso de que se utilice. Validar usuario de dominio.
+                //if (Membership.ValidateUser(model.Email, model.Password))
+                //{
+                //MembershipUser vMembershipUser = Membership.GetUser(model.Email);
+                SignInStatus vSignInStatus = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                switch (vSignInStatus)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return RedirectToAction("Lockout", new { returnUrl = returnUrl });
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        this.SetTempDataError("Usuario o contraseña inválidos.");
+                        return View(model);
+                }
+                //}
+                //else
+                //{
+                //ModelState.AddModelError(string.Empty, "El usuario no pertenece al dominio.");
+                //return View(model);
+                //}
+            }
+            catch (Exception vException)
+            {
+                logger.Error(vException);
+                ModelState.AddModelError(string.Empty, Titiushko.Utilities.Constants.Errors.BaseError.DEFAULT(vException.GetExceptionMessage()));
+                return View();
             }
         }
 
@@ -102,10 +127,7 @@ namespace Titiushko.MVC5.Controllers
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
-            {
-                return View("Error");
-            }
+            if (!await SignInManager.HasBeenVerifiedAsync()) return View("Error");
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
@@ -116,17 +138,13 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
+            if (!ModelState.IsValid) return View(model);
             // The following code protects for brute force attacks against the two factor codes. 
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
+            SignInStatus vSignInStatus = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            switch (vSignInStatus)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(model.ReturnUrl);
@@ -156,23 +174,20 @@ namespace Titiushko.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                ApplicationUser vApplicationUser = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                IdentityResult vIdentityResult = await UserManager.CreateAsync(vApplicationUser, model.Password);
+                if (vIdentityResult.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    await SignInManager.SignInAsync(vApplicationUser, isPersistent: false, rememberBrowser: false);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    //string vCode = await UserManager.GenerateEmailConfirmationTokenAsync(vApplicationUser.Id);
+                    //string vCallbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = vApplicationUser.Id, code = vCode }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(vApplicationUser.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + vCallbackUrl + "\">here</a>");
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                AddErrors(vIdentityResult);
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -182,12 +197,9 @@ namespace Titiushko.MVC5.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(code)) return View("Error");
+            IdentityResult vIdentityResult = await UserManager.ConfirmEmailAsync(userId, code);
+            return View(vIdentityResult.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         //
@@ -207,21 +219,16 @@ namespace Titiushko.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
-
+                ApplicationUser vApplicationUser = await UserManager.FindByNameAsync(model.Email);
+                // Don't reveal that the user does not exist or is not confirmed
+                if (vApplicationUser == null || !(await UserManager.IsEmailConfirmedAsync(vApplicationUser.Id))) return View("ForgotPasswordConfirmation");
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                //string vCode = await UserManager.GeneratePasswordResetTokenAsync(vApplicationUser.Id);
+                //string vCallbackUrl = Url.Action("ResetPassword", "Account", new { userId = vApplicationUser.Id, code = vCode }, protocol: Request.Url.Scheme);		
+                //await UserManager.SendEmailAsync(vApplicationUser.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + vCallbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -239,7 +246,7 @@ namespace Titiushko.MVC5.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return string.IsNullOrWhiteSpace(code) ? View("Error") : View();
         }
 
         //
@@ -249,22 +256,13 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
+            if (!ModelState.IsValid) return View(model);
+            ApplicationUser vApplicationUser = await UserManager.FindByNameAsync(model.Email);
+            // Don't reveal that the user does not exist
+            if (vApplicationUser == null) return RedirectToAction("ResetPasswordConfirmation", "Account");
+            IdentityResult vIdentityResult = await UserManager.ResetPasswordAsync(vApplicationUser.Id, model.Code, model.Password);
+            if (vIdentityResult.Succeeded) return RedirectToAction("ResetPasswordConfirmation", "Account");
+            AddErrors(vIdentityResult);
             return View();
         }
 
@@ -292,14 +290,11 @@ namespace Titiushko.MVC5.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
-            {
-                return View("Error");
-            }
-            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            string vUserId = await SignInManager.GetVerifiedUserIdAsync();
+            if (string.IsNullOrWhiteSpace(vUserId)) return View("Error");
+            IList<string> vUserFactors = await UserManager.GetValidTwoFactorProvidersAsync(vUserId);
+            List<SelectListItem> vFactorOptions = vUserFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            return View(new SendCodeViewModel { Providers = vFactorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //
@@ -309,16 +304,9 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
+            if (!ModelState.IsValid) return View();
             // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
-                return View("Error");
-            }
+            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider)) return View("Error");
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
@@ -327,15 +315,11 @@ namespace Titiushko.MVC5.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
-
+            ExternalLoginInfo vExternalLoginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            if (vExternalLoginInfo == null) return RedirectToAction("Login");
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            switch (result)
+            SignInStatus vSignInStatus = await SignInManager.ExternalSignInAsync(vExternalLoginInfo, isPersistent: false);
+            switch (vSignInStatus)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
@@ -347,8 +331,8 @@ namespace Titiushko.MVC5.Controllers
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    ViewBag.LoginProvider = vExternalLoginInfo.Login.LoginProvider;
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = vExternalLoginInfo.Email });
             }
         }
 
@@ -359,33 +343,25 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
-
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Manage");
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
+                ExternalLoginInfo vExternalLoginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (vExternalLoginInfo == null) return View("ExternalLoginFailure");
+                ApplicationUser vApplicationUser = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                IdentityResult vIdentityResult = await UserManager.CreateAsync(vApplicationUser);
+                if (vIdentityResult.Succeeded)
                 {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                    if (result.Succeeded)
+                    vIdentityResult = await UserManager.AddLoginAsync(vApplicationUser.Id, vExternalLoginInfo.Login);
+                    if (vIdentityResult.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await SignInManager.SignInAsync(vApplicationUser, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
                 }
-                AddErrors(result);
+                AddErrors(vIdentityResult);
             }
-
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
@@ -420,15 +396,13 @@ namespace Titiushko.MVC5.Controllers
                 {
                     vRoleManager.Create(new IdentityRole(role));
                 }
-
-                TempData["success"] = Titiushko.Utilities.Constants.Basic.TRUE;
-                TempData["success_message"] = "Roles are created correctly.";
+                this.SetTempDataSuccess("Roles are created correctly.");
                 return RedirectToAction("createdefaultusers", "account");
             }
-            catch (Exception vE)
+            catch (Exception vException)
             {
-                logger.Error(vE);
-                TempData = vE.TempDataExceptionMessage();
+                logger.Error(vException);
+                this.SetTempDataException(vException);
                 return RedirectToAction("index", "home");
             }
         }
@@ -452,19 +426,16 @@ namespace Titiushko.MVC5.Controllers
                         LastLoginDate = DateTime.Now,
                         LastPasswordChangedDate = DateTime.Now
                     };
-
                     vUserManager.Create(user, "Admin$1234");
                     vUserManager.AddToRole(user.Id, role);
                 }
-
-                TempData["success"] = Titiushko.Utilities.Constants.Basic.TRUE;
-                TempData["success_message"] = "Default users are created correctly.";
+                this.SetTempDataSuccess("Default users are created correctly.");
                 return RedirectToAction("index", "home");
             }
-            catch (Exception vE)
+            catch (Exception vException)
             {
-                logger.Error(vE);
-                TempData = vE.TempDataExceptionMessage();
+                logger.Error(vException);
+                this.SetTempDataException(vException);
                 return RedirectToAction("index", "home");
             }
         }
@@ -479,14 +450,12 @@ namespace Titiushko.MVC5.Controllers
                     _userManager.Dispose();
                     _userManager = null;
                 }
-
                 if (_signInManager != null)
                 {
                     _signInManager.Dispose();
                     _signInManager = null;
                 }
             }
-
             base.Dispose(disposing);
         }
 
@@ -521,10 +490,7 @@ namespace Titiushko.MVC5.Controllers
 
         internal class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
-            {
-            }
+            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null) { }
 
             public ChallengeResult(string provider, string redirectUri, string userId)
             {
@@ -539,12 +505,12 @@ namespace Titiushko.MVC5.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
+                AuthenticationProperties vAuthenticationProperties = new AuthenticationProperties { RedirectUri = RedirectUri };
+                if (!string.IsNullOrWhiteSpace(UserId))
                 {
-                    properties.Dictionary[XsrfKey] = UserId;
+                    vAuthenticationProperties.Dictionary[XsrfKey] = UserId;
                 }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+                context.HttpContext.GetOwinContext().Authentication.Challenge(vAuthenticationProperties, LoginProvider);
             }
         }
         #endregion

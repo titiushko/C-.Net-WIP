@@ -19,6 +19,14 @@ namespace Titiushko.MVC5.Controllers
             };
         }
 
+        public string BASE_URL
+        {
+            get
+            {
+                return Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+            }
+        }
+
         #region HTTP Errors
         /// <summary>
         /// Muestra la vista de error pErrorCode personalizada
@@ -79,5 +87,10 @@ namespace Titiushko.MVC5.Controllers
             return ErrorBase(HttpStatusCode.InternalServerError, pIsPartialView);
         }
         #endregion
+
+        public ActionResult RedirectToAuthenticatedDenied(string ReturnUrl = null)
+        {
+            return RedirectToAction("login", "account", new { returnUrl = string.IsNullOrWhiteSpace(ReturnUrl) ? (Request.Url == null ? BASE_URL : Request.Url.AbsolutePath) : ReturnUrl });
+        }
     }
 }

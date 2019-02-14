@@ -23,6 +23,7 @@ namespace Titiushko.MVC5.Controllers
         //[Route("index")]
         public ActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAuthenticatedDenied();
             ViewBag.BreadcomeArea.Title = string.Format(Resources.Resource.TextListOf, Resources.Resource.ModuleStatusName);
             ViewBag.BreadcomeArea.Level1 = new MvcHtmlString((string)ViewBag.BreadcomeArea.Title);
             return View();
@@ -32,6 +33,7 @@ namespace Titiushko.MVC5.Controllers
         [Route("get")]
         public JsonResult Get(Models.BootstrapDataTable.Request pDataTableRequest)
         {
+            if (!User.Identity.IsAuthenticated) return Json(JsonError.AUTHENTICATED_DENIED, JsonRequestBehavior.AllowGet);
             if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED, JsonRequestBehavior.AllowGet);
             try
             {
@@ -76,6 +78,7 @@ namespace Titiushko.MVC5.Controllers
         [Route("create")]
         public ActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAuthenticatedDenied();
             ViewBag.BreadcomeArea = this.GetHtmlHelper().GetBreadcomeAreaUpToLevel2(ActionName.CREATE, ControllerName.STATUS);
             return PartialView();
         }
@@ -88,6 +91,8 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Create(StatusModel pStatusModel)
         {
+            if (!User.Identity.IsAuthenticated) return Json(JsonError.AUTHENTICATED_DENIED);
+            if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED);
             try
             {
                 JsonResponse vJsonResponse = new JsonResponse();
@@ -128,6 +133,7 @@ namespace Titiushko.MVC5.Controllers
         [Route("edit/{id}")]
         public ActionResult Edit(int? id)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAuthenticatedDenied();
             try
             {
                 if (id == null) return Error400();
@@ -152,6 +158,8 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(StatusModel pStatusModel)
         {
+            if (!User.Identity.IsAuthenticated) return Json(JsonError.AUTHENTICATED_DENIED);
+            if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED);
             try
             {
                 JsonResponse vJsonResponse = new JsonResponse();
@@ -189,9 +197,10 @@ namespace Titiushko.MVC5.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult DeleteConfirmed(int? id)
         {
+            if (!User.Identity.IsAuthenticated) return Json(JsonError.AUTHENTICATED_DENIED);
+            if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED);
             try
             {
-                if (!Request.IsAjaxRequest()) return Json(JsonError.AJAX_DENIED);
                 if (id == null) return Json(JsonError.ERROR_400);
                 TitiushkoStatus vTitiushkoStatus = db.TitiushkoStatus.Find(id);
                 if (vTitiushkoStatus == null) return Json(JsonError.ERROR_404);

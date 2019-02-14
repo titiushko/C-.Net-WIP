@@ -37,6 +37,17 @@ namespace Titiushko.Utilities.Constants.Errors
             return EXCEPCION(pEntityException.GetEntityExceptionMessage());
         }
 
+        public static Responses.JsonResponse AUTHENTICATED_DENIED
+        {
+            get
+            {
+                return new Responses.JsonResponse
+                {
+                    Error = DEFAULT(Resources.Resource.ErrorAuthenticatedDenied, TypeError.AUTHENTICATED_DENIED)
+                };
+            }
+        }
+
         public static Responses.JsonResponse ACCESS_DENIED
         {
             get
